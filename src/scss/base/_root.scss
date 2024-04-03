@@ -1,0 +1,16 @@
+@use '../abstract' as *;
+
+:root {
+	//sizes
+	@each $value in $sequence {
+		--size-#{$value}: #{calc-em-l($value)};
+
+		@include mq('medium') {
+			--size-#{$value}: #{calc-em-m($value)};
+		}
+
+		@include mq('small') {
+			--size-#{$value}: #{calc-em-s($value)};
+		}
+	}
+}

@@ -2,6 +2,6 @@
 
 @each $ratio, $value in $ratios {
 	.ar-#{$ratio} {
-		aspect-ratio: $value;
+		aspect-ratio: #{$value};
 	}
 }

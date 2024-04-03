@@ -1,4 +1,1 @@
-<div class="red"></div>
-
-<style lang="scss">
-</style>
+<p class="hello">Lorem ipsum dolor sit amet.</p>
