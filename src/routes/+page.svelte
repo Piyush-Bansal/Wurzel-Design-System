@@ -1,1 +1,4 @@
-<div class="ar-2-3" style:height="50vh" style:background-color="red"></div>
+<div class="red"></div>
+
+<style lang="scss">
+</style>
