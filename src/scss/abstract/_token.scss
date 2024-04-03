@@ -3,10 +3,18 @@
 
 //layout
 $container-max-width: $ss-large * 1px;
-$container-padding: (
-	container-width: (
+$container-padding-values: (
+	container-padding: (
 		large: $size-64,
 		medium: $size-32,
 		small: $size-16
+	)
+);
+
+$gutter-values: (
+	gutter: (
+		large: $size-16,
+		medium: $size-16,
+		small: $size-12
 	)
 );

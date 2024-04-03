@@ -1,10 +1,28 @@
 @use '../abstract' as *;
 
-@include map-to-var($container-padding);
+@include map-to-var($container-padding-values);
+@include map-to-var($gutter-values);
+
+$container-padding: var(--container-padding);
+$gutter: var(--gutter);
 
 .container {
 	max-width: $container-max-width;
 	margin-inline: auto;
 	background-color: red;
-	padding-inline: var(--container-width);
+	padding-inline: $container-padding;
+
+	&[data-size='full'] {
+		padding-inline: 0;
+	}
+
+	&[data-size='right-extended'] {
+		padding-left: $container-padding;
+		padding-right: calc($container-padding - ($gutter/2));
+	}
+
+	&[data-size='left-extended'] {
+		padding-left: calc($container-padding - ($gutter/2));
+		padding-right: $container-padding;
+	}
 }
