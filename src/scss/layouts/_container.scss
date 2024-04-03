@@ -1,0 +1,10 @@
+@use '../abstract' as *;
+
+@include map-to-var($container-padding);
+
+.container {
+	max-width: $container-max-width;
+	margin-inline: auto;
+	background-color: red;
+	padding-inline: var(--container-width);
+}

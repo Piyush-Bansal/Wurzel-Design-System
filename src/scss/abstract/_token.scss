@@ -1,0 +1,12 @@
+@use './breakpoint' as *;
+@use './sizes' as *;
+
+//layout
+$container-max-width: $ss-large * 1px;
+$container-padding: (
+	container-width: (
+		large: $size-64,
+		medium: $size-32,
+		small: $size-16
+	)
+);

@@ -20,3 +20,24 @@
 		@error 'the keyword #{$size} is not in the $breakpoints map';
 	}
 }
+
+@mixin map-to-var($map) {
+	:root {
+		@each $key-parent, $value-parent in $map {
+			$property-name: '--' + $key-parent; // Construct the custom property name
+			@each $key, $value in $value-parent {
+				@if ($key == 'large') {
+					#{$property-name}: #{$value};
+				} @else if($key == 'medium') {
+					@include mq('medium') {
+						#{$property-name}: #{$value};
+					}
+				} @else {
+					@include mq('small') {
+						#{$property-name}: #{$value};
+					}
+				}
+			}
+		}
+	}
+}
