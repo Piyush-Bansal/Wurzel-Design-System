@@ -1,0 +1,177 @@
+@use '../abstract' as *;
+
+@each $key, $value in $converted-sizes {
+	//padding
+	.p-#{$key} {
+		padding: $value;
+	}
+
+	.p-y-#{$key} {
+		padding: $value 0;
+	}
+
+	.p-x-#{$key} {
+		padding: 0 $value;
+	}
+
+	.p-t-#{$key} {
+		padding: $value 0 0 0;
+	}
+
+	.p-r-#{$key} {
+		padding: 0 $value 0 0;
+	}
+
+	.p-b-#{$key} {
+		padding: 0 0 $value 0;
+	}
+
+	.p-l-#{$key} {
+		padding: 0 0 0 $value;
+	}
+
+	//margin
+	.m-#{$key} {
+		margin: $value;
+	}
+
+	.m-y-#{$key} {
+		margin: $value 0;
+	}
+
+	.m-x-#{$key} {
+		margin: 0 $value;
+	}
+
+	.m-t-#{$key} {
+		margin: $value 0 0 0;
+	}
+
+	.m-r-#{$key} {
+		margin: 0 $value 0 0;
+	}
+}
+
+@include mq('medium') {
+	@each $key, $value in $converted-sizes {
+		//padding
+		.p-md-#{$key} {
+			padding: $value;
+		}
+
+		.p-y-md-#{$key} {
+			padding: $value 0;
+		}
+
+		.p-x-md-#{$key} {
+			padding: 0 $value;
+		}
+
+		.p-t-md-#{$key} {
+			padding: $value 0 0 0;
+		}
+
+		.p-r-md-#{$key} {
+			padding: 0 $value 0 0;
+		}
+
+		.p-b-md-#{$key} {
+			padding: 0 0 $value 0;
+		}
+
+		.p-l-md-#{$key} {
+			padding: 0 0 0 $value;
+		}
+
+		//margin
+		.m-md-#{$key} {
+			margin: $value;
+		}
+
+		.m-y-md-#{$key} {
+			margin: $value 0;
+		}
+
+		.m-x-md-#{$key} {
+			margin: 0 $value;
+		}
+
+		.m-t-md-#{$key} {
+			margin: $value 0 0 0;
+		}
+
+		.m-r-md-#{$key} {
+			margin: 0 $value 0 0;
+		}
+
+		.m-b-md-#{$key} {
+			margin: 0 0 $value 0;
+		}
+
+		.m-l-md-#{$key} {
+			margin: 0 0 0 $value;
+		}
+	}
+}
+
+@include mq('small') {
+	@each $key, $value in $converted-sizes {
+		//padding
+		.p-sm-#{$key} {
+			padding: $value;
+		}
+
+		.p-y-sm-#{$key} {
+			padding: $value 0;
+		}
+
+		.p-x-sm-#{$key} {
+			padding: 0 $value;
+		}
+
+		.p-t-sm-#{$key} {
+			padding: $value 0 0 0;
+		}
+
+		.p-r-sm-#{$key} {
+			padding: 0 $value 0 0;
+		}
+
+		.p-b-sm-#{$key} {
+			padding: 0 0 $value 0;
+		}
+
+		.p-l-sm-#{$key} {
+			padding: 0 0 0 $value;
+		}
+
+		//margin
+		.m-sm-#{$key} {
+			margin: $value;
+		}
+
+		.m-y-sm-#{$key} {
+			margin: $value 0;
+		}
+
+		.m-x-sm-#{$key} {
+			margin: 0 $value;
+		}
+
+		.m-t-sm-#{$key} {
+			margin: $value 0 0 0;
+		}
+
+		.m-r-sm-#{$key} {
+			margin: 0 $value 0 0;
+		}
+
+		.m-b-sm-#{$key} {
+			margin: 0 0 $value 0;
+		}
+
+		.m-l-sm-#{$key} {
+			margin: 0 0 0 $value;
+		}
+	}
+}
