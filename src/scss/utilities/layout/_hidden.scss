@@ -1,0 +1,59 @@
+@use '../../abstract' as *;
+
+//hide
+.hide {
+	display: none;
+}
+
+.hide-md {
+	@include mq('medium') {
+		display: none;
+	}
+
+	@include mq('small') {
+		display: block;
+	}
+}
+
+.hide-sm {
+	@include mq('small') {
+		display: none;
+	}
+}
+
+//only
+.only-md {
+	display: none;
+
+	@include mq('medium') {
+		display: block;
+	}
+
+	@include mq('small') {
+		display: none;
+	}
+}
+
+.only-sm {
+	display: none;
+
+	@include mq('medium') {
+		display: none;
+	}
+
+	@include mq('small') {
+		display: block;
+	}
+}
+
+.only-lg {
+	display: block;
+
+	@include mq('medium') {
+		display: none;
+	}
+
+	@include mq('small') {
+		display: none;
+	}
+}
