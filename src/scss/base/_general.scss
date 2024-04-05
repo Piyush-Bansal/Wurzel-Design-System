@@ -1,3 +1,44 @@
+@use '../abstract' as *;
+
 body {
 	font-size: 1vw;
+}
+
+p,
+ul,
+ol,
+a {
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+	letter-spacing: $base-letter-spacing;
+}
+
+h5 {
+	font-size: $fs-h5;
+	line-height: $lh-h5;
+	letter-spacing: $ls-h5;
+}
+
+h4 {
+	font-size: $fs-h4;
+	line-height: $lh-h4;
+	letter-spacing: $ls-h4;
+}
+
+h3 {
+	font-size: $fs-h3;
+	line-height: $lh-h3;
+	letter-spacing: $ls-h3;
+}
+
+h2 {
+	font-size: $fs-h2;
+	line-height: $lh-h2;
+	letter-spacing: $ls-h2;
+}
+
+h1 {
+	font-size: $fs-h1;
+	line-height: $lh-h1;
+	letter-spacing: $ls-h1;
 }

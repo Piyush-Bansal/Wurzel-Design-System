@@ -1,0 +1,68 @@
+@use '../mixins' as *;
+
+//line height
+$-line-heights: (
+	caption: (
+		large: 16,
+		medium: 12,
+		small: 16
+	),
+	body: (
+		large: 24,
+		medium: 20,
+		small: 24
+	),
+	h5: (
+		large: 36,
+		medium: 28,
+		small: 24
+	),
+	h4: (
+		large: 44,
+		medium: 32,
+		small: 28
+	),
+	h3: (
+		large: 56,
+		medium: 40,
+		small: 36
+	),
+	h2: (
+		large: 80,
+		medium: 56,
+		small: 40
+	),
+	h1: (
+		large: 108,
+		medium: 76,
+		small: 48
+	),
+	xl: (
+		large: 156,
+		medium: 104,
+		small: 60
+	),
+	xxl: (
+		large: 220,
+		medium: 148,
+		small: 76
+	),
+	xxxl: (
+		large: 308,
+		medium: 208,
+		small: 96
+	)
+);
+
+@include map-to-var($-line-heights, 'lh-', true);
+
+$lh-caption: var(--lh-caption);
+$lh-body: var(--lh-body);
+$lh-h5: var(--lh-h5);
+$lh-h4: var(--lh-h4);
+$lh-h3: var(--lh-h3);
+$lh-h2: var(--lh-h2);
+$lh-h1: var(--lh-h1);
+$lh-xl: var(--lh-xl);
+$lh-xxl: var(--lh-xxl);
+$lh-xxxl: var(--lh-xxxl);

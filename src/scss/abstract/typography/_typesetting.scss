@@ -1,0 +1,56 @@
+@use './font-sizes' as *;
+@use './letter-spacing' as *;
+@use './line-heights' as *;
+
+$type-scale: (
+	caption: (
+		font-size: $fs-caption,
+		line-height: $lh-caption,
+		letter-spacing: $ls-caption
+	),
+	body: (
+		font-size: $fs-body,
+		line-height: $lh-body,
+		letter-spacing: $ls-body
+	),
+	h5: (
+		font-size: $fs-h5,
+		line-height: $lh-h5,
+		letter-spacing: $ls-h5
+	),
+	h4: (
+		font-size: $fs-h4,
+		line-height: $lh-h4,
+		letter-spacing: $ls-h4
+	),
+	h3: (
+		font-size: $fs-h3,
+		line-height: $lh-h3,
+		letter-spacing: $ls-h3
+	),
+	h2: (
+		font-size: $fs-h2,
+		line-height: $lh-h2,
+		letter-spacing: $ls-h2
+	),
+	h1: (
+		font-size: $fs-h1,
+		line-height: $lh-h1,
+		letter-spacing: $ls-h1
+	),
+	xl: (
+		font-size: $fs-xl,
+		line-height: $lh-xl,
+		letter-spacing: $ls-xl
+	),
+	xxl: (
+		font-size: $fs-xxl,
+		line-height: $lh-xxl,
+		letter-spacing: $ls-xxl
+	),
+	xxxl: (
+		font-size: $fs-xxxl,
+		line-height: $lh-xxxl,
+		letter-spacing: $ls-xxxl
+	)
+);

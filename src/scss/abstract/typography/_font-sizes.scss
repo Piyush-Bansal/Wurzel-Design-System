@@ -1,0 +1,68 @@
+@use '../mixins' as *;
+
+//font sizes
+$-font-sizes: (
+	caption: (
+		large: 13.4,
+		medium: 9.2,
+		small: 11.9
+	),
+	body: (
+		large: 19,
+		medium: 13,
+		small: 15
+	),
+	h5: (
+		large: 26.9,
+		medium: 18.4,
+		small: 18.9
+	),
+	h4: (
+		large: 38,
+		medium: 26,
+		small: 23.8
+	),
+	h3: (
+		large: 53.7,
+		medium: 36.8,
+		small: 30
+	),
+	h2: (
+		large: 76,
+		medium: 52,
+		small: 37.8
+	),
+	h1: (
+		large: 107.5,
+		medium: 73.5,
+		small: 47.6
+	),
+	xl: (
+		large: 152,
+		medium: 104,
+		small: 60
+	),
+	xxl: (
+		large: 215,
+		medium: 147.1,
+		small: 75.6
+	),
+	xxxl: (
+		large: 304,
+		medium: 208,
+		small: 95.2
+	)
+);
+
+@include map-to-var($-font-sizes, 'fs-', true);
+
+$fs-caption: var(--fs-caption);
+$fs-body: var(--fs-body);
+$fs-h5: var(--fs-h5);
+$fs-h4: var(--fs-h4);
+$fs-h3: var(--fs-h3);
+$fs-h2: var(--fs-h2);
+$fs-h1: var(--fs-h1);
+$fs-xl: var(--fs-xl);
+$fs-xxl: var(--fs-xxl);
+$fs-xxxl: var(--fs-xxxl);

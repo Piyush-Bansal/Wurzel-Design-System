@@ -1,0 +1,10 @@
+@use '../../abstract' as *;
+@use 'sass:string';
+
+@each $type-size, $props in $type-scale {
+	.#{$type-size} {
+		@each $key, $value in $props {
+			#{$key}: $value;
+		}
+	}
+}

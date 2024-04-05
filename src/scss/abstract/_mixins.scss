@@ -1,4 +1,5 @@
 @use './breakpoint' as *;
+@use './functions' as *;
 @use 'sass:map';
 @use 'sass:meta';
 
@@ -21,20 +22,20 @@
 	}
 }
 
-@mixin map-to-var($map) {
+@mixin map-to-var($map, $key-prefix: '', $convert-to-em: false) {
 	:root {
 		@each $key-parent, $value-parent in $map {
-			$property-name: '--' + $key-parent; // Construct the custom property name
+			$property-name: '--' + $key-prefix + $key-parent; // Construct the custom property name
 			@each $key, $value in $value-parent {
 				@if ($key == 'large') {
-					#{$property-name}: #{$value};
+					#{$property-name}: if($convert-to-em, #{calc-em-l($value)}, #{$value});
 				} @else if($key == 'medium') {
 					@include mq('medium') {
-						#{$property-name}: #{$value};
+						#{$property-name}: if($convert-to-em, #{calc-em-m($value)}, #{$value});
 					}
 				} @else {
 					@include mq('small') {
-						#{$property-name}: #{$value};
+						#{$property-name}: if($convert-to-em, #{calc-em-s($value)}, #{$value});
 					}
 				}
 			}
