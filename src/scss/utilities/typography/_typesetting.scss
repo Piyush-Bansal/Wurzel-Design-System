@@ -8,3 +8,12 @@
 		}
 	}
 }
+
+//uppercase
+@each $type-size, $props in $type-scale-uppercase {
+	.#{$type-size}.uppercase {
+		@each $key, $value in $props {
+			#{$key}: $value;
+		}
+	}
+}

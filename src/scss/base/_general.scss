@@ -11,34 +11,70 @@ a {
 	font-size: $base-font-size;
 	line-height: $base-line-height;
 	letter-spacing: $base-letter-spacing;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-body;
+		letter-spacing: $uppercase-ls-body;
+	}
 }
 
 h5 {
 	font-size: $fs-h5;
 	line-height: $lh-h5;
 	letter-spacing: $ls-h5;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-h5;
+		letter-spacing: $uppercase-ls-h5;
+	}
 }
 
 h4 {
 	font-size: $fs-h4;
 	line-height: $lh-h4;
 	letter-spacing: $ls-h4;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-h4;
+		letter-spacing: $uppercase-ls-h4;
+	}
 }
 
 h3 {
 	font-size: $fs-h3;
 	line-height: $lh-h3;
 	letter-spacing: $ls-h3;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-h3;
+		letter-spacing: $uppercase-ls-h3;
+	}
 }
 
 h2 {
 	font-size: $fs-h2;
 	line-height: $lh-h2;
 	letter-spacing: $ls-h2;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-h2;
+		letter-spacing: $uppercase-ls-h2;
+	}
 }
 
 h1 {
 	font-size: $fs-h1;
 	line-height: $lh-h1;
 	letter-spacing: $ls-h1;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-h1;
+		letter-spacing: $uppercase-ls-h1;
+	}
 }

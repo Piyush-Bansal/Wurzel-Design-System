@@ -1,0 +1,70 @@
+@use '../mixins' as *;
+
+//line height
+$-uppercase-line-heights: (
+	(
+		caption: (
+			large: 16,
+			medium: 12,
+			small: 16
+		),
+		body: (
+			large: 20,
+			medium: 16,
+			small: 16
+		),
+		h5: (
+			large: 28,
+			medium: 20,
+			small: 24
+		),
+		h4: (
+			large: 40,
+			medium: 28,
+			small: 24
+		),
+		h3: (
+			large: 52,
+			medium: 36,
+			small: 32
+		),
+		h2: (
+			large: 76,
+			medium: 52,
+			small: 36
+		),
+		h1: (
+			large: 108,
+			medium: 76,
+			small: 48
+		),
+		xl: (
+			large: 152,
+			medium: 104,
+			small: 60
+		),
+		xxl: (
+			large: 216,
+			medium: 148,
+			small: 76
+		),
+		xxxl: (
+			large: 304,
+			medium: 208,
+			small: 96
+		)
+	)
+);
+
+@include map-to-var($-uppercase-line-heights, 'uppercase-lh-', true);
+
+$uppercase-lh-caption: var(--uppercase-lh-caption);
+$uppercase-lh-body: var(--uppercase-lh-body);
+$uppercase-lh-h5: var(--uppercase-lh-h5);
+$uppercase-lh-h4: var(--uppercase-lh-h4);
+$uppercase-lh-h3: var(--uppercase-lh-h3);
+$uppercase-lh-h2: var(--uppercase-lh-h2);
+$uppercase-lh-h1: var(--uppercase-lh-h1);
+$uppercase-lh-xl: var(--uppercase-lh-xl);
+$uppercase-lh-xxl: var(--uppercase-lh-xxl);
+$uppercase-lh-xxxl: var(--uppercase-lh-xxxl);
