@@ -84,3 +84,8 @@ h1 {
 p + p {
 	text-indent: $paragraph-indent;
 }
+
+a {
+	text-decoration-thickness: $anchor-line-thickness;
+	color: inherit;
+}

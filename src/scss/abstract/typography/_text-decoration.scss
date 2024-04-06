@@ -1,0 +1,23 @@
+@use '../sizes' as *;
+
+$-underline-thickness-0: $size-0;
+$-underline-thickness-1: $size-1;
+$-underline-thickness-2: $size-2;
+$-underline-thickness-3: $size-3;
+$-underline-thickness-4: $size-4;
+$-underline-thickness-6: $size-6;
+$-underline-thickness-8: $size-8;
+$-underline-thickness-12: $size-12;
+$-underline-thickness-16: $size-16;
+$-underline-thickness-24: $size-24;
+
+$ut-0: $-underline-thickness-0;
+$ut-1: $-underline-thickness-1;
+$ut-2: $-underline-thickness-2;
+$ut-3: $-underline-thickness-3;
+$ut-4: $-underline-thickness-4;
+$ut-6: $-underline-thickness-6;
+$ut-8: $-underline-thickness-8;
+$ut-12: $-underline-thickness-12;
+$ut-16: $-underline-thickness-16;
+$ut-24: $-underline-thickness-24;
