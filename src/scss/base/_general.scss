@@ -80,3 +80,7 @@ h1 {
 		letter-spacing: $uppercase-ls-h1;
 	}
 }
+
+p + p {
+	text-indent: $paragraph-indent;
+}

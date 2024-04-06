@@ -13,3 +13,8 @@
 @function calc-em-s($val) {
 	@return calc($val/$ss-small * 100em);
 }
+
+//calc based on typesize
+@function calc-em-type($val, $type-size: $base-font-size) {
+	@return calc($val/$type-size * 1em);
+}
