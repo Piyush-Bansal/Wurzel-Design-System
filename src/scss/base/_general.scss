@@ -5,6 +5,7 @@ body {
 	font-family: $body-font-family;
 	line-height: $body-line-height;
 	letter-spacing: $body-letter-spacing;
+	font-weight: $body-font-weight;
 
 	&.uppercase {
 		text-transform: uppercase;
