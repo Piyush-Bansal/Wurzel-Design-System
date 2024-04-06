@@ -1,4 +1,6 @@
 @use '../mixins' as *;
+@use './font-sizes' as *;
+@use '../mixins' as *;
 
 //line height
 $-line-heights: (
@@ -54,7 +56,9 @@ $-line-heights: (
 	)
 );
 
-@include map-to-var($-line-heights, 'lh-', true);
+:root {
+	@include generate-line-height($-line-heights, $font-sizes, 'lh');
+}
 
 $lh-caption: var(--lh-caption);
 $lh-body: var(--lh-body);

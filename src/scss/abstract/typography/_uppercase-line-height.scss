@@ -1,4 +1,6 @@
 @use '../mixins' as *;
+@use './font-sizes' as *;
+@use '../mixins' as *;
 
 //line height
 $-uppercase-line-heights: (
@@ -56,7 +58,9 @@ $-uppercase-line-heights: (
 	)
 );
 
-@include map-to-var($-uppercase-line-heights, 'uppercase-lh-', true);
+:root {
+	@include generate-line-height($-uppercase-line-heights, $font-sizes, 'uppercase-lh');
+}
 
 $uppercase-lh-caption: var(--uppercase-lh-caption);
 $uppercase-lh-body: var(--uppercase-lh-body);

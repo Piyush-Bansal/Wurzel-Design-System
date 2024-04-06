@@ -42,3 +42,26 @@
 		}
 	}
 }
+
+@mixin generate-line-height($line-heights, $font-sizes, $prefix) {
+	@each $size, $key-values in $line-heights {
+		@each $breakpoint, $line-height in $key-values {
+			$property-name: '--' + $prefix + '-' + $size;
+
+			@if ($breakpoint == 'large') {
+				$-fs: map.get($font-sizes, $size, $breakpoint);
+				#{$property-name}: calc($line-height/$-fs * 100%);
+			} @else if($breakpoint == 'medium') {
+				@include mq('medium') {
+					$-fs: map.get($font-sizes, $size, $breakpoint);
+					#{$property-name}: calc($line-height/$-fs * 100%);
+				}
+			} @else {
+				@include mq('small') {
+					$-fs: map.get($font-sizes, $size, $breakpoint);
+					#{$property-name}: calc($line-height/$-fs * 100%);
+				}
+			}
+		}
+	}
+}

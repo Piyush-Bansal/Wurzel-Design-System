@@ -1,3 +1,3 @@
 <div class="container">
-	<h3>Hello World</h3>
+	<h2 class="uppercase">Hello World</h2>
 </div>

@@ -1,7 +1,7 @@
 @use '../mixins' as *;
 
 //font sizes
-$-font-sizes: (
+$font-sizes: (
 	caption: (
 		large: 13.4,
 		medium: 9.2,
@@ -54,7 +54,7 @@ $-font-sizes: (
 	)
 );
 
-@include map-to-var($-font-sizes, 'fs-', true);
+@include map-to-var($font-sizes, 'fs-', true);
 
 $fs-caption: var(--fs-caption);
 $fs-body: var(--fs-body);
