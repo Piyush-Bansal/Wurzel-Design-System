@@ -2,25 +2,10 @@
 @use './sizes' as *;
 @use './typography' as *;
 
-//layout
-$container-max-width: $ss-large * 1px;
-$container-padding-values: (
-	container-padding: (
-		large: $size-64,
-		medium: $size-32,
-		small: $size-16
-	)
-);
+//body
+$body-font-family: $font-family-base;
+$body-line-height: $lh-body;
+$body-letter-spacing: $ls-body;
 
-$gutter-values: (
-	gutter: (
-		large: $size-16,
-		medium: $size-16,
-		small: $size-12
-	)
-);
-
-//typograghy
+//since body font size is set to 1vw its base
 $base-font-size: $fs-body;
-$base-line-height: $lh-body;
-$base-letter-spacing: $ls-body;

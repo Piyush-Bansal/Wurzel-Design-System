@@ -2,6 +2,12 @@
 @use './letter-spacing' as *;
 @use './line-heights' as *;
 
+$-ff-base: 'Switzer', sans-serif;
+$-ff-accent: 'Switzer Italics', sans-serif;
+
+$font-family-base: $-ff-base;
+$font-family-accent: $-ff-accent;
+
 $type-scale: (
 	caption: (
 		font-size: $fs-caption,
