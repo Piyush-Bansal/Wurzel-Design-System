@@ -1,23 +1,144 @@
 @use '../sizes' as *;
+@use '../functions' as *;
+@use 'sass:map';
+@use './font-sizes' as *;
+@use '../mixins' as *;
 
-$-underline-thickness-0: $size-0;
-$-underline-thickness-1: $size-1;
-$-underline-thickness-2: $size-2;
-$-underline-thickness-3: $size-3;
-$-underline-thickness-4: $size-4;
-$-underline-thickness-6: $size-6;
-$-underline-thickness-8: $size-8;
-$-underline-thickness-12: $size-12;
-$-underline-thickness-16: $size-16;
-$-underline-thickness-24: $size-24;
+$-ut-sizes: 1, 2, 3, 4, 6, 8, 12, 16, 24, 32;
 
-$ut-0: $-underline-thickness-0;
-$ut-1: $-underline-thickness-1;
-$ut-2: $-underline-thickness-2;
-$ut-3: $-underline-thickness-3;
-$ut-4: $-underline-thickness-4;
-$ut-6: $-underline-thickness-6;
-$ut-8: $-underline-thickness-8;
-$ut-12: $-underline-thickness-12;
-$ut-16: $-underline-thickness-16;
-$ut-24: $-underline-thickness-24;
+:root {
+	@each $type-size, $type-props in $font-sizes {
+		@each $breakpoint, $font-size in $type-props {
+			@if ($breakpoint == 'large') {
+				@each $size in $-ut-sizes {
+					$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
+					#{$custom-property}: calc($size/$font-size * 1em);
+				}
+			} @else if ($breakpoint == 'medium') {
+				@each $size in $-ut-sizes {
+					@include mq('medium') {
+						$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
+						#{$custom-property}: calc($size/$font-size * 1em);
+					}
+				}
+			} @else {
+				@each $size in $-ut-sizes {
+					@include mq('small') {
+						$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
+						#{$custom-property}: calc($size/$font-size * 1em);
+					}
+				}
+			}
+		}
+	}
+}
+
+$ut-caption-1: var(--underline-thickness-caption-1);
+$ut-caption-2: var(--underline-thickness-caption-2);
+$ut-caption-3: var(--underline-thickness-caption-3);
+$ut-caption-4: var(--underline-thickness-caption-4);
+$ut-caption-6: var(--underline-thickness-caption-6);
+$ut-caption-8: var(--underline-thickness-caption-8);
+$ut-caption-12: var(--underline-thickness-caption-12);
+$ut-caption-16: var(--underline-thickness-caption-16);
+$ut-caption-24: var(--underline-thickness-caption-24);
+$ut-caption-32: var(--underline-thickness-caption-32);
+
+$ut-body-1: var(--underline-thickness-body-1);
+$ut-body-2: var(--underline-thickness-body-2);
+$ut-body-3: var(--underline-thickness-body-3);
+$ut-body-4: var(--underline-thickness-body-4);
+$ut-body-6: var(--underline-thickness-body-6);
+$ut-body-8: var(--underline-thickness-body-8);
+$ut-body-12: var(--underline-thickness-body-12);
+$ut-body-16: var(--underline-thickness-body-16);
+$ut-body-24: var(--underline-thickness-body-24);
+$ut-body-32: var(--underline-thickness-body-32);
+
+$ut-h5-1: var(--underline-thickness-h5-1);
+$ut-h5-2: var(--underline-thickness-h5-2);
+$ut-h5-3: var(--underline-thickness-h5-3);
+$ut-h5-4: var(--underline-thickness-h5-4);
+$ut-h5-6: var(--underline-thickness-h5-6);
+$ut-h5-8: var(--underline-thickness-h5-8);
+$ut-h5-12: var(--underline-thickness-h5-12);
+$ut-h5-16: var(--underline-thickness-h5-16);
+$ut-h5-24: var(--underline-thickness-h5-24);
+$ut-h5-32: var(--underline-thickness-h5-32);
+
+$ut-h4-1: var(--underline-thickness-h4-1);
+$ut-h4-2: var(--underline-thickness-h4-2);
+$ut-h4-3: var(--underline-thickness-h4-3);
+$ut-h4-4: var(--underline-thickness-h4-4);
+$ut-h4-6: var(--underline-thickness-h4-6);
+$ut-h4-8: var(--underline-thickness-h4-8);
+$ut-h4-12: var(--underline-thickness-h4-12);
+$ut-h4-16: var(--underline-thickness-h4-16);
+$ut-h4-24: var(--underline-thickness-h4-24);
+$ut-h4-32: var(--underline-thickness-h4-32);
+
+$ut-h3-1: var(--underline-thickness-h3-1);
+$ut-h3-2: var(--underline-thickness-h3-2);
+$ut-h3-3: var(--underline-thickness-h3-3);
+$ut-h3-4: var(--underline-thickness-h3-4);
+$ut-h3-6: var(--underline-thickness-h3-6);
+$ut-h3-8: var(--underline-thickness-h3-8);
+$ut-h3-12: var(--underline-thickness-h3-12);
+$ut-h3-16: var(--underline-thickness-h3-16);
+$ut-h3-24: var(--underline-thickness-h3-24);
+$ut-h3-32: var(--underline-thickness-h3-32);
+
+$ut-h2-1: var(--underline-thickness-h2-1);
+$ut-h2-2: var(--underline-thickness-h2-2);
+$ut-h2-3: var(--underline-thickness-h2-3);
+$ut-h2-4: var(--underline-thickness-h2-4);
+$ut-h2-6: var(--underline-thickness-h2-6);
+$ut-h2-8: var(--underline-thickness-h2-8);
+$ut-h2-12: var(--underline-thickness-h2-12);
+$ut-h2-16: var(--underline-thickness-h2-16);
+$ut-h2-24: var(--underline-thickness-h2-24);
+$ut-h2-32: var(--underline-thickness-h2-32);
+
+$ut-h1-1: var(--underline-thickness-h1-1);
+$ut-h1-2: var(--underline-thickness-h1-2);
+$ut-h1-3: var(--underline-thickness-h1-3);
+$ut-h1-4: var(--underline-thickness-h1-4);
+$ut-h1-6: var(--underline-thickness-h1-6);
+$ut-h1-8: var(--underline-thickness-h1-8);
+$ut-h1-12: var(--underline-thickness-h1-12);
+$ut-h1-16: var(--underline-thickness-h1-16);
+$ut-h1-24: var(--underline-thickness-h1-24);
+$ut-h1-32: var(--underline-thickness-h1-32);
+
+$ut-xl-1: var(--underline-thickness-xl-1);
+$ut-xl-2: var(--underline-thickness-xl-2);
+$ut-xl-3: var(--underline-thickness-xl-3);
+$ut-xl-4: var(--underline-thickness-xl-4);
+$ut-xl-6: var(--underline-thickness-xl-6);
+$ut-xl-8: var(--underline-thickness-xl-8);
+$ut-xl-12: var(--underline-thickness-xl-12);
+$ut-xl-16: var(--underline-thickness-xl-16);
+$ut-xl-24: var(--underline-thickness-xl-24);
+$ut-xl-32: var(--underline-thickness-xl-32);
+
+$ut-xxl-1: var(--underline-thickness-xxl-1);
+$ut-xxl-2: var(--underline-thickness-xxl-2);
+$ut-xxl-3: var(--underline-thickness-xxl-3);
+$ut-xxl-4: var(--underline-thickness-xxl-4);
+$ut-xxl-6: var(--underline-thickness-xxl-6);
+$ut-xxl-8: var(--underline-thickness-xxl-8);
+$ut-xxl-12: var(--underline-thickness-xxl-12);
+$ut-xxl-16: var(--underline-thickness-xxl-16);
+$ut-xxl-24: var(--underline-thickness-xxl-24);
+$ut-xxl-32: var(--underline-thickness-xxl-32);
+
+$ut-xxxl-1: var(--underline-thickness-xxxl-1);
+$ut-xxxl-2: var(--underline-thickness-xxxl-2);
+$ut-xxxl-3: var(--underline-thickness-xxxl-3);
+$ut-xxxl-4: var(--underline-thickness-xxxl-4);
+$ut-xxxl-6: var(--underline-thickness-xxxl-6);
+$ut-xxxl-8: var(--underline-thickness-xxxl-8);
+$ut-xxxl-12: var(--underline-thickness-xxxl-12);
+$ut-xxxl-16: var(--underline-thickness-xxxl-16);
+$ut-xxxl-24: var(--underline-thickness-xxxl-24);
+$ut-xxxl-32: var(--underline-thickness-xxxl-32);
