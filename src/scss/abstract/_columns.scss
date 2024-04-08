@@ -1,0 +1,17 @@
+@use './mixins' as *;
+@use './container' as *;
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:map';
+
+$total-columns: (
+	total-columns: (
+		large: 12,
+		medium: 6,
+		small: 6
+	)
+);
+
+@include map-to-var($gutter-values);
+
+$gutter: var(--gutter);

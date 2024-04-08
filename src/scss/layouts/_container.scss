@@ -1,10 +1,8 @@
 @use '../abstract' as *;
 
 @include map-to-var($container-padding-values);
-@include map-to-var($gutter-values);
 
 $container-padding: var(--container-padding);
-$gutter: var(--gutter);
 
 .container {
 	max-width: $container-max-width;
