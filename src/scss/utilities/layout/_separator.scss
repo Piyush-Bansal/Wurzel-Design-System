@@ -24,3 +24,10 @@
 		margin-right: calc(($gutter/2) * -1);
 	}
 }
+
+.vertical-separator {
+	display: block;
+	width: $vertical-separator-width;
+	height: 100%;
+	background-color: $vertical-separator-color;
+}
