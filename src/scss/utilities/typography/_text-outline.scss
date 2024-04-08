@@ -1,0 +1,36 @@
+@use '../../abstract' as *;
+
+@each $type-size, $props in $font-sizes {
+	$fs: $type-size;
+	@each $type-key, $type-size in $props {
+		@if ($type-key == 'large') {
+			@each $size in $text-outline-sizes {
+				#{$fs}.outline-#{$size},
+				.#{$fs}.outline-#{$size} {
+					-webkit-text-stroke-width: calc-em-type($size, $type-size);
+					-webkit-text-stroke-color: $text-outline-color;
+				}
+			}
+		} @else if($type-key == 'medium') {
+			@include mq('medium') {
+				@each $size in $text-outline-sizes {
+					#{$fs}.outline-#{$size},
+					.#{$fs}.outline-#{$size} {
+						-webkit-text-stroke-width: calc-em-type($size, $type-size);
+						-webkit-text-stroke-color: $text-outline-color;
+					}
+				}
+			}
+		} @else {
+			@include mq('small') {
+				@each $size in $text-outline-sizes {
+					#{$fs}.outline-#{$size},
+					.#{$fs}.outline-#{$size} {
+						-webkit-text-stroke-width: calc-em-type($size, $type-size);
+						-webkit-text-stroke-color: $text-outline-color;
+					}
+				}
+			}
+		}
+	}
+}
