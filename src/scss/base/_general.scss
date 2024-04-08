@@ -88,3 +88,8 @@ a {
 	text-decoration-thickness: $anchor-line-thickness;
 	color: inherit;
 }
+
+::selection {
+	background-color: $selection-background-color;
+	color: $selection-text-color;
+}
