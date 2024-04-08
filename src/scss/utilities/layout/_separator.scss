@@ -1,0 +1,26 @@
+@use '../../abstract' as *;
+@use '../../layouts' as *;
+
+.separator {
+	display: block;
+	height: $separator-height;
+	background-color: $separator-color;
+
+	&[data-size='full'] {
+		margin-left: calc($container-padding * -1);
+		margin-right: calc($container-padding * -1);
+	}
+
+	&[data-size='right-extended'] {
+		margin-right: calc(($gutter/2) * -1);
+	}
+
+	&[data-size='left-extended'] {
+		margin-left: calc(($gutter/2) * -1);
+	}
+
+	&[data-size='left-right-extended'] {
+		margin-left: calc(($gutter/2) * -1);
+		margin-right: calc(($gutter/2) * -1);
+	}
+}
