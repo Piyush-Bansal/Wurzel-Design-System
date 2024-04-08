@@ -6,18 +6,18 @@ body {
 	line-height: $body-line-height;
 	letter-spacing: $body-letter-spacing;
 	font-weight: $body-font-weight;
-
-	&.uppercase {
-		text-transform: uppercase;
-		line-height: $uppercase-lh-body;
-		letter-spacing: $uppercase-ls-body;
-	}
 }
 
 p,
 ul,
 ol {
 	font-size: $base-font-size;
+
+	&.uppercase {
+		text-transform: uppercase;
+		line-height: $uppercase-lh-body;
+		letter-spacing: $uppercase-ls-body;
+	}
 }
 
 h5 {
