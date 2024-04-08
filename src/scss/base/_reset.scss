@@ -10,9 +10,20 @@
 	font: inherit;
 }
 
+html {
+	hanging-punctuation: first last;
+}
+
 img,
 picture,
-svg {
+svg,
+video {
 	display: block;
 	max-width: 100%;
+}
+
+p,
+li {
+	max-width: 75ch;
+	text-wrap: pretty;
 }
