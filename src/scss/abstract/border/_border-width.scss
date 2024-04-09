@@ -1,0 +1,20 @@
+@use '../sizes' as *;
+@use '../mixins' as *;
+
+$-bw: (
+	bw: (
+		none: 0,
+		sm: $size-1,
+		md: $size-2,
+		lg: $size-4,
+		xl: $size-8
+	)
+);
+
+@include map-to-var($-bw);
+
+$border-width-none: var(--bw-none);
+$border-width-sm: var(--bw-sm);
+$border-width-md: var(--bw-md);
+$border-width-lg: var(--bw-lg);
+$border-width-xl: var(--bw-xl);

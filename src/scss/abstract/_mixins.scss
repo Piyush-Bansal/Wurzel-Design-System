@@ -22,7 +22,7 @@
 	}
 }
 
-@mixin map-to-var($map, $key-prefix: '', $convert-to-em: false) {
+@mixin map-to-var-breakpoints($map, $key-prefix: '', $convert-to-em: false) {
 	:root {
 		@each $key-parent, $value-parent in $map {
 			$property-name: '--' + $key-prefix + $key-parent; // Construct the custom property name
@@ -38,6 +38,17 @@
 						#{$property-name}: if($convert-to-em, #{calc-em-s($value)}, #{$value});
 					}
 				}
+			}
+		}
+	}
+}
+
+@mixin map-to-var($map, $key-prefix: '') {
+	:root {
+		@each $parent-key, $parent-value in $map {
+			@each $key, $value in $parent-value {
+				$property-name: '--' + $key-prefix + $parent-key + '-' + $key;
+				#{$property-name}: #{$value};
 			}
 		}
 	}

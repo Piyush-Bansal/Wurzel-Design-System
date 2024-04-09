@@ -1,6 +1,6 @@
 @use '../abstract' as *;
 
-@include map-to-var($container-padding-values);
+@include map-to-var-breakpoints($container-padding-values);
 
 $container-padding: var(--container-padding);
 

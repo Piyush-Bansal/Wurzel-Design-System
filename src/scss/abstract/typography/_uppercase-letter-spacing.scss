@@ -54,7 +54,7 @@ $-uppercase-letter-spacing: (
 	)
 );
 
-@include map-to-var($-uppercase-letter-spacing, 'uppercase-ls-');
+@include map-to-var-breakpoints($-uppercase-letter-spacing, 'uppercase-ls-');
 
 $uppercase-ls-caption: var(--uppercase-ls-caption);
 $uppercase-ls-body: var(--uppercase-ls-body);

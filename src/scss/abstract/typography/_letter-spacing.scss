@@ -54,7 +54,7 @@ $-letter-spacings: (
 	)
 );
 
-@include map-to-var($-letter-spacings, 'ls-');
+@include map-to-var-breakpoints($-letter-spacings, 'ls-');
 
 $ls-caption: var(--ls-caption);
 $ls-body: var(--ls-body);
