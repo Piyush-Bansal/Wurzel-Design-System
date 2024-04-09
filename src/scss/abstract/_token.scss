@@ -20,6 +20,7 @@ $anchor-line-thickness: $ut-body-1;
 
 //grid
 $grid-gap: $gutter;
+$grid-gap-half: calc($gutter/2);
 
 //separator
 $separator-height: $size-1;

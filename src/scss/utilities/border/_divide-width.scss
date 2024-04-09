@@ -1,0 +1,24 @@
+@use '../../abstract/' as *;
+
+.divide {
+	&-x > * {
+		padding: 0 $grid-gap-half;
+
+		&:not(:first-child) {
+			border-left: $border-width-sm solid black;
+		}
+	}
+
+	&-y > *:not(:first-child) {
+		padding: $grid-gap-half 0;
+		border-top: $border-width-sm solid black;
+	}
+
+	&-y > :last-child {
+		padding-bottom: 0;
+	}
+
+	&-y > :first-child {
+		padding-bottom: $grid-gap-half;
+	}
+}
