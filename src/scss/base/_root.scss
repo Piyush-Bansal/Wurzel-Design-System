@@ -14,4 +14,9 @@
 			--size-#{$value}: #{calc-em-s($value)};
 		}
 	}
+
+	//border-radius
+	@each $key, $value in $br {
+		--br-#{$key}: #{$value};
+	}
 }
