@@ -1,3 +1,5 @@
+@use './sizes' as *;
+
 $br: (
 	none: 0,
 	1: $size-1,
