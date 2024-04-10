@@ -1,0 +1,7 @@
+@use '../../abstract' as *;
+
+@each $key, $value in $blur {
+	.blur-#{$key} {
+		filter: blur($value);
+	}
+}

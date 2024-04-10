@@ -1,0 +1,7 @@
+@use '../../abstract' as *;
+
+@each $key, $value in $blur {
+	.backdrop-blur-#{$key} {
+		backdrop-filter: blur($value);
+	}
+}
