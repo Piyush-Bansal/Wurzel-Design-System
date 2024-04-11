@@ -1,4 +1,5 @@
 import postcssPresetEnv from 'postcss-preset-env';
+import purgecss from '@fullhuman/postcss-purgecss';
 
 /** @type {import('postcss-preset-env').Config} */
 
@@ -7,6 +8,9 @@ const config = {
 		postcssPresetEnv({
 			stage: 3
 		})
+		// purgecss({
+		// 	content: ['./**/*.html']
+		// })
 	]
 };
 
