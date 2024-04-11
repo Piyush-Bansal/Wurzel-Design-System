@@ -9,7 +9,10 @@ const config = {
 			stage: 3
 		})
 		// purgecss({
-		// 	content: ['./**/*.html']
+		// 	content: ['./**/*.html'],
+		// 	variables: true,
+		// 	fontFace: true,
+		// 	keyframes: true
 		// })
 	]
 };

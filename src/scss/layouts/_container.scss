@@ -7,7 +7,6 @@ $container-padding: var(--container-padding);
 .container {
 	max-width: $container-max-width;
 	margin-inline: auto;
-	background-color: red;
 	padding-inline: $container-padding;
 
 	&[data-size='full'] {
@@ -16,11 +15,11 @@ $container-padding: var(--container-padding);
 
 	&[data-size='right-extended'] {
 		padding-left: $container-padding;
-		padding-right: calc($container-padding - ($gutter/2));
+		padding-right: calc($container-padding - $grid-gap-half);
 	}
 
 	&[data-size='left-extended'] {
-		padding-left: calc($container-padding - ($gutter/2));
+		padding-left: calc($container-padding - $grid-gap-half);
 		padding-right: $container-padding;
 	}
 }
