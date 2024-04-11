@@ -41,4 +41,21 @@
 			align-items: stretch;
 		}
 	}
+
+    &-self {
+        &-start {
+            align-self: flex-start;
+            align-self: start;
+        }
+        &-end {
+            align-self: flex-end;
+            align-self: end;
+        }
+        &-center {
+            align-self: center;
+        }
+        &-stretch {
+            align-self: stretch;
+        }
+    }
 }
