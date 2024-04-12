@@ -2,6 +2,7 @@
 @use './sizes' as *;
 @use './typography' as *;
 @use './columns' as *;
+@use './container' as *;
 
 //body
 $body-font-family: $font-family-base;

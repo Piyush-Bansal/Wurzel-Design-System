@@ -1,5 +1,6 @@
 @use './breakpoint' as *;
 @use './sizes' as *;
+@use './mixins' as *;
 
 //Container
 $container-max-width: $ss-large * 1px;
@@ -18,3 +19,7 @@ $gutter-values: (
 		small: $size-12
 	)
 );
+
+@include map-to-var-breakpoints($gutter-values);
+
+$gutter: var(--gutter);

@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="divide-y">
+	<div class="grid">
 		<div>
 			<p>Lorem ipsum dolor sit amet.</p>
 		</div>

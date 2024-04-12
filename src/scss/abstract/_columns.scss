@@ -12,6 +12,6 @@ $total-columns: (
 	)
 );
 
-@include map-to-var-breakpoints($gutter-values);
+@include map-to-var-breakpoints($total-columns);
 
-$gutter: var(--gutter);
+$column-count: var(--total-columns);
