@@ -1,0 +1,14 @@
+@use '../functions' as *;
+@use '../mixins' as *;
+@use './font-sizes' as *;
+@use 'sass:map';
+
+$-p-indent: (
+	paragraph-indent: (
+		large: calc-em-type(24, map.get($font-sizes, 'body', 'large')),
+		medium: calc-em-type(24, map.get($font-sizes, 'body', 'medium')),
+		small: calc-em-type(24, map.get($font-sizes, 'body', 'small'))
+	)
+);
+
+@include map-to-var-breakpoints($-p-indent);

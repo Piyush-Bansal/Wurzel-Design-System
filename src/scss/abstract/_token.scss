@@ -14,7 +14,7 @@ $base-font-size: $fs-body;
 $body-font-weight: $font-weight-regular;
 
 //paragraph
-$paragraph-indent: $size-12;
+$paragraph-indent: var(--paragraph-indent);
 
 //anchor tag
 $anchor-line-thickness: $ut-body-1;
