@@ -3,7 +3,7 @@
 @use '../mixins' as *;
 
 //line height
-$-line-heights: (
+$line-heights: (
 	caption: (
 		large: 16,
 		medium: 12,
@@ -57,7 +57,7 @@ $-line-heights: (
 );
 
 :root {
-	@include generate-line-height($-line-heights, $font-sizes, 'lh');
+	@include generate-line-height($line-heights, $font-sizes, 'lh');
 }
 
 $lh-caption: var(--lh-caption);

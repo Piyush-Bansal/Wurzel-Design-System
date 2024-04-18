@@ -1,5 +1,9 @@
 @use '../abstract' as *;
 
+* {
+	caret-color: $caret-color;
+}
+
 body {
 	font-size: 1vw;
 	font-family: $body-font-family;
@@ -18,6 +22,24 @@ ol {
 		line-height: $uppercase-lh-body;
 		letter-spacing: $uppercase-ls-body;
 	}
+}
+
+p + p {
+	text-indent: $paragraph-indent;
+}
+
+p:not(:last-child) {
+	padding-bottom: $paragraph-spacing;
+}
+
+a {
+	text-decoration-thickness: $anchor-line-thickness;
+	color: inherit;
+}
+
+::selection {
+	background-color: $selection-background-color;
+	color: $selection-text-color;
 }
 
 h5 {
@@ -80,27 +102,9 @@ h1 {
 	}
 }
 
-p + p {
-	text-indent: $paragraph-indent;
-}
-
-a {
-	text-decoration-thickness: $anchor-line-thickness;
-	color: inherit;
-}
-
-::selection {
-	background-color: $selection-background-color;
-	color: $selection-text-color;
-}
-
 @media (prefers-reduced-motion: no-preference) {
 	:has(:target) {
 		scroll-behavior: smooth;
 		scroll-padding-top: $size-32;
 	}
-}
-
-* {
-	caret-color: $caret-color;
 }

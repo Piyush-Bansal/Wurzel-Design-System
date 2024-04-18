@@ -1,0 +1,27 @@
+@use '../functions' as *;
+@use '../mixins' as *;
+@use './font-sizes' as *;
+@use 'sass:map';
+@use './line-heights' as *;
+
+$-p-spacing: (
+	paragraph-spacing: (
+		large:
+			calc-em-type(
+				map.get($line-heights, 'body', 'large'),
+				map.get($font-sizes, 'body', 'large')
+			),
+		medium:
+			calc-em-type(
+				map.get($line-heights, 'body', 'medium'),
+				map.get($font-sizes, 'body', 'medium')
+			),
+		small:
+			calc-em-type(
+				map.get($line-heights, 'body', 'small'),
+				map.get($font-sizes, 'body', 'small')
+			)
+	)
+);
+
+@include map-to-var-breakpoints($-p-spacing);

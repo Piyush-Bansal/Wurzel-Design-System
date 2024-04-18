@@ -2,12 +2,13 @@
 @use '../mixins' as *;
 @use './font-sizes' as *;
 @use 'sass:map';
+@use '../container' as *;
 
 $-p-indent: (
 	paragraph-indent: (
-		large: calc-em-type(24, map.get($font-sizes, 'body', 'large')),
-		medium: calc-em-type(24, map.get($font-sizes, 'body', 'medium')),
-		small: calc-em-type(24, map.get($font-sizes, 'body', 'small'))
+		large: calc-em-type(16, map.get($font-sizes, 'body', 'large')),
+		medium: calc-em-type(16, map.get($font-sizes, 'body', 'medium')),
+		small: calc-em-type(12, map.get($font-sizes, 'body', 'small'))
 	)
 );
 
