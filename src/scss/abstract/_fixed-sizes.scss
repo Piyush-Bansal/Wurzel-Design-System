@@ -1,0 +1,8 @@
+@use './sizes' as *;
+
+$fxd-sizes: (
+	24: $size-24,
+	32: $size-32,
+	48: $size-48,
+	64: $size-64
+);
