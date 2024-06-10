@@ -1,0 +1,10 @@
+@mixin stylistic-sets {
+	font-feature-settings:
+		'salt' 1,
+		'aalt' 1,
+		'frac' 1,
+		'ordn' 1,
+		'liga' 1,
+		'sups' 1,
+		'kern' 1;
+}
