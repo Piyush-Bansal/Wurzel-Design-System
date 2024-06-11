@@ -30,16 +30,12 @@
 				$key-parent; // Construct the custom property name
 			@each $key, $value in $value-parent {
 				@if ($key == 'large') {
-					#{$property-name}: if(
-						$convert-to-em,
-						#{calc-em-l($value)},
-						#{$value}
-					);
+					#{$property-name}: if($convert-to-em, #{fluid-l($value)}, #{$value});
 				} @else if($key == 'medium') {
 					@include mq('medium') {
 						#{$property-name}: if(
 							$convert-to-em,
-							#{calc-em-m($value)},
+							#{fluid-m($value)},
 							#{$value}
 						);
 					}
@@ -47,7 +43,7 @@
 					@include mq('small') {
 						#{$property-name}: if(
 							$convert-to-em,
-							#{calc-em-s($value)},
+							#{fluid-s($value)},
 							#{$value}
 						);
 					}
