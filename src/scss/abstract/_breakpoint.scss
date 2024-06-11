@@ -6,6 +6,9 @@ $breakpoints: (
 );
 
 //change these values
-$ss-large: 1928;
-$ss-medium: 768;
-$ss-small: 356;
+$ss-large-high: 1928;
+$ss-large-low: 1024;
+$ss-medium-high: 1023;
+$ss-medium-low: 768;
+$ss-small-high: 767;
+$ss-small-low: 356;

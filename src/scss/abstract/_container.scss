@@ -3,7 +3,7 @@
 @use './mixins' as *;
 
 //Container
-$container-max-width: $ss-large * 1px;
+$container-max-width: $ss-large-high * 1px;
 $container-padding-values: (
 	container-padding: (
 		large: $size-64,

@@ -80,6 +80,6 @@
 
 	.test {
 		font-size: calc-clamp(30);
-		padding: clamp(3.125rem, 3.261vw + 0.924rem, 5rem);
+		padding: var(--size-96);
 	}
 </style>

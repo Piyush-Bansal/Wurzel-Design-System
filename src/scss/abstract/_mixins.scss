@@ -25,17 +25,31 @@
 @mixin map-to-var-breakpoints($map, $key-prefix: '', $convert-to-em: false) {
 	:root {
 		@each $key-parent, $value-parent in $map {
-			$property-name: '--' + $key-prefix + $key-parent; // Construct the custom property name
+			$property-name: '--' +
+				$key-prefix +
+				$key-parent; // Construct the custom property name
 			@each $key, $value in $value-parent {
 				@if ($key == 'large') {
-					#{$property-name}: if($convert-to-em, #{calc-em-l($value)}, #{$value});
+					#{$property-name}: if(
+						$convert-to-em,
+						#{calc-em-l($value)},
+						#{$value}
+					);
 				} @else if($key == 'medium') {
 					@include mq('medium') {
-						#{$property-name}: if($convert-to-em, #{calc-em-m($value)}, #{$value});
+						#{$property-name}: if(
+							$convert-to-em,
+							#{calc-em-m($value)},
+							#{$value}
+						);
 					}
 				} @else {
 					@include mq('small') {
-						#{$property-name}: if($convert-to-em, #{calc-em-s($value)}, #{$value});
+						#{$property-name}: if(
+							$convert-to-em,
+							#{calc-em-s($value)},
+							#{$value}
+						);
 					}
 				}
 			}

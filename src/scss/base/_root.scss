@@ -4,14 +4,14 @@
 :root {
 	//sizes
 	@each $value in $sequence {
-		--size-#{$value}: #{calc-em-l($value)};
+		--size-#{$value}: #{fluid-l($value)};
 
 		@include mq('medium') {
-			--size-#{$value}: #{calc-em-m($value)};
+			--size-#{$value}: #{fluid-m($value)};
 		}
 
 		@include mq('small') {
-			--size-#{$value}: #{calc-em-s($value)};
+			--size-#{$value}: #{fluid-s($value)};
 		}
 	}
 
