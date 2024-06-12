@@ -7,7 +7,7 @@
 			@each $size in $text-outline-sizes {
 				#{$fs}.outline-#{$size},
 				.#{$fs}.outline-#{$size} {
-					-webkit-text-stroke-width: calc-em-type($size, $type-size);
+					-webkit-text-stroke-width: fluid-l($size);
 					-webkit-text-stroke-color: $text-outline-color;
 				}
 			}
@@ -16,7 +16,7 @@
 				@each $size in $text-outline-sizes {
 					#{$fs}.outline-#{$size},
 					.#{$fs}.outline-#{$size} {
-						-webkit-text-stroke-width: calc-em-type($size, $type-size);
+						-webkit-text-stroke-width: fluid-m($size);
 						-webkit-text-stroke-color: $text-outline-color;
 					}
 				}
@@ -26,7 +26,7 @@
 				@each $size in $text-outline-sizes {
 					#{$fs}.outline-#{$size},
 					.#{$fs}.outline-#{$size} {
-						-webkit-text-stroke-width: calc-em-type($size, $type-size);
+						-webkit-text-stroke-width: fluid-s($size);
 						-webkit-text-stroke-color: $text-outline-color;
 					}
 				}

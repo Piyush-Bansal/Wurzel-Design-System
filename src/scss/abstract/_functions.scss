@@ -4,11 +4,6 @@
 
 // @use './mixins' as *;
 
-//calc based on typesize
-@function calc-em-type($val, $type-size) {
-	@return calc($val/$type-size * 1em);
-}
-
 //fluid size
 @function fluid-l($val) {
 	$size-small: math.div($val, $ss-large-high) * $ss-large-low;
