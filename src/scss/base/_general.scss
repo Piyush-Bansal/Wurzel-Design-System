@@ -6,7 +6,7 @@
 
 body {
 	font-family: $body-font-family;
-	line-height: $body-line-height;
+
 	letter-spacing: $body-letter-spacing;
 	font-weight: $body-font-weight;
 }
@@ -15,6 +15,7 @@ p,
 ul,
 ol {
 	font-size: $base-font-size;
+	line-height: $body-line-height;
 
 	&.uppercase {
 		text-transform: uppercase;

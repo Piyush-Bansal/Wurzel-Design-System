@@ -4,23 +4,12 @@
 @use 'sass:map';
 @use './line-heights' as *;
 
+//change the number in ()
 $-p-spacing: (
 	paragraph-spacing: (
-		large:
-			calc-em-type(
-				map.get($line-heights, 'body', 'large'),
-				map.get($font-sizes, 'body', 'large')
-			),
-		medium:
-			calc-em-type(
-				map.get($line-heights, 'body', 'medium'),
-				map.get($font-sizes, 'body', 'medium')
-			),
-		small:
-			calc-em-type(
-				map.get($line-heights, 'body', 'small'),
-				map.get($font-sizes, 'body', 'small')
-			)
+		large: fluid-l(24),
+		medium: fluid-m(20),
+		small: fluid-s(20)
 	)
 );
 
