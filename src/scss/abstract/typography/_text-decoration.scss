@@ -8,26 +8,16 @@ $-ut-sizes: 1, 2, 3, 4, 6, 8, 12, 16, 24, 32;
 
 :root {
 	@each $type-size, $type-props in $font-sizes {
-		@each $breakpoint, $font-size in $type-props {
-			@if ($breakpoint == 'large') {
-				@each $size in $-ut-sizes {
-					$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
-					#{$custom-property}: calc($size/$font-size * 1em);
-				}
-			} @else if ($breakpoint == 'medium') {
-				@each $size in $-ut-sizes {
-					@include mq('medium') {
-						$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
-						#{$custom-property}: calc($size/$font-size * 1em);
-					}
-				}
-			} @else {
-				@each $size in $-ut-sizes {
-					@include mq('small') {
-						$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
-						#{$custom-property}: calc($size/$font-size * 1em);
-					}
-				}
+		@each $size in $-ut-sizes {
+			$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
+			#{$custom-property}: #{fluid-l($size)};
+
+			@include mq('medium') {
+				#{$custom-property}: #{fluid-m($size)};
+			}
+
+			@include mq('small') {
+				#{$custom-property}: #{fluid-s($size)};
 			}
 		}
 	}
