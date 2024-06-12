@@ -4,19 +4,6 @@
 
 // @use './mixins' as *;
 
-//size conversion
-@function calc-em-l($val) {
-	@return calc($val/$ss-large-high * 100em);
-}
-
-@function calc-em-m($val) {
-	@return calc($val/$ss-medium-high * 100em);
-}
-
-@function calc-em-s($val) {
-	@return calc($val/$ss-small-high * 100em);
-}
-
 //calc based on typesize
 @function calc-em-type($val, $type-size) {
 	@return calc($val/$type-size * 1em);

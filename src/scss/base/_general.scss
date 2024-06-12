@@ -16,6 +16,7 @@ ul,
 ol {
 	font-size: $base-font-size;
 	line-height: $body-line-height;
+	@include stylistic-sets;
 
 	&.uppercase {
 		text-transform: uppercase;
