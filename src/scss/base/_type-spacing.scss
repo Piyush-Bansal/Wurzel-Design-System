@@ -1,0 +1,41 @@
+@use '../abstract/' as *;
+@use 'sass:string';
+
+//useful for rich text editor
+
+@each $key-parent, $value-parent in $headline-paragraph-spacing {
+	@each $key, $value in $value-parent {
+		@if ($key == 'large') {
+			#{$key-parent}:has(+ p),
+			#{$key-parent}:has(+ ol),
+			#{$key-parent}:has(+ ul),
+			.#{$key-parent}:has(+ p),
+			.#{$key-parent}:has(+ ol),
+			.#{$key-parent}:has(+ ul) {
+				padding-bottom: $value;
+			}
+		} @else if($key == 'medium') {
+			@include mq('medium') {
+				#{$key-parent}:has(+ p),
+				#{$key-parent}:has(+ ol),
+				#{$key-parent}:has(+ ul),
+				.#{$key-parent}:has(+ p),
+				.#{$key-parent}:has(+ ol),
+				.#{$key-parent}:has(+ ul) {
+					padding-bottom: $value;
+				}
+			}
+		} @else {
+			@include mq('small') {
+				#{$key-parent}:has(+ p),
+				#{$key-parent}:has(+ ol),
+				#{$key-parent}:has(+ ul),
+				.#{$key-parent}:has(+ p),
+				.#{$key-parent}:has(+ ol),
+				.#{$key-parent}:has(+ ul) {
+					padding-bottom: $value;
+				}
+			}
+		}
+	}
+}

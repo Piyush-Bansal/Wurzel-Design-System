@@ -1,0 +1,30 @@
+@use '../sizes' as *;
+// to be used for rte
+
+$headline-paragraph-spacing: (
+	h5: (
+		large: $size-12,
+		medium: $size-12,
+		small: $size-12
+	),
+	h4: (
+		large: $size-12,
+		medium: $size-12,
+		small: $size-12
+	),
+	h3: (
+		large: $size-12,
+		medium: $size-12,
+		small: $size-12
+	),
+	h2: (
+		large: $size-12,
+		medium: $size-12,
+		small: $size-12
+	),
+	h1: (
+		large: $size-12,
+		medium: $size-12,
+		small: $size-12
+	)
+);

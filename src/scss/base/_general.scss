@@ -29,7 +29,9 @@ p + p {
 	text-indent: $paragraph-indent;
 }
 
-p:not(:last-child) {
+p:not(:last-child),
+ul:not(:last-child),
+ol:not(:last-child) {
 	padding-bottom: $paragraph-spacing;
 }
 

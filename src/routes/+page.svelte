@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="test p-y-128">Home</h1>
+	<h1>Home</h1>
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore
 		beatae suscipit perferendis similique, hic cumque quo deserunt eaque velit
@@ -35,6 +35,4 @@
 </div>
 
 <style lang="scss">
-	
-
 </style>
