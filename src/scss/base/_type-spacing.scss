@@ -2,14 +2,17 @@
 @use 'sass:string';
 
 //useful for rich text editor
+//paragraph followed by a headline
 
 @each $key-parent, $value-parent in $headline-paragraph-spacing {
 	@each $key, $value in $value-parent {
 		@if ($key == 'large') {
 			#{$key-parent}:has(+ p),
+			#{$key-parent}:has(+ .p),
 			#{$key-parent}:has(+ ol),
 			#{$key-parent}:has(+ ul),
 			.#{$key-parent}:has(+ p),
+			.#{$key-parent}:has(+ .p),
 			.#{$key-parent}:has(+ ol),
 			.#{$key-parent}:has(+ ul) {
 				padding-bottom: $value;
@@ -17,9 +20,11 @@
 		} @else if($key == 'medium') {
 			@include mq('medium') {
 				#{$key-parent}:has(+ p),
+				#{$key-parent}:has(+ .p),
 				#{$key-parent}:has(+ ol),
 				#{$key-parent}:has(+ ul),
 				.#{$key-parent}:has(+ p),
+				.#{$key-parent}:has(+ .p),
 				.#{$key-parent}:has(+ ol),
 				.#{$key-parent}:has(+ ul) {
 					padding-bottom: $value;
@@ -28,11 +33,57 @@
 		} @else {
 			@include mq('small') {
 				#{$key-parent}:has(+ p),
+				#{$key-parent}:has(+ .p),
 				#{$key-parent}:has(+ ol),
 				#{$key-parent}:has(+ ul),
 				.#{$key-parent}:has(+ p),
+				.#{$key-parent}:has(+ .p),
 				.#{$key-parent}:has(+ ol),
 				.#{$key-parent}:has(+ ul) {
+					padding-bottom: $value;
+				}
+			}
+		}
+	}
+}
+
+//headline follwed by a paragraph
+@each $key-parent, $value-parent in $paragraph-headline-spacing {
+	@each $key, $value in $value-parent {
+		@if ($key == 'large') {
+			p:has(+ #{$key-parent}),
+			.p:has(+ #{$key-parent}),
+			ol:has(+ #{$key-parent}),
+			ul:has(+ #{$key-parent}),
+			.p:has(+ #{$key-parent}),
+			.p:has(+ .#{$key-parent}),
+			ol:has(+ .#{$key-parent}),
+			ul:has(+ .#{$key-parent}) {
+				padding-bottom: $value;
+			}
+		} @else if($key == 'medium') {
+			@include mq('medium') {
+				p:has(+ #{$key-parent}),
+				.p:has(+ #{$key-parent}),
+				ol:has(+ #{$key-parent}),
+				ul:has(+ #{$key-parent}),
+				.p:has(+ #{$key-parent}),
+				.p:has(+ .#{$key-parent}),
+				ol:has(+ .#{$key-parent}),
+				ul:has(+ .#{$key-parent}) {
+					padding-bottom: $value;
+				}
+			}
+		} @else {
+			@include mq('small') {
+				p:has(+ #{$key-parent}),
+				.p:has(+ #{$key-parent}),
+				ol:has(+ #{$key-parent}),
+				ul:has(+ #{$key-parent}),
+				.p:has(+ #{$key-parent}),
+				.p:has(+ .#{$key-parent}),
+				ol:has(+ .#{$key-parent}),
+				ul:has(+ .#{$key-parent}) {
 					padding-bottom: $value;
 				}
 			}
