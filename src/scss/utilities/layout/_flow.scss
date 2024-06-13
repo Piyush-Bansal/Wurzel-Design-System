@@ -1,0 +1,5 @@
+@use '../../abstract/' as *;
+
+.flow > * + *:not(:last-child) {
+	padding-bottom: $flow-gap;
+}

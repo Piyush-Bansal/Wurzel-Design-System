@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container | flow">
 	<h1>Home</h1>
 	<p>
 		Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi inventore
@@ -23,15 +23,14 @@
 		voluptatem iusto autem at optio, suscipit consequuntur ea numquam distinctio
 		deserunt quis dolore, quae aliquid. Corporis, illum. Veniam recusandae nemo
 		accusantium!
-		
 	</p>
 	<p>
 		Fugit sint cumque ut non praesentium nostrum blanditiis magni inventore,
-		consectetur iusto dolorum debitis, endim est adipisci illum deleniti ratione?
-		Officia, labore. Asperiores quas ducimus commodi doloribus, nobis culpa
-		voluptatem iusto autem at optio, suscipit consequuntur ea numquam distinctio
-		deserunt quis dolore, quae aliquid. Corporis, illum. Veniam recusandae nemo
-		accusantium!
+		consectetur iusto dolorum debitis, endim est adipisci illum deleniti
+		ratione? Officia, labore. Asperiores quas ducimus commodi doloribus, nobis
+		culpa voluptatem iusto autem at optio, suscipit consequuntur ea numquam
+		distinctio deserunt quis dolore, quae aliquid. Corporis, illum. Veniam
+		recusandae nemo accusantium!
 	</p>
 </div>
 
