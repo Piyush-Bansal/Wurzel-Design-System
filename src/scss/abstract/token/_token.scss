@@ -4,11 +4,6 @@
 @use './columns' as *;
 @use './container' as *;
 
-//body
-$body-font-family: $font-family-base;
-$body-line-height: $lh-body;
-$body-letter-spacing: $ls-body;
-
 //since body font size is set to 1vw its base
 $base-font-size: $fs-body;
 $body-font-weight: $font-weight-regular;
