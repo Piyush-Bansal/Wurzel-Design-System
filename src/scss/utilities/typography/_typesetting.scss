@@ -2,6 +2,11 @@
 @use 'sass:string';
 
 @each $type-size, $props in $type-scale {
+	#{$type-size} {
+		@each $key, $value in $props {
+			#{$key}: $value;
+		}
+	}
 	.#{$type-size} {
 		@each $key, $value in $props {
 			#{$key}: $value;
@@ -11,6 +16,11 @@
 
 //uppercase
 @each $type-size, $props in $type-scale-uppercase {
+	#{$type-size}.uppercase {
+		@each $key, $value in $props {
+			#{$key}: $value;
+		}
+	}
 	.#{$type-size}.uppercase {
 		@each $key, $value in $props {
 			#{$key}: $value;
