@@ -1,0 +1,9 @@
+@use '../sizes' as *;
+@use '../container' as *;
+
+//flow
+$flow-gap: $size-32;
+
+//grid
+$grid-gap: $gutter;
+$grid-gap-half: calc($gutter/2);
