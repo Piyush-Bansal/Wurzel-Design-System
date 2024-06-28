@@ -1,0 +1,12 @@
+@use '../abstract/' as *;
+
+@each $key, $value in $colors {
+	@each $shade, $color-value in $value {
+		.clr-#{$key}-#{$shade} {
+			color: var(--#{$key}-#{$shade});
+		}
+		.bg-#{$key}-#{$shade} {
+			background-color: var(--#{$key}-#{$shade});
+		}
+	}
+}

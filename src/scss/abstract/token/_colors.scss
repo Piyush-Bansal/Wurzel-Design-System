@@ -1,0 +1,16 @@
+@use '../colors' as *;
+
+//text
+$color-headline-primary: $color-neutral-9;
+$color-body-primary: $color-neutral-9;
+$color-text-action: $color-success-6;
+$color-text-action-hover: $color-success-7;
+$color-text-on-action: $color-neutral-0;
+
+$color-text-success: $color-success-6;
+$color-text-disabled: $color-neutral-4;
+$color-text-on-disabled: $color-neutral-6;
+$color-text-error: $color-error-3;
+$color-text-warning: $color-warning-3;
+$color-text-information: $color-information-3;
+$color-text-highlight: $color-primary-6;
