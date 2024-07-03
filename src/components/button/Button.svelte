@@ -30,8 +30,12 @@
 >
 
 <style lang="scss">
+	@use '$tokens/colors' as *;
+	@use '$styles/abstract/border/border-radius' as *;
+
 	button {
 		color: $color-text-on-action;
 		background-color: $color-surface-action-1;
+		border-radius: $border-radius-md;
 	}
 </style>

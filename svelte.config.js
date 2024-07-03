@@ -9,6 +9,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$styles: './src/scss',
+			$tokens: './src/scss/abstract/token',
+			$breakpoints: './src/scss/abstract/mixins',
+			$sizes: './src/scss/abstract/functions',
 			$components: './src/components'
 		}
 	}
