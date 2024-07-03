@@ -8,7 +8,8 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			$styles: './src/scss'
+			$styles: './src/scss',
+			$components: './src/components'
 		}
 	}
 };

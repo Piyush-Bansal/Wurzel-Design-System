@@ -47,7 +47,7 @@
 	}
 }
 
-//headline follwed by a paragraph
+//headline followed by a paragraph
 @each $key-parent, $value-parent in $paragraph-headline-spacing {
 	@each $key, $value in $value-parent {
 		@if ($key == 'large') {

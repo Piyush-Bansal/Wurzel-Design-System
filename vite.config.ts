@@ -8,7 +8,9 @@ export default defineConfig({
 		preprocessorOptions: {
 			scss: {
 				additionalData: `
-                // @use '$styles/abstract' as *;
+                @use './src/scss/abstract/token' as *;
+                @use './src/scss/abstract/mixin-breakpoints' as *;
+                @use './src/scss/abstract/functions' as *;
                 
             `
 			}
