@@ -55,6 +55,7 @@ Button component
 	class="cursor-pointer border-none p-x-16 p-y-12"
 	class:right-icon-padding={rightIcon}
 	class:left-icon-padding={leftIcon}
+	class:no-padding={variant === 'ghost'}
 >
 	<div class="button__content | flex align-items-center">
 		{@render icon(leftIcon)}
@@ -94,5 +95,9 @@ Button component
 	}
 	.left-icon-padding {
 		padding-inline: fluid-l(10) fluid-l(16);
+	}
+
+	.no-padding {
+		padding: 0 !important;
 	}
 </style>
