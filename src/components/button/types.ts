@@ -6,4 +6,6 @@ export interface Button extends HTMLAttributes<HTMLButtonElement> {
 	disabled?: boolean;
 	type?: 'button' | 'submit' | 'reset';
 	variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+	leftIcon?: Snippet | undefined;
+	rightIcon?: Snippet | undefined;
 }
