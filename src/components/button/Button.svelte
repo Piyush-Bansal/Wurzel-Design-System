@@ -98,6 +98,6 @@ Button component
 	}
 
 	.no-padding {
-		padding: 0 !important;
+		padding: 0;
 	}
 </style>
