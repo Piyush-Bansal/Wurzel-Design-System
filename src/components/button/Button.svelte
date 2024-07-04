@@ -12,6 +12,25 @@
 	}: Button = $props();
 </script>
 
+<!-- 
+@component
+
+Button component
+---------------
+
+### Props
+
+- `props {Button}` - The props for the button component
+  - `children {Snippet}` - The content of the button
+  - `disabled {boolean} = false` - Whether the button is disabled
+  - `type {('button' | 'submit' | 'reset')} = 'button'` - The type of button
+  - `variant {('primary' | 'secondary' | 'ghost' | 'danger')} = 'primary'` - The style variant of the button
+  - `leftIcon {Snippet}` - The icon to display on the left side of the button
+  - `rightIcon {Snippet}` - The icon to display on the right side of the button
+  - `...props {HTMLAttributes}` - Additional props to pass to the button element
+
+-->
+
 {#snippet label()}
 	{#if children}
 		{@render children()}
