@@ -62,6 +62,12 @@
 		.#{&}__content {
 			gap: fluid-l(8);
 		}
+
+		&:focus {
+			outline-color: pink;
+			outline-width: fluid-l(1);
+			outline-offset: fluid-l(2);
+		}
 	}
 
 	.right-icon-padding {
