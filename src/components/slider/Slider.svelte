@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { map } from '$lib/helper-functions/map';
+	import { map } from '$lib/helper-functions/map.svelte';
 
 	let inputValue: number = $state(50);
 
