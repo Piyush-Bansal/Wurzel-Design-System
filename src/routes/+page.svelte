@@ -4,7 +4,7 @@
 </script>
 
 <div class="container | flow">
-	<Button variant="ghost">
+	<Button>
 		Some text
 		{#snippet rightIcon()}
 			<Arrow />
