@@ -25,27 +25,36 @@
 @mixin map-to-var-breakpoints($map, $key-prefix: '', $convert-to-em: false) {
 	:root {
 		@each $key-parent, $value-parent in $map {
-			$property-name: '--' +
-				$key-prefix +
-				$key-parent; // Construct the custom property name
+			$property-name: '--' + $key-prefix + $key-parent;
+
 			@each $key, $value in $value-parent {
 				@if ($key == 'large') {
-					#{$property-name}: if($convert-to-em, #{fluid-l($value)}, #{$value});
-				} @else if($key == 'medium') {
-					@include mq('medium') {
+					& {
 						#{$property-name}: if(
 							$convert-to-em,
-							#{fluid-m($value)},
+							#{fluid-l($value)},
 							#{$value}
 						);
 					}
+				} @else if($key == 'medium') {
+					@include mq('medium') {
+						& {
+							#{$property-name}: if(
+								$convert-to-em,
+								#{fluid-m($value)},
+								#{$value}
+							);
+						}
+					}
 				} @else {
 					@include mq('small') {
-						#{$property-name}: if(
-							$convert-to-em,
-							#{fluid-s($value)},
-							#{$value}
-						);
+						& {
+							#{$property-name}: if(
+								$convert-to-em,
+								#{fluid-s($value)},
+								#{$value}
+							);
+						}
 					}
 				}
 			}
@@ -71,16 +80,22 @@
 
 			@if ($breakpoint == 'large') {
 				$-fs: map.get($font-sizes, $size, $breakpoint);
-				#{$property-name}: calc($line-height/$-fs * 100%);
+				& {
+					#{$property-name}: calc($line-height/$-fs * 100%);
+				}
 			} @else if($breakpoint == 'medium') {
 				@include mq('medium') {
 					$-fs: map.get($font-sizes, $size, $breakpoint);
-					#{$property-name}: calc($line-height/$-fs * 100%);
+					& {
+						#{$property-name}: calc($line-height/$-fs * 100%);
+					}
 				}
 			} @else {
 				@include mq('small') {
 					$-fs: map.get($font-sizes, $size, $breakpoint);
-					#{$property-name}: calc($line-height/$-fs * 100%);
+					& {
+						#{$property-name}: calc($line-height/$-fs * 100%);
+					}
 				}
 			}
 		}

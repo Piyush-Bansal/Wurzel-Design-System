@@ -11,6 +11,7 @@
 	const id = crypto.randomUUID();
 	let collapsable = getContext('collapsable');
 
+	//non collapsable accordion toggle
 	const toggleopen = () => {
 		open = !open;
 	};
@@ -21,13 +22,15 @@
 			: (collapseLogic.activeID = id);
 	};
 
+	//handle on click
 	const handleClick = () => {
 		collapsable ? setActive() : toggleopen();
 	};
 
-	let active = $derived(collapseLogic.activeID === id);
+	// let active: boolean = $derived(collapseLogic.activeID === id);
+	let active: boolean = $derived(open ? true : collapseLogic.activeID === id);
 
-	let isOpen = $derived(collapsable ? active : open);
+	let isOpen: boolean = $derived(collapsable ? active : open);
 </script>
 
 <div

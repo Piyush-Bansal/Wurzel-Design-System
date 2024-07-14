@@ -10,14 +10,20 @@ $-ut-sizes: 1, 2, 3, 4, 6, 8, 12, 16, 24, 32;
 	@each $type-size, $type-props in $font-sizes {
 		@each $size in $-ut-sizes {
 			$custom-property: '--underline-thickness-' + $type-size + '-' + $size;
-			#{$custom-property}: #{fluid-l($size)};
+			& {
+				#{$custom-property}: #{fluid-l($size)};
+			}
 
 			@include mq('medium') {
-				#{$custom-property}: #{fluid-m($size)};
+				& {
+					#{$custom-property}: #{fluid-m($size)};
+				}
 			}
 
 			@include mq('small') {
-				#{$custom-property}: #{fluid-s($size)};
+				& {
+					#{$custom-property}: #{fluid-s($size)};
+				}
 			}
 		}
 	}

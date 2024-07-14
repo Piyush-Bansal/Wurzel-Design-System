@@ -4,19 +4,27 @@
 :root {
 	//sizes
 	@each $value in $sequence {
-		--size-#{$value}: #{fluid-l($value)};
+		& {
+			--size-#{$value}: #{fluid-l($value)};
+		}
 
 		@include mq('medium') {
-			--size-#{$value}: #{fluid-m($value)};
+			& {
+				--size-#{$value}: #{fluid-m($value)};
+			}
 		}
 
 		@include mq('small') {
-			--size-#{$value}: #{fluid-s($value)};
+			& {
+				--size-#{$value}: #{fluid-s($value)};
+			}
 		}
 	}
 
 	//border-radius
 	@each $key, $value in $br {
-		--br-#{$key}: #{$value};
+		& {
+			--br-#{$key}: #{$value};
+		}
 	}
 }
