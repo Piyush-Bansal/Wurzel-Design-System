@@ -17,6 +17,7 @@
 	};
 
 	const setActive = () => {
+		if (open) open = false;
 		collapseLogic.activeID === id
 			? (collapseLogic.activeID = null)
 			: (collapseLogic.activeID = id);
@@ -27,8 +28,7 @@
 		collapsable ? setActive() : toggleopen();
 	};
 
-	let active: boolean = $derived(collapseLogic.activeID === id);
-	// let active: boolean = $derived(open ? true : collapseLogic.activeID === id);
+	let active: boolean = $derived(open ? true : collapseLogic.activeID === id);
 
 	let isOpen: boolean = $derived(collapsable ? active : open);
 </script>
