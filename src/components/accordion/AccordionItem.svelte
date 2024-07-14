@@ -16,18 +16,24 @@
 	};
 
 	const setActive = () => {
-		collapseLogic.activeID = id;
+		collapseLogic.activeID === id
+			? (collapseLogic.activeID = null)
+			: (collapseLogic.activeID = id);
 	};
 
 	const handleClick = () => {
 		collapsable ? setActive() : toggleopen();
 	};
+
+	let active = $derived(collapseLogic.activeID === id);
+
+	let isOpen = $derived(collapsable ? active : open);
 </script>
 
 <div
 	class="accordion-item | flex-column align-items-stretch cursor-pointer"
 	onclick={handleClick}
-	aria-expanded={open}
+	aria-expanded={isOpen}
 	aria-controls="accordion-{id}"
 	role="button"
 	tabindex="0"
@@ -46,10 +52,10 @@
 			{/if}
 		</div>
 		<div class="icon | center">
-			<img src="/icons/chevron.svg" alt="" srcset="" class:closed={!open} />
+			<img src="/icons/chevron.svg" alt="" srcset="" class:closed={!isOpen} />
 		</div>
 	</div>
-	{#if open}
+	{#if isOpen}
 		<div
 			class="accordion-item__description | p-8"
 			transition:slide|local={{
