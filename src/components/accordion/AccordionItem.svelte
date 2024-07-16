@@ -28,8 +28,12 @@
 		collapsable ? setActive() : toggleopen();
 	};
 
-	let active: boolean = $derived(open ? true : collapseLogic.activeID === id);
+	if (collapsable && open) {
+		collapseLogic.activeID = id;
+		open = false;
+	}
 
+	let active: boolean = $derived(open ? true : collapseLogic.activeID === id);
 	let isOpen: boolean = $derived(collapsable ? active : open);
 </script>
 
