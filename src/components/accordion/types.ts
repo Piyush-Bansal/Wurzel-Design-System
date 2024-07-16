@@ -10,3 +10,7 @@ export interface AccordionItem {
 	description?: Snippet;
 	open?: boolean;
 }
+
+export type ActiveID = {
+	activeID: string | null;
+};
