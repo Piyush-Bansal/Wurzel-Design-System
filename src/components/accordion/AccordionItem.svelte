@@ -4,7 +4,7 @@
 	import { time4 } from '$lib/helper-functions/timing.svelte';
 	import { expoInOut } from 'svelte/easing';
 	import { getContext } from 'svelte';
-	import { Accordion } from './currentID.svelte';
+	import { Accordion } from './functionality.svelte';
 
 	let { heading, description, open = false }: AccordionItem = $props();
 
