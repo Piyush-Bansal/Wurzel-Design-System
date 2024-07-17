@@ -29,7 +29,7 @@
 <div class="container | flow grid">
 	<Accordion collapsable={true}>
 		{#each accordionData as data, i}
-			<AccordionItem open={i === 1}>
+			<AccordionItem open={i === 0}>
 				{#snippet heading()}
 					{data.heading}
 				{/snippet}
