@@ -4,48 +4,25 @@
 	import { time4 } from '$lib/helper-functions/timing.svelte';
 	import { expoInOut } from 'svelte/easing';
 	import { getContext } from 'svelte';
-	import { collapseLogic } from './currentID.svelte';
+	import { Accordion } from './currentID.svelte';
 
 	let { heading, description, open = false }: AccordionItem = $props();
 
-	const id = crypto.randomUUID();
-	let collapsable = getContext('collapsable');
+	let collapsable: boolean = getContext('collapsable');
 
-	//non collapsable accordion toggle
-	const toggleopen = () => {
-		open = !open;
-	};
-
-	const setActive = () => {
-		collapseLogic.activeID === id
-			? (collapseLogic.activeID = null)
-			: (collapseLogic.activeID = id);
-	};
-
-	//handle on click
-	const handleClick = () => {
-		collapsable ? setActive() : toggleopen();
-	};
-
-	if (collapsable && open) {
-		collapseLogic.activeID = id;
-		open = false;
-	}
-
-	let active: boolean = $derived(collapseLogic.activeID === id);
-	let isOpen: boolean = $derived(collapsable ? active : open);
+	const accordion = new Accordion(open, collapsable);
 </script>
 
 <div
 	class="accordion-item | flex-column align-items-stretch cursor-pointer"
-	onclick={handleClick}
-	aria-expanded={isOpen}
-	aria-controls="accordion-{id}"
+	onclick={accordion.handleClick}
+	aria-expanded={accordion.isOpen}
+	aria-controls="accordion-{accordion.id}"
 	role="button"
 	tabindex="0"
 	onkeydown={(event) => {
 		if (event.key === 'Enter') {
-			handleClick();
+			accordion.handleClick();
 		}
 	}}
 >
@@ -58,10 +35,15 @@
 			{/if}
 		</div>
 		<div class="icon | center">
-			<img src="/icons/chevron.svg" alt="" srcset="" class:closed={!isOpen} />
+			<img
+				src="/icons/chevron.svg"
+				alt=""
+				srcset=""
+				class:closed={!accordion.isOpen}
+			/>
 		</div>
 	</div>
-	{#if isOpen}
+	{#if accordion.isOpen}
 		<div
 			class="accordion-item__description | p-8"
 			transition:slide|local={{
@@ -69,7 +51,7 @@
 				easing: expoInOut
 			}}
 			role="region"
-			aria-labelledby="accordion-{id}"
+			aria-labelledby="accordion-{accordion.id}"
 		>
 			{#if description}
 				<p>
