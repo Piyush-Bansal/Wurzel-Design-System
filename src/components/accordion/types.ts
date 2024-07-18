@@ -9,6 +9,7 @@ export interface AccordionItem {
 	heading?: Snippet;
 	description?: Snippet;
 	open?: boolean;
+	group?: string;
 }
 
 export type ActiveID = {

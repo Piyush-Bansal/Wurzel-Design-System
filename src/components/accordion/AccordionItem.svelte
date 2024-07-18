@@ -6,11 +6,11 @@
 	import { getContext } from 'svelte';
 	import { Accordion } from './functionality.svelte';
 
-	let { heading, description, open = false }: AccordionItem = $props();
+	let { heading, description, open = false, group }: AccordionItem = $props();
 
 	let collapsable: boolean = getContext('collapsable');
 
-	const accordion = new Accordion(open, collapsable);
+	const accordion = new Accordion(open, collapsable, group);
 </script>
 
 <div
