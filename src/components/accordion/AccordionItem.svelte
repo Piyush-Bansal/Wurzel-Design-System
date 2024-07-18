@@ -13,6 +13,51 @@
 	const accordion = new Accordion(open, collapsable, group);
 </script>
 
+<!-- 
+@component
+## AccordionItem Component 
+
+### Description
+AccordionItem is a component that represents an item within an accordion. It typically consists of a heading and a description that can be expanded or collapsed.
+
+### Props
+- `heading` (optional): The heading content of the AccordionItem.
+- `description` (optional): The description content of the AccordionItem.
+- `open` (boolean): Determines whether the AccordionItem is initially open or closed.
+- `group` (string): Group identifier for grouping multiple AccordionItems together.
+
+### Usage
+```svelte
+<AccordionItem open={i === 0} group="b">
+	{#snippet heading()}
+		{data.heading}
+	{/snippet}
+	{#snippet description()}
+		{data.description}
+	{/snippet}
+</AccordionItem>
+```
+
+### Features
+- Clicking on the AccordionItem toggles its open/closed state.
+- Supports dynamic heading and description content.
+- Accessibility features like keyboard interaction for opening/closing the item.
+
+### Styles
+- The heading and description have specific styling defined within the component.
+- The icon next to the heading rotates to indicate the open/closed state.
+
+### Transitions
+- Uses the `slide` transition for smooth opening/closing animations.
+
+### Dependencies
+- Imports `slide` from `svelte/transition`.
+- Imports `expoInOut` from `svelte/easing`.
+- Imports `getContext` from `svelte`.
+- Imports `Accordion` from `./functionality.svelte`.
+
+-->
+
 <div
 	class="accordion-item | flex-column align-items-stretch cursor-pointer"
 	onclick={accordion.handleClick}
