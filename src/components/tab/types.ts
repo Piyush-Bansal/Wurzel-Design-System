@@ -18,3 +18,5 @@ export interface TabContext {
 	value: string;
 	children: Snippet;
 }
+
+export type CurrentTab = { tabName: string | undefined };

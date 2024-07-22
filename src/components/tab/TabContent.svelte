@@ -9,7 +9,7 @@
 	let { children, value }: TabContext = $props();
 </script>
 
-{#if activeTab.tab === value}
+{#if activeTab.tabName === value}
 	<div
 		out:fade={{
 			easing: quadIn,

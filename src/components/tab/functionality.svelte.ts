@@ -1,27 +1,28 @@
-// export let activeTab = $state();
-let setActiveTab = () => {
-	let tab = $state();
-	return {
-		get tab() {
-			return tab;
-		},
-		set tab(value) {
-			tab = value;
-		}
-	};
-};
+import type { CurrentTab } from './types';
 
-export let activeTab = setActiveTab();
+/**
+ * Returns the current active tab state.
+ *
+ * @return {CurrentTab} The current active tab state.
+ */
+function activeTabState(): CurrentTab {
+	let currentTab: CurrentTab = $state({
+		tabName: undefined
+	});
+	return currentTab;
+}
+
+export let activeTab: CurrentTab = activeTabState();
 
 export class Tab {
 	private _initialValue: string | undefined;
 	constructor(initialValue: string) {
 		this._initialValue = initialValue;
 		if (this._initialValue === undefined) this._initialValue = 'tab1';
-		activeTab.tab = this._initialValue;
+		activeTab.tabName = this._initialValue;
 	}
 
 	handleClick(value) {
-		activeTab.tab = value;
+		activeTab.tabName = value;
 	}
 }
