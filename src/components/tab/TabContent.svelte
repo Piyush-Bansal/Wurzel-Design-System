@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
 	import { activeTab } from './functionality.svelte';
-	import type { TabContext } from './types';
+	import type { TabValue } from './types';
 	import { fade } from 'svelte/transition';
-	import { cubicOut, expoInOut, quadIn } from 'svelte/easing';
+	import { cubicOut, quadIn } from 'svelte/easing';
 	import { time3, time4, time5 } from '$lib/helper-functions/timing.svelte';
 
-	let { children, value }: TabContext = $props();
+	let { children, value }: TabValue = $props();
 </script>
 
 {#if activeTab.tabName === value}
@@ -20,6 +19,10 @@
 			duration: time5,
 			delay: time4
 		}}
+		class="tab-content"
+		id={`tabpannel-${value}`}
+		role="tabpanel"
+		tabindex={activeTab.tabName === value ? 0 : -1}
 	>
 		{@render children()}
 	</div>

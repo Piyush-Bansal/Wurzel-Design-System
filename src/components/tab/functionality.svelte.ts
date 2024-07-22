@@ -14,15 +14,12 @@ function activeTabState(): CurrentTab {
 
 export let activeTab: CurrentTab = activeTabState();
 
-export class Tab {
-	private _initialValue: string | undefined;
-	constructor(initialValue: string) {
-		this._initialValue = initialValue;
-		if (this._initialValue === undefined) this._initialValue = 'tab1';
-		activeTab.tabName = this._initialValue;
-	}
-
-	handleClick(value) {
-		activeTab.tabName = value;
-	}
+/**
+ * Updates the active tab state with the given value.
+ *
+ * @param {string} value - The new value for the active tab.
+ * @return {void} This function does not return anything.
+ */
+export function tabHandleClick(value: string): void {
+	activeTab.tabName = value;
 }

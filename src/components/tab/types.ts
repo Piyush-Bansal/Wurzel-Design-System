@@ -1,22 +1,17 @@
 import type { Snippet } from 'svelte';
 
 export interface Tabs {
-	activeTab?: string | undefined;
+	activeTab: string;
 	tabList: Snippet;
 	tabContent: Snippet;
 }
 
-export interface TabList {
+export interface TabChildren {
 	children: Snippet;
 }
 
-export interface TabTrigger {
+export interface TabValue extends TabChildren {
 	value: string;
-	children: Snippet;
-}
-export interface TabContext {
-	value: string;
-	children: Snippet;
 }
 
 export type CurrentTab = { tabName: string | undefined };

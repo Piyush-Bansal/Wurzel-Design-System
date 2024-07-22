@@ -1,25 +1,19 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { TabTrigger } from './types';
-	import { Tab } from './functionality.svelte';
+	import { tabHandleClick, activeTab } from './functionality.svelte';
+	import type { TabValue } from './types';
 
-	let { children, value }: TabTrigger = $props();
-
-	const tab = new Tab(getContext('activeTab'));
-
-	function handleClick() {
-		tab.handleClick(value);
-	}
+	let { children, value }: TabValue = $props();
 </script>
 
 <div
 	class="tab__trigger | cursor-pointer p-y-8 p-x-12"
-	onclick={handleClick}
-	role="button"
+	onclick={() => tabHandleClick(value)}
+	role="tab"
+	aria-selected={value === activeTab.tabName}
 	tabindex="0"
 	onkeydown={(event) => {
 		if (event.key === 'Enter') {
-			tab.handleClick(value);
+			tabHandleClick(value);
 		}
 	}}
 >
