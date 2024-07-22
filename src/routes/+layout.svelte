@@ -11,4 +11,6 @@
 	let { children } = $props();
 </script>
 
-{@render children()}
+<main>
+	{@render children()}
+</main>
