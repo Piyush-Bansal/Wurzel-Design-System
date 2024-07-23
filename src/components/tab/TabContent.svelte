@@ -1,11 +1,19 @@
 <script lang="ts">
-	import { activeTab } from './functionality.svelte';
+	import { activeTab, contentHeight } from './functionality.svelte';
 	import type { TabValue } from './types';
 	import { fade } from 'svelte/transition';
 	import { cubicOut, quadIn } from 'svelte/easing';
 	import { time3, time4, time5 } from '$lib/helper-functions/timing.svelte';
 
 	let { children, value }: TabValue = $props();
+
+	let height: number | undefined = $state();
+
+	$effect((): void => {
+		if (activeTab.tabName === value && height) {
+			contentHeight.height = height;
+		}
+	});
 </script>
 
 {#if activeTab.tabName === value}
@@ -19,6 +27,7 @@
 			duration: time5,
 			delay: time4
 		}}
+		bind:clientHeight={height}
 		class="tab-content | absolute"
 		id={`tabpannel-${value}`}
 		role="tabpanel"

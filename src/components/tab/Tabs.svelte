@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { Tabs } from './types';
-	import { activeTab as activeTabState } from './functionality.svelte';
+	import {
+		activeTab as activeTabState,
+		contentHeight
+	} from './functionality.svelte';
 
 	let { activeTab, tabList, tabContent }: Tabs = $props();
 
@@ -90,7 +93,17 @@ The `Tabs` component follows the WAI-ARIA guidelines for tabs. It uses the `role
 	<div class="tab-list">
 		{@render tabList()}
 	</div>
-	<div class="tab-content__wrapper | relative">
+	<div
+		class="tab-content__wrapper | relative"
+		style:height={`${contentHeight.height}px`}
+	>
 		{@render tabContent()}
 	</div>
 </div>
+
+<style lang="scss">
+	@use '$tokens/time' as *;
+	.tab-content__wrapper {
+		transition: height $time-3 ease-in-out;
+	}
+</style>
