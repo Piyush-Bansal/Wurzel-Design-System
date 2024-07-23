@@ -1,4 +1,4 @@
-import type { CurrentTab } from './types';
+import type { CurrentTab, TabHeight } from './types';
 
 /**
  * Returns the current active tab state.
@@ -23,3 +23,15 @@ export let activeTab: CurrentTab = activeTabState();
 export function tabHandleClick(value: string): void {
 	activeTab.tabName = value;
 }
+
+/**
+ * Returns the current height of the content tab.
+ *
+ * @return {TabHeight} The current height of the content tab.
+ */
+function contentTabHeight(): TabHeight {
+	let height: TabHeight = $state({ height: 0 });
+	return height;
+}
+
+export let contentHeight: TabHeight = contentTabHeight();

@@ -19,7 +19,7 @@
 			duration: time5,
 			delay: time4
 		}}
-		class="tab-content"
+		class="tab-content | absolute"
 		id={`tabpannel-${value}`}
 		role="tabpanel"
 		tabindex={activeTab.tabName === value ? 0 : -1}

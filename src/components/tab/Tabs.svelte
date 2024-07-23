@@ -90,7 +90,7 @@ The `Tabs` component follows the WAI-ARIA guidelines for tabs. It uses the `role
 	<div class="tab-list">
 		{@render tabList()}
 	</div>
-	<div class="tab-content">
+	<div class="tab-content__wrapper | relative">
 		{@render tabContent()}
 	</div>
 </div>

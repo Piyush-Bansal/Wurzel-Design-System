@@ -15,3 +15,7 @@ export interface TabValue extends TabChildren {
 }
 
 export type CurrentTab = { tabName: string | undefined };
+
+export interface TabHeight {
+	height: number;
+}
