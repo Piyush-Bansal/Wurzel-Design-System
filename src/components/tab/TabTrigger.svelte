@@ -7,6 +7,7 @@
 
 <div
 	class="tab__trigger | cursor-pointer p-y-8 p-x-12"
+	class:active={value === activeTab.tabName}
 	onclick={() => tabHandleClick(value)}
 	role="tab"
 	aria-selected={value === activeTab.tabName}
@@ -19,3 +20,9 @@
 >
 	<p>{@render children()}</p>
 </div>
+
+<style lang="scss">
+	.active {
+		cursor: default;
+	}
+</style>
