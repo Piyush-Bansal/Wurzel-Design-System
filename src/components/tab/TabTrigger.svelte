@@ -24,5 +24,6 @@
 <style lang="scss">
 	.active {
 		cursor: default;
+		pointer-events: none;
 	}
 </style>
