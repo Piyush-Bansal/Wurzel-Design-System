@@ -1,4 +1,9 @@
-import type { CurrentTab, TabHeight } from './types';
+import type {
+	CurrentTab,
+	IndicatorWidth,
+	TabHeight,
+	TabLeftPosition
+} from './types';
 
 /**
  * Returns the current active tab state.
@@ -35,3 +40,31 @@ function contentTabHeight(): TabHeight {
 }
 
 export let contentHeight: TabHeight = contentTabHeight();
+
+/**
+ * Returns an IndicatorWidth object that stores the current width.
+ *
+ * @return {IndicatorWidth} An object representing the current width.
+ */
+function storeIndicatorWidth(): IndicatorWidth {
+	let width = $state({
+		width: 0
+	});
+	return width;
+}
+
+export let indicatorWidth: IndicatorWidth = storeIndicatorWidth();
+
+/**
+ * Returns a TabLeftPosition object that stores the current left position.
+ *
+ * @return {TabLeftPosition} An object representing the current left position.
+ */
+function storeTabLeftPosition(): TabLeftPosition {
+	let left = $state({
+		left: 0
+	});
+	return left;
+}
+
+export let tabLeftPosition: TabLeftPosition = storeTabLeftPosition();

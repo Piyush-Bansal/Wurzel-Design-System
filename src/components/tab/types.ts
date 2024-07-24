@@ -19,3 +19,11 @@ export type CurrentTab = { tabName: string | undefined };
 export interface TabHeight {
 	height: number;
 }
+
+export interface IndicatorWidth {
+	width: number;
+}
+
+export interface TabLeftPosition {
+	left: number;
+}
