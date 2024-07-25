@@ -74,9 +74,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 	<div class="accordion-item__headline | flex justify-content-between p-8">
 		<div class="headline">
 			{#if heading}
-				<p>
-					{@render heading()}
-				</p>
+				{@render heading()}
 			{/if}
 		</div>
 		<div class="icon | center">
@@ -99,9 +97,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 			aria-labelledby="accordion-{accordion.id}"
 		>
 			{#if description}
-				<p>
-					{@render description()}
-				</p>
+				{@render description()}
 			{/if}
 		</div>
 	{/if}
