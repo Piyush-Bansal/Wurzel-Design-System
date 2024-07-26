@@ -37,3 +37,11 @@
 	</div>
 	<br />
 {/if}
+
+<style lang="scss">
+	.tab-content {
+		top: 0%;
+		left: 0%;
+		right: 0%;
+	}
+</style>

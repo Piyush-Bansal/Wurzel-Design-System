@@ -1,12 +1,14 @@
 <script lang="ts">
 	import type { TabChildren } from './types';
 	import { getTabState } from './functionality.svelte';
-	let { children }: TabChildren = $props();
+	let { children, label = 'tablist' }: TabChildren = $props();
 	const tabState = getTabState();
 </script>
 
 <div class="tab-list | flex flex-row relative">
 	<div
+		role="tablist"
+		aria-labelledby={label}
 		class="tab__indicator | absolute"
 		style:width="{tabState.indicatorWidth}px"
 		style:left="{tabState.tabLeftPosition}px"

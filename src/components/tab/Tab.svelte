@@ -46,7 +46,7 @@ Here's an example of how to use the `Tabs` component:
 ```svelte
 <Tabs activeTab="tab1">
 	{#snippet tabList()}
-		<TabList>
+		<TabList label="tablist">
 			<TabTrigger value="tab1">Tab 1</TabTrigger>
 			<TabTrigger value="tab2">Tab 2</TabTrigger>
 		</TabList>

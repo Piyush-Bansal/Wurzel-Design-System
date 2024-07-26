@@ -24,7 +24,8 @@
 	onclick={() => tabState.tabHandleClick(value)}
 	role="tab"
 	aria-selected={value === tabState.activeTab}
-	tabindex="0"
+	tabindex={value === tabState.activeTab ? 0 : -1}
+	aria-controls={`tabpannel-${value}`}
 	onkeydown={(event) => {
 		if (event.key === 'Enter') {
 			tabState.tabHandleClick(value);

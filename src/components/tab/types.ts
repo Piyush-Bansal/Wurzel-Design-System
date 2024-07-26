@@ -8,6 +8,7 @@ export interface Tabs {
 
 export interface TabChildren {
 	children: Snippet;
+	label?: string;
 }
 
 export interface TabValue extends TabChildren {
