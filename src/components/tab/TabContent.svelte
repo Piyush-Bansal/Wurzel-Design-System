@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { activeTab, contentHeight } from './functionality.svelte';
+	import { getTabState } from './functionality.svelte';
 	import type { TabValue } from './types';
 	import { fade } from 'svelte/transition';
 	import { cubicOut, quadIn } from 'svelte/easing';
 	import { time3, time4, time5 } from '$lib/helper-functions/timing.svelte';
 
 	let { children, value }: TabValue = $props();
-
 	let height: number | undefined = $state();
+	let tabState = getTabState();
 
 	$effect((): void => {
-		if (activeTab.tabName === value && height) {
-			contentHeight.height = height;
+		if (tabState.activeTab === value && height) {
+			tabState.contentHeight = height;
 		}
 	});
 </script>
 
-{#if activeTab.tabName === value}
+{#if tabState.activeTab === value}
 	<div
 		out:fade={{
 			easing: quadIn,
@@ -31,8 +31,9 @@
 		class="tab-content | absolute"
 		id={`tabpannel-${value}`}
 		role="tabpanel"
-		tabindex={activeTab.tabName === value ? 0 : -1}
+		tabindex={tabState.activeTab === value ? 0 : -1}
 	>
 		{@render children()}
 	</div>
+	<br />
 {/if}

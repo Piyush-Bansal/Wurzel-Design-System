@@ -1,14 +1,15 @@
 <script lang="ts">
 	import type { TabChildren } from './types';
-	import { indicatorWidth, tabLeftPosition } from './functionality.svelte';
+	import { getTabState } from './functionality.svelte';
 	let { children }: TabChildren = $props();
+	const tabState = getTabState();
 </script>
 
 <div class="tab-list | flex flex-row relative">
 	<div
 		class="tab__indicator | absolute"
-		style:width="{indicatorWidth.width}px"
-		style:left="{tabLeftPosition.left}px"
+		style:width="{tabState.indicatorWidth}px"
+		style:left="{tabState.tabLeftPosition}px"
 	></div>
 	{@render children()}
 </div>

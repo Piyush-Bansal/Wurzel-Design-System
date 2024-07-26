@@ -14,16 +14,10 @@ export interface TabValue extends TabChildren {
 	value: string;
 }
 
-export type CurrentTab = { tabName: string | undefined };
-
-export interface TabHeight {
-	height: number;
-}
-
-export interface IndicatorWidth {
-	width: number;
-}
-
-export interface TabLeftPosition {
-	left: number;
+export interface ClassTabInterface {
+	activeTab: string | undefined;
+	contentHeight: number;
+	indicatorWidth: number;
+	tabLeftPosition: number;
+	tabHandleClick: (value: string) => void;
 }
