@@ -12,3 +12,14 @@ $ss-medium-high: 1023;
 $ss-medium-low: 768;
 $ss-small-high: 767;
 $ss-small-low: 356;
+
+:root {
+	--ss-large-high: #{$ss-large-high};
+	--ss-large-low: #{$ss-large-low};
+	--ss-medium-high: #{$ss-medium-high};
+	--ss-medium-low: #{$ss-medium-low};
+	--ss-small-high: #{$ss-small-high};
+	--ss-small-low: #{$ss-small-low};
+}
+
+////PLEASE DON'T FORGET TO UPDATE BREAKPOINTS-STORE

@@ -12,7 +12,8 @@ const config = {
 			$tokens: './src/scss/abstract/token',
 			$breakpoints: './src/scss/abstract/mixins',
 			$sizes: './src/scss/abstract/functions',
-			$components: './src/components'
+			$components: './src/components',
+			$abstracts: './src/scss/abstract'
 		}
 	}
 };

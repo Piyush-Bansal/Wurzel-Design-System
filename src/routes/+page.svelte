@@ -1,47 +1,29 @@
 <script lang="ts">
-	import { Tab, TabList, TabTrigger, TabContent } from '$components/tab';
-	const data = [
-		{
-			id: 1,
-			url: 'https://picsum.photos/800'
-		},
-		{
-			id: 2,
-			url: 'https://picsum.photos/800'
-		},
-		{
-			id: 3,
-			url: 'https://picsum.photos/800'
-		},
-		{
-			id: 4,
-			url: 'https://picsum.photos/800'
-		},
-		{
-			id: 5,
-			url: 'https://picsum.photos/800'
-		},
-		{
-			id: 6,
-			url: 'https://picsum.photos/800'
-		}
-	];
+	import {
+		Carousel,
+		CarouselContent,
+		CarouselItem
+	} from '$components/carousel';
+
+	import Slide from '$components/tab/Slide.svelte';
+
+	const data = [Slide, Slide, Slide, Slide, Slide, Slide, Slide, Slide];
 </script>
 
-<div class="container">
-	<Tab activeTab="tab1">
-		{#snippet tabList()}
-			<TabList label="tablist">
-				<TabTrigger value="tab1">Tab 1</TabTrigger>
-				<TabTrigger value="tab2">Tab 2</TabTrigger>
-			</TabList>
-		{/snippet}
-		{#snippet tabContent()}
-			<TabContent value="tab1">Content for Tab 1</TabContent>
-			<TabContent value="tab2">Content for Tab 2</TabContent>
-		{/snippet}
-	</Tab>
+<div class="container" data-size="full">
+	<Carousel
+		autoscroll={true}
+		indicator={true}
+		controls={true}
+		reverse={false}
+		count={data.length}
+	>
+		<CarouselContent size={{ lg: 589, md: 344, sm: 324 }}>
+			{#each data as slide, number}
+				<CarouselItem>
+					<svelte:component this={slide} number={number + 1} />
+				</CarouselItem>
+			{/each}
+		</CarouselContent>
+	</Carousel>
 </div>
-
-<style lang="scss">
-</style>
