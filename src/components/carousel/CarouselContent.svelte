@@ -23,5 +23,6 @@
 	.carousel__content {
 		gap: $carousel-gap;
 		width: max-content;
+		transform: translateX($left-padding);
 	}
 </style>

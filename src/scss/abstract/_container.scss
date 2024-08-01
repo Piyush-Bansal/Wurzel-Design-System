@@ -21,5 +21,7 @@ $gutter-values: (
 );
 
 @include map-to-var-breakpoints($gutter-values);
+@include map-to-var-breakpoints($container-padding-values);
 
 $gutter: var(--gutter);
+$container-padding: var(--container-padding);

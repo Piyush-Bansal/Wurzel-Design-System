@@ -1,5 +1,6 @@
 @use './layouts' as *;
 @use '../mixins' as *;
+@use '../container' as *;
 
 $carousel-gap: $grid-gap;
 @include mq('medium') {
@@ -8,3 +9,5 @@ $carousel-gap: $grid-gap;
 @include mq('small') {
 	$carousel-gap: $grid-gap-half;
 }
+
+$left-padding: $container-padding;
