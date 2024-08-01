@@ -11,7 +11,7 @@
 	state.width.sm = size.sm;
 </script>
 
-<div class="overflow-hidden-x">
+<div class=" overflow-hidden-x | hide-scroll-bar">
 	<div class="carousel__content | flex-row">
 		{@render children()}
 	</div>

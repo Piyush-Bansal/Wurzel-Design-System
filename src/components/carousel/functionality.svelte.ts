@@ -40,10 +40,6 @@ class CarouselState implements State {
 
 	active = $state(1);
 
-	// getCarouselWidth() {
-	// 	return getFluidSizeLg(this.currentWidth);
-	// }
-
 	getCarouselWidth = $derived.by(() => {
 		return getFluidSize(this.currentWidth);
 	});

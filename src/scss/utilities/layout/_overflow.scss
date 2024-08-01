@@ -15,12 +15,12 @@
 
 	&-x {
 		overflow-x: hidden;
-		overflow-y: visible;
+		// overflow-y: visible;
 	}
 
 	&-y {
 		overflow-x: visible;
-		overflow-y: hidden;
+		// overflow-y: hidden;
 	}
 }
 
@@ -29,12 +29,12 @@
 
 	&-x {
 		overflow-x: clip;
-		overflow-y: visible;
+		// overflow-y: visible;
 	}
 
 	&-y {
 		overflow-x: visible;
-		overflow-y: clip;
+		// overflow-y: clip;
 	}
 }
 

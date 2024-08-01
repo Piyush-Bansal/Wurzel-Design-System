@@ -5,7 +5,6 @@
 	let { children }: CarouselItem = $props();
 	const state = getCarouselState();
 	const carouselWidth = state.getCarouselWidth;
-	$inspect(state.getCarouselWidth);
 </script>
 
 <div class="carousel__item" style:width={carouselWidth}>
