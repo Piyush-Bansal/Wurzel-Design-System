@@ -30,9 +30,12 @@ export interface State {
 	width: Sizes;
 	gap: Sizes;
 	currentWidth: number;
-	currentGap?: number;
-	active: number;
+	currentGap: number;
+	currentCombinedWidth: number;
 	carouselWidth: number;
+	active: number;
 	visibleCount: number;
 	getCarouselWidth: string;
+	getCarouselGap: string;
+	amountToMove: string;
 }
