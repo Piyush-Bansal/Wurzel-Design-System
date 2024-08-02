@@ -21,7 +21,7 @@
 		<CarouselContent size={{ lg: 589, md: 344, sm: 324 }}>
 			{#each data as slide, number}
 				<CarouselItem>
-					<svelte:component this={slide} number={number + 1} />
+					<svelte:component this={Slide} number={number + 1} />
 				</CarouselItem>
 			{/each}
 		</CarouselContent>

@@ -15,7 +15,7 @@ export interface CarouselContent {
 	gap?: Sizes;
 }
 
-type Sizes = {
+export type Sizes = {
 	lg: number;
 	md: number;
 	sm: number;
@@ -30,9 +30,9 @@ export interface State {
 	width: Sizes;
 	gap: Sizes;
 	currentWidth: number;
+	currentGap?: number;
 	active: number;
 	carouselWidth: number;
 	visibleCount: number;
-	// getCarouselWidth: () => string;
 	getCarouselWidth: string;
 }

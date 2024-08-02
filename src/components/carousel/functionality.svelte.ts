@@ -31,6 +31,14 @@ class CarouselState implements State {
 				: this.width.sm
 	);
 
+	currentGap = $derived(
+		screenSize.width >= ssLargeLow
+			? this.gap.lg
+			: screenSize.width >= ssMediumLow
+				? this.gap.md
+				: this.gap.sm
+	);
+
 	carouselWidth = $state(0);
 
 	visibleCount = $derived.by(() => {
@@ -42,6 +50,10 @@ class CarouselState implements State {
 
 	getCarouselWidth = $derived.by(() => {
 		return getFluidSize(this.currentWidth);
+	});
+
+	getCarouselGap = $derived.by(() => {
+		return getFluidSize(this.currentGap);
 	});
 }
 
