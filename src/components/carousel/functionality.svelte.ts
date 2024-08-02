@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import type { State } from './types';
+import type { Sizes, State } from './types';
 import { screenSize } from '$lib/helper-functions/screen-size.svelte';
 import { getFluidSize } from '$lib/helper-functions/fluid-size';
 import {
@@ -22,21 +22,24 @@ class CarouselState implements State {
 		sm: 12
 	});
 
-	//compare what is the current width
-	currentWidth = $derived(
-		screenSize.width >= ssLargeLow
-			? this.width.lg
-			: screenSize.width >= ssMediumLow
-				? this.width.md
-				: this.width.sm
-	);
+	private _combinedWidth = $derived({
+		lg: this.gap.lg + this.width.lg,
+		md: this.gap.md + this.width.md,
+		sm: this.gap.sm + this.width.sm
+	});
 
-	currentGap = $derived(
-		screenSize.width >= ssLargeLow
-			? this.gap.lg
+	private _screenSizeBasedValue = (val: Sizes) => {
+		return screenSize.width >= ssLargeLow
+			? val.lg
 			: screenSize.width >= ssMediumLow
-				? this.gap.md
-				: this.gap.sm
+				? val.md
+				: val.sm;
+	};
+
+	currentWidth = $derived(this._screenSizeBasedValue(this.width));
+	currentGap = $derived(this._screenSizeBasedValue(this.gap));
+	currentCombinedWidth = $derived(
+		this._screenSizeBasedValue(this._combinedWidth)
 	);
 
 	carouselWidth = $state(0);
@@ -54,6 +57,7 @@ class CarouselState implements State {
 
 	getCarouselWidth = $derived(this._returnFluidSize(this.currentWidth));
 	getCarouselGap = $derived(this._returnFluidSize(this.currentGap));
+	amountToMove = $derived(this._returnFluidSize(this.currentCombinedWidth));
 }
 
 const CAROUSEL_KEY = Symbol('CAROUSEL');
