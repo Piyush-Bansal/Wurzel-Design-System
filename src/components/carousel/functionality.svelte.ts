@@ -48,13 +48,12 @@ class CarouselState implements State {
 
 	active = $state(1);
 
-	getCarouselWidth = $derived.by(() => {
-		return getFluidSize(this.currentWidth);
-	});
+	private _returnFluidSize = (val: number) => {
+		return getFluidSize(val);
+	};
 
-	getCarouselGap = $derived.by(() => {
-		return getFluidSize(this.currentGap);
-	});
+	getCarouselWidth = $derived(this._returnFluidSize(this.currentWidth));
+	getCarouselGap = $derived(this._returnFluidSize(this.currentGap));
 }
 
 const CAROUSEL_KEY = Symbol('CAROUSEL');
