@@ -14,11 +14,9 @@
 	setCarouselState();
 	const currentState = getCarouselState();
 	currentState.count = count;
-
-	$effect(() => {
-		currentState.calcAllPos();
-	});
 </script>
+
+<svelte:window onresize={currentState.calculatePositions} />
 
 <div
 	class="carousel__wrapper | relative"

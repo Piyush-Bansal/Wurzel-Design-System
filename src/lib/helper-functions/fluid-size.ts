@@ -30,7 +30,7 @@ export function getFluidSize(val: number) {
 	const smallRem = sizeSmall / 16;
 	const largeRem = val / 16;
 
-	const pxAdjustment = (rateOfChange * largeHigh) / 100 - val;
+	const pxAdjustment = rateOfChange * (largeHigh / 100) - val;
 	const remAdjustment = pxAdjustment / 16;
 
 	// Format numbers to 10 decimal places

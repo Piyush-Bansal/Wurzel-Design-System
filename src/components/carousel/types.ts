@@ -35,10 +35,10 @@ export interface State {
 	currentCombinedWidth: number;
 	carouselWidth: number;
 	active: number;
-	visibleCount: number;
+	// visibleCount: number;
 	getCarouselWidth: string;
 	getCarouselGap: string;
-	amountToMove: string;
+	// amountToMove: string;
 	carouselPositions: Array<{ left: string }>;
 	isPositions: boolean;
 	calculatePositions: () => void;
