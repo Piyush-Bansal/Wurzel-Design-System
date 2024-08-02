@@ -1,16 +1,28 @@
 <script lang="ts">
 	import { getCarouselState } from './functionality.svelte';
+	import type { IndicatorDot } from './types';
 
-	let { index } = $props();
-	const state = getCarouselState();
+	let { index }: IndicatorDot = $props();
+	const currentState = getCarouselState();
+
+	const changeActive = () => {
+		currentState.active = index;
+	};
 </script>
 
 <div
 	class="indicator-dot | cursor-pointer"
-	onclick={() => {
-		state.active = index;
+	aria-label="Carousel indicator dot"
+	aria-current={currentState.active === index ? 'true' : 'false'}
+	role="button"
+	tabindex="0"
+	onclick={changeActive}
+	onkeydown={(event) => {
+		if (event.key === 'Enter') {
+			changeActive();
+		}
 	}}
-	class:active={state.active === index}
+	class:active={currentState.active === index}
 ></div>
 
 <style lang="scss">

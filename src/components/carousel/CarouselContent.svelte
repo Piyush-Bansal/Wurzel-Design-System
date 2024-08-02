@@ -9,6 +9,8 @@
 	}: CarouselContent = $props();
 
 	const carouselState = getCarouselState();
+
+	//initiate the values in carouselState
 	carouselState.width.lg = size.lg;
 	carouselState.width.md = size.md;
 	carouselState.width.sm = size.sm;

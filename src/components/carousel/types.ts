@@ -39,3 +39,7 @@ export interface State {
 	getCarouselGap: string;
 	amountToMove: string;
 }
+
+export interface IndicatorDot {
+	index: number;
+}
