@@ -12,13 +12,13 @@
 	}: Carousel = $props();
 
 	setCarouselState();
-	const state = getCarouselState();
-	state.count = count;
+	const currentState = getCarouselState();
+	currentState.count = count;
 </script>
 
 <div
 	class="carousel__wrapper | relative"
-	bind:clientWidth={state.carouselWidth}
+	bind:clientWidth={currentState.carouselWidth}
 >
 	{#if controls}
 		<Previous></Previous>
