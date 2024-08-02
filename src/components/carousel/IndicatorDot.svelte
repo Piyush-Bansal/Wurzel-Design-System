@@ -16,10 +16,14 @@
 	aria-current={currentState.active === index ? 'true' : 'false'}
 	role="button"
 	tabindex="0"
-	onclick={changeActive}
+	onclick={() => {
+		changeActive();
+		currentState.jumpToSlide(index);
+	}}
 	onkeydown={(event) => {
 		if (event.key === 'Enter') {
 			changeActive();
+			currentState.jumpToSlide(index);
 		}
 	}}
 	class:active={currentState.active === index}
@@ -37,5 +41,6 @@
 	}
 	.active {
 		width: fluid-l(24);
+		pointer-events: none;
 	}
 </style>

@@ -24,6 +24,7 @@
 	<div
 		class="carousel__content | flex-row"
 		style:gap={carouselState.getCarouselGap}
+		bind:this={carouselState.carouselWrapper}
 	>
 		{@render children()}
 	</div>
@@ -32,8 +33,10 @@
 <style lang="scss">
 	@use '$tokens/carousel' as *;
 	@use '$sizes' as *;
+	@use '$tokens/time' as *;
 	.carousel__content {
 		width: max-content;
 		transform: translate($left-padding, 0);
+		transition: transform $time-4 ease-in-out;
 	}
 </style>

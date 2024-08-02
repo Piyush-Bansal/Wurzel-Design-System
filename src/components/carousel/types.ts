@@ -26,6 +26,7 @@ export interface CarouselItem {
 }
 
 export interface State {
+	carouselWrapper: undefined | HTMLDivElement;
 	count: number;
 	width: Sizes;
 	gap: Sizes;
@@ -38,6 +39,9 @@ export interface State {
 	getCarouselWidth: string;
 	getCarouselGap: string;
 	amountToMove: string;
+	carouselPositions: Array<{ left: string }>;
+	isPositions: boolean;
+	calculatePositions: () => void;
 }
 
 export interface IndicatorDot {

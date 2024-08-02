@@ -14,6 +14,10 @@
 	setCarouselState();
 	const currentState = getCarouselState();
 	currentState.count = count;
+
+	$effect(() => {
+		currentState.calcAllPos();
+	});
 </script>
 
 <div
