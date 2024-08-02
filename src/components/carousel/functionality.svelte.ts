@@ -49,7 +49,7 @@ class CarouselState implements State {
 		return widthCarousel;
 	});
 
-	active = $state(1);
+	active = $state(0);
 
 	private _returnFluidSize = (val: number) => {
 		return getFluidSize(val);

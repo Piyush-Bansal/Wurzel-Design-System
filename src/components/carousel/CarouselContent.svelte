@@ -20,7 +20,7 @@
 	carouselState.gap.sm = gap.sm;
 </script>
 
-<div class="a overflow-hidden-x hide-scroll-bar">
+<div class="overflow-hidden-x hide-scroll-bar">
 	<div
 		class="carousel__content | flex-row"
 		style:gap={carouselState.getCarouselGap}

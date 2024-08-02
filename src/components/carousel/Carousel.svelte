@@ -13,7 +13,6 @@
 
 	setCarouselState();
 	const state = getCarouselState();
-
 	state.count = count;
 </script>
 
@@ -21,9 +20,13 @@
 	class="carousel__wrapper | relative"
 	bind:clientWidth={state.carouselWidth}
 >
-	<Previous></Previous>
+	{#if controls}
+		<Previous></Previous>
+	{/if}
 	{@render children()}
-	<Next></Next>
+	{#if controls}
+		<Next></Next>
+	{/if}
 </div>
 
 {#if indicator}

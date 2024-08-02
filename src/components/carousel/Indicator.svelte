@@ -6,7 +6,7 @@
 
 <div class="indicator__wrapper | m-t-64">
 	{#each Array(state.count) as item, index}
-		<IndicatorDot index={index + 1}></IndicatorDot>
+		<IndicatorDot {index}></IndicatorDot>
 	{/each}
 </div>
 
