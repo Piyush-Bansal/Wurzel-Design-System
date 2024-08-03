@@ -10,7 +10,7 @@ import {
 import { browser } from '$app/environment';
 
 class CarouselState implements State {
-	carouselWrapper: undefined | HTMLDivElement = $state();
+	carouselWrapper: undefined | HTMLDivElement = $state(undefined);
 
 	count = $state(0);
 
@@ -26,19 +26,21 @@ class CarouselState implements State {
 		sm: 12
 	});
 
+	active = $state(0);
+	carouselWidth = $state(0);
+	isPositions = $state(false);
+	carouselPositions = $state<Array<{ left: string }>>([]);
+
 	leftPadding = $derived.by(() => {
-		if (!browser) {
-			return 0;
-		} else {
-			return Number(
-				getComputedStyle(document.documentElement).getPropertyValue(
-					'--carousel-left-padding'
-				)
-			);
-		}
+		if (!browser) return 0;
+		return Number(
+			getComputedStyle(document.documentElement).getPropertyValue(
+				'--carousel-left-padding'
+			)
+		);
 	});
 
-	private _combinedWidth = $derived({
+	private _combinedWidth = $derived<Sizes>({
 		lg: this.gap.lg + this.width.lg,
 		md: this.gap.md + this.width.md,
 		sm: this.gap.sm + this.width.sm
@@ -64,75 +66,33 @@ class CarouselState implements State {
 		this._screenSizeBasedValue(this._combinedWidth)
 	);
 
-	carouselWidth = $state(0);
-
-	// visibleCount = $derived.by(() => {
-	// 	const widthCarousel = this.carouselWidth / (this.currentWidth * this.count);
-	// 	return widthCarousel;
-	// });
-
-	active = $state(0);
-
-	/**
-	 * Returns a fluid size value based on the provided numeric value.
-	 *
-	 * @param {number} val - The numeric value to be converted to fluid size.
-	 * @return {string} The fluid size value as a string.
-	 */
-	private _returnFluidSize(val: number): string {
-		return getFluidSize(val);
-	}
-
 	//set styling of carousel item and the gap between them
-	getCarouselWidth = $derived(this._returnFluidSize(this.currentWidth));
-	getCarouselGap = $derived(this._returnFluidSize(this.currentGap));
+	getCarouselWidth = $derived(getFluidSize(this.currentWidth));
+	getCarouselGap = $derived(getFluidSize(this.currentGap));
 
-	// amountToMove = $derived(this._returnFluidSize(this.currentCombinedWidth));
-
-	//calculate the position of each item in the carousel and initiate it with first item
-	carouselPositions = $state([
-		{ left: browser ? this._returnFluidSize(this.leftPadding) : '0' }
-	]);
-
-	isPositions = $state(false);
-
-	/**
-	 * Calculates the positions of each item in the carousel.
-	 *
-	 * @return {void}
-	 */
-	calculatePositions() {
+	calculatePositions(): void {
+		this.carouselPositions = [
+			{ left: browser ? getFluidSize(this.leftPadding) : '0' }
+		];
 		for (let i = 1; i < this.count; i++) {
 			const position = this.currentCombinedWidth * i - this.leftPadding;
-			const clampValue = `calc(${this._returnFluidSize(position)} * -1)`;
-			this.carouselPositions.push({ left: clampValue });
+			this.carouselPositions.push({
+				left: `calc(${getFluidSize(position)} * -1)`
+			});
 		}
+		this.isPositions = true;
 	}
 
-	/**
-	 * Jumps to a specific slide in the carousel.
-	 *
-	 * @param {number} index - The index of the slide to jump to.
-	 */
-	jumpToSlide(index: number) {
+	jumpToSlide(index: number): void {
 		if (!this.isPositions) {
 			this.calculatePositions();
-			this.isPositions = true;
-			this.moveSlide(this.carouselPositions[index].left);
-		} else {
-			this.moveSlide(this.carouselPositions[index].left);
 		}
+		this.moveSlide(this.carouselPositions[index].left);
 	}
-
-	/**
-	 * Moves the carousel to a specific slide or position.
-	 *
-	 * @param {string | number} pos - The position or index of the slide to move to.
-	 * @return {void}
-	 */
-	moveSlide(pos: string | number) {
-		if (!this.carouselWrapper) return;
-		this.carouselWrapper.style.transform = `translateX(${pos})`;
+	moveSlide(pos: string): void {
+		if (this.carouselWrapper) {
+			this.carouselWrapper.style.transform = `translateX(${pos})`;
+		}
 	}
 }
 
