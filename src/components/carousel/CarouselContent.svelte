@@ -39,4 +39,6 @@
 		transform: translate($left-padding, 0);
 		transition: transform $time-4 ease-in-out;
 	}
+	$a: fluid-l(328);
+	@debug $a;
 </style>

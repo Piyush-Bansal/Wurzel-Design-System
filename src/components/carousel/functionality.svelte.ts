@@ -44,13 +44,19 @@ class CarouselState implements State {
 		sm: this.gap.sm + this.width.sm
 	});
 
-	private _screenSizeBasedValue = (val: Sizes) => {
+	/**
+	 * Determines the appropriate value based on the screen size.
+	 *
+	 * @param {Sizes} val - Object containing values for large, medium, and small screen sizes
+	 * @return {number} The value corresponding to the current screen size
+	 */
+	private _screenSizeBasedValue(val: Sizes) {
 		return screenSize.width >= ssLargeLow
 			? val.lg
 			: screenSize.width >= ssMediumLow
 				? val.md
 				: val.sm;
-	};
+	}
 
 	currentWidth = $derived(this._screenSizeBasedValue(this.width));
 	currentGap = $derived(this._screenSizeBasedValue(this.gap));
@@ -67,9 +73,15 @@ class CarouselState implements State {
 
 	active = $state(0);
 
-	private _returnFluidSize = (val: number): string => {
+	/**
+	 * Returns a fluid size value based on the provided numeric value.
+	 *
+	 * @param {number} val - The numeric value to be converted to fluid size.
+	 * @return {string} The fluid size value as a string.
+	 */
+	private _returnFluidSize(val: number): string {
 		return getFluidSize(val);
-	};
+	}
 
 	//set styling of carousel item and the gap between them
 	getCarouselWidth = $derived(this._returnFluidSize(this.currentWidth));
@@ -84,15 +96,24 @@ class CarouselState implements State {
 
 	isPositions = $state(false);
 
+	/**
+	 * Calculates the positions of each item in the carousel.
+	 *
+	 * @return {void}
+	 */
 	calculatePositions() {
 		for (let i = 1; i < this.count; i++) {
-			const position = (this.currentCombinedWidth * i - this.leftPadding) * -1;
-			console.log(position);
-			const clampValue = this._returnFluidSize(position);
+			const position = this.currentCombinedWidth * i - this.leftPadding;
+			const clampValue = `calc(${this._returnFluidSize(position)} * -1)`;
 			this.carouselPositions.push({ left: clampValue });
 		}
 	}
 
+	/**
+	 * Jumps to a specific slide in the carousel.
+	 *
+	 * @param {number} index - The index of the slide to jump to.
+	 */
 	jumpToSlide(index: number) {
 		if (!this.isPositions) {
 			this.calculatePositions();
@@ -103,6 +124,12 @@ class CarouselState implements State {
 		}
 	}
 
+	/**
+	 * Moves the carousel to a specific slide or position.
+	 *
+	 * @param {string | number} pos - The position or index of the slide to move to.
+	 * @return {void}
+	 */
 	moveSlide(pos: string | number) {
 		if (!this.carouselWrapper) return;
 		this.carouselWrapper.style.transform = `translateX(${pos})`;

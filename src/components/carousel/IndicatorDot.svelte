@@ -32,15 +32,26 @@
 <style lang="scss">
 	@use '$sizes' as *;
 	@use '$tokens/time' as *;
+	@use '$breakpoints' as *;
 	.indicator-dot {
 		width: fluid-l(12);
 		height: fluid-l(12);
 		background-color: black;
 		border-radius: fluid-l(12);
 		transition: width $time-2 ease-in-out;
+
+		@include mq('medium') {
+			width: fluid-m(8);
+			height: fluid-m(8);
+		}
 	}
 	.active {
 		width: fluid-l(24);
 		pointer-events: none;
+
+		@include mq('medium') {
+			width: fluid-m(16);
+			height: fluid-m(8);
+		}
 	}
 </style>
