@@ -11,8 +11,9 @@ export interface Carousel {
 
 export interface CarouselContent {
 	children: Snippet;
-	size?: { lg: number; md: number; sm: number };
+	size?: Sizes;
 	gap?: Sizes;
+	leftPadding?: Sizes;
 }
 
 export type Sizes = {
@@ -30,17 +31,16 @@ export interface State {
 	count: number;
 	width: Sizes;
 	gap: Sizes;
+	leftPadding: Sizes;
+	active: number;
+	carouselWidth: number;
+	isPositions: boolean;
+	carouselPositions: Array<{ left: string }>;
 	currentWidth: number;
 	currentGap: number;
 	currentCombinedWidth: number;
-	carouselWidth: number;
-	active: number;
-	// visibleCount: number;
 	getCarouselWidth: string;
 	getCarouselGap: string;
-	// amountToMove: string;
-	carouselPositions: Array<{ left: string }>;
-	isPositions: boolean;
 	calculatePositions: () => void;
 }
 

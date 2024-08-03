@@ -5,6 +5,7 @@
 	let {
 		size = { lg: 500, md: 300, sm: 300 },
 		gap = { lg: 16, md: 16, sm: 12 },
+		leftPadding = { lg: 64, md: 32, sm: 16 },
 		children
 	}: CarouselContent = $props();
 
@@ -18,6 +19,10 @@
 	carouselState.gap.lg = gap.lg;
 	carouselState.gap.md = gap.md;
 	carouselState.gap.sm = gap.sm;
+
+	carouselState.leftPadding.lg = leftPadding.lg;
+	carouselState.leftPadding.md = leftPadding.md;
+	carouselState.leftPadding.sm = leftPadding.sm;
 </script>
 
 <div class="overflow-hidden-x hide-scroll-bar">
@@ -39,6 +44,4 @@
 		transform: translate($left-padding, 0);
 		transition: transform $time-4 ease-in-out;
 	}
-	$a: fluid-l(328);
-	@debug $a;
 </style>

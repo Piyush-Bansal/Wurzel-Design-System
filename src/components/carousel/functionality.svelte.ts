@@ -26,19 +26,16 @@ class CarouselState implements State {
 		sm: 12
 	});
 
+	leftPadding = $state({
+		lg: 0,
+		md: 0,
+		sm: 0
+	});
+
 	active = $state(0);
 	carouselWidth = $state(0);
 	isPositions = $state(false);
 	carouselPositions = $state<Array<{ left: string }>>([]);
-
-	leftPadding = $derived.by(() => {
-		if (!browser) return 0;
-		return Number(
-			getComputedStyle(document.documentElement).getPropertyValue(
-				'--carousel-left-padding'
-			)
-		);
-	});
 
 	private _combinedWidth = $derived<Sizes>({
 		lg: this.gap.lg + this.width.lg,
@@ -72,10 +69,16 @@ class CarouselState implements State {
 
 	calculatePositions(): void {
 		this.carouselPositions = [
-			{ left: browser ? getFluidSize(this.leftPadding) : '0' }
+			{
+				left: browser
+					? getFluidSize(this._screenSizeBasedValue(this.leftPadding))
+					: '0'
+			}
 		];
 		for (let i = 1; i < this.count; i++) {
-			const position = this.currentCombinedWidth * i - this.leftPadding;
+			const position =
+				this.currentCombinedWidth * i -
+				this._screenSizeBasedValue(this.leftPadding);
 			this.carouselPositions.push({
 				left: `calc(${getFluidSize(position)} * -1)`
 			});
