@@ -12,6 +12,10 @@
 		class="carousel__next | absolute cursor-pointer"
 		in:fade={{ duration: time3, easing: circOut }}
 		out:fade={{ duration: time2, easing: circIn }}
+		onclick={state.nextSlide}
+		role="button"
+		onkeydown={(e) => e.key === 'Enter' && state.nextSlide}
+		tabindex={state.active !== state.count - 1 ? -1 : 0}
 	>
 		<img src="icons/chevron-right.svg" alt="" srcset="" />
 	</div>

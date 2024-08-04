@@ -86,17 +86,29 @@ class CarouselState implements State {
 		this.isPositions = true;
 	}
 
-	jumpToSlide(index: number): void {
+	jumpToSlide = (index: number): void => {
 		if (!this.isPositions) {
 			this.calculatePositions();
 		}
-		this.moveSlide(this.carouselPositions[index].left);
-	}
-	moveSlide(pos: string): void {
+		if (index >= 0 && index < this.count) {
+			this.active = index;
+			this.moveSlide(this.carouselPositions[index].left);
+		}
+	};
+
+	moveSlide = (pos: string): void => {
 		if (this.carouselWrapper) {
 			this.carouselWrapper.style.transform = `translateX(${pos})`;
 		}
-	}
+	};
+
+	nextSlide = (): void => {
+		if (typeof this.active !== 'number') this.active = 0;
+		if (this.active < this.count - 1) {
+			this.active += 1;
+			this.jumpToSlide(this.active);
+		}
+	};
 }
 
 //Initiate

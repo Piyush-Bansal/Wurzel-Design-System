@@ -42,6 +42,7 @@ export interface State {
 	getCarouselWidth: string;
 	getCarouselGap: string;
 	calculatePositions: () => void;
+	nextSlide: () => void;
 }
 
 export interface IndicatorDot {
