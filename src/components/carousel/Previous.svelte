@@ -1,10 +1,26 @@
-<div class="carousel__next | absolute cursor-pointer">
-	<img src="icons/chevron-left.svg" alt="" srcset="" />
-</div>
+<script lang="ts">
+	import { fade } from 'svelte/transition';
+	import { getCarouselState } from './functionality.svelte';
+	import { time2, time3 } from '$lib/helper-functions/timing.svelte';
+	import { circIn, circOut } from 'svelte/easing';
+
+	const state = getCarouselState();
+</script>
+
+{#if state.active !== 0}
+	<div
+		class="carousel__next | absolute cursor-pointer"
+		in:fade={{ duration: time3, easing: circOut }}
+		out:fade={{ duration: time2, easing: circIn }}
+	>
+		<img src="icons/chevron-left.svg" alt="" srcset="" />
+	</div>
+{/if}
 
 <style lang="scss">
 	@use '$sizes' as *;
 	@use '$tokens/carousel' as *;
+	@use '$breakpoints' as *;
 
 	.carousel__next {
 		left: $left-padding;
@@ -16,5 +32,15 @@
 	img {
 		width: fluid-l(24);
 		height: fluid-l(24);
+
+		@include mq('medium') {
+			width: fluid-l(24);
+			height: fluid-l(24);
+		}
+
+		@include mq('small') {
+			width: fluid-s(24);
+			height: fluid-s(24);
+		}
 	}
 </style>

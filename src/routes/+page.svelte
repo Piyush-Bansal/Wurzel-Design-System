@@ -27,7 +27,3 @@
 		</CarouselContent>
 	</Carousel>
 </div>
-
-<div class="container">
-	<div style:height={'50vh'} style:background-color={'red'}></div>
-</div>

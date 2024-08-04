@@ -39,9 +39,15 @@
 	@use '$tokens/carousel' as *;
 	@use '$sizes' as *;
 	@use '$tokens/time' as *;
+	@use '$tokens/easing' as *;
+	@use '$breakpoints' as *;
 	.carousel__content {
 		width: max-content;
 		transform: translate($left-padding, 0);
-		transition: transform $time-4 ease-in-out;
+		transition: transform $time-5 $easeInOutQuart;
+
+		@include mq('small') {
+			transition: transform $time-4 $easeInOutQuart;
+		}
 	}
 </style>

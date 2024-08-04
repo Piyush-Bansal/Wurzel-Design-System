@@ -16,6 +16,13 @@
 	currentState.count = count;
 </script>
 
+<svelte:window
+	onresize={() => {
+		currentState.carouselPositions = [];
+		currentState.calculatePositions();
+	}}
+/>
+
 <div
 	class="carousel__wrapper | relative"
 	bind:clientWidth={currentState.carouselWidth}
