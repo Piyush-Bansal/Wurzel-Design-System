@@ -109,6 +109,14 @@ class CarouselState implements State {
 			this.jumpToSlide(this.active);
 		}
 	};
+
+	previousSlide = (): void => {
+		if (typeof this.active !== 'number') this.active = 0;
+		if (this.active > 0) {
+			this.active -= 1;
+			this.jumpToSlide(this.active);
+		}
+	};
 }
 
 //Initiate
