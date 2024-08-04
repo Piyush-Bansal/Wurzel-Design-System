@@ -6,7 +6,7 @@ import {
 	ssLargeLow,
 	ssMediumLow
 } from '$lib/helper-functions/breakpoints-store.svelte';
-
+import type { Action } from 'svelte/action';
 import { browser } from '$app/environment';
 
 class CarouselState implements State {
@@ -116,6 +116,41 @@ class CarouselState implements State {
 			this.active -= 1;
 			this.jumpToSlide(this.active);
 		}
+	};
+
+	autoScrollFunc: Action<
+		HTMLDivElement,
+		{ duration: number; autoScroll: boolean } | undefined
+	> = (node, params) => {
+		let autoscrollTimer: number | undefined;
+
+		const startAutoScroll = () => {
+			if (params?.autoScroll) {
+				autoscrollTimer = setInterval(() => {
+					this.nextSlide();
+				}, params.duration);
+			}
+		};
+
+		const stopAutoScroll = () => {
+			if (autoscrollTimer) {
+				clearInterval(autoscrollTimer);
+				autoscrollTimer = undefined;
+			}
+		};
+
+		startAutoScroll();
+
+		return {
+			update: (newParams) => {
+				stopAutoScroll();
+				params = newParams;
+				startAutoScroll();
+			},
+			destroy: () => {
+				stopAutoScroll();
+			}
+		};
 	};
 }
 

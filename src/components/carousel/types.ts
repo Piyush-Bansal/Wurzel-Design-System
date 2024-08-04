@@ -1,4 +1,5 @@
 import type { Snippet } from 'svelte';
+import type { Action } from 'svelte/action';
 
 export interface Carousel {
 	autoscroll: boolean;
@@ -6,6 +7,7 @@ export interface Carousel {
 	controls: boolean;
 	reverse: boolean;
 	count: number;
+	autoScrollDuration?: number;
 	children: Snippet;
 }
 
@@ -31,6 +33,7 @@ export interface State {
 	count: number;
 	width: Sizes;
 	gap: Sizes;
+
 	leftPadding: Sizes;
 	active: number;
 	carouselWidth: number;
@@ -41,9 +44,15 @@ export interface State {
 	currentCombinedWidth: number;
 	getCarouselWidth: string;
 	getCarouselGap: string;
+
 	calculatePositions: () => void;
 	nextSlide: () => void;
 	previousSlide: () => void;
+
+	autoScrollFunc: Action<
+		HTMLDivElement,
+		{ duration: number; autoScroll: boolean } | undefined
+	>;
 }
 
 export interface IndicatorDot {
