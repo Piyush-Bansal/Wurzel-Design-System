@@ -6,7 +6,7 @@ export class Interval<T, U> {
 
 	start(func: (arg?: T) => U, arg?: T): void {
 		if (this.intervalId) {
-			console.error('Interval already running');
+			// console.error('Interval already running');
 			return;
 		}
 
@@ -17,7 +17,7 @@ export class Interval<T, U> {
 
 	stop(): void {
 		if (!this.intervalId) {
-			console.error('No interval to stop');
+			// console.error('No interval to stop');
 			return;
 		}
 
