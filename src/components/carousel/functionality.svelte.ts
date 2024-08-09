@@ -8,48 +8,43 @@ import {
 } from '$lib/helper-functions/breakpoints-store.svelte';
 import type { Action } from 'svelte/action';
 import { browser } from '$app/environment';
+import { Interval } from '$lib/helper-functions/setInterval.svelte';
+import { time10 } from '$lib/helper-functions/timing.svelte';
 
 class CarouselState implements State {
+	// State properties
 	carouselWrapper: undefined | HTMLDivElement = $state(undefined);
-
 	count = $state(0);
-
-	width = $state({
-		lg: 0,
-		md: 0,
-		sm: 0
-	});
-
-	gap = $state({
-		lg: 16,
-		md: 16,
-		sm: 12
-	});
-
-	leftPadding = $state({
-		lg: 0,
-		md: 0,
-		sm: 0
-	});
-
+	width = $state<Sizes>({ lg: 0, md: 0, sm: 0 });
+	gap = $state<Sizes>({ lg: 16, md: 16, sm: 12 });
+	leftPadding = $state<Sizes>({ lg: 0, md: 0, sm: 0 });
 	active = $state(0);
 	carouselWidth = $state(0);
 	isPositions = $state(false);
 	carouselPositions = $state<Array<{ left: string }>>([]);
 
+	// Configuration properties
+	infinite = false;
+	autoscroll = false;
+	autoscrollDuration = time10;
+
+	// Derived properties
 	private _combinedWidth = $derived<Sizes>({
 		lg: this.gap.lg + this.width.lg,
 		md: this.gap.md + this.width.md,
 		sm: this.gap.sm + this.width.sm
 	});
 
-	/**
-	 * Determines the appropriate value based on the screen size.
-	 *
-	 * @param {Sizes} val - Object containing values for large, medium, and small screen sizes
-	 * @return {number} The value corresponding to the current screen size
-	 */
-	private _screenSizeBasedValue(val: Sizes) {
+	currentWidth = $derived(this._screenSizeBasedValue(this.width));
+	currentGap = $derived(this._screenSizeBasedValue(this.gap));
+	currentCombinedWidth = $derived(
+		this._screenSizeBasedValue(this._combinedWidth)
+	);
+	getCarouselWidth = $derived(getFluidSize(this.currentWidth));
+	getCarouselGap = $derived(getFluidSize(this.currentGap));
+
+	// Helper methods
+	private _screenSizeBasedValue(val: Sizes): number {
 		return screenSize.width >= ssLargeLow
 			? val.lg
 			: screenSize.width >= ssMediumLow
@@ -57,17 +52,8 @@ class CarouselState implements State {
 				: val.sm;
 	}
 
-	currentWidth = $derived(this._screenSizeBasedValue(this.width));
-	currentGap = $derived(this._screenSizeBasedValue(this.gap));
-	currentCombinedWidth = $derived(
-		this._screenSizeBasedValue(this._combinedWidth)
-	);
-
-	//set styling of carousel item and the gap between them
-	getCarouselWidth = $derived(getFluidSize(this.currentWidth));
-	getCarouselGap = $derived(getFluidSize(this.currentGap));
-
-	calculatePositions(): void {
+	// Core carousel methods
+	calculatePositions = (): void => {
 		this.carouselPositions = [
 			{
 				left: browser
@@ -84,7 +70,7 @@ class CarouselState implements State {
 			});
 		}
 		this.isPositions = true;
-	}
+	};
 
 	jumpToSlide = (index: number): void => {
 		if (!this.isPositions) {
@@ -107,7 +93,13 @@ class CarouselState implements State {
 		if (this.active < this.count - 1) {
 			this.active += 1;
 			this.jumpToSlide(this.active);
+		} else {
+			this.autoScrollTimer.stop();
+			if (this.infinite) {
+				this.infiniteLoop();
+			}
 		}
+		this.restartAutoScrollIfNeeded();
 	};
 
 	previousSlide = (): void => {
@@ -115,52 +107,52 @@ class CarouselState implements State {
 		if (this.active > 0) {
 			this.active -= 1;
 			this.jumpToSlide(this.active);
+		} else {
+			this.autoScrollTimer.stop();
+			if (this.infinite) {
+				this.infiniteLoop();
+			}
+		}
+		this.restartAutoScrollIfNeeded();
+	};
+
+	infiniteLoop = (): void => {
+		this.active = this.active === this.count - 1 ? 0 : this.count - 1;
+		this.jumpToSlide(this.active);
+		this.restartAutoScrollIfNeeded();
+	};
+
+	// Auto-scroll functionality
+	autoScrollTimer = new Interval<number, void>(this.autoscrollDuration);
+
+	restartAutoScrollIfNeeded = (): void => {
+		if (this.autoscroll && !this.autoScrollTimer.isRunning) {
+			this.autoScrollTimer.start(this.nextSlide);
 		}
 	};
 
-	autoScrollFunc: Action<
-		HTMLDivElement,
-		{ duration: number; autoScroll: boolean } | undefined
-	> = (node, params) => {
-		let autoscrollTimer: number | undefined;
-
+	autoScrollFunc: Action<HTMLDivElement> = () => {
 		const startAutoScroll = () => {
-			if (params?.autoScroll) {
-				autoscrollTimer = setInterval(() => {
-					this.nextSlide();
-				}, params.duration);
+			if (this.autoscroll) {
+				this.autoScrollTimer.start(this.nextSlide);
 			}
 		};
 
 		const stopAutoScroll = () => {
-			if (autoscrollTimer) {
-				clearInterval(autoscrollTimer);
-				autoscrollTimer = undefined;
-			}
+			this.autoScrollTimer.stop();
 		};
 
 		startAutoScroll();
 
 		return {
-			update: (newParams) => {
-				stopAutoScroll();
-				params = newParams;
-				startAutoScroll();
-			},
-			destroy: () => {
-				stopAutoScroll();
-			}
+			destroy: stopAutoScroll
 		};
 	};
 }
 
-//Initiate
+// Context management
 const CAROUSEL_KEY = Symbol('CAROUSEL');
 
-export function setCarouselState() {
-	return setContext(CAROUSEL_KEY, new CarouselState());
-}
-
-export function getCarouselState() {
-	return getContext<ReturnType<typeof setCarouselState>>(CAROUSEL_KEY);
-}
+export const setCarouselState = () =>
+	setContext(CAROUSEL_KEY, new CarouselState());
+export const getCarouselState = () => getContext<CarouselState>(CAROUSEL_KEY);

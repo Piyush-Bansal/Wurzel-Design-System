@@ -8,6 +8,7 @@
 		indicator = true,
 		controls = true,
 		reverse = false,
+		infinite = false,
 		count,
 		autoScrollDuration = time10,
 		children
@@ -16,6 +17,9 @@
 	setCarouselState();
 	const currentState = getCarouselState();
 	currentState.count = count;
+	currentState.autoscrollDuration = autoScrollDuration;
+	currentState.infinite = infinite;
+	currentState.autoscroll = autoscroll;
 </script>
 
 <svelte:window
@@ -28,10 +32,7 @@
 <div
 	class="carousel__wrapper | relative"
 	bind:clientWidth={currentState.carouselWidth}
-	use:currentState.autoScrollFunc={{
-		duration: autoScrollDuration,
-		autoScroll: autoscroll
-	}}
+	use:currentState.autoScrollFunc
 >
 	{#if controls}
 		<Previous></Previous>

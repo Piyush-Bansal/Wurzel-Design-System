@@ -16,6 +16,7 @@
 		indicator={true}
 		controls={true}
 		reverse={false}
+		infinite={true}
 		count={data.length}
 	>
 		<CarouselContent size={{ lg: 589, md: 344, sm: 324 }}>

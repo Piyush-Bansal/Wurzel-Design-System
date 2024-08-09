@@ -7,7 +7,7 @@
 	const state = getCarouselState();
 </script>
 
-{#if state.active !== state.count - 1}
+{#if state.active !== state.count - 1 || state.infinite}
 	<div
 		class="carousel__next | absolute cursor-pointer"
 		in:fade={{ duration: time3, easing: circOut }}
