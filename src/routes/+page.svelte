@@ -15,7 +15,6 @@
 		autoscroll={true}
 		indicator={true}
 		controls={true}
-		reverse={false}
 		infinite={true}
 		count={data.length}
 	>

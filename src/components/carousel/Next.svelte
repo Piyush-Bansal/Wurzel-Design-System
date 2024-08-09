@@ -1,10 +1,13 @@
 <script>
-	import { time2, time3 } from '$lib/helper-functions/timing.svelte';
+	import { time2, time3, time5 } from '$lib/helper-functions/timing.svelte';
 	import { circIn, circOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import { getCarouselState } from './functionality.svelte';
+	import throttle from '$lib/helper-functions/throttle';
 
 	const state = getCarouselState();
+
+	const throttledNextSlide = throttle(state.nextSlide, time5);
 </script>
 
 {#if state.active !== state.count - 1 || state.infinite}
@@ -12,7 +15,7 @@
 		class="carousel__next | absolute cursor-pointer"
 		in:fade={{ duration: time3, easing: circOut }}
 		out:fade={{ duration: time2, easing: circIn }}
-		onclick={state.nextSlide}
+		onclick={throttledNextSlide}
 		role="button"
 		onkeydown={(e) => e.key === 'Enter' && state.nextSlide}
 		tabindex={state.active !== state.count - 1 ? -1 : 0}
