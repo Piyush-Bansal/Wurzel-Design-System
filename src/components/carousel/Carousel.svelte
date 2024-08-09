@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Indicator, Next, Previous } from '$components/carousel';
-	import { time10 } from '$lib/helper-functions/timing.svelte';
+	import swipe from '$lib/helper-functions/swipe';
+	import { time10, time5 } from '$lib/helper-functions/timing.svelte';
 	import { getCarouselState, setCarouselState } from './functionality.svelte';
 	import type { Carousel } from './types';
 	let {
@@ -32,6 +33,11 @@
 	class="carousel__wrapper | relative"
 	bind:clientWidth={currentState.carouselWidth}
 	use:currentState.autoScrollFunc
+	use:swipe={{
+		leftFunction: currentState.nextSlide,
+		rightFunction: currentState.previousSlide,
+		throttleDuration: time5
+	}}
 >
 	{#if controls}
 		<Previous></Previous>

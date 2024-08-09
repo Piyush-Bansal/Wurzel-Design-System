@@ -12,10 +12,10 @@
 
 <div class="container" data-size="full">
 	<Carousel
-		autoscroll={true}
+		autoscroll={false}
 		indicator={true}
 		controls={true}
-		infinite={true}
+		infinite={false}
 		count={data.length}
 	>
 		<CarouselContent size={{ lg: 589, md: 344, sm: 324 }}>
