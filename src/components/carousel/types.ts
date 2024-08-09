@@ -6,7 +6,6 @@ export interface Carousel {
 	autoscroll: boolean;
 	indicator: boolean;
 	controls: boolean;
-	reverse: boolean;
 	count: number;
 	autoScrollDuration?: number;
 	infinite?: boolean;

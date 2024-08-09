@@ -7,7 +7,6 @@
 		autoscroll = false,
 		indicator = true,
 		controls = true,
-		reverse = false,
 		infinite = false,
 		count,
 		autoScrollDuration = time10,
