@@ -18,7 +18,10 @@
 		infinite={false}
 		count={data.length}
 	>
-		<CarouselContent size={{ lg: 589, md: 344, sm: 324 }}>
+		<CarouselContent
+			size={{ lg: 589, md: 344, sm: 324 }}
+			leftPadding={{ lg: 364, md: 32, sm: 16 }}
+		>
 			{#each data as slide, number}
 				<CarouselItem>
 					<svelte:component this={Slide} number={number + 1} />

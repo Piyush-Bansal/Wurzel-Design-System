@@ -23,6 +23,10 @@
 	carouselState.leftPadding.lg = leftPadding.lg;
 	carouselState.leftPadding.md = leftPadding.md;
 	carouselState.leftPadding.sm = leftPadding.sm;
+
+	$effect(() => {
+		carouselState.initialPosition();
+	});
 </script>
 
 <div class="overflow-hidden-x hide-scroll-bar">
@@ -43,7 +47,7 @@
 	@use '$breakpoints' as *;
 	.carousel__content {
 		width: max-content;
-		transform: translate($left-padding, 0);
+		// transform: translate($left-padding, 0);
 		transition: transform $time-5 $easeInOutQuart;
 
 		@include mq('small') {

@@ -52,6 +52,7 @@ export interface State {
 	calculatePositions: () => void;
 	jumpToSlide: (index: number) => void;
 	moveSlide: (pos: string) => void;
+	initialPosition: (node: HTMLElement) => void;
 	nextSlide: () => void;
 	previousSlide: () => void;
 	infiniteLoop: () => void;

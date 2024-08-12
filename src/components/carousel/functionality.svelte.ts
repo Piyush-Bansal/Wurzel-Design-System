@@ -88,6 +88,14 @@ class CarouselState implements State {
 		}
 	};
 
+	initialPosition = (): void => {
+		if (!this.isPositions) {
+			this.calculatePositions();
+		}
+		// if (!this.carouselPositions[0].left) return;
+		this.moveSlide(this.carouselPositions[0].left);
+	};
+
 	nextSlide = (): void => {
 		if (typeof this.active !== 'number') this.active = 0;
 		if (this.active < this.count - 1) {
