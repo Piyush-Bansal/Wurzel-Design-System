@@ -24,7 +24,7 @@
 <!-- 
 @component
 
-**Header Component**
+ **Header Component**
 =====================
 
 ### Overview
@@ -50,6 +50,9 @@ Then, use the component in your Svelte template:
   openGraphDescription="Welcome to my website!"
   openGraphImage="https://example.com/og-image.jpg"
   canonical="https://example.com/"
+  faviconSVG="https://example.com/favicon.svg"
+  faviconPNG="https://example.com/favicon.png"
+  robots="index, follow"
 />
 ```
 ### Props
@@ -64,23 +67,10 @@ The Header component accepts the following props:
 * **openGraphDescription**: A string representing the Open Graph description.
 * **openGraphImage**: A string representing the Open Graph image URL.
 * **canonical**: A string representing the canonical URL.
-
-### Type Definitions
-
-The `baseURL` prop is expected to be a valid URL path, which can be represented using the `URLPath` type:
-```typescript
-type URLPath = string & {
-	__brand: 'URLPath';
-  };
-  
-  function isURLPath(str: string): str is URLPath {
-	return typeof str === 'string' && str.startsWith('/');
-  }
-  ```
-  ### Styling
-  
-  The Header component does not provide any default styling. You can style it according to your needs using CSS or a CSS-in-JS solution like SCSS.
-  
+* **faviconSVG**: A string representing the favicon SVG URL.
+* **faviconPNG**: A string representing the favicon PNG URL.
+* **robots**: A string representing the robots meta tag value (e.g. `index, follow`)
+ 
   ### Dependencies
   
   The Header component does not have any dependencies.
@@ -88,11 +78,7 @@ type URLPath = string & {
   ### Accessibility
   
   The Header component follows the WAI-ARIA guidelines for SEO meta tags. It uses the appropriate HTML tags and attributes to provide the correct semantics.
-  
-  ### Transitions
-  
-  The Header component does not use any transitions.
-  
+    
   ### Best Practices
   
   * Make sure to provide a unique `pageTitle` for each page of your website.
@@ -101,7 +87,6 @@ type URLPath = string & {
   * Set the `openGraphTitle` and `openGraphDescription` to the same values as the `metaTitle` and `metaDescription`, respectively.
   * Use a high-quality Open Graph image that represents the content of the page.
   * Set the `canonical` URL to the URL of the page.
-
 -->
 <svelte:head>
 	<title>{pageTitle}</title>
