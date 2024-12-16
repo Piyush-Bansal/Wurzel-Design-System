@@ -21,19 +21,19 @@ To use the `Tabs` component, you need to import it from the `'$components/tab'` 
 
 ```svelte
 <script lang="ts">
-	import { Tabs, TabList, TabTrigger, TabContent } from '$components/tab';
+	import { Tab, TabList, TabTrigger, TabContent } from '$components/tab';
 </script>
 ```
 
 ### Props
 
-The `Tabs` component accepts the following props:
+The `Tab` component accepts the following props:
 
 - `activeTab`: A string representing the currently active tab.
 
 ### Slots
 
-The `Tabs` component has two slots:
+The `Tab` component has two slots:
 
 - `tabList`: This slot is used to define the tab list. It should contain `TabTrigger` components.
 
@@ -44,7 +44,7 @@ The `Tabs` component has two slots:
 Here's an example of how to use the `Tabs` component:
 
 ```svelte
-<Tabs activeTab="tab1">
+<Tab activeTab="tab1">
 	{#snippet tabList()}
 		<TabList label="tablist">
 			<TabTrigger value="tab1">Tab 1</TabTrigger>
@@ -55,18 +55,18 @@ Here's an example of how to use the `Tabs` component:
 		<TabContent value="tab1">Content for Tab 1</TabContent>
 		<TabContent value="tab2">Content for Tab 2</TabContent>
 	{/snippet}
-</Tabs>
+</Tab>
 ```
 
 In this example, the `activeTab` prop is set to `'tab1'`, indicating that the first tab is initially active. The `tabList` slot contains two `TabTrigger` components, each with a unique `value` prop. The `tabContent` slot contains two `TabContent` components, each with a unique `value` prop.
 
 ### Styling
 
-The `Tabs` component does not provide any default styling. You can style it according to your needs using CSS or a CSS-in-JS solution like SCSS.
+The `Tab` component does not provide any default styling. You can style it according to your needs using CSS or a CSS-in-JS solution like SCSS.
 
 ### Dependencies
 
-The `Tabs` component depends on the following components:
+The `Tab` component depends on the following components:
 
 - `TabList`: A component used to define the tab list.
 
@@ -76,11 +76,11 @@ The `Tabs` component depends on the following components:
 
 ### Transitions
 
-The `Tabs` component uses the `fade` transition from the `svelte/transition` module to animate the tab content.
+The `Tab` component uses the `fade` transition from the `svelte/transition` module to animate the tab content.
 
 ### Accessibility
 
-The `Tabs` component follows the WAI-ARIA guidelines for tabs. It uses the `role="tablist"` and `role="tab"` attributes to provide the correct semantics. It also uses the `aria-selected` attribute to indicate the currently active tab.
+The `Tab` component follows the WAI-ARIA guidelines for tabs. It uses the `role="tablist"` and `role="tab"` attributes to provide the correct semantics. It also uses the `aria-selected` attribute to indicate the currently active tab.
 
 
 

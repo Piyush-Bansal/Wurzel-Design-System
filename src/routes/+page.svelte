@@ -7,6 +7,8 @@
 
 	import Slide from '$components/tab/Slide.svelte';
 
+	import { Tab, TabList, TabTrigger, TabContent } from '$components/tab';
+
 	const data = [Slide, Slide, Slide, Slide, Slide, Slide, Slide, Slide];
 </script>
 
