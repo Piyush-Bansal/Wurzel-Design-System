@@ -1,4 +1,5 @@
 export interface HeaderProps {
+	baseURL: string;
 	pageTitle?: string;
 	metaTitle?: string;
 	metaDescription?: string;

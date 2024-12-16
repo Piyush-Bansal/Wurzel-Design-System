@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { HeaderProps } from './types';
 
 	let {
+		baseURL,
 		pageTitle,
 		metaTitle,
 		metaDescription,
@@ -10,6 +12,10 @@
 		openGraphImage,
 		canonical
 	}: HeaderProps = $props();
+
+	function generateCanonicalURL() {
+		return `${baseURL}${$page.url.pathname}`;
+	}
 </script>
 
 <!-- 
@@ -31,7 +37,7 @@ To use the Header component, you need to import it from the `$components/seo-hea
 ### Props
 
 The Header component accepts the following props:
-
+* **baseURL:** Domain address https://example.com
 * **pageTitle:** A string representing the page title.
 * **metaTitle:** A string representing the meta title.
 * **metaDescription:** A string representing the meta description.
@@ -46,6 +52,7 @@ Here's an example of how to use the Header component:
 
 ```svelte
 <Header
+baseURL ="https://example.com"
   pageTitle="Homepage"
   metaTitle="My Website - Homepage"
   metaDescription="Welcome to my website!"
@@ -56,7 +63,7 @@ Here's an example of how to use the Header component:
 />
 ```
 
-In this example, the `pageTitle`, `metaTitle`, `metaDescription`, `openGraphTitle`, `openGraphDescription`, `openGraphImage`, and `canonical` props are set to their respective values.
+In this example, the `baseURL`,`pageTitle`, `metaTitle`, `metaDescription`, `openGraphTitle`, `openGraphDescription`, `openGraphImage`, and `canonical` props are set to their respective values.
 
 ### Styling
 
@@ -110,5 +117,5 @@ The Header component uses the `svelte:head` element to insert the SEO meta tags 
 	<meta property="og:locale" content="en_GB" />
 	<!-- <meta property="og:locale:alternate" content="de_DE" /> -->
 	<meta name="robots" content="index, follow" />
-	<link rel="canonical" href={canonical} />
+	<link rel="canonical" href={canonical ? canonical : generateCanonicalURL()} />
 </svelte:head>
