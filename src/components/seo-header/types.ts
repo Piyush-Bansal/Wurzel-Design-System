@@ -7,4 +7,7 @@ export interface HeaderProps {
 	openGraphDescription?: string;
 	openGraphImage?: string;
 	canonical?: string;
+	faviconSVG?: string;
+	faviconPNG?: string;
+	robots?: string;
 }

@@ -4,6 +4,7 @@
 		CarouselContent,
 		CarouselItem
 	} from '$components/carousel';
+	import Header from '$components/seo-header/Header.svelte';
 
 	import Slide from '$components/tab/Slide.svelte';
 

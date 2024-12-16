@@ -10,7 +10,10 @@
 		openGraphTitle,
 		openGraphDescription,
 		openGraphImage,
-		canonical
+		canonical,
+		faviconSVG,
+		faviconPNG,
+		robots
 	}: HeaderProps = $props();
 
 	function generateCanonicalURL() {
@@ -20,39 +23,26 @@
 
 <!-- 
 @component
-## Header Component
+
+**Header Component**
+=====================
+
+### Overview
 
 The Header component is a UI component that provides SEO meta tags for a webpage. It allows you to set the page title, meta title, meta description, Open Graph title, Open Graph description, Open Graph image, and canonical URL.
 
 ### Usage
 
-To use the Header component, you need to import it from the `$components/seo-header` module.
-
+To use the Header component, import it from the `$components/seo-header` module:
 ```svelte
 <script lang="ts">
   import { Header } from '$components/seo-header';
 </script>
 ```
-
-### Props
-
-The Header component accepts the following props:
-* **baseURL:** Domain address https://example.com
-* **pageTitle:** A string representing the page title.
-* **metaTitle:** A string representing the meta title.
-* **metaDescription:** A string representing the meta description.
-* **openGraphTitle:** A string representing the Open Graph title.
-* **openGraphDescription:** A string representing the Open Graph description.
-* **openGraphImage:** A string representing the Open Graph image URL.
-* **canonical:** A string representing the canonical URL.
-
-### Example
-
-Here's an example of how to use the Header component:
-
+Then, use the component in your Svelte template:
 ```svelte
 <Header
-baseURL ="https://example.com"
+  baseURL="https://example.com"
   pageTitle="Homepage"
   metaTitle="My Website - Homepage"
   metaDescription="Welcome to my website!"
@@ -62,37 +52,55 @@ baseURL ="https://example.com"
   canonical="https://example.com/"
 />
 ```
+### Props
 
-In this example, the `baseURL`,`pageTitle`, `metaTitle`, `metaDescription`, `openGraphTitle`, `openGraphDescription`, `openGraphImage`, and `canonical` props are set to their respective values.
+The Header component accepts the following props:
 
-### Styling
+* **baseURL**: Domain address (e.g. `https://example.com`)
+* **pageTitle**: A string representing the page title.
+* **metaTitle**: A string representing the meta title.
+* **metaDescription**: A string representing the meta description.
+* **openGraphTitle**: A string representing the Open Graph title.
+* **openGraphDescription**: A string representing the Open Graph description.
+* **openGraphImage**: A string representing the Open Graph image URL.
+* **canonical**: A string representing the canonical URL.
 
-The Header component does not provide any default styling. You can style it according to your needs using CSS or a CSS-in-JS solution like SCSS.
+### Type Definitions
 
-### Dependencies
-
-The Header component does not have any dependencies.
-
-### Accessibility
-
-The Header component follows the WAI-ARIA guidelines for SEO meta tags. It uses the appropriate HTML tags and attributes to provide the correct semantics.
-
-### Transitions
-
-The Header component does not use any transitions.
-
-### Best Practices
-
-* Make sure to provide a unique `pageTitle` for each page of your website.
-* Set the `metaTitle` to a concise and descriptive title that includes the website name and page title.
-* Provide a `metaDescription` that summarizes the content of the page.
-* Set the `openGraphTitle` and `openGraphDescription` to the same values as the `metaTitle` and `metaDescription`, respectively.
-* Use a high-quality Open Graph image that represents the content of the page.
-* Set the `canonical` URL to the URL of the page.
-
-### Additional Information
-
-The Header component uses the `svelte:head` element to insert the SEO meta tags into the HTML `<head>` section of the webpage.
+The `baseURL` prop is expected to be a valid URL path, which can be represented using the `URLPath` type:
+```typescript
+type URLPath = string & {
+	__brand: 'URLPath';
+  };
+  
+  function isURLPath(str: string): str is URLPath {
+	return typeof str === 'string' && str.startsWith('/');
+  }
+  ```
+  ### Styling
+  
+  The Header component does not provide any default styling. You can style it according to your needs using CSS or a CSS-in-JS solution like SCSS.
+  
+  ### Dependencies
+  
+  The Header component does not have any dependencies.
+  
+  ### Accessibility
+  
+  The Header component follows the WAI-ARIA guidelines for SEO meta tags. It uses the appropriate HTML tags and attributes to provide the correct semantics.
+  
+  ### Transitions
+  
+  The Header component does not use any transitions.
+  
+  ### Best Practices
+  
+  * Make sure to provide a unique `pageTitle` for each page of your website.
+  * Set the `metaTitle` to a concise and descriptive title that includes the website name and page title.
+  * Provide a `metaDescription` that summarizes the content of the page.
+  * Set the `openGraphTitle` and `openGraphDescription` to the same values as the `metaTitle` and `metaDescription`, respectively.
+  * Use a high-quality Open Graph image that represents the content of the page.
+  * Set the `canonical` URL to the URL of the page.
 
 -->
 <svelte:head>
@@ -116,6 +124,8 @@ The Header component uses the `svelte:head` element to insert the SEO meta tags 
 	<meta content={openGraphImage} property="twitter:image" />
 	<meta property="og:locale" content="en_GB" />
 	<!-- <meta property="og:locale:alternate" content="de_DE" /> -->
-	<meta name="robots" content="index, follow" />
+	<meta name="robots" content={robots ? robots : 'index, follow'} />
 	<link rel="canonical" href={canonical ? canonical : generateCanonicalURL()} />
+	<link rel="icon" href={faviconSVG} type="image/svg+xml" />
+	<link rel="icon" href={faviconPNG} type="image/png" />
 </svelte:head>
