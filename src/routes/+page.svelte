@@ -3,5 +3,5 @@
 </script>
 
 <div class="container">
-	<Countdown targetDate="2025-01-01T00:00:00"></Countdown>
+	<Countdown targetDate="2025-01-01T00:00:00" />
 </div>

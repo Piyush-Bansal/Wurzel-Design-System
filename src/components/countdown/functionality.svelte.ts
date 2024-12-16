@@ -1,51 +1,81 @@
-import { getContext, setContext } from 'svelte';
-import type { CountDownState, DateFormat } from './types';
-class Countdown implements CountDownState {
-	interval: undefined | number;
-	diff: number = $state(0);
-	days: number = $state(0);
-	hr: number = $state(0);
-	min: number = $state(0);
-	sec: number = $state(0);
-	targetDate: DateFormat = '2025-01-01T00:00:00';
+import { setContext } from 'svelte';
+import type { ICountdown } from './types';
 
-	calculateTimeLeft(): void {
-		const target = new Date(this.targetDate);
-		const now = new Date();
-		this.diff = target.getTime() - now.getTime();
+class Countdown implements ICountdown {
+	#targetDate = $state('');
+	#endTime = $state(0);
 
-		if (this.diff <= 0) {
-			this.clearInterval();
-			this.resetTimeLeft();
+	days = $state(0);
+	hours = $state(0);
+	minutes = $state(0);
+	seconds = $state(0);
+
+	#timerInterval?: ReturnType<typeof setInterval>;
+
+	constructor(targetDate: string) {
+		this.#targetDate = targetDate;
+		this.#updateEndTime();
+	}
+
+	#updateEndTime() {
+		this.#endTime = new Date(this.#targetDate).getTime();
+	}
+
+	start() {
+		// Clear any existing interval
+		this.stop();
+
+		// Initial calculation
+		this.#calculate();
+
+		// Start interval
+		this.#timerInterval = setInterval(() => {
+			this.#calculate();
+		}, 1000);
+	}
+
+	stop() {
+		if (this.#timerInterval) {
+			clearInterval(this.#timerInterval);
+			this.#timerInterval = undefined;
+		}
+	}
+
+	#calculate() {
+		const now = Date.now();
+		const difference = this.#endTime - now;
+
+		if (difference <= 0) {
+			this.stop();
+			this.reset();
 			return;
 		}
 
-		this.computeTime();
-		this.interval = setInterval(this.calculateTimeLeft.bind(this), 1000); // setInterval
+		// More efficient time calculation
+		const totalSeconds = Math.floor(difference / 1000);
+
+		this.days = Math.floor(totalSeconds / (24 * 3600));
+		const remainingSeconds = totalSeconds % (24 * 3600);
+
+		this.hours = Math.floor(remainingSeconds / 3600);
+		const remainingMinutes = remainingSeconds % 3600;
+
+		this.minutes = Math.floor(remainingMinutes / 60);
+		this.seconds = remainingMinutes % 60;
 	}
 
-	resetTimeLeft(): void {
+	reset() {
 		this.days = 0;
-		this.hr = 0;
-		this.min = 0;
-		this.sec = 0;
-	}
-
-	clearInterval(): void {
-		clearInterval(this.interval);
-	}
-
-	computeTime(): void {
-		this.days = Math.floor(this.diff / (1000 * 60 * 60 * 24));
-		this.hr = Math.floor((this.diff / (1000 * 60 * 60)) % 24);
-		this.min = Math.floor((this.diff / (1000 * 60)) % 60);
-		this.sec = Math.floor((this.diff / 1000) % 60);
+		this.hours = 0;
+		this.minutes = 0;
+		this.seconds = 0;
 	}
 }
 
 const COUNTDOWN_KEY = Symbol('COUNTDOWN');
 
-export const setCountDownState = () =>
-	setContext(COUNTDOWN_KEY, new Countdown());
-export const getCountDownState = () =>
-	getContext<CountDownState>(COUNTDOWN_KEY);
+export const createCountdown = (targetDate: string) => {
+	const countdown = new Countdown(targetDate);
+	setContext(COUNTDOWN_KEY, countdown);
+	return countdown;
+};

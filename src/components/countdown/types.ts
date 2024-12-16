@@ -1,20 +1,16 @@
 export type DateFormat =
 	`${number}-${number}-${number}T${number}:${number}:${number}${string}`;
 
-export interface Date {
+export interface CountdownProps {
 	targetDate: DateFormat;
 }
 
-export interface CountDownState {
-	interval: undefined | number;
-	diff: number;
+export interface ICountdown {
 	days: number;
-	hr: number;
-	min: number;
-	sec: number;
-	targetDate: DateFormat;
-	calculateTimeLeft(): void;
-	resetTimeLeft(): void;
-	clearInterval(): void;
-	computeTime(): void;
+	hours: number;
+	minutes: number;
+	seconds: number;
+	start(): void;
+	stop(): void;
+	reset(): void;
 }

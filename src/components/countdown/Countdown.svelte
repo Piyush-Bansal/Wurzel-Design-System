@@ -1,25 +1,20 @@
 <script lang="ts">
-	import { getCountDownState, setCountDownState } from './functionality.svelte';
-	import type { Date } from './types';
+	import { createCountdown } from './functionality.svelte';
+	import type { CountdownProps } from './types';
 
-	let { targetDate }: Date = $props();
+	let { targetDate }: CountdownProps = $props();
 
-	setCountDownState();
-	const currentState = getCountDownState();
+	const countdown = createCountdown(targetDate);
 
 	$effect(() => {
-		currentState.targetDate = targetDate;
-
-		currentState.calculateTimeLeft();
-
-		return () => {
-			currentState.resetTimeLeft();
-			currentState.clearInterval();
-		};
+		countdown.start();
+		return () => countdown.stop();
 	});
 </script>
 
-<h4>{currentState.days}</h4>
-<h4>{currentState.hr}</h4>
-<h4>{currentState.min}</h4>
-<h4>{currentState.sec}</h4>
+<div class="countdown">
+	<div>{countdown.days} Days</div>
+	<div>{countdown.hours} Hours</div>
+	<div>{countdown.minutes} Minutes</div>
+	<div>{countdown.seconds} Seconds</div>
+</div>
