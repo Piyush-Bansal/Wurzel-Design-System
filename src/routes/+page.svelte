@@ -3,5 +3,8 @@
 </script>
 
 <div class="container">
-	<Countdown targetDate="2025-01-01T00:00:00" />
+	<Countdown
+		targetDate="2025-12-16T23:01:00"
+		options={{ onComplete: () => console.log('YAY!') }}
+	/>
 </div>

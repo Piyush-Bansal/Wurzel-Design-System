@@ -3,14 +3,5 @@ export type DateFormat =
 
 export interface CountdownProps {
 	targetDate: DateFormat;
-}
-
-export interface ICountdown {
-	days: number;
-	hours: number;
-	minutes: number;
-	seconds: number;
-	start(): void;
-	stop(): void;
-	reset(): void;
+	options?: { onComplete: () => void };
 }

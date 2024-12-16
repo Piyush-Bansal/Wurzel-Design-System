@@ -2,9 +2,9 @@
 	import { createCountdown } from './functionality.svelte';
 	import type { CountdownProps } from './types';
 
-	let { targetDate }: CountdownProps = $props();
+	let { targetDate, options }: CountdownProps = $props();
 
-	const countdown = createCountdown(targetDate);
+	const countdown = createCountdown(targetDate, options);
 
 	$effect(() => {
 		countdown.start();

@@ -1,7 +1,6 @@
 import { setContext } from 'svelte';
-import type { ICountdown } from './types';
 
-class Countdown implements ICountdown {
+class Countdown {
 	#targetDate = $state('');
 	#endTime = $state(0);
 
@@ -11,10 +10,26 @@ class Countdown implements ICountdown {
 	seconds = $state(0);
 
 	#timerInterval?: ReturnType<typeof setInterval>;
+	#onComplete?: () => void;
 
-	constructor(targetDate: string) {
+	constructor(targetDate: string, onComplete?: () => void) {
+		// Validate date format
+		if (!this.#isValidDateFormat(targetDate)) {
+			throw new Error(
+				'Invalid date format. Use ISO 8601 format (YYYY-MM-DDTHH:mm:ss)'
+			);
+		}
+
 		this.#targetDate = targetDate;
 		this.#updateEndTime();
+		this.#onComplete = onComplete;
+	}
+
+	#isValidDateFormat(dateString: string): boolean {
+		// Basic ISO 8601 format validation
+		const isoDateRegex =
+			/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(([+-]\d{2}:\d{2})|Z)?$/;
+		return isoDateRegex.test(dateString) && !isNaN(Date.parse(dateString));
 	}
 
 	#updateEndTime() {
@@ -48,6 +63,8 @@ class Countdown implements ICountdown {
 		if (difference <= 0) {
 			this.stop();
 			this.reset();
+			// Call the completion callback if provided
+			this.#onComplete?.();
 			return;
 		}
 
@@ -74,8 +91,11 @@ class Countdown implements ICountdown {
 
 const COUNTDOWN_KEY = Symbol('COUNTDOWN');
 
-export const createCountdown = (targetDate: string) => {
-	const countdown = new Countdown(targetDate);
+export const createCountdown = (
+	targetDate: string,
+	options?: { onComplete: () => void }
+) => {
+	const countdown = new Countdown(targetDate, options?.onComplete);
 	setContext(COUNTDOWN_KEY, countdown);
 	return countdown;
 };
