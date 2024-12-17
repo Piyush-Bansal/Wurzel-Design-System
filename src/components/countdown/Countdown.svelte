@@ -8,13 +8,33 @@
 
 	$effect(() => {
 		countdown.start();
-		return () => countdown.stop();
+
+		return () => {
+			countdown.stop();
+		};
 	});
 </script>
 
-<div class="countdown">
-	<div>{countdown.days} Days</div>
-	<div>{countdown.hours} Hours</div>
-	<div>{countdown.minutes} Minutes</div>
-	<div>{countdown.seconds} Seconds</div>
+{#snippet count(type: number, label: string)}
+	<div class="flex-column align-items-center">
+		<div><h4>{type}</h4></div>
+		<p>{label}</p>
+	</div>
+{/snippet}
+
+<div class="countdown flex align-items-center">
+	{@render count(countdown.days, 'DD')}
+	<p>:</p>
+	{@render count(countdown.hours, 'HH')}
+	<p>:</p>
+	{@render count(countdown.minutes, 'MM')}
+	<p>:</p>
+	{@render count(countdown.seconds, 'SS')}
 </div>
+
+<!-- <style lang="scss">
+	@use '$tokens/time' as *;
+	.countdown {
+		gap: $space-2;
+	}
+</style> -->
