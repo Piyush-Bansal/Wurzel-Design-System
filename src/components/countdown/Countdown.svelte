@@ -15,7 +15,7 @@
 	});
 </script>
 
-{#snippet count(type: number, label: string)}
+{#snippet count(type: number | string, label: string)}
 	<div class="flex-column align-items-center">
 		<div><h4>{type}</h4></div>
 		<p>{label}</p>
@@ -31,10 +31,3 @@
 	<p>:</p>
 	{@render count(countdown.seconds, 'SS')}
 </div>
-
-<!-- <style lang="scss">
-	@use '$tokens/time' as *;
-	.countdown {
-		gap: $space-2;
-	}
-</style> -->

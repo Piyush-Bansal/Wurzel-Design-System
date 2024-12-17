@@ -4,10 +4,10 @@ class Countdown {
 	#targetDate = $state('');
 	#endTime = $state(0);
 
-	days = $state(0);
-	hours = $state(0);
-	minutes = $state(0);
-	seconds = $state(0);
+	days: number | string = $state(0);
+	hours: number | string = $state(0);
+	minutes: number | string = $state(0);
+	seconds: number | string = $state(0);
 
 	#timerInterval?: ReturnType<typeof setInterval>;
 	#onComplete?: () => void;
@@ -71,14 +71,22 @@ class Countdown {
 		// More efficient time calculation
 		const totalSeconds = Math.floor(difference / 1000);
 
-		this.days = Math.floor(totalSeconds / (24 * 3600));
+		this.days = this.#padZero(Math.floor(totalSeconds / (24 * 3600)));
 		const remainingSeconds = totalSeconds % (24 * 3600);
 
-		this.hours = Math.floor(remainingSeconds / 3600);
+		this.hours = this.#padZero(Math.floor(remainingSeconds / 3600));
 		const remainingMinutes = remainingSeconds % 3600;
 
-		this.minutes = Math.floor(remainingMinutes / 60);
-		this.seconds = remainingMinutes % 60;
+		this.minutes = this.#padZero(Math.floor(remainingMinutes / 60));
+		this.seconds = this.#padZero(remainingMinutes % 60);
+	}
+
+	#padZero(num: number): string | number {
+		if (num < 10) {
+			return num.toString().padStart(2, '0');
+		} else {
+			return num;
+		}
 	}
 
 	reset() {
