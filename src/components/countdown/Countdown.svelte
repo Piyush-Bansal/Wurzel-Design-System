@@ -22,7 +22,7 @@
 	</div>
 {/snippet}
 
-<div class="countdown flex align-items-center">
+<div class="countdown flex align-items-center gap-x-8">
 	{@render count(countdown.days, 'DD')}
 	<p>:</p>
 	{@render count(countdown.hours, 'HH')}

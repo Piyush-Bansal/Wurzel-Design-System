@@ -1,0 +1,43 @@
+@use '../abstract' as *;
+
+@each $key, $value in $converted-sizes {
+	.gap-#{$key} {
+		gap: $value;
+	}
+
+	.gap-y-#{$key} {
+		row-gap: $value;
+	}
+
+	.gap-x-#{$key} {
+		column-gap: $value;
+	}
+
+	@include mq('medium') {
+		.gap-md-#{$key} {
+			gap: $value;
+		}
+
+		.gap-y-md-#{$key} {
+			row-gap: $value;
+		}
+
+		.gap-x-md-#{$key} {
+			column-gap: $value;
+		}
+	}
+
+	@include mq('small') {
+		.gap-sm-#{$key} {
+			gap: $value;
+		}
+
+		.gap-y-sm-#{$key} {
+			row-gap: $value;
+		}
+
+		.gap-x-sm-#{$key} {
+			column-gap: $value;
+		}
+	}
+}
