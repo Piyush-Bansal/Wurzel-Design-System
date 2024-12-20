@@ -59,7 +59,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 -->
 
 <div
-	class="accordion-item | flex-column align-items-stretch cursor-pointer"
+	class="accordion-item | flex-column align-items-stretch | cursor-pointer"
 	onclick={accordion.handleClick}
 	aria-expanded={accordion.isOpen}
 	aria-controls="accordion-{accordion.id}"
@@ -71,7 +71,9 @@ AccordionItem is a component that represents an item within an accordion. It typ
 		}
 	}}
 >
-	<div class="accordion-item__headline | flex justify-content-between p-8">
+	<div
+		class="accordion-item__headline | flex justify-content-between align-items-start | p-8"
+	>
 		<div class="headline">
 			{#if heading}
 				{@render heading()}
@@ -106,10 +108,11 @@ AccordionItem is a component that represents an item within an accordion. It typ
 <style lang="scss">
 	@use '$sizes' as *;
 	@use '$tokens/time' as *;
+	@use '$componentTokens/accordion' as *;
 
 	.accordion-item {
 		&__headline {
-			gap: fluid-l(16);
+			gap: $accordion-header-icon-space-inline;
 		}
 	}
 	.icon {

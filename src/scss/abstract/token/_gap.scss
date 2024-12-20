@@ -1,0 +1,5 @@
+@use '../sizes' as *;
+@use '../token/layouts' as *;
+
+$spacing-inline-small: $grid-gap-half;
+$spacing-inline-icon: $grid-gap;
