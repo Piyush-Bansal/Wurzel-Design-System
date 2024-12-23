@@ -1,3 +1,13 @@
 @use '../gap' as *;
+@use '../padding' as *;
+@use '../ico-size' as *;
 
-$accordion-header-icon-space-inline: $spacing-inline-icon;
+$accordion-header-icon-gap: $spacing-text-icon-100;
+$accordion-header-padding-y: $padding-icon-y-100;
+$accordion-header-padding-x: $padding-icon-x-100;
+
+$accordion-header-icon-height: $ico-height;
+$accordion-header-icon-width: $ico-width;
+
+$accordion-description-padding-y: $padding-text-y-100;
+$accordion-description-padding-x: $padding-text-x-100;

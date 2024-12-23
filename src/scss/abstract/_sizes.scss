@@ -1,7 +1,8 @@
 @use './functions' as *;
 @use './mixins' as *;
 
-$sequence: 0, 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 384, 512;
+$sequence: 0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 32, 48, 64, 96, 128, 192, 256,
+	384, 512;
 
 $size-0: var(--size-0);
 $size-1: var(--size-1);
@@ -12,6 +13,7 @@ $size-6: var(--size-6);
 $size-8: var(--size-8);
 $size-12: var(--size-12);
 $size-16: var(--size-16);
+$size-20: var(--size-20);
 $size-24: var(--size-24);
 $size-32: var(--size-32);
 $size-48: var(--size-48);
@@ -33,6 +35,7 @@ $converted-sizes: (
 	8: $size-8,
 	12: $size-12,
 	16: $size-16,
+	20: $size-20,
 	24: $size-24,
 	32: $size-32,
 	48: $size-48,

@@ -72,7 +72,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 	}}
 >
 	<div
-		class="accordion-item__headline | flex justify-content-between align-items-start | p-8"
+		class="accordion-item__headline | flex justify-content-between align-items-start"
 	>
 		<div class="headline">
 			{#if heading}
@@ -90,7 +90,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 	</div>
 	{#if accordion.isOpen}
 		<div
-			class="accordion-item__description | p-8"
+			class="accordion-item__description"
 			transition:slide|local={{
 				duration: time4,
 				easing: expoInOut
@@ -106,20 +106,25 @@ AccordionItem is a component that represents an item within an accordion. It typ
 </div>
 
 <style lang="scss">
-	@use '$sizes' as *;
 	@use '$tokens/time' as *;
 	@use '$componentTokens/accordion' as *;
 
 	.accordion-item {
 		&__headline {
-			gap: $accordion-header-icon-space-inline;
+			gap: $accordion-header-icon-gap;
+			padding-inline: $accordion-header-padding-y;
+			padding-block: $accordion-header-padding-x;
+		}
+		&__description {
+			padding-inline: $accordion-description-padding-y;
+			padding-block: $accordion-description-padding-x;
 		}
 	}
 	.icon {
 		img {
 			transition: transform $time-3 ease-in-out;
-			height: fluid-l(20);
-			width: fluid-l(20);
+			height: $accordion-header-icon-height;
+			width: $accordion-header-icon-width;
 
 			&.closed {
 				transform: rotate(180deg);
