@@ -108,7 +108,7 @@ The Header component accepts the following props:
 	/>
 	<!-- Additional config needed if using Prismic -->
 	{#if openGraphImage}
-		<meta content={openGraphImage} property="twitter:image" />
+		<meta content={openGraphImage} property="og:image" />
 	{/if}
 
 	<meta property="og:locale" content="en_GB" />
