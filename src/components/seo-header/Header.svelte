@@ -106,7 +106,11 @@ The Header component accepts the following props:
 		content={openGraphDescription ? openGraphDescription : metaDescription}
 		property="twitter:description"
 	/>
-	<meta content={openGraphImage} property="twitter:image" />
+	<!-- Additional config needed if using Prismic -->
+	{#if openGraphImage}
+		<meta content={openGraphImage} property="twitter:image" />
+	{/if}
+
 	<meta property="og:locale" content="en_GB" />
 	<!-- <meta property="og:locale:alternate" content="de_DE" /> -->
 	<meta name="robots" content={robots ? robots : 'index, follow'} />
