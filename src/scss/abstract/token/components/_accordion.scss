@@ -1,6 +1,7 @@
 @use '../gap' as *;
 @use '../padding' as *;
 @use '../ico-size' as *;
+@use '../time' as *;
 
 $accordion-header-icon-gap: $spacing-text-icon-100;
 $accordion-header-padding-y: $padding-icon-y-100;
@@ -11,3 +12,5 @@ $accordion-header-icon-width: $ico-width;
 
 $accordion-description-padding-y: $padding-text-y-100;
 $accordion-description-padding-x: $padding-text-x-100;
+
+$accordion-transition-duration: $duration-base;

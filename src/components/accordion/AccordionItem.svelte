@@ -106,7 +106,6 @@ AccordionItem is a component that represents an item within an accordion. It typ
 </div>
 
 <style lang="scss">
-	@use '$tokens/time' as *;
 	@use '$componentTokens/accordion' as *;
 
 	.accordion-item {
@@ -122,7 +121,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 	}
 	.icon {
 		img {
-			transition: transform $time-3 ease-in-out;
+			transition: transform $accordion-transition-duration ease-in-out;
 			height: $accordion-header-icon-height;
 			width: $accordion-header-icon-width;
 
