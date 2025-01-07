@@ -18,6 +18,22 @@
 	bind:innerHeight={screenSize.height}
 />
 
+<!-- preload typeface -->
+{#snippet loadFont(fontName: string)}
+	<link
+		rel="preconnect"
+		as="font"
+		crossorigin="anonymous"
+		type="font/woff2"
+		href={`/fonts/${fontName}.woff2`}
+	/>
+{/snippet}
+
+<svelte:head>
+	{@render loadFont('Switzer-Variable')}
+	{@render loadFont('Switzer-VariableItalic')}
+</svelte:head>
+
 <main>
 	{@render children()}
 </main>
