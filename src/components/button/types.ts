@@ -9,3 +9,5 @@ export interface Button extends HTMLAttributes<HTMLButtonElement> {
 	leftIcon?: Snippet | undefined;
 	rightIcon?: Snippet | undefined;
 }
+
+export type ButtonIcon = Snippet | undefined;

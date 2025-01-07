@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Accordion, AccordionItem } from '$components/accordion';
+	import Button from '$components/button/Button.svelte';
 	import Countdown from '$components/countdown/Countdown.svelte';
 
 	const accordionData = [
@@ -36,4 +37,10 @@
 			</AccordionItem>
 		{/each}
 	</Accordion>
+</div>
+
+<div class="container">
+	<Button variant="primary" onclick={() => console.log('clicked')}
+		><p>Primary</p></Button
+	>
 </div>

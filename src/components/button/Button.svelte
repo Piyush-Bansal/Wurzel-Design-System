@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Button } from './types';
+	import type { Button, ButtonIcon } from './types';
 
 	let {
 		children,
@@ -39,7 +39,7 @@ Button component
 	{/if}
 {/snippet}
 
-{#snippet icon(side)}
+{#snippet icon(side: ButtonIcon)}
 	{#if side}
 		{@render side()}
 	{/if}
