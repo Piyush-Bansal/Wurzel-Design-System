@@ -1,5 +1,5 @@
 import postcssPresetEnv from 'postcss-preset-env';
-import purgecss from '@fullhuman/postcss-purgecss';
+// import purgecss from '@fullhuman/postcss-purgecss';
 
 /** @type {import('postcss-preset-env').Config} */
 
