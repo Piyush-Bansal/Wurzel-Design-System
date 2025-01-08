@@ -22,7 +22,7 @@
 	</div>
 {/snippet}
 
-<div class="countdown | flex align-items-center gap-x-8 gap-sm-6">
+<div class="countdown | flex align-items-center">
 	{@render count(countdown.days, 'DD')}
 	<p>:</p>
 	{@render count(countdown.hours, 'HH')}
@@ -31,3 +31,10 @@
 	<p>:</p>
 	{@render count(countdown.seconds, 'SS')}
 </div>
+
+<style lang="scss">
+	@use '$componentTokens/countdown' as *;
+	.countdown {
+		column-gap: $count-gap-x;
+	}
+</style>
