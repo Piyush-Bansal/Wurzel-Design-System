@@ -1,15 +1,20 @@
 @use '../mixins' as *;
 @use '../sizes' as *;
 
-$size-icon-height-100: $size-24;
-$size-icon-width-100: $size-24;
+$-ico-size: (
+	ico-height-100: (
+		large: $size-24,
+		medium: $size-20,
+		small: $size-20
+	),
+	ico-width-100: (
+		large: $size-24,
+		medium: $size-20,
+		small: $size-20
+	)
+);
 
-@include mq('medium') {
-	$size-icon-height-100: $size-20;
-	$size-icon-width-100: $size-20;
-}
+@include map-to-var-breakpoints($-ico-size);
 
-@include mq('small') {
-	$size-icon-height-100: $size-20;
-	$size-icon-width-100: $size-20;
-}
+$size-icon-height-100: var(--ico-height-100);
+$size-icon-width-100: var(--ico-width-100);

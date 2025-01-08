@@ -28,10 +28,10 @@
 </script>
 
 <div class="container">
-	<Countdown
+	<!-- <Countdown
 		targetDate="2025-12-16T23:01:00"
 		options={{ onComplete: () => console.log('YAY!') }}
-	/>
+	/> -->
 
 	<!-- <Tab activeTab="tab1">
 		{#snippet tabList()}
@@ -55,7 +55,7 @@
 		{/snippet}
 	</Tab> -->
 
-	<!-- <Accordion collapsable={true}>
+	<Accordion collapsable={true}>
 		{#each accordionData as data, i}
 			<AccordionItem open={i === 0} group="b">
 				{#snippet heading()}
@@ -66,7 +66,7 @@
 				{/snippet}
 			</AccordionItem>
 		{/each}
-	</Accordion> -->
+	</Accordion>
 </div>
 
 <!-- <div class="container">
