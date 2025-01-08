@@ -1,15 +1,15 @@
 @use '../mixins' as *;
 @use '../sizes' as *;
 
-$ico-height: $size-24;
-$ico-width: $size-24;
+$size-icon-height-100: $size-24;
+$size-icon-width-100: $size-24;
 
 @include mq('medium') {
-	$ico-height: $size-20;
-	$ico-width: $size-20;
+	$size-icon-height-100: $size-20;
+	$size-icon-width-100: $size-20;
 }
 
 @include mq('small') {
-	$ico-height: $size-20;
-	$ico-width: $size-20;
+	$size-icon-height-100: $size-20;
+	$size-icon-width-100: $size-20;
 }

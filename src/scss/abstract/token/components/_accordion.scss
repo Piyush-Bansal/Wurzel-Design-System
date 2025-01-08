@@ -3,14 +3,14 @@
 @use '../ico-size' as *;
 @use '../time' as *;
 
-$accordion-header-icon-gap: $spacing-text-icon-100;
-$accordion-header-padding-y: $padding-icon-y-100;
-$accordion-header-padding-x: $padding-icon-x-100;
+$accordion-header-icon-gap: $space-text-icon-gap-100;
+$accordion-header-padding-y: $space-icon-edge-y-100;
+$accordion-header-padding-x: $space-icon-edge-x-100;
 
-$accordion-header-icon-height: $ico-height;
-$accordion-header-icon-width: $ico-width;
+$accordion-header-icon-height: $size-icon-height-100;
+$accordion-header-icon-width: $size-icon-width-100;
 
-$accordion-description-padding-y: $padding-text-y-100;
-$accordion-description-padding-x: $padding-text-x-100;
+$accordion-description-padding-y: $space-text-edge-y-100;
+$accordion-description-padding-x: $space-text-edge-x-100;
 
 $accordion-transition-duration: $duration-base;

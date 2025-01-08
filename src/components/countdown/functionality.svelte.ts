@@ -58,9 +58,9 @@ class Countdown {
 
 	#calculate() {
 		const now = Date.now();
-		const difference = this.#endTime - now;
+		const timeDifference = this.#endTime - now;
 
-		if (difference <= 0) {
+		if (timeDifference <= 0) {
 			this.stop();
 			this.reset();
 			// Call the completion callback if provided
@@ -69,7 +69,7 @@ class Countdown {
 		}
 
 		// More efficient time calculation
-		const totalSeconds = Math.floor(difference / 1000);
+		const totalSeconds = Math.floor(timeDifference / 1000);
 
 		this.days = this.#padZero(Math.floor(totalSeconds / (24 * 3600)));
 		const remainingSeconds = totalSeconds % (24 * 3600);
