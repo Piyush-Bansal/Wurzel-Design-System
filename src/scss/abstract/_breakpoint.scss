@@ -1,17 +1,16 @@
-//no point changing
 $breakpoints: (
-	small: 767,
+	small: 360,
 	medium: 1023,
-	large: 1928 //might not be useful
+	large: 1932
 );
 
 //change these values
-$ss-large-high: 1928;
+$ss-large-high: 1932;
 $ss-large-low: 1024;
 $ss-medium-high: 1023;
-$ss-medium-low: 768;
-$ss-small-high: 767;
-$ss-small-low: 356;
+$ss-medium-low: 701;
+$ss-small-high: 700;
+$ss-small-low: 360;
 
 :root {
 	--ss-large-high: #{$ss-large-high};
