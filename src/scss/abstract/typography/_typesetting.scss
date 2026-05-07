@@ -9,6 +9,11 @@ $font-family-base: $-ff-base;
 $font-family-accent: $-ff-accent;
 
 $type-scale: (
+	small-caption: (
+		font-size: $fs-small-caption,
+		line-height: $lh-small-caption,
+		letter-spacing: $ls-small-caption
+	),
 	caption: (
 		font-size: $fs-caption,
 		line-height: $lh-caption,

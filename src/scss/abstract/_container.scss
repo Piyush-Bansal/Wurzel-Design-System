@@ -1,22 +1,22 @@
 @use './breakpoint' as *;
-@use './sizes' as *;
+@use './spacers' as *;
 @use './mixins' as *;
 
 //Container
 $container-max-width: $ss-large-high * 1px;
 $container-padding-values: (
 	container-padding: (
-		large: $size-64,
-		medium: $size-32,
-		small: $size-16
+		large: $spacer-5,
+		medium: $spacer-4,
+		small: $spacer-3
 	)
 );
 
 $gutter-values: (
 	gutter: (
-		large: $size-16,
-		medium: $size-16,
-		small: $size-12
+		large: $spacer-2,
+		medium: $spacer-2,
+		small: $spacer-2
 	)
 );
 

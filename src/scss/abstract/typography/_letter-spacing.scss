@@ -1,61 +1,67 @@
 @use '../mixins' as *;
 
 //letter spacings
-$-letter-spacings: (
+$-letter-spacing-default: (
+	small-caption: (
+		large: 0,
+		medium: 0,
+		small: 0
+	),
 	caption: (
-		large: 0.01em,
-		medium: 0.012em,
-		small: 0.012em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	body: (
-		large: 0.005em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h5: (
-		large: 0em,
-		medium: 0.005em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h4: (
-		large: -0.005em,
-		medium: 0.005em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h3: (
-		large: -0.005em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h2: (
-		large: -0.01em,
-		medium: 0em,
-		small: 0em
+		large: 0.3%,
+		medium: 0.3%,
+		small: 0.3%
 	),
 	h1: (
-		large: -0.02em,
-		medium: -0.005em,
-		small: -0.002em
+		large: -0.6%,
+		medium: -0.6%,
+		small: -0.6%
 	),
 	xl: (
-		large: -0.02em,
-		medium: -0.007em,
-		small: -0.008em
+		large: -0.8%,
+		medium: -0.8%,
+		small: -0.8%
 	),
 	xxl: (
-		large: -0.021em,
-		medium: -0.01em,
-		small: -0.01em
+		large: -1%,
+		medium: -1%,
+		small: -1%
 	),
 	xxxl: (
-		large: -0.021em,
-		medium: -0.017em,
-		small: -0.012em
+		large: -1.6%,
+		medium: -1.6%,
+		small: -1.6%
 	)
 );
 
-@include map-to-var-breakpoints($-letter-spacings, 'ls-');
+@include map-to-var-breakpoints($-letter-spacing-default, 'ls-');
 
+$ls-small-caption: var(--ls-small-caption);
 $ls-caption: var(--ls-caption);
 $ls-body: var(--ls-body);
 $ls-h5: var(--ls-h5);

@@ -1,15 +1,11 @@
-@use '../functions' as *;
 @use '../mixins' as *;
-@use './font-sizes' as *;
-@use 'sass:map';
 @use '../container' as *;
-@use '../sizes' as *;
 
 $-p-indent: (
 	paragraph-indent: (
-		large: $size-16,
-		medium: $size-16,
-		small: $size-12
+		large: $gutter,
+		medium: $gutter,
+		small: $gutter
 	)
 );
 

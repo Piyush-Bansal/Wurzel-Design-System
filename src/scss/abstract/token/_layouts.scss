@@ -1,8 +1,8 @@
-@use '../sizes' as *;
+@use '../spacers' as *;
 @use '../container' as *;
 
 //flow
-$flow-gap: $size-32;
+$flow-gap: $spacer-5;
 
 //grid
 $grid-gap: $gutter;

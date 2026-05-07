@@ -1,43 +1,75 @@
 @use '../../abstract/' as *;
 
-@each $key, $value in $converted-sizes {
-	.gap-#{$key} {
-		gap: $value;
-	}
+@each $key-parent, $value-parent in $spacers {
+	$spacer-value: #{$key-parent};
+	@each $key, $value in $value-parent {
+		@if ($key == 'large') {
+			.gap-#{$value} {
+				gap: var(--#{$key-parent});
+			}
 
-	.gap-y-#{$key} {
-		row-gap: $value;
-	}
+			.gap-y-#{$value} {
+				row-gap: var(--#{$key-parent});
+			}
 
-	.gap-x-#{$key} {
-		column-gap: $value;
-	}
+			.gap-x-#{$value} {
+				column-gap: var(--#{$key-parent});
+			}
 
-	@include mq('medium') {
-		.gap-md-#{$key} {
-			gap: $value;
-		}
+			@include mq('medium') {
+				.gap-#{$value} {
+					gap: 0;
+				}
 
-		.gap-y-md-#{$key} {
-			row-gap: $value;
-		}
+				.gap-y-#{$value} {
+					row-gap: 0;
+				}
 
-		.gap-x-md-#{$key} {
-			column-gap: $value;
-		}
-	}
+				.gap-x-#{$value} {
+					column-gap: 0;
+				}
+			}
+		} @else if($key == 'medium') {
+			@include mq('medium') {
+				.gap-md-#{$value} {
+					gap: var(--#{$key-parent});
+				}
 
-	@include mq('small') {
-		.gap-sm-#{$key} {
-			gap: $value;
-		}
+				.gap-y-md-#{$value} {
+					row-gap: var(--#{$key-parent});
+				}
 
-		.gap-y-sm-#{$key} {
-			row-gap: $value;
-		}
+				.gap-x-md-#{$value} {
+					column-gap: var(--#{$key-parent});
+				}
+			}
+			@include mq('small') {
+				.gap-md-#{$value} {
+					gap: 0;
+				}
 
-		.gap-x-sm-#{$key} {
-			column-gap: $value;
+				.gap-y-md-#{$value} {
+					row-gap: 0;
+				}
+
+				.gap-x-md-#{$value} {
+					column-gap: 0;
+				}
+			}
+		} @else {
+			@include mq('small') {
+				.gap-sm-#{$value} {
+					gap: var(--#{$key-parent});
+				}
+
+				.gap-y-sm-#{$value} {
+					row-gap: var(--#{$key-parent});
+				}
+
+				.gap-x-sm-#{$value} {
+					column-gap: var(--#{$key-parent});
+				}
+			}
 		}
 	}
 }

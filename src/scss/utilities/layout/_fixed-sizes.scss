@@ -1,8 +1,0 @@
-@use '../../abstract' as *;
-
-@each $key, $value in $fxd-sizes {
-	.fxd-s-#{$key} {
-		width: $value;
-		height: $value;
-	}
-}

@@ -1,61 +1,67 @@
 @use '../mixins' as *;
 
 //line height
-$-uppercase-letter-spacing: (
+$-letter-spacing-uppercase: (
+	small-caption: (
+		large: 0,
+		medium: 0,
+		small: 0
+	),
 	caption: (
-		large: 0.01em,
-		medium: 0.01em,
-		small: 0.012em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	body: (
-		large: 0.008em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h5: (
-		large: 0.008em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h4: (
-		large: 0em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h3: (
-		large: 0em,
-		medium: 0em,
-		small: 0em
+		large: 0,
+		medium: 0,
+		small: 0
 	),
 	h2: (
-		large: -0.01em,
-		medium: 0em,
-		small: 0em
+		large: 0.3%,
+		medium: 0.3%,
+		small: 0.3%
 	),
 	h1: (
-		large: -0.012em,
-		medium: -0.005em,
-		small: -0.002em
+		large: -0.6%,
+		medium: -0.6%,
+		small: -0.6%
 	),
 	xl: (
-		large: -0.014em,
-		medium: -0.007em,
-		small: -0.008em
+		large: -0.8%,
+		medium: -0.8%,
+		small: -0.8%
 	),
 	xxl: (
-		large: -0.018em,
-		medium: -0.01em,
-		small: -0.01em
+		large: -1%,
+		medium: -1%,
+		small: -1%
 	),
 	xxxl: (
-		large: -0.02em,
-		medium: -0.02em,
-		small: -0.012em
+		large: -1.6%,
+		medium: -1.6%,
+		small: -1.6%
 	)
 );
 
-@include map-to-var-breakpoints($-uppercase-letter-spacing, 'uppercase-ls-');
+@include map-to-var-breakpoints($-letter-spacing-uppercase, 'uppercase-ls-');
 
+$uppercase-ls-small-caption: var(--uppercase-ls-small-caption);
 $uppercase-ls-caption: var(--uppercase-ls-caption);
 $uppercase-ls-body: var(--uppercase-ls-body);
 $uppercase-ls-h5: var(--uppercase-ls-h5);

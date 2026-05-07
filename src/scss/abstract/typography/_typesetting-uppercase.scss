@@ -3,9 +3,13 @@
 @use './uppercase-line-height' as *;
 
 $type-scale-uppercase: (
+	small-caption: (
+		line-height: $uppercase-lh-small-caption,
+		letter-spacing: $uppercase-ls-small-caption
+	),
 	caption: (
 		line-height: $uppercase-lh-caption,
-		letter-spacing: $uppercase-ls-body
+		letter-spacing: $uppercase-ls-caption
 	),
 	body: (
 		line-height: $uppercase-lh-body,

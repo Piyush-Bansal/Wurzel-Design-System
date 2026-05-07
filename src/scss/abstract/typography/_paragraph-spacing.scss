@@ -1,15 +1,12 @@
-@use '../functions' as *;
 @use '../mixins' as *;
-@use './font-sizes' as *;
-@use 'sass:map';
-@use './line-heights' as *;
+@use '../container' as *;
 
 //change the number in ()
 $-p-spacing: (
 	paragraph-spacing: (
-		large: fluid-l(24),
-		medium: fluid-m(20),
-		small: fluid-s(20)
+		large: $gutter,
+		medium: $gutter,
+		small: $gutter
 	)
 );
 

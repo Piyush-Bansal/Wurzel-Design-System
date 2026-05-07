@@ -3,63 +3,69 @@
 @use '../mixins' as *;
 
 //line height
-$line-heights: (
+$line-height-default: (
+	small-caption: (
+		large: 14,
+		medium: 10,
+		small: 10
+	),
 	caption: (
-		large: 16,
-		medium: 12,
-		small: 16
+		large: 14,
+		medium: 10,
+		small: 10
 	),
 	body: (
-		large: 24,
+		large: 28,
 		medium: 20,
-		small: 24
+		small: 20
 	),
 	h5: (
-		large: 36,
-		medium: 28,
-		small: 24
+		large: 42,
+		medium: 30,
+		small: 30
 	),
 	h4: (
-		large: 44,
-		medium: 32,
-		small: 28
+		large: 56,
+		medium: 30,
+		small: 40
 	),
 	h3: (
 		large: 56,
-		medium: 40,
-		small: 36
+		medium: 50,
+		small: 50
 	),
 	h2: (
-		large: 80,
-		medium: 56,
-		small: 40
+		large: 84,
+		medium: 70,
+		small: 70
 	),
 	h1: (
-		large: 108,
-		medium: 76,
-		small: 48
+		large: 126,
+		medium: 90,
+		small: 90
 	),
 	xl: (
-		large: 156,
-		medium: 104,
-		small: 60
+		large: 182,
+		medium: 120,
+		small: 120
 	),
 	xxl: (
-		large: 220,
-		medium: 148,
-		small: 76
+		large: 224,
+		medium: 160,
+		small: 160
 	),
 	xxxl: (
-		large: 308,
-		medium: 208,
-		small: 96
+		large: 322,
+		medium: 220,
+		small: 220
 	)
 );
 
 :root {
-	@include generate-line-height($line-heights, $font-sizes, 'lh');
+	@include generate-line-height($line-height-default, $font-sizes, 'lh');
 }
 
+$lh-small-caption: var(--lh-small-caption);
 $lh-caption: var(--lh-caption);
 $lh-body: var(--lh-body);
 $lh-h5: var(--lh-h5);

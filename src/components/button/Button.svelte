@@ -52,7 +52,7 @@ Button component
 	data-variant={variant}
 	aria-disabled={disabled}
 	tabindex={disabled ? -1 : 0}
-	class="cursor-pointer border-none p-x-16 p-y-12"
+	class="cursor-pointer border-none p-x-16 p-y-12 br-m"
 	class:right-icon-padding={rightIcon}
 	class:left-icon-padding={leftIcon}
 	class:no-padding={variant === 'ghost'}
@@ -65,7 +65,7 @@ Button component
 </button>
 
 <style lang="scss">
-	@use '$tokens/colors' as *;
+	@use '$tokens/colours' as *;
 	@use '$styles/abstract/border/border-radius' as *;
 	@use '$sizes' as *;
 	@use '$breakpoints' as *;
@@ -73,7 +73,7 @@ Button component
 	button {
 		color: $color-text-on-action;
 		background-color: $color-surface-action-1;
-		border-radius: $border-radius-md;
+		border-radius: $border-radius-m;
 
 		&[data-variant='secondary'] {
 			// background-color: red;

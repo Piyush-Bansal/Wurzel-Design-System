@@ -1,16 +1,16 @@
 @use '../mixins' as *;
-@use '../sizes' as *;
+@use '../spacers' as *;
 
 $-ico-size: (
 	ico-height-100: (
-		large: $size-24,
-		medium: $size-20,
-		small: $size-20
+		large: $spacer-2,
+		medium: $spacer-2,
+		small: $spacer-2
 	),
 	ico-width-100: (
-		large: $size-24,
-		medium: $size-20,
-		small: $size-20
+		large: $spacer-2,
+		medium: $spacer-2,
+		small: $spacer-2
 	)
 );
 

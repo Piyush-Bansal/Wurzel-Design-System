@@ -1,0 +1,79 @@
+@use './mixins' as *;
+
+$spacers: (
+	spacer-1: (
+		large: 14,
+		medium: 10,
+		small: 10
+	),
+	spacer-2: (
+		large: 28,
+		medium: 20,
+		small: 20
+	),
+	spacer-3: (
+		large: 42,
+		medium: 30,
+		small: 30
+	),
+	spacer-4: (
+		large: 56,
+		medium: 40,
+		small: 40
+	),
+	spacer-5: (
+		large: 84,
+		medium: 60,
+		small: 60
+	),
+	spacer-6: (
+		large: 112,
+		medium: 80,
+		small: 80
+	),
+	spacer-7: (
+		large: 168,
+		medium: 120,
+		small: 120
+	),
+	spacer-8: (
+		large: 224,
+		medium: 160,
+		small: 160
+	),
+	spacer-9: (
+		large: 336,
+		medium: 240,
+		small: 240
+	),
+	spacer-10: (
+		large: 448,
+		medium: 320,
+		small: 320
+	),
+	spacer-11: (
+		large: 672,
+		medium: 480,
+		small: 480
+	),
+	spacer-12: (
+		large: 896,
+		medium: 640,
+		small: 640
+	)
+);
+
+@include map-to-var-breakpoints($map: $spacers, $convert-to-em: true);
+
+$spacer-1: var(--spacer-1);
+$spacer-2: var(--spacer-2);
+$spacer-3: var(--spacer-3);
+$spacer-4: var(--spacer-4);
+$spacer-5: var(--spacer-5);
+$spacer-6: var(--spacer-6);
+$spacer-7: var(--spacer-7);
+$spacer-8: var(--spacer-8);
+$spacer-9: var(--spacer-9);
+$spacer-10: var(--spacer-10);
+$spacer-11: var(--spacer-11);
+$spacer-12: var(--spacer-12);

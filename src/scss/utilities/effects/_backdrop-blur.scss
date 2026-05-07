@@ -1,7 +1,5 @@
-@use '../../abstract' as *;
-
-@each $key, $value in $blur {
-	.backdrop-blur-#{$key} {
-		backdrop-filter: blur($value);
+@for $i from 0 to 10 {
+	.backdrop-blur-#{$i*10} {
+		backdrop-filter: blur($i * 10px);
 	}
 }

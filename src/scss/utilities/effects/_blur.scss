@@ -1,7 +1,5 @@
-@use '../../abstract' as *;
-
-@each $key, $value in $blur {
-	.blur-#{$key} {
-		filter: blur($value);
+@for $i from 0 to 10 {
+	.blur-#{i} {
+		filter: blur($i * 1px);
 	}
 }

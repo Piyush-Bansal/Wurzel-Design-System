@@ -17,7 +17,7 @@ a {
 @media (prefers-reduced-motion: no-preference) {
 	:has(:target) {
 		scroll-behavior: smooth;
-		scroll-padding-top: $size-32;
+		scroll-padding-top: $spacer-5;
 	}
 }
 
@@ -26,7 +26,7 @@ body {
 	letter-spacing: $body-letter-spacing;
 	line-height: $body-line-height;
 	font-weight: $body-font-weight;
-	// @include stylistic-sets;
+	// @include stylistic-sets-base;
 }
 
 p,
