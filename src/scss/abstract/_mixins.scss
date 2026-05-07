@@ -31,18 +31,16 @@
 				@if ($key == 'large') {
 					& {
 						#{$property-name}: if(
-							$convert-to-em,
-							#{fluid-l($value)},
-							#{$value}
+							sass($convert-to-em): #{fluid-l($value)};
+							else: #{$value}
 						);
 					}
 				} @else if($key == 'medium') {
 					@include mq('medium') {
 						& {
 							#{$property-name}: if(
-								$convert-to-em,
-								#{fluid-m($value)},
-								#{$value}
+								sass($convert-to-em): #{fluid-m($value)};
+								else: #{$value}
 							);
 						}
 					}
@@ -50,9 +48,8 @@
 					@include mq('small') {
 						& {
 							#{$property-name}: if(
-								$convert-to-em,
-								#{fluid-s($value)},
-								#{$value}
+								sass($convert-to-em): #{fluid-s($value)};
+								else: #{$value}
 							);
 						}
 					}

@@ -4,4 +4,16 @@
 	.ar-#{$ratio} {
 		aspect-ratio: #{$value};
 	}
+
+	@include mq('medium') {
+		.ar-md-#{$ratio} {
+			aspect-ratio: #{$value};
+		}
+	}
+
+	@include mq('small') {
+		.ar-sm-#{$ratio} {
+			aspect-ratio: #{$value};
+		}
+	}
 }
