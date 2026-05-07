@@ -26,12 +26,12 @@ const removeEmptyRulesets = (): Plugin => ({
 export default defineConfig({
 	plugins: [
 		sveltekit(),
-		// pluginPurgeCss({
-		// 	content: ['./src/**/*.{html,js,svelte,ts}'],
-		// 	fontFace: true,
-		// 	keyframes: true,
-		// 	variables: true
-		// }),
+		pluginPurgeCss({
+			content: ['./src/**/*.{html,js,svelte,ts}'],
+			fontFace: true,
+			keyframes: true,
+			variables: true
+		}),
 		removeEmptyRulesets()
 	] as PluginOption[]
 });
