@@ -3,7 +3,7 @@
 	import type { Accordion } from './types';
 
 	let { collapsable = true, children }: Accordion = $props();
-	setContext('collapsable', collapsable);
+	setContext('collapsable', () => collapsable);
 </script>
 
 <!-- 

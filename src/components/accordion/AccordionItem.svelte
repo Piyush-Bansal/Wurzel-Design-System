@@ -7,10 +7,12 @@
 	import { Accordion } from './functionality.svelte';
 
 	let { heading, description, open = false, group }: AccordionItem = $props();
+	let collapsable: () => boolean = getContext('collapsable');
 
-	let collapsable: boolean = getContext('collapsable');
+	let currentOpen = () => open;
+	let currentGroup = () => group;
 
-	const accordion = new Accordion(open, collapsable, group);
+	const accordion = new Accordion(currentOpen(), collapsable(), currentGroup());
 </script>
 
 <!-- 
@@ -127,6 +129,7 @@ AccordionItem is a component that represents an item within an accordion. It typ
 
 			&.closed {
 				transform: rotate(180deg);
+				background-color: red;
 			}
 		}
 	}

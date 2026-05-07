@@ -33,7 +33,7 @@
 		options={{ onComplete: () => console.log('YAY!') }}
 	/> -->
 
-	<Tab activeTab="tab1">
+	<!-- <Tab activeTab="tab1">
 		{#snippet tabList()}
 			<TabList label="tablist">
 				<TabTrigger value="tab1">Tab 1</TabTrigger>
@@ -53,9 +53,9 @@
 			>
 			<TabContent value="tab2">Content for Tab 2</TabContent>
 		{/snippet}
-	</Tab>
+	</Tab> -->
 
-	<!-- <Accordion collapsable={true}>
+	<Accordion collapsable={true}>
 		{#each accordionData as data, i}
 			<AccordionItem open={i === 0} group="b">
 				{#snippet heading()}
@@ -66,17 +66,16 @@
 				{/snippet}
 			</AccordionItem>
 		{/each}
-	</Accordion> -->
+	</Accordion>
 </div>
 
-<div class="container">
+<!-- <div class="container">
 	<Button variant="primary" onclick={() => console.log('clicked')}
 		><p>Primary</p></Button
 	>
-</div>
+</div> -->
 
-<!--
-<div class="container" data-size="full">
+<!-- <div class="container" data-size="full">
 	<Carousel
 		autoscroll={false}
 		indicator={true}
@@ -95,8 +94,8 @@
 			{/each}
 		</CarouselContent>
 	</Carousel>
-</div> -->
+</div>
 
 <p class="p-28">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, aperiam.
-</p>
+</p> -->
