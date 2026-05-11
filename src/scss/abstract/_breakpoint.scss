@@ -1,24 +1,19 @@
 $breakpoints: (
-	small: 699,
-	medium: 1023,
-	large: 1932
+	sm: 767,
+	md: 1023
 );
 
 //change these values
-$ss-large-high: 1932;
+$ss-large-high: 1920;
 $ss-large-low: 1024;
 $ss-medium-high: 1023;
-$ss-medium-low: 700;
-$ss-small-high: 699;
+$ss-medium-low: 768;
+$ss-small-high: 767;
 $ss-small-low: 360;
 
-:root {
-	--ss-large-high: #{$ss-large-high};
-	--ss-large-low: #{$ss-large-low};
-	--ss-medium-high: #{$ss-medium-high};
-	--ss-medium-low: #{$ss-medium-low};
-	--ss-small-high: #{$ss-small-high};
-	--ss-small-low: #{$ss-small-low};
-}
+//Design size
+$ss-artboard-lg: 1440;
+$ss-artboard-md: 800;
+$ss-artboard-sm: 360;
 
 ////PLEASE DON'T FORGET TO UPDATE BREAKPOINTS-STORE

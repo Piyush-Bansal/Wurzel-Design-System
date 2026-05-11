@@ -1,104 +1,66 @@
 @use './breakpoint' as *;
-@use 'sass:map';
 @use 'sass:math';
-
-// @use './mixins' as *;
 
 //fluid size
 @function fluid-l($val) {
-	$size-small: math.div($val, $ss-large-high) * $ss-large-low;
+	// Scale sizes
+	$max-size: math.div($val, $ss-artboard-lg) * $ss-large-high;
+	$min-size: math.div($val, $ss-artboard-lg) * $ss-large-low;
 
-	// Calculate the difference in font sizes
-	$size-difference: $val - $size-small;
+	// Convert to rem
+	$max-rem: math.div($max-size, 16) * 1rem;
+	$min-rem: math.div($min-size, 16) * 1rem;
 
-	// Calculate the difference in screen sizes
-	$screen-size-difference: $ss-large-high - $ss-large-low;
+	// Convert viewport bounds to rem
+	$min-vw: math.div($ss-large-low, 16) * 1rem;
+	$max-vw: math.div($ss-large-high, 16) * 1rem;
 
-	// Calculate the rate of change per vw unit
-	$rate-of-change: math.div($size-difference, $screen-size-difference) * 100vw;
-
-	// Convert the small font size to rem units
-	$small-rem: math.div($size-small, 16) + rem;
-
-	// Convert the large font size to rem units
-	$large-rem: math.div($val, 16) + rem;
-
-	// Calculate the px adjustment
-	$px-adjustment: ($rate-of-change * math.div($ss-large-high, 100vw)) - $val;
-
-	// Convert the px adjustment to rem
-	$rem-adjustment: math.div($px-adjustment, 16) + rem;
-
-	// Return the clamp expression
-	@return clamp(
-		#{$small-rem},
-		#{$rate-of-change + ' - ' + $rem-adjustment},
-		#{$large-rem}
+	$preferred: calc(
+		#{$min-rem} + (#{$max-rem} - #{$min-rem}) *
+			((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw}))
 	);
+
+	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
 }
 
 @function fluid-m($val) {
-	$size-large: math.div($val, $ss-medium-low) * $ss-medium-high;
+	// Scale sizes
+	$max-size: math.div($val, $ss-artboard-md) * $ss-medium-high;
+	$min-size: math.div($val, $ss-artboard-md) * $ss-medium-low;
 
-	// Calculate the difference in font sizes
-	$size-difference: $size-large - $val;
+	// Convert to rem
+	$max-rem: math.div($max-size, 16) * 1rem;
+	$min-rem: math.div($min-size, 16) * 1rem;
 
-	// Calculate the difference in screen sizes
-	$screen-size-difference: $ss-medium-high - $ss-medium-low;
+	// Convert viewport bounds to rem
+	$min-vw: math.div($ss-medium-low, 16) * 1rem;
+	$max-vw: math.div($ss-medium-high, 16) * 1rem;
 
-	// Calculate the rate of change per vw unit
-	$rate-of-change: math.div($size-difference, $screen-size-difference) * 100vw;
-
-	// Convert the small font size to rem units
-	$small-rem: math.div($val, 16) + rem;
-
-	// Convert the large font size to rem units
-	$large-rem: math.div($size-large, 16) + rem;
-
-	// Calculate the px adjustment
-	$px-adjustment: ($rate-of-change * math.div($ss-medium-high, 100vw)) -
-		$size-large;
-
-	// Convert the px adjustment to rem
-	$rem-adjustment: math.div($px-adjustment, 16) + rem;
-
-	// Return the clamp expression
-	@return clamp(
-		#{$small-rem},
-		#{$rate-of-change + ' - ' + $rem-adjustment},
-		#{$large-rem}
+	$preferred: calc(
+		#{$min-rem} + (#{$max-rem} - #{$min-rem}) *
+			((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw}))
 	);
+
+	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
 }
 
 @function fluid-s($val) {
-	$size-large: math.div($val, $ss-small-low) * $ss-small-high;
+	// Scale sizes
+	$max-size: math.div($val, $ss-artboard-sm) * $ss-small-high;
+	$min-size: math.div($val, $ss-artboard-sm) * $ss-small-low;
 
-	// Calculate the difference in font sizes
-	$size-difference: $size-large - $val;
+	// Convert to rem
+	$max-rem: math.div($max-size, 16) * 1rem;
+	$min-rem: math.div($min-size, 16) * 1rem;
 
-	// Calculate the difference in screen sizes
-	$screen-size-difference: $ss-small-high - $ss-small-low;
+	// Convert viewport bounds to rem
+	$min-vw: math.div($ss-small-low, 16) * 1rem;
+	$max-vw: math.div($ss-small-high, 16) * 1rem;
 
-	// Calculate the rate of change per vw unit
-	$rate-of-change: math.div($size-difference, $screen-size-difference) * 100vw;
-
-	// Convert the small font size to rem units
-	$small-rem: math.div($val, 16) + rem;
-
-	// Convert the large font size to rem units
-	$large-rem: math.div($size-large, 16) + rem;
-
-	// Calculate the px adjustment
-	$px-adjustment: ($rate-of-change * math.div($ss-small-high, 100vw)) -
-		$size-large;
-
-	// Convert the px adjustment to rem
-	$rem-adjustment: math.div($px-adjustment, 16) + rem;
-
-	// Return the clamp expression
-	@return clamp(
-		#{$small-rem},
-		#{$rate-of-change + ' - ' + $rem-adjustment},
-		#{$large-rem}
+	$preferred: calc(
+		#{$min-rem} + (#{$max-rem} - #{$min-rem}) *
+			((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw}))
 	);
+
+	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
 }
