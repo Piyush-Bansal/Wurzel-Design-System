@@ -1,8 +1,24 @@
 @use './breakpoint' as *;
 @use 'sass:math';
+@use 'sass:meta';
 
 //fluid size
 @function fluid-l($val) {
+	// Type check
+	@if meta.type-of($val) != 'number' {
+		@error "fluid-l($val): Expected a number, got #{meta.type-of($val)}.";
+	}
+
+	// Unit check
+	@if not math.is-unitless($val) {
+		@error "fluid-l($val): Value must be unitless (design pixel value). Received #{$val}.";
+	}
+
+	// Optional positivity check
+	@if $val <= 0 {
+		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
 	// Scale sizes
 	$max-size: math.div($val, $ss-artboard-lg) * $ss-large-high;
 	$min-size: math.div($val, $ss-artboard-lg) * $ss-large-low;
@@ -24,6 +40,21 @@
 }
 
 @function fluid-m($val) {
+	// Type check
+	@if meta.type-of($val) != 'number' {
+		@error "fluid-l($val): Expected a number, got #{meta.type-of($val)}.";
+	}
+
+	// Unit check
+	@if not math.is-unitless($val) {
+		@error "fluid-l($val): Value must be unitless (design pixel value). Received #{$val}.";
+	}
+
+	// Optional positivity check
+	@if $val <= 0 {
+		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
 	// Scale sizes
 	$max-size: math.div($val, $ss-artboard-md) * $ss-medium-high;
 	$min-size: math.div($val, $ss-artboard-md) * $ss-medium-low;
@@ -45,6 +76,21 @@
 }
 
 @function fluid-s($val) {
+	// Type check
+	@if meta.type-of($val) != 'number' {
+		@error "fluid-l($val): Expected a number, got #{meta.type-of($val)}.";
+	}
+
+	// Unit check
+	@if not math.is-unitless($val) {
+		@error "fluid-l($val): Value must be unitless (design pixel value). Received #{$val}.";
+	}
+
+	// Optional positivity check
+	@if $val <= 0 {
+		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
 	// Scale sizes
 	$max-size: math.div($val, $ss-artboard-sm) * $ss-small-high;
 	$min-size: math.div($val, $ss-artboard-sm) * $ss-small-low;
