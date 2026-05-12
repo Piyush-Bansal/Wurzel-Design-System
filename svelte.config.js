@@ -14,7 +14,7 @@ const config = {
 			$breakpoints: './src/scss/tokens/mixins',
 			$sizes: './src/scss/tokens/functions',
 			$components: './src/components',
-			$tokenss: './src/scss/tokens'
+			$tokens: './src/scss/tokens'
 		}
 	}
 };
