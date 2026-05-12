@@ -5,59 +5,54 @@
 //line height
 $line-height-default: (
 	small-caption: (
-		large: 14,
-		medium: 10,
-		small: 10
+		large: 13,
+		medium: 13,
+		small: 15
 	),
 	caption: (
-		large: 14,
-		medium: 10,
-		small: 10
+		large: 15,
+		medium: 14,
+		small: 17
 	),
 	body: (
-		large: 28,
-		medium: 20,
-		small: 20
-	),
-	h5: (
-		large: 42,
-		medium: 30,
-		small: 30
+		large: 18,
+		medium: 17,
+		small: 19
 	),
 	h4: (
-		large: 56,
-		medium: 30,
-		small: 40
+		large: 26,
+		medium: 24,
+		small: 24
 	),
 	h3: (
-		large: 56,
-		medium: 50,
-		small: 50
+		large: 32,
+		medium: 34,
+		small: 30
 	),
 	h2: (
-		large: 84,
-		medium: 70,
-		small: 70
+		large: 45,
+		medium: 42,
+		small: 38
 	),
 	h1: (
-		large: 126,
-		medium: 90,
-		small: 90
+		large: 64,
+		medium: 59,
+		small: 42
 	),
 	xl: (
-		large: 182,
-		medium: 120,
-		small: 120
+		large: 90,
+		medium: 84,
+		small: 60
 	),
 	xxl: (
-		large: 224,
-		medium: 160,
-		small: 160
+		large: 128,
+		medium: 119,
+		small: 70
 	),
 	xxxl: (
-		large: 322,
-		medium: 220,
-		small: 220
+		large: 180,
+		medium: 168,
+		small: 95
 	)
 );
 
