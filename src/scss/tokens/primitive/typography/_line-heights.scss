@@ -1,6 +1,5 @@
-@use '../mixins' as *;
+@use '../../../abstract/mixins' as *;
 @use './font-sizes' as *;
-@use '../mixins' as *;
 
 //line height
 $line-height-default: (

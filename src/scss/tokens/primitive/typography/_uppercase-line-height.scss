@@ -1,6 +1,5 @@
-@use '../mixins' as *;
 @use './font-sizes' as *;
-@use '../mixins' as *;
+@use '../../../abstract/mixins' as *;
 
 //line height
 $-line-height-uppercase: (
