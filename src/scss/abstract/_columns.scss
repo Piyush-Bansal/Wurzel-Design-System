@@ -1,8 +1,4 @@
 @use './mixins' as *;
-@use './container' as *;
-@use 'sass:list';
-@use 'sass:meta';
-@use 'sass:map';
 
 $total-columns: (
 	total-columns: (

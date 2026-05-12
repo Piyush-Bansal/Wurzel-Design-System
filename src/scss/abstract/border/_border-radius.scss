@@ -2,50 +2,50 @@
 @use '../spacers' as *;
 @use '../mixins' as *;
 
-$br: (
-	br-none: (
-		large: 0,
-		medium: 0,
-		small: 0
-	),
-	br-xs: (
-		large: $micro-1,
-		medium: $micro-1,
-		small: $micro-1
-	),
-	br-s: (
-		large: $micro-2,
-		medium: $micro-2,
-		small: $micro-2
-	),
-	br-m: (
-		large: $micro-3,
-		medium: $micro-3,
-		small: $micro-3
-	),
-	br-l: (
-		large: $micro-4,
-		medium: 0,
-		small: 0
-	),
-	br-round: (
-		large: 50%,
-		medium: 50%,
-		small: 50%
-	),
-	br-capsule: (
-		large: $spacer-12,
-		medium: $spacer-12,
-		small: $spacer-12
-	)
-);
+// $br: (
+// 	br-none: (
+// 		large: 0,
+// 		medium: 0,
+// 		small: 0
+// 	),
+// 	br-xs: (
+// 		large: $micro-1,
+// 		medium: $micro-1,
+// 		small: $micro-1
+// 	),
+// 	br-s: (
+// 		large: $micro-2,
+// 		medium: $micro-2,
+// 		small: $micro-2
+// 	),
+// 	br-m: (
+// 		large: $micro-3,
+// 		medium: $micro-3,
+// 		small: $micro-3
+// 	),
+// 	br-l: (
+// 		large: $micro-4,
+// 		medium: 0,
+// 		small: 0
+// 	),
+// 	br-round: (
+// 		large: 50%,
+// 		medium: 50%,
+// 		small: 50%
+// 	),
+// 	br-capsule: (
+// 		large: $spacer-12,
+// 		medium: $spacer-12,
+// 		small: $spacer-12
+// 	)
+// );
 
-@include map-to-var-breakpoints($br);
+// @include map-to-var-breakpoints($br);
 
-$border-radius-none: var(--br-none);
-$border-radius-xs: var(--br-xs);
-$border-radius-s: var(--br-s);
-$border-radius-m: var(--br-m);
-$border-radius-l: var(--br-l);
-$border-radius-round: var(--br-round);
-$border-radius-capsule: var(--br-capsule);
+// $border-radius-none: var(--br-none);
+// $border-radius-xs: var(--br-xs);
+// $border-radius-s: var(--br-s);
+// $border-radius-m: var(--br-m);
+// $border-radius-l: var(--br-l);
+// $border-radius-round: var(--br-round);
+// $border-radius-capsule: var(--br-capsule);

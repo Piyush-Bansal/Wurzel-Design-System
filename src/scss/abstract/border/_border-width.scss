@@ -1,38 +1,38 @@
 @use '../micro-spacers' as *;
 @use '../mixins' as *;
 
-$-bw: (
-	br-none: (
-		large: 0,
-		medium: 0,
-		small: 0
-	),
-	bw-xs: (
-		large: $micro-1,
-		medium: $micro-1,
-		small: $micro-1
-	),
-	bw-s: (
-		large: $micro-2,
-		medium: $micro-2,
-		small: $micro-2
-	),
-	bw-m: (
-		large: $micro-3,
-		medium: $micro-3,
-		small: $micro-3
-	),
-	bw-l: (
-		large: $micro-4,
-		medium: 0,
-		small: 0
-	)
-);
+// $-bw: (
+// 	br-none: (
+// 		large: 0,
+// 		medium: 0,
+// 		small: 0
+// 	),
+// 	bw-xs: (
+// 		large: $micro-1,
+// 		medium: $micro-1,
+// 		small: $micro-1
+// 	),
+// 	bw-s: (
+// 		large: $micro-2,
+// 		medium: $micro-2,
+// 		small: $micro-2
+// 	),
+// 	bw-m: (
+// 		large: $micro-3,
+// 		medium: $micro-3,
+// 		small: $micro-3
+// 	),
+// 	bw-l: (
+// 		large: $micro-4,
+// 		medium: 0,
+// 		small: 0
+// 	)
+// );
 
-@include map-to-var-breakpoints($-bw);
+// @include map-to-var-breakpoints($-bw);
 
-$border-width-none: var(--br-none);
-$border-width-xs: var(--br-xs);
-$border-width-s: var(--br-s);
-$border-width-m: var(--br-m);
-$border-width-l: var(--br-l);
+// $border-width-none: var(--br-none);
+// $border-width-xs: var(--br-xs);
+// $border-width-s: var(--br-s);
+// $border-width-m: var(--br-m);
+// $border-width-l: var(--br-l);

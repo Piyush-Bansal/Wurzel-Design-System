@@ -8,10 +8,10 @@ $right-padding: $container-padding;
 
 :root {
 	--carousel-left-padding: 64;
-	@include mq('medium') {
+	@include mq('md') {
 		--carousel-left-padding: 32;
 	}
-	@include mq('small') {
+	@include mq('sm') {
 		--carousel-left-padding: 16;
 	}
 }

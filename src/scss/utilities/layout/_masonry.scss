@@ -10,7 +10,7 @@ $max-columns: map.get($total-columns, total-columns, large);
 	}
 }
 
-@include mq('medium') {
+@include mq('md') {
 	$max-columns: map.get($total-columns, total-columns, medium);
 
 	@for $i from 1 through $max-columns {
@@ -21,7 +21,7 @@ $max-columns: map.get($total-columns, total-columns, large);
 	}
 }
 
-@include mq('small') {
+@include mq('sm') {
 	$max-columns: map.get($total-columns, total-columns, small);
 
 	@for $i from 1 through $max-columns {

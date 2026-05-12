@@ -18,7 +18,7 @@
 				padding-bottom: $value;
 			}
 		} @else if($key == 'medium') {
-			@include mq('medium') {
+			@include mq('md') {
 				#{$key-parent}:has(+ p),
 				#{$key-parent}:has(+ .p),
 				#{$key-parent}:has(+ ol),
@@ -31,7 +31,7 @@
 				}
 			}
 		} @else {
-			@include mq('small') {
+			@include mq('sm') {
 				#{$key-parent}:has(+ p),
 				#{$key-parent}:has(+ .p),
 				#{$key-parent}:has(+ ol),
@@ -62,7 +62,7 @@
 				padding-bottom: $value;
 			}
 		} @else if($key == 'medium') {
-			@include mq('medium') {
+			@include mq('md') {
 				p:has(+ #{$key-parent}),
 				.p:has(+ #{$key-parent}),
 				ol:has(+ #{$key-parent}),
@@ -75,7 +75,7 @@
 				}
 			}
 		} @else {
-			@include mq('small') {
+			@include mq('sm') {
 				p:has(+ #{$key-parent}),
 				.p:has(+ #{$key-parent}),
 				ol:has(+ #{$key-parent}),

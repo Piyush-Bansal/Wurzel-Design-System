@@ -40,12 +40,12 @@
 		width: fluid-l(24);
 		height: fluid-l(24);
 
-		@include mq('medium') {
+		@include mq('md') {
 			width: fluid-l(24);
 			height: fluid-l(24);
 		}
 
-		@include mq('small') {
+		@include mq('sm') {
 			width: fluid-s(24);
 			height: fluid-s(24);
 		}

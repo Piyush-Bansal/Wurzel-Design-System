@@ -5,13 +5,13 @@
 		aspect-ratio: #{$value};
 	}
 
-	@include mq('medium') {
+	@include mq('md') {
 		.ar-md-#{$ratio} {
 			aspect-ratio: #{$value};
 		}
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		.ar-sm-#{$ratio} {
 			aspect-ratio: #{$value};
 		}

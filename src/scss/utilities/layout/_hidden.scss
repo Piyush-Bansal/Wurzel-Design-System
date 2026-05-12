@@ -6,17 +6,17 @@
 }
 
 .hide-md {
-	@include mq('medium') {
+	@include mq('md') {
 		display: none;
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		display: block;
 	}
 }
 
 .hide-sm {
-	@include mq('small') {
+	@include mq('sm') {
 		display: none;
 	}
 }
@@ -25,11 +25,11 @@
 .only-md {
 	display: none;
 
-	@include mq('medium') {
+	@include mq('md') {
 		display: block;
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		display: none;
 	}
 }
@@ -37,11 +37,11 @@
 .only-sm {
 	display: none;
 
-	@include mq('medium') {
+	@include mq('md') {
 		display: none;
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		display: block;
 	}
 }
@@ -49,11 +49,11 @@
 .only-lg {
 	display: block;
 
-	@include mq('medium') {
+	@include mq('md') {
 		display: none;
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		display: none;
 	}
 }

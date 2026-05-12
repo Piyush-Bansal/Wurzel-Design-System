@@ -40,7 +40,7 @@
 		border-radius: fluid-l(12);
 		transition: width $time-2 ease-in-out;
 
-		@include mq('medium') {
+		@include mq('md') {
 			width: fluid-m(8);
 			height: fluid-m(8);
 		}
@@ -49,7 +49,7 @@
 		width: fluid-l(24);
 		pointer-events: none;
 
-		@include mq('medium') {
+		@include mq('md') {
 			width: fluid-m(16);
 			height: fluid-m(8);
 		}

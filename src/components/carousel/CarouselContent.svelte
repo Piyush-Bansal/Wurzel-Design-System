@@ -50,7 +50,7 @@
 		// transform: translate($left-padding, 0);
 		transition: transform $time-5 $easeInOutQuart;
 
-		@include mq('small') {
+		@include mq('sm') {
 			transition: transform $time-4 $easeInOutQuart;
 		}
 	}

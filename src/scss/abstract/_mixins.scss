@@ -31,25 +31,22 @@
 				@if ($key == 'large') {
 					& {
 						#{$property-name}: if(
-							sass($convert-to-em): #{fluid-l($value)};
-							else: #{$value}
+							sass($convert-to-em): #{fluid-l($value)}; else: #{$value}
 						);
 					}
 				} @else if($key == 'medium') {
-					@include mq('medium') {
+					@include mq('md') {
 						& {
 							#{$property-name}: if(
-								sass($convert-to-em): #{fluid-m($value)};
-								else: #{$value}
+								sass($convert-to-em): #{fluid-m($value)}; else: #{$value}
 							);
 						}
 					}
 				} @else {
-					@include mq('small') {
+					@include mq('sm') {
 						& {
 							#{$property-name}: if(
-								sass($convert-to-em): #{fluid-s($value)};
-								else: #{$value}
+								sass($convert-to-em): #{fluid-s($value)}; else: #{$value}
 							);
 						}
 					}
@@ -81,14 +78,14 @@
 					#{$property-name}: calc($line-height/$-fs * 100%);
 				}
 			} @else if($breakpoint == 'medium') {
-				@include mq('medium') {
+				@include mq('md') {
 					$-fs: map.get($font-sizes, $size, $breakpoint);
 					& {
 						#{$property-name}: calc($line-height/$-fs * 100%);
 					}
 				}
 			} @else {
-				@include mq('small') {
+				@include mq('sm') {
 					$-fs: map.get($font-sizes, $size, $breakpoint);
 					& {
 						#{$property-name}: calc($line-height/$-fs * 100%);

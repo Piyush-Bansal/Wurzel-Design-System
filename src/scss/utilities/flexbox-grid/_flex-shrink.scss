@@ -5,13 +5,13 @@
 		flex-grow: $i;
 	}
 
-	@include mq('medium') {
+	@include mq('md') {
 		.flex-grow-md-#{$i} {
 			flex-grow: $i;
 		}
 	}
 
-	@include mq('small') {
+	@include mq('sm') {
 		.flex-grow-sm-#{$i} {
 			flex-grow: $i;
 		}

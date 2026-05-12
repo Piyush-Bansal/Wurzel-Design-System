@@ -16,7 +16,7 @@
 				column-gap: var(--#{$key-parent});
 			}
 
-			@include mq('medium') {
+			@include mq('md') {
 				.gap-#{$value} {
 					gap: 0;
 				}
@@ -30,7 +30,7 @@
 				}
 			}
 		} @else if($key == 'medium') {
-			@include mq('medium') {
+			@include mq('md') {
 				.gap-md-#{$value} {
 					gap: var(--#{$key-parent});
 				}
@@ -43,7 +43,7 @@
 					column-gap: var(--#{$key-parent});
 				}
 			}
-			@include mq('small') {
+			@include mq('sm') {
 				.gap-md-#{$value} {
 					gap: 0;
 				}
@@ -57,7 +57,7 @@
 				}
 			}
 		} @else {
-			@include mq('small') {
+			@include mq('sm') {
 				.gap-sm-#{$value} {
 					gap: var(--#{$key-parent});
 				}

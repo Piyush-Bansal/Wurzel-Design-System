@@ -5,13 +5,13 @@
 		padding: 0 $grid-gap-half;
 
 		&:not(:first-child) {
-			border-left: $border-width-s solid black;
+			// border-left: $border-width-s solid black;
 		}
 	}
 
 	&-y > *:not(:first-child) {
 		padding: $grid-gap-half 0;
-		border-top: $border-width-s solid black;
+		// border-top: $border-width-s solid black;
 	}
 
 	&-y > :last-child {
@@ -19,6 +19,6 @@
 	}
 
 	&-y > :first-child {
-		padding-bottom: $grid-gap-half;
+		// padding-bottom: $grid-gap-half;
 	}
 }
