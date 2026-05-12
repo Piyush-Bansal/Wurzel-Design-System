@@ -1,4 +1,4 @@
-@use '../../abstract' as *;
+@use '../../tokens' as *;
 
 @for $i from 0 through 4 {
 	.flex-grow-#{$i} {

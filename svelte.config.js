@@ -9,12 +9,12 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$styles: './src/scss',
-			$tokens: './src/scss/abstract/token',
-			$componentTokens: './src/scss/abstract/token/components',
-			$breakpoints: './src/scss/abstract/mixins',
-			$sizes: './src/scss/abstract/functions',
+			$tokens: './src/scss/tokens/token',
+			$componentTokens: './src/scss/tokens/token/components',
+			$breakpoints: './src/scss/tokens/mixins',
+			$sizes: './src/scss/tokens/functions',
 			$components: './src/components',
-			$abstracts: './src/scss/abstract'
+			$tokenss: './src/scss/tokens'
 		}
 	}
 };

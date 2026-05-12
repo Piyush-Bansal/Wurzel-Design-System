@@ -1,4 +1,4 @@
-@use '../../abstract' as *;
+@use '../../tokens' as *;
 @use 'sass:map';
 
 @for $i from 1 through map.get($total-columns, total-columns, large) {

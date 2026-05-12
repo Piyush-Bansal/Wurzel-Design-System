@@ -1,4 +1,4 @@
-@use '../abstract/' as *;
+@use '../tokens/' as *;
 
 @each $key, $value in $colors {
 	@each $shade, $color-value in $value {

@@ -1,4 +1,4 @@
-@use '../../abstract' as *;
+@use '../../tokens' as *;
 @use 'sass:map';
 
 $max-columns: map.get($total-columns, total-columns, large);

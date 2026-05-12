@@ -66,14 +66,14 @@ Button component
 
 <style lang="scss">
 	@use '$tokens/colours' as *;
-	@use '$styles/abstract/border/border-radius' as *;
+	@use '$styles/tokens/border/border-radius' as *;
 	@use '$sizes' as *;
 	@use '$breakpoints' as *;
 
 	button {
 		color: $color-text-on-action;
 		background-color: $color-surface-action-1;
-		border-radius: $border-radius-m;
+		// border-radius: $border-radius-m;
 
 		&[data-variant='secondary'] {
 			// background-color: red;

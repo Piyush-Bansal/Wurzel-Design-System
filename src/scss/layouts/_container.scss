@@ -1,4 +1,4 @@
-@use '../abstract' as *;
+@use '../tokens' as *;
 
 @include map-to-var-breakpoints($container-padding-values);
 
