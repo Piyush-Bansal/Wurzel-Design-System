@@ -1,20 +1,20 @@
-@use '../mixins' as *;
-@use '../spacers' as *;
+// @use '../mixins' as *;
+// @use '../spacers' as *;
 
-$-ico-size: (
-	ico-height-100: (
-		large: $spacer-2,
-		medium: $spacer-2,
-		small: $spacer-2
-	),
-	ico-width-100: (
-		large: $spacer-2,
-		medium: $spacer-2,
-		small: $spacer-2
-	)
-);
+// $-ico-size: (
+// 	ico-height-100: (
+// 		large: $spacer-2,
+// 		medium: $spacer-2,
+// 		small: $spacer-2
+// 	),
+// 	ico-width-100: (
+// 		large: $spacer-2,
+// 		medium: $spacer-2,
+// 		small: $spacer-2
+// 	)
+// );
 
-@include map-to-var-breakpoints($-ico-size);
+// @include map-to-var-breakpoints($-ico-size);
 
-$size-icon-height-100: var(--ico-height-100);
-$size-icon-width-100: var(--ico-width-100);
+// $size-icon-height-100: var(--ico-height-100);
+// $size-icon-width-100: var(--ico-width-100);

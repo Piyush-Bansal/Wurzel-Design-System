@@ -1,24 +1,24 @@
-@use '../../tokens/' as *;
+// @use '../../tokens/' as *;
 
-.divide {
-	&-x > * {
-		padding: 0 $grid-gap-half;
+// .divide {
+// 	&-x > * {
+// 		padding: 0 $grid-gap-half;
 
-		&:not(:first-child) {
-			// border-left: $border-width-s solid black;
-		}
-	}
+// 		&:not(:first-child) {
+// 			// border-left: $border-width-s solid black;
+// 		}
+// 	}
 
-	&-y > *:not(:first-child) {
-		padding: $grid-gap-half 0;
-		// border-top: $border-width-s solid black;
-	}
+// 	&-y > *:not(:first-child) {
+// 		padding: $grid-gap-half 0;
+// 		// border-top: $border-width-s solid black;
+// 	}
 
-	&-y > :last-child {
-		padding-bottom: 0;
-	}
+// 	&-y > :last-child {
+// 		padding-bottom: 0;
+// 	}
 
-	&-y > :first-child {
-		// padding-bottom: $grid-gap-half;
-	}
-}
+// 	&-y > :first-child {
+// 		// padding-bottom: $grid-gap-half;
+// 	}
+// }

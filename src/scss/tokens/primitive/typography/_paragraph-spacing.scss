@@ -1,13 +1,13 @@
-@use '../mixins' as *;
-@use '../container' as *;
+// @use '../mixins' as *;
+// @use '../container' as *;
 
-//change the number in ()
-$-p-spacing: (
-	paragraph-spacing: (
-		large: $gutter,
-		medium: $gutter,
-		small: $gutter
-	)
-);
+// //change the number in ()
+// $-p-spacing: (
+// 	paragraph-spacing: (
+// 		large: $gutter,
+// 		medium: $gutter,
+// 		small: $gutter
+// 	)
+// );
 
-@include map-to-var-breakpoints($-p-spacing);
+// @include map-to-var-breakpoints($-p-spacing);

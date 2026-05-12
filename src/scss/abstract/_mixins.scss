@@ -1,5 +1,5 @@
-@use './breakpoint' as *;
-@use './functions' as *;
+@use '../tokens/primitive/breakpoint' as *;
+// @use './functions' as *;
 @use 'sass:map';
 @use 'sass:meta';
 

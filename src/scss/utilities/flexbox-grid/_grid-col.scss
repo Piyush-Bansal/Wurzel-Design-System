@@ -1,9 +1,9 @@
-@use '../../tokens' as *;
-@use 'sass:map';
+// @use '../../abstract/' as *;
+// @use 'sass:map';
 
-@for $i from 2 through map.get($total-columns, total-columns, large) {
-	.grid-col-#{$i} {
-		grid-template-columns: repeat($i, 1fr);
-		gap: $grid-gap;
-	}
-}
+// @for $i from 2 through map.get($total-columns, total-columns, large) {
+// 	.grid-col-#{$i} {
+// 		grid-template-columns: repeat($i, 1fr);
+// 		gap: $grid-gap;
+// 	}
+// }

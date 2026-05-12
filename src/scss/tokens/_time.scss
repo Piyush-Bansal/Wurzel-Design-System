@@ -1,83 +1,83 @@
-@use './mixins' as *;
+// @use './mixins' as *;
 
-$-time-signature: (
-	time-1: (
-		large: 0.0833333333333333s,
-		//100%
-		medium: 0.075s,
-		//90% of large
-		small: 0.06666666667s //80% of large
-	),
-	time-2: (
-		large: 0.1178511302s,
-		medium: 0.1060660172s,
-		small: 0.09428090416s
-	),
-	time-3: (
-		large: 0.1666666667s,
-		medium: 0.15s,
-		small: 0.1333333333333333s
-	),
-	time-4: (
-		large: 0.2357022604s,
-		medium: 0.2121320344s,
-		small: 0.1885618083s
-	),
-	time-5: (
-		large: 0.3333333333s,
-		medium: 0.3s,
-		small: 0.2666666667s
-	),
-	time-6: (
-		large: 0.4714045208s,
-		medium: 0.4242640687s,
-		small: 0.3771236166
-	),
-	time-7: (
-		large: 0.6666666667s,
-		medium: 0.6s,
-		small: 0.5333333333s
-	),
-	time-8: (
-		large: 0.9428090416s,
-		medium: 0.8485281374s,
-		small: 0.7542472333s
-	),
-	time-9: (
-		large: 1.333333333s,
-		medium: 1.2s,
-		small: 1.0666666667s
-	),
-	time-10: (
-		large: 1.885618083s,
-		medium: 1.697056275s,
-		small: 1.508494467s
-	),
-	time-11: (
-		large: 2.6666666667s,
-		medium: 2.4s,
-		small: 2.1333333333s
-	),
-	time-12: (
-		large: 3.771236166s,
-		medium: 3.39411255s,
-		small: 3.016988933s
-	),
-	time-13: (
-		large: 5.333333333s,
-		medium: 4.8s,
-		small: 4.2666666667s
-	),
-	time-14: (
-		large: 7.542472333s,
-		medium: 6.788225099s,
-		small: 6.033977866s
-	),
-	time-15: (
-		large: 10.66666667s,
-		medium: 9.6s,
-		small: 8.5333333333s
-	)
-);
+// $-time-signature: (
+// 	time-1: (
+// 		large: 0.0833333333333333s,
+// 		//100%
+// 		medium: 0.075s,
+// 		//90% of large
+// 		small: 0.06666666667s //80% of large
+// 	),
+// 	time-2: (
+// 		large: 0.1178511302s,
+// 		medium: 0.1060660172s,
+// 		small: 0.09428090416s
+// 	),
+// 	time-3: (
+// 		large: 0.1666666667s,
+// 		medium: 0.15s,
+// 		small: 0.1333333333333333s
+// 	),
+// 	time-4: (
+// 		large: 0.2357022604s,
+// 		medium: 0.2121320344s,
+// 		small: 0.1885618083s
+// 	),
+// 	time-5: (
+// 		large: 0.3333333333s,
+// 		medium: 0.3s,
+// 		small: 0.2666666667s
+// 	),
+// 	time-6: (
+// 		large: 0.4714045208s,
+// 		medium: 0.4242640687s,
+// 		small: 0.3771236166
+// 	),
+// 	time-7: (
+// 		large: 0.6666666667s,
+// 		medium: 0.6s,
+// 		small: 0.5333333333s
+// 	),
+// 	time-8: (
+// 		large: 0.9428090416s,
+// 		medium: 0.8485281374s,
+// 		small: 0.7542472333s
+// 	),
+// 	time-9: (
+// 		large: 1.333333333s,
+// 		medium: 1.2s,
+// 		small: 1.0666666667s
+// 	),
+// 	time-10: (
+// 		large: 1.885618083s,
+// 		medium: 1.697056275s,
+// 		small: 1.508494467s
+// 	),
+// 	time-11: (
+// 		large: 2.6666666667s,
+// 		medium: 2.4s,
+// 		small: 2.1333333333s
+// 	),
+// 	time-12: (
+// 		large: 3.771236166s,
+// 		medium: 3.39411255s,
+// 		small: 3.016988933s
+// 	),
+// 	time-13: (
+// 		large: 5.333333333s,
+// 		medium: 4.8s,
+// 		small: 4.2666666667s
+// 	),
+// 	time-14: (
+// 		large: 7.542472333s,
+// 		medium: 6.788225099s,
+// 		small: 6.033977866s
+// 	),
+// 	time-15: (
+// 		large: 10.66666667s,
+// 		medium: 9.6s,
+// 		small: 8.5333333333s
+// 	)
+// );
 
-@include map-to-var-breakpoints($-time-signature);
+// @include map-to-var-breakpoints($-time-signature);

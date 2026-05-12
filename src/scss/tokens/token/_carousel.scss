@@ -1,17 +1,17 @@
-@use './layouts' as *;
-@use '../mixins' as *;
-@use '../container' as *;
-@use '../mixins' as *;
+// @use './layouts' as *;
+// @use '../mixins' as *;
+// @use '../container' as *;
+// @use '../mixins' as *;
 
-$left-padding: $container-padding;
-$right-padding: $container-padding;
+// $left-padding: $container-padding;
+// $right-padding: $container-padding;
 
-:root {
-	--carousel-left-padding: 64;
-	@include mq('md') {
-		--carousel-left-padding: 32;
-	}
-	@include mq('sm') {
-		--carousel-left-padding: 16;
-	}
-}
+// :root {
+// 	--carousel-left-padding: 64;
+// 	@include mq('md') {
+// 		--carousel-left-padding: 32;
+// 	}
+// 	@include mq('sm') {
+// 		--carousel-left-padding: 16;
+// 	}
+// }

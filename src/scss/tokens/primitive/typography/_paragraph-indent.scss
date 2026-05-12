@@ -1,12 +1,12 @@
-@use '../../mixins' as *;
-@use '../container' as *;
+// @use '../../../abstract/mixins' as *;
+// @use '../container' as *;
 
-$-p-indent: (
-	paragraph-indent: (
-		large: $gutter,
-		medium: $gutter,
-		small: $gutter
-	)
-);
+// $-p-indent: (
+// 	paragraph-indent: (
+// 		large: $gutter,
+// 		medium: $gutter,
+// 		small: $gutter
+// 	)
+// );
 
-@include map-to-var-breakpoints($-p-indent);
+// @include map-to-var-breakpoints($-p-indent);

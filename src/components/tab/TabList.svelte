@@ -17,7 +17,7 @@
 </div>
 
 <style lang="scss">
-	@use '$sizes' as *;
+	//@use '$sizes' as *;
 	@use '$tokens/time' as *;
 	.tab-list {
 		width: max-content;
@@ -28,8 +28,7 @@
 		bottom: 0;
 		z-index: -1;
 		left: 0;
-		transition:
-			width $time-2 ease-in-out,
-			left $time-3 ease-in-out;
+		// transition: width $time-2 ease-in-out;
+		// left $time-3 ease-in-out;
 	}
 </style>

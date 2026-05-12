@@ -11,7 +11,7 @@
 </div>
 
 <style lang="scss">
-	@use '$sizes' as *;
+	//@use '$sizes' as *;
 	.indicator__wrapper {
 		display: flex;
 		justify-content: center;

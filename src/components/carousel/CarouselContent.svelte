@@ -40,18 +40,18 @@
 </div>
 
 <style lang="scss">
-	@use '$tokens/carousel' as *;
-	@use '$sizes' as *;
-	@use '$tokens/time' as *;
-	@use '$tokens/easing' as *;
-	@use '$breakpoints' as *;
+	// @use '$tokens/carousel' as *;
+	//@use '$sizes' as *;
+	// @use '$tokens/time' as *;
+	// @use '$tokens/easing' as *;
+	//@use '$breakpoints' as *;
 	.carousel__content {
 		width: max-content;
 		// transform: translate($left-padding, 0);
-		transition: transform $time-5 $easeInOutQuart;
+		// transition: transform $time-5 $easeInOutQuart;
 
-		@include mq('sm') {
-			transition: transform $time-4 $easeInOutQuart;
-		}
+		// @include mq('sm') {
+		// 	transition: transform $time-4 $easeInOutQuart;
+		// }
 	}
 </style>

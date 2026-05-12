@@ -1,13 +1,13 @@
-@use './mixins' as *;
+// @use './mixins' as *;
 
-$total-columns: (
-	total-columns: (
-		large: 16,
-		medium: 8,
-		small: 4
-	)
-);
+// $total-columns: (
+// 	total-columns: (
+// 		large: 16,
+// 		medium: 8,
+// 		small: 4
+// 	)
+// );
 
-@include map-to-var-breakpoints($total-columns);
+// @include map-to-var-breakpoints($total-columns);
 
-$column-count: var(--total-columns);
+// $column-count: var(--total-columns);

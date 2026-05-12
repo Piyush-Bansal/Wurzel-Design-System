@@ -1,56 +1,56 @@
-@use '../colours' as *;
+// @use '../colours' as *;
 
-//text
-$color-headline-primary: $color-neutral-9;
-$color-body-primary: $color-neutral-9;
-$color-text-action: $color-success-6;
-$color-text-action-hover: $color-success-7;
-$color-text-on-action: $color-neutral-0;
+// //text
+// $color-headline-primary: $color-neutral-9;
+// $color-body-primary: $color-neutral-9;
+// $color-text-action: $color-success-6;
+// $color-text-action-hover: $color-success-7;
+// $color-text-on-action: $color-neutral-0;
 
-$color-text-success: $color-success-6;
-$color-text-disabled: $color-neutral-4;
-$color-text-on-disabled: $color-neutral-6;
-$color-text-error: $color-error-3;
-$color-text-warning: $color-warning-2;
-$color-text-information: $color-information-3;
-$color-text-highlight: $color-primary-6;
+// $color-text-success: $color-success-6;
+// $color-text-disabled: $color-neutral-4;
+// $color-text-on-disabled: $color-neutral-6;
+// $color-text-error: $color-error-3;
+// $color-text-warning: $color-warning-2;
+// $color-text-information: $color-information-3;
+// $color-text-highlight: $color-primary-6;
 
-//icons
-$color-icon-primary: $color-primary-6;
-$color-icon-information: $color-information-3;
-$color-icon-success: $color-success-6;
-$color-icon-warning: $color-warning-2;
-$color-icon-error: $color-error-3;
-$color-icon-disabled: $color-neutral-4;
-$color-icon-action: $color-primary-6;
-$color-icon-on-action: $color-neutral-0;
+// //icons
+// $color-icon-primary: $color-primary-6;
+// $color-icon-information: $color-information-3;
+// $color-icon-success: $color-success-6;
+// $color-icon-warning: $color-warning-2;
+// $color-icon-error: $color-error-3;
+// $color-icon-disabled: $color-neutral-4;
+// $color-icon-action: $color-primary-6;
+// $color-icon-on-action: $color-neutral-0;
 
-//borders
-$color-border-primary: $color-primary-6;
-$color-border-secondary: $color-neutral-9;
-$color-border-information: $color-information-3;
-$color-border-warning: $color-warning-2;
-$color-border-error: $color-error-3;
-$color-border-highlight: $color-primary-6;
-$color-border-action: $color-primary-6;
-$color-border-action-hover: $color-primary-7;
-$color-border-focus: $color-primary-6;
-$color-border-success: $color-success-6;
-$color-border-disabled: $color-neutral-4;
+// //borders
+// $color-border-primary: $color-primary-6;
+// $color-border-secondary: $color-neutral-9;
+// $color-border-information: $color-information-3;
+// $color-border-warning: $color-warning-2;
+// $color-border-error: $color-error-3;
+// $color-border-highlight: $color-primary-6;
+// $color-border-action: $color-primary-6;
+// $color-border-action-hover: $color-primary-7;
+// $color-border-focus: $color-primary-6;
+// $color-border-success: $color-success-6;
+// $color-border-disabled: $color-neutral-4;
 
-//surface
-$color-surface-page: $color-neutral-0;
-$color-surface-primary: $color-neutral-0;
-$color-surface-secondary: $color-primary-3;
-$color-surface-error: $color-error-3;
-$color-surface-warning: $color-warning-2;
-$color-surface-information: $color-information-3;
-$color-surface-action-1: $color-primary-6;
-$color-surface-action-1-hover: $color-primary-7;
-$color-surface-action-1-active: $color-primary-8;
-$color-surface-action-2: $color-neutral-9;
-$color-surface-action-2-hover: $color-neutral-8;
-$color-surface-modal: $color-neutral-0;
-$color-surface-success: $color-success-6;
-$color-surface-disabled: $color-neutral-2;
-$color-surface-highlight: $color-primary-6;
+// //surface
+// $color-surface-page: $color-neutral-0;
+// $color-surface-primary: $color-neutral-0;
+// $color-surface-secondary: $color-primary-3;
+// $color-surface-error: $color-error-3;
+// $color-surface-warning: $color-warning-2;
+// $color-surface-information: $color-information-3;
+// $color-surface-action-1: $color-primary-6;
+// $color-surface-action-1-hover: $color-primary-7;
+// $color-surface-action-1-active: $color-primary-8;
+// $color-surface-action-2: $color-neutral-9;
+// $color-surface-action-2-hover: $color-neutral-8;
+// $color-surface-modal: $color-neutral-0;
+// $color-surface-success: $color-success-6;
+// $color-surface-disabled: $color-neutral-2;
+// $color-surface-highlight: $color-primary-6;

@@ -1,27 +1,27 @@
-@use './breakpoint' as *;
-@use './spacers' as *;
-@use './mixins' as *;
+// @use './breakpoint' as *;
+// @use './spacers' as *;
+// @use './mixins' as *;
 
-//Container
-$container-max-width: $ss-large-high * 1px;
-$container-padding-values: (
-	container-padding: (
-		large: $spacer-5,
-		medium: $spacer-4,
-		small: $spacer-3
-	)
-);
+// //Container
+// $container-max-width: $ss-large-high * 1px;
+// $container-padding-values: (
+// 	container-padding: (
+// 		large: $spacer-5,
+// 		medium: $spacer-4,
+// 		small: $spacer-3
+// 	)
+// );
 
-$gutter-values: (
-	gutter: (
-		large: $spacer-2,
-		medium: $spacer-2,
-		small: $spacer-2
-	)
-);
+// $gutter-values: (
+// 	gutter: (
+// 		large: $spacer-2,
+// 		medium: $spacer-2,
+// 		small: $spacer-2
+// 	)
+// );
 
-@include map-to-var-breakpoints($gutter-values);
-@include map-to-var-breakpoints($container-padding-values);
+// @include map-to-var-breakpoints($gutter-values);
+// @include map-to-var-breakpoints($container-padding-values);
 
-$gutter: var(--gutter);
-$container-padding: var(--container-padding);
+// $gutter: var(--gutter);
+// $container-padding: var(--container-padding);

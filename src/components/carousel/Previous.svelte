@@ -24,12 +24,12 @@
 {/if}
 
 <style lang="scss">
-	@use '$sizes' as *;
-	@use '$tokens/carousel' as *;
-	@use '$breakpoints' as *;
+	//@use '$sizes' as *;
+	// @use '$tokens/carousel' as *;
+	//@use '$breakpoints' as *;
 
 	.carousel__next {
-		left: $left-padding;
+		left: 20px;
 		top: 29%;
 		z-index: 1;
 		transform-origin: center;
@@ -39,14 +39,14 @@
 		width: fluid-l(24);
 		height: fluid-l(24);
 
-		@include mq('md') {
-			width: fluid-l(24);
-			height: fluid-l(24);
-		}
+		// @include mq('md') {
+		// 	width: fluid-l(24);
+		// 	height: fluid-l(24);
+		// }
 
-		@include mq('sm') {
-			width: fluid-s(24);
-			height: fluid-s(24);
-		}
+		// @include mq('sm') {
+		// 	width: fluid-s(24);
+		// 	height: fluid-s(24);
+		// }
 	}
 </style>

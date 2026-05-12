@@ -1,4 +1,5 @@
-@use '../../tokens' as *;
+@use '../../abstract/' as *;
+@use '../../tokens/' as *;
 
 @each $ratio, $value in $ratios {
 	.ar-#{$ratio} {
