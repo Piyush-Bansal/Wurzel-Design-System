@@ -1,0 +1,14 @@
+@import '../../../primitive/_spacers.scss';
+@import '../../../../abstract/_mixins.scss';
+
+$-page-margins: (
+	page-margins: (
+		large: $spacer-4,
+		medium: $spacer-2,
+		small: $spacer-1
+	)
+);
+
+@include map-to-var-breakpoints($-page-margins);
+
+$page-margins: var(--page-margins);

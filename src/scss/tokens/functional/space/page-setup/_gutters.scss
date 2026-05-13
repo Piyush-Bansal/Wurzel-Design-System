@@ -9,7 +9,7 @@ $-page-full-gutter: (
 	)
 );
 
-$page-half-gutter: (
+$-page-half-gutter: (
 	half-gutter: (
 		large: 9,
 		medium: 8.5,
@@ -18,7 +18,7 @@ $page-half-gutter: (
 );
 
 @include map-to-var-breakpoints($-page-full-gutter);
-@include map-to-var-breakpoints($map: $page-half-gutter, $convert-to-em: true);
+@include map-to-var-breakpoints($map: $-page-half-gutter, $convert-to-em: true);
 
 $gutter: var(--gutter);
 $half-gutter: var(--half-gutter);
