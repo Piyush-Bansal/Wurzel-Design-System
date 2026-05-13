@@ -1,0 +1,13 @@
+@import '../space/page-setup/_gutters.scss';
+
+$-p-spacing: (
+	paragraph-spacing: (
+		large: $gutter,
+		medium: $gutter,
+		small: $gutter
+	)
+);
+
+@include map-to-var-breakpoints($-p-spacing);
+
+$paragraph-spacing: var(--paragraph-spacing);
