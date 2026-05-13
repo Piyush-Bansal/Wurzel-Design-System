@@ -1,6 +1,6 @@
 @use '../../abstract/mixins' as *;
 
-$micro-spacers: (
+$-micro-spacers: (
 	micro-1: (
 		large: 1,
 		medium: 1,
@@ -46,7 +46,7 @@ $micro-spacers: (
 	)
 );
 
-@include map-to-var-breakpoints($map: $micro-spacers, $convert-to-em: true);
+@include map-to-var-breakpoints($map: $-micro-spacers, $convert-to-em: true);
 
 $micro-1: var(--micro-1);
 $micro-2: var(--micro-2);

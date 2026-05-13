@@ -1,6 +1,6 @@
 @use '../../abstract/mixins' as *;
 
-$spacers: (
+$-spacers: (
 	spacer-1: (
 		large: 18,
 		medium: 17,
@@ -53,7 +53,7 @@ $spacers: (
 	)
 );
 
-@include map-to-var-breakpoints($map: $spacers, $convert-to-em: true);
+@include map-to-var-breakpoints($map: $-spacers, $convert-to-em: true);
 
 $spacer-1: var(--spacer-1);
 $spacer-2: var(--spacer-2);
