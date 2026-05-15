@@ -1,6 +1,6 @@
 @use '../../../../semantic/space/_large-gaps' as *;
 @use '../../../../semantic/space/_small-gaps' as *;
-@import '../../../../../abstract/_mixins.scss';
+@use '../../../../../abstract/_mixins.scss' as *;
 
 $-l-internal-gaps: (
 	s-ico-to-edge-gap: (

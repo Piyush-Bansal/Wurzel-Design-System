@@ -1,5 +1,5 @@
-@import '../../semantic/size/_micro-heights.scss';
-@import '../../../abstract/_mixins.scss';
+@use '../../semantic/size/_micro-heights.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
 
 $-stroke: (
 	hairline: (

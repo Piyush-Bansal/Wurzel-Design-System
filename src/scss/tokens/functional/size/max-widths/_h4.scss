@@ -1,5 +1,5 @@
-@import '../_fixed-width.scss';
-@import '../../../../abstract/_mixins.scss';
+@use '../_fixed-width.scss' as *;
+@use '../../../../abstract/_mixins.scss' as *;
 
 $-h4-max-width: (
 	single-word: (

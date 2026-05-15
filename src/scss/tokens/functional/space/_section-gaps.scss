@@ -1,5 +1,5 @@
 @use '../../semantic/size/_height' as *;
-@import '../../../abstract/_mixins.scss';
+@use '../../../abstract/_mixins.scss' as *;
 
 $-section-gaps: (
 	sec-gap-s: (

@@ -1,5 +1,5 @@
-@import '../../primitive/_micro-spacers.scss';
-@import '../../../abstract/_mixins.scss';
+@use '../../primitive/_micro-spacers.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
 
 $-micro-heights: (
 	micro-height-xs: (

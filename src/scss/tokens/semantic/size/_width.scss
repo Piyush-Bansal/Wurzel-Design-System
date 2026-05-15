@@ -1,5 +1,5 @@
-@import '../../primitive/_spacers.scss';
-@import '../../../abstract/_mixins.scss';
+@use '../../primitive/_spacers.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
 
 $-widths: (
 	width-1: (

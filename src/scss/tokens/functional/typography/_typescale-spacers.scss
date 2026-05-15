@@ -1,5 +1,5 @@
-@import '../../semantic/space/_small-gaps.scss';
-@import '../../semantic/space/_large-gaps.scss';
+@use '../../semantic/space/_small-gaps.scss' as *;
+@use '../../semantic/space/_large-gaps.scss' as *;
 
 $-typescale-spacers: (
 	small-caption-default: (

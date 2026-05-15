@@ -1,6 +1,6 @@
-@import '../../../semantic/size/_micro-widths.scss';
-@import '../../../semantic/size/_width.scss';
-@import '../../../../abstract/_mixins.scss';
+@use '../../../semantic/size/_micro-widths.scss' as *;
+@use '../../../semantic/size/_width.scss' as *;
+@use '../../../../abstract/_mixins.scss' as *;
 
 $-thumb-span: (
 	quarter: (

@@ -1,5 +1,5 @@
-@import '../../semantic/size/_min-widths.scss';
-@import '../../../abstract/_mixins.scss';
+@use '../../semantic/size/_min-widths.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
 
 $-min-widths: (
 	size-s: (

@@ -1,4 +1,4 @@
-@import '../space/page-setup/_gutters.scss';
+@use '../space/page-setup/_gutters.scss' as *;
 
 $-p-indent: (
 	paragraph-indent: (

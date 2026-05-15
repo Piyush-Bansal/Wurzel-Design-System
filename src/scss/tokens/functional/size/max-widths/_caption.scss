@@ -1,5 +1,5 @@
-@import '../_fixed-width.scss';
-@import '../../../../abstract/_mixins.scss';
+@use '../_fixed-width.scss' as *;
+@use '../../../../abstract/_mixins.scss' as *;
 
 $-caption-max-width: (
 	single-word: (
