@@ -1,5 +1,5 @@
 @use '../tokens/primitive/grid/breakpoint' as *;
-// @use './functions' as *;
+@use './functions' as *;
 @use 'sass:map';
 @use 'sass:meta';
 

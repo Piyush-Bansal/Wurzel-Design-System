@@ -100,7 +100,7 @@ The `Tab` component follows the WAI-ARIA guidelines for tabs. It uses the `role=
 </div>
 
 <style lang="scss">
-	@use '$tokens/time' as *;
+	// @use '$tokens/time' as *;
 	.tab-content__wrapper {
 		// transition: height $time-3 ease-in-out;
 	}

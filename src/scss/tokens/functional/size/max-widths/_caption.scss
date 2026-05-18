@@ -24,10 +24,7 @@ $-caption-max-width: (
 	)
 );
 
-@include map-to-var-breakpoints(
-	$-caption-max-width,
-	$prefix: 'caption-max-width'
-);
+@include map-to-var-breakpoints($-caption-max-width, 'caption-max-width');
 
 $caption-max-width-single-word: var(--caption-max-width-single-word);
 $caption-max-width-few-words: var(--caption-max-width-few-words);

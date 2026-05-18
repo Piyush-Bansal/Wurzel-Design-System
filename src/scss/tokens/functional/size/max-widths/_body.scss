@@ -24,7 +24,7 @@ $-body-max-width: (
 	)
 );
 
-@include map-to-var-breakpoints($-body-max-width, $prefix: 'body-max-width');
+@include map-to-var-breakpoints($-body-max-width, 'body-max-width');
 
 $body-max-width-single-word: var(--body-max-width-single-word);
 $body-max-width-few-words: var(--body-max-width-few-words);

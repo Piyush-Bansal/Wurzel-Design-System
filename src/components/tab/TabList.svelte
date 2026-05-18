@@ -18,7 +18,7 @@
 
 <style lang="scss">
 	//@use '$sizes' as *;
-	@use '$tokens/time' as *;
+	// @use '$tokens/time' as *;
 	.tab-list {
 		width: max-content;
 	}

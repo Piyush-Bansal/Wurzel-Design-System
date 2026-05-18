@@ -33,8 +33,8 @@
 </div>
 
 <style lang="scss">
-	@use '$componentTokens/countdown' as *;
+	// @use '$componentTokens/countdown' as *;
 	.countdown {
-		column-gap: $count-gap-x;
+		column-gap: 10px;
 	}
 </style>

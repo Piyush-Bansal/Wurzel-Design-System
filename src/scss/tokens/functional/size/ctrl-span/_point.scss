@@ -12,7 +12,7 @@ $-ctrl-span: (
 		large: $micro-width-xxl,
 		medium: $micro-width-xxl,
 		small: $micro-width-xxl
-	)
+	),
 	base: (
 		large: $micro-width-xxxxl,
 		medium: $micro-width-xxxxl,
@@ -35,7 +35,7 @@ $-ctrl-span: (
 	)
 );
 
-@include map-to-var-breakpoints($-ctrl-span, $prefix: 'point-span-');
+@include map-to-var-breakpoints($-ctrl-span, 'point-span-');
 
 $point-span-quarter: var(--point-span-quarter);
 $point-span-half: var(--point-span-half);

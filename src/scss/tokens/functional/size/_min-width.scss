@@ -24,7 +24,7 @@ $-min-widths: (
 	)
 );
 
-@include map-to-var-breakpoints($-min-widths, $prefix: 'min-comp');
+@include map-to-var-breakpoints($-min-widths, 'min-comp');
 
 $min-comp-size-s: var(--min-comp-size-s);
 $min-comp-size-m: var(--min-comp-size-m);

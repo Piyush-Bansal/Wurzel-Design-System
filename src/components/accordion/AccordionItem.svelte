@@ -108,24 +108,24 @@ AccordionItem is a component that represents an item within an accordion. It typ
 </div>
 
 <style lang="scss">
-	@use '$componentTokens/accordion' as *;
+	// @use '$componentTokens/accordion' as *;
 
 	.accordion-item {
 		&__headline {
-			gap: $accordion-header-icon-gap;
-			padding-inline: $accordion-header-padding-y;
-			padding-block: $accordion-header-padding-x;
+			gap: 10px;
+			padding-inline: 10px;
+			padding-block: 10px;
 		}
 		&__description {
-			padding-inline: $accordion-description-padding-y;
-			padding-block: $accordion-description-padding-x;
+			padding-inline: 10px;
+			padding-block: 10px;
 		}
 	}
 	.icon {
 		img {
-			transition: transform $accordion-transition-duration ease-in-out;
-			height: $accordion-header-icon-height;
-			width: $accordion-header-icon-width;
+			transition: transform 180ms ease-in-out;
+			height: 24px;
+			width: 24px;
 
 			&.closed {
 				transform: rotate(180deg);

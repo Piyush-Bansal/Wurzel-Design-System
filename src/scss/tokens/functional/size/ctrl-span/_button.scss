@@ -12,7 +12,7 @@ $-button-span: (
 		large: $width-1,
 		medium: $width-1,
 		small: $micro-width-xxxxxl
-	)
+	),
 	base: (
 		large: $width-3,
 		medium: $width-3,
@@ -35,7 +35,7 @@ $-button-span: (
 	)
 );
 
-@include map-to-var-breakpoints($-button-span, $prefix: 'button-span-');
+@include map-to-var-breakpoints($-button-span, 'button-span-');
 
 $button-span-quarter: var(--button-span-quarter);
 $button-span-half: var(--button-span-half);

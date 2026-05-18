@@ -12,7 +12,7 @@ $-thumb-span: (
 		large: $micro-width-xxxl,
 		medium: $micro-width-xxxl,
 		small: $micro-width-xxxxl
-	)
+	),
 	base: (
 		large: $width-2,
 		medium: $width-2,
@@ -35,7 +35,7 @@ $-thumb-span: (
 	)
 );
 
-@include map-to-var-breakpoints($-thumb-span, $prefix: 'thumb-span-');
+@include map-to-var-breakpoints($-thumb-span, 'thumb-span-');
 
 $thumb-span-quarter: var(--thumb-span-quarter);
 $thumb-span-half: var(--thumb-span-half);

@@ -1,4 +1,6 @@
-@use '../../../abstract/_mixins' as *;
+@use '../../primitive/_time.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
+
 $-duration: (
 	instant: (
 		large: $time-1,

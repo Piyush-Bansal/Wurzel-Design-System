@@ -1,5 +1,5 @@
 @use '../../../abstract/_mixins' as *;
-@use '../../token/_time' as *;
+@use '../../primitive/_time' as *;
 
 $-overlap: (
 	tight-1: (

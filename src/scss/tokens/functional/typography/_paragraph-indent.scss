@@ -1,4 +1,5 @@
 @use '../space/page-setup/_gutters.scss' as *;
+@use '../../../abstract/_mixins.scss' as *;
 
 $-p-indent: (
 	paragraph-indent: (

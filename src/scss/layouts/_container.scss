@@ -1,25 +1,21 @@
-// @use '../tokens' as *;
+@use '../tokens/functional/space/page-setup/_gutters' as *;
+@use '../tokens/functional/space/page-setup/_page-margins' as *;
 
-// @include map-to-var-breakpoints($container-padding-values);
+.container {
+	margin-inline: auto;
+	padding-inline: $page-margins;
 
-// $container-padding: var(--container-padding);
+	&[data-size='full'] {
+		padding-inline: 0;
+	}
 
-// .container {
-// 	max-width: $container-max-width;
-// 	margin-inline: auto;
-// 	padding-inline: $container-padding;
+	&[data-size='right-extended'] {
+		padding-left: $page-margins;
+		padding-right: calc($page-margins - $half-gutter);
+	}
 
-// 	&[data-size='full'] {
-// 		padding-inline: 0;
-// 	}
-
-// 	&[data-size='right-extended'] {
-// 		padding-left: $container-padding;
-// 		padding-right: calc($container-padding - $grid-gap-half);
-// 	}
-
-// 	&[data-size='left-extended'] {
-// 		padding-left: calc($container-padding - $grid-gap-half);
-// 		padding-right: $container-padding;
-// 	}
-// }
+	&[data-size='left-extended'] {
+		padding-left: calc($page-margins - $half-gutter);
+		padding-right: $page-margins;
+	}
+}

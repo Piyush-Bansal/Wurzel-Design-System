@@ -1,4 +1,5 @@
 @use '../../../../semantic/space/_small-gaps' as *;
+@use '../../../../../abstract/_mixins' as *;
 
 $-m-internal-gaps: (
 	s-ico-to-edge-gap: (

@@ -1,4 +1,5 @@
 @use '../../../semantic/space/_small-gaps' as *;
+@use '../../../../abstract/_mixins' as *;
 
 $-ico-h-gap: (
 	s-ico-h-gap-default: (

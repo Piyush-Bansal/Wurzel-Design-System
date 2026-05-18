@@ -24,7 +24,7 @@ $-h4-max-width: (
 	)
 );
 
-@include map-to-var-breakpoints($-h4-max-width, $prefix: 'h4-max-width');
+@include map-to-var-breakpoints($-h4-max-width, 'h4-max-width');
 
 $h4-max-width-single-word: var(--h4-max-width-single-word);
 $h4-max-width-few-words: var(--h4-max-width-few-words);

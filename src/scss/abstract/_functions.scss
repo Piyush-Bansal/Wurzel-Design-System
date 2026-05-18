@@ -1,6 +1,6 @@
-@use '../tokens' as *;
 @use 'sass:math';
 @use 'sass:meta';
+@use '../tokens/primitive/grid/_breakpoint' as *;
 
 //fluid size
 @function fluid-l($val) {
@@ -15,8 +15,12 @@
 	}
 
 	// Optional positivity check
-	@if $val <= 0 {
+	@if $val < 0 {
 		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
+	@if $val==0 {
+		@return 0;
 	}
 
 	// Scale sizes
@@ -51,8 +55,12 @@
 	}
 
 	// Optional positivity check
-	@if $val <= 0 {
+	@if $val < 0 {
 		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
+	@if $val==0 {
+		@return 0;
 	}
 
 	// Scale sizes
@@ -87,8 +95,12 @@
 	}
 
 	// Optional positivity check
-	@if $val <= 0 {
+	@if $val < 0 {
 		@error "fluid-l($val): Value must be greater than zero. Received #{$val}.";
+	}
+
+	@if $val==0 {
+		@return 0;
 	}
 
 	// Scale sizes

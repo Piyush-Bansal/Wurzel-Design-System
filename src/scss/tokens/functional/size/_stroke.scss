@@ -24,7 +24,7 @@ $-stroke: (
 	)
 );
 
-@include map-to-var-breakpoints($-stroke, $prefix: 'stroke-');
+@include map-to-var-breakpoints($-stroke, 'stroke-');
 
 $stroke-hairline: var(--stroke-hairline);
 $stroke-default: var(--stroke-default);

@@ -29,7 +29,7 @@ $-component-sizes: (
 	)
 );
 
-@include map-to-var-breakpoints($-component-sizes, $prefix: 'comp-size-');
+@include map-to-var-breakpoints($-component-sizes, 'comp-size-');
 
 $comp-size-xs: var(--comp-size-xs);
 $comp-size-s: var(--comp-size-s);

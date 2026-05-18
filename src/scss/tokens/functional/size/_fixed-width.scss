@@ -1,4 +1,6 @@
 @use '../../primitive/_spacers' as *;
+@use '../../../abstract/_mixins' as *;
+
 $-fixed-widths: (
 	col-wide-1: (
 		large: 72,
