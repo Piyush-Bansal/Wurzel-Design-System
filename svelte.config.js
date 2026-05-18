@@ -9,12 +9,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$styles: './src/scss',
-			$tokens: './src/scss/tokens/token',
-			$componentTokens: './src/scss/tokens/token/components',
-			$breakpoints: './src/scss/tokens/mixins',
-			$sizes: './src/scss/tokens/functions',
-			$components: './src/components',
-			$tokens: './src/scss/tokens'
+			$tokens: './src/scss/tokens/functional',
+			$sizes: './src/scss/tokens/abstract/functions',
+			$components: './src/components'
 		}
 	}
 };
