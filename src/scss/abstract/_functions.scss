@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:meta';
+@use 'sass:string';
 @use '../tokens/primitive/grid/_breakpoint' as *;
 
 //fluid size
@@ -121,4 +122,15 @@
 	);
 
 	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
+}
+
+@function str-replace($string, $search, $replace: '') {
+	$index: string.index($string, $search);
+
+	@if $index {
+		@return string.slice($string, 1, $index - 1) + $replace +
+			string.slice($string, $index + string.length($search));
+	}
+
+	@return $string;
 }
