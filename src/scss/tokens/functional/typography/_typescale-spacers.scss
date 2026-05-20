@@ -95,7 +95,7 @@ $typescale-spacers: (
 	)
 );
 
-@include map-to-var-breakpoints($typescale-spacers, 'ts');
+@include map-to-var-breakpoints($typescale-spacers, 'ts-');
 
 $ts-small-caption-default: var(--ts-small-caption-default);
 $ts-small-caption-spaced: var(--ts-small-caption-spaced);

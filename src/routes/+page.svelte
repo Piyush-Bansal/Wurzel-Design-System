@@ -20,7 +20,7 @@
 </script>
 
 <div class="container | paragraph-indent">
-	<p class="uppercase">
+	<p>
 		im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
 		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
 		molestias id delectus nihil provident accusantium excepturi quo nemo maxime
@@ -30,8 +30,8 @@
 		maxime, nam sequi deleniti sapiente est omnis ad iure saepe quis. Similique,
 		non!
 	</p>
-	<p>
-		im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
+	<p class="body-margin-top">
+		Im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
 		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
 		molestias id delectus nihil provident accusantium excepturi quo nemo maxime
 		dicta hic similique veritatis quod, vel aliquam! Labore reprehenderit
