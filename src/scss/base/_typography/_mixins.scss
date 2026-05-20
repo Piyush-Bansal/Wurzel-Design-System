@@ -5,3 +5,7 @@
 	line-height: $lh-body;
 	font-weight: $fw-regular;
 }
+
+@mixin font-family-accent {
+	font-family: $ff-accent;
+}

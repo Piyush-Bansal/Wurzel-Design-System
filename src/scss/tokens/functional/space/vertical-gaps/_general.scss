@@ -1,7 +1,7 @@
 @use '../../../../abstract/_mixins' as *;
 @use '../../../semantic/space/_large-gaps' as *;
 
-$-general-gaps: (
+$general-gaps: (
 	v-gap-1: (
 		large: $lg-gap-1,
 		medium: $lg-gap-1,
@@ -24,10 +24,10 @@ $-general-gaps: (
 	)
 );
 
-@include map-to-var-breakpoints($-general-gaps);
+@include map-to-var-breakpoints($general-gaps);
 
-$-v-gap-1: var(--v-gap-1);
-$-v-gap-2: var(--v-gap-2);
-$-v-gap-3: var(--v-gap-3);
-$-v-gap-4: var(--v-gap-4);
-$-v-gap-5: var(--v-gap-5);
+$v-gap-1: var(--v-gap-1);
+$v-gap-2: var(--v-gap-2);
+$v-gap-3: var(--v-gap-3);
+$v-gap-4: var(--v-gap-4);
+$v-gap-5: var(--v-gap-5);

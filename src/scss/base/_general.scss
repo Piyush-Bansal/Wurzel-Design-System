@@ -1,93 +1,17 @@
-// @use '../tokens' as *;
+@use '../tokens/functional' as *;
 
 * {
-	// caret-color: $caret-color;
-}
-
-a {
-	// text-decoration-thickness: $anchor-line-thickness;
-	// color: inherit;
+	caret-color: $clr-text-primary;
 }
 
 ::selection {
-	// background-color: $selection-background-color;
-	// color: $selection-text-color;
+	background-color: $clr-sur-primary;
+	color: $clr-text-inverse;
 }
 
 @media (prefers-reduced-motion: no-preference) {
 	:has(:target) {
 		scroll-behavior: smooth;
-		// scroll-padding-top: $spacer-5;
+		scroll-padding-top: $v-gap-4;
 	}
-}
-
-body {
-	// font-family: $body-font-family;
-	// letter-spacing: $body-letter-spacing;
-	// line-height: $body-line-height;
-	// font-weight: $body-font-weight;
-	// @include stylistic-sets-base;
-}
-
-p,
-ul,
-ol,
-button {
-	// font-family: $body-font-family;
-	// letter-spacing: $body-letter-spacing;
-	// line-height: $body-line-height;
-	// font-weight: $body-font-weight;
-
-	// &.uppercase {
-	// 	text-transform: uppercase;
-	// 	line-height: $uppercase-lh-body;
-	// 	letter-spacing: $uppercase-ls-body;
-	// }
-}
-
-p + p {
-	// text-indent: $paragraph-indent;
-}
-
-p:not(:last-child),
-ul:not(:last-child),
-ol:not(:last-child) {
-	// padding-bottom: $paragraph-spacing;
-}
-
-h5,
-.h5 {
-	// font-family: $heading-font-family;
-}
-
-h4,
-.h4 {
-	// font-family: $heading-font-family;
-}
-
-h3,
-.h3 {
-	// font-family: $heading-font-family;
-}
-
-h2,
-.h2 {
-	// font-family: $heading-font-family;
-}
-
-h1,
-.h1 {
-	// font-family: $heading-font-family;
-}
-
-.xl {
-	// font-family: $heading-font-family;
-}
-
-.xxl {
-	// font-family: $heading-font-family;
-}
-
-.xxxxl {
-	// font-family: $heading-font-family;
 }
