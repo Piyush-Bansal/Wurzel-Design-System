@@ -55,13 +55,12 @@ $line-height-default: (
 	)
 );
 
-:root {
-	@include generate-line-height($line-height-default, $font-sizes, 'lh');
-}
+@include map-to-var-breakpoints($line-height-default, 'lh-', true);
 
 $lh-small-caption: var(--lh-small-caption);
 $lh-caption: var(--lh-caption);
 $lh-body: var(--lh-body);
+$lh-body-half: calc(var(--lh-body) / 2);
 $lh-h5: var(--lh-h5);
 $lh-h4: var(--lh-h4);
 $lh-h3: var(--lh-h3);

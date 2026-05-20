@@ -1,3 +1,6 @@
+@use '../tokens/functional' as *;
+@use '../tokens/primitive/typography' as *;
+
 *,
 *::before,
 *::after {
@@ -7,13 +10,18 @@
 * {
 	margin: 0;
 	padding: 0;
-	font: inherit;
-	//tap highlight color
-	-webkit-tap-highlight-color: transparent;
 }
 
-html {
+body {
+	//tap highlight color
+	-webkit-tap-highlight-color: transparent;
+	background-color: $clr-sur-page;
+
+	text-box-trim: trim-both;
+	text-box-edge: cap alphabetic;
 	hanging-punctuation: first last;
+	color: $clr-text-primary;
+	font-family: $ff-base;
 }
 
 img,

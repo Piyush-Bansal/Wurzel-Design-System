@@ -1,0 +1,12 @@
+@use '../../tokens/functional' as *;
+@use '../../tokens/primitive/typography' as *;
+
+p {
+	&.spacing + p {
+		margin-top: $paragraph-spacing;
+	}
+	&.indent + p {
+		text-indent: $paragraph-indent;
+		margin-top: $lh-body-half;
+	}
+}

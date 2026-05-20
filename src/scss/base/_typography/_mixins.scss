@@ -1,0 +1,7 @@
+@use '../../tokens/primitive' as *;
+
+@mixin body-settings {
+	letter-spacing: $ls-body;
+	line-height: $lh-body;
+	font-weight: $fw-regular;
+}
