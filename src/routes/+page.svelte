@@ -19,7 +19,7 @@
 	];
 </script>
 
-<div class="container | paragraph-indent">
+<div class="container paragraph-indent grid">
 	<p>
 		im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
 		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
@@ -30,7 +30,7 @@
 		maxime, nam sequi deleniti sapiente est omnis ad iure saepe quis. Similique,
 		non!
 	</p>
-	<p class="body-margin-top">
+	<p class="place-col-7-11 place-row-1-2">
 		Im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
 		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
 		molestias id delectus nihil provident accusantium excepturi quo nemo maxime
@@ -40,7 +40,7 @@
 		maxime, nam sequi deleniti sapiente est omnis ad iure saepe quis. Similique,
 		non!
 	</p>
-	<a href="/">Hello</a>
+	<a href="/" class="place-row-4">Hello</a>
 
 	<Accordion collapsable={true}>
 		{#each accordionData as data, i}

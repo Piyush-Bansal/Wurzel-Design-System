@@ -29,7 +29,7 @@
 		$new-value: 'ts-' + $clean-key + '-spaced';
 
 		.#{$clean-key}-margin-bt[data-margin='spaced'] {
-			margin-bottom: var(#{$new-value});
+			margin-bottom: var(--#{$new-value});
 		}
 
 		.#{$clean-key}-margin-top[data-margin='spaced'] {
