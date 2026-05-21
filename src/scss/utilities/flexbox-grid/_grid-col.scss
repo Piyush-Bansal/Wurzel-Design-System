@@ -1,9 +1,27 @@
-// @use '../../abstract/' as *;
-// @use 'sass:map';
+@use '../../tokens/primitive/grid' as *;
+@use '../../tokens/functional/space/page-setup' as *;
+@use 'sass:map';
 
-// @for $i from 2 through map.get($total-columns, total-columns, large) {
-// 	.grid-col-#{$i} {
-// 		grid-template-columns: repeat($i, 1fr);
-// 		gap: $grid-gap;
-// 	}
-// }
+@for $i from 2 through map.get($total-columns, total-columns, large) {
+	.grid-col-#{$i} {
+		display: grid;
+		grid-template-columns: repeat($i, minmax(0, 1fr));
+		gap: map.get($page-full-gutter, gutter, large);
+	}
+}
+
+@for $i from 2 through map.get($total-columns, total-columns, medium) {
+	.grid-col-#{$i}-md {
+		display: grid;
+		grid-template-columns: repeat($i, minmax(0, 1fr));
+		gap: map.get($page-full-gutter, gutter, medium);
+	}
+}
+
+@for $i from 2 through map.get($total-columns, total-columns, small) {
+	.grid-col-#{$i}-sm {
+		display: grid;
+		grid-template-columns: repeat($i, minmax(0, 1fr));
+		gap: map.get($page-full-gutter, gutter, small);
+	}
+}
