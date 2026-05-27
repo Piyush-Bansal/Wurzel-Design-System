@@ -1,57 +1,19 @@
 <script lang="ts">
-	import { Accordion, AccordionItem } from '$components/accordion';
-	import Slide from '$components/tab/Slide.svelte';
-	const data = [Slide, Slide, Slide, Slide, Slide, Slide, Slide, Slide];
+	import { List, ListItem } from '$components/list-hover';
 
-	const accordionData = [
-		{
-			heading: 'Accordion Heading 1',
-			description: 'Accordion Description 1'
-		},
-		{
-			heading: 'Accordion Heading 2',
-			description: 'Accordion Description 2'
-		},
-		{
-			heading: 'Accordion Heading 3',
-			description: 'Accordion Description 3'
-		}
+	let listData = [
+		'Prow scuttle parrel provost Sail ho shrouds',
+		'Spirits boom mizzenmast yardarm',
+		'Pinnace holystone mizzenmast quarter',
+		"Crow's nest nipperkin grog yardarm hempen halter furl",
+		'Swab barque interloper chantey doubloon'
 	];
 </script>
 
-<div class="container paragraph-indent grid-col-3">
-	<p>
-		im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
-		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
-		molestias id delectus nihil provident accusantium excepturi quo nemo maxime
-		dicta hic similique veritatis quod, vel aliquam! Labore reprehenderit
-		blanditiis, est dolores illo quos dolor esse laudantium officia distinctio
-		veritatis saepe totam qui voluptatem! Suscipit modi qui officia delectus
-		maxime, nam sequi deleniti sapiente est omnis ad iure saepe quis. Similique,
-		non!
-	</p>
-	<p>
-		Im obcaecati natus explicabo expedita? Tenetur perspiciatis aliquam esse non
-		culpa expedita possimus. Repudiandae corporis obcaecati aliquid eum
-		molestias id delectus nihil provident accusantium excepturi quo nemo maxime
-		dicta hic similique veritatis quod, vel aliquam! Labore reprehenderit
-		blanditiis, est dolores illo quos dolor esse laudantium officia distinctio
-		veritatis saepe totam qui voluptatem! Suscipit modi qui officia delectus
-		maxime, nam sequi deleniti sapiente est omnis ad iure saepe quis. Similique,
-		non!
-	</p>
-	<a href="/">Hello</a>
-
-	<Accordion collapsable={true}>
-		{#each accordionData as data, i}
-			<AccordionItem open={i === 0} group="b">
-				{#snippet heading()}
-					{data.heading}
-				{/snippet}
-				{#snippet description()}
-					{data.description}
-				{/snippet}
-			</AccordionItem>
+<div class="container">
+	<List>
+		{#each listData as data, i (crypto.randomUUID())}
+			<ListItem index={i + 1} content={data} />
 		{/each}
-	</Accordion>
+	</List>
 </div>
