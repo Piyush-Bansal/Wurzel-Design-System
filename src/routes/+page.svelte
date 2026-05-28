@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { List, ListItem } from '$components/list-hover';
+	import { List, ListItem, HoverImage } from '$components/list-hover';
 
 	let listData = [
 		'Prow scuttle parrel provost Sail ho shrouds',
@@ -12,7 +12,8 @@
 
 <div class="container">
 	<List>
-		{#each listData as data, i (crypto.randomUUID())}
+		<HoverImage src="https://picsum.photos/800" />
+		{#each listData as data, i (i)}
 			<ListItem index={i + 1} content={data} />
 		{/each}
 	</List>

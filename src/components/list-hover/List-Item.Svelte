@@ -5,7 +5,7 @@
 </script>
 
 <div class="list-item">
-	<div class="list-item-content">
+	<div role="presentation" class="list-item-content">
 		<p>{index}</p>
 		<h3>{content}</h3>
 	</div>
