@@ -1,3 +1,5 @@
+import type { Spring } from 'svelte/motion';
+
 export interface ListItemProps {
 	index: number;
 	content: string;
@@ -9,7 +11,7 @@ export interface HoverImageProps {
 }
 
 export interface HoverFunctionality {
-	yAxis: number;
+	yAxis: Spring<number>;
 	imageWrapperHeight: number;
 	imageIsVisible: boolean;
 }

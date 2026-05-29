@@ -13,7 +13,7 @@
 		class="image-wrapper | ar-2-3"
 		bind:this={imageWrapper}
 		bind:clientHeight={currentState.imageWrapperHeight}
-		style:transform="translateY({currentState.yAxis}px)"
+		style:transform={`translateY(${currentState.yAxis.current}px)`}
 	>
 		<img {src} {alt} />
 	</div>

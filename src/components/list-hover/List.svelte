@@ -12,7 +12,7 @@
 	class="list | relative"
 	onmousemove={(e) => {
 		const rect = e.currentTarget.getBoundingClientRect();
-		currentState.yAxis =
+		currentState.yAxis.target =
 			e.clientY - rect.top - currentState.imageWrapperHeight / 2;
 	}}
 	onmouseleave={() => {
@@ -28,7 +28,9 @@
 </div>
 
 <style lang="scss">
+	@use '$tokens' as *;
+
 	.list {
-		margin-top: 30vh;
+		margin-top: $sec-gap-xl;
 	}
 </style>
