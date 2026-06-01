@@ -6,12 +6,12 @@ export interface ListItemProps {
 }
 
 export interface HoverImageProps {
-	src: string;
+	urls: string[];
 	alt?: string;
 }
 
 export interface HoverFunctionality {
 	yAxis: Spring<number>;
 	imageWrapperHeight: number;
-	imageIsVisible: boolean;
+	isImgVisible: boolean;
 }

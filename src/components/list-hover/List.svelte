@@ -16,10 +16,10 @@
 			e.clientY - rect.top - currentState.imageWrapperHeight / 2;
 	}}
 	onmouseleave={() => {
-		currentState.imageIsVisible = false;
+		currentState.isImgVisible = false;
 	}}
 	onmouseenter={() => {
-		currentState.imageIsVisible = true;
+		currentState.isImgVisible = true;
 	}}
 >
 	{#if children}

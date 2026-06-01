@@ -1,12 +1,20 @@
 <script lang="ts">
+	import { getHoverState } from './functionality.svelte';
 	import type { ListItemProps } from './types';
 
 	let { index, content }: ListItemProps = $props();
+	const currentState = getHoverState();
 </script>
 
-<div class="list-item">
-	<div role="presentation" class="list-item-content">
-		<p>{index}</p>
+<div
+	role="presentation"
+	class="list-item"
+	onmouseenter={() => {
+		currentState.hoverQueue.push(index);
+	}}
+>
+	<div class="list-item-content">
+		<p>{index + 1}</p>
 		<h3>{content}</h3>
 	</div>
 </div>
