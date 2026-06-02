@@ -8,10 +8,10 @@ class Hover implements HoverFunctionality {
 	imageWrapperHeight = $state(0);
 	isImgVisible = $state(false);
 	hoverQueue = $state<number[]>([]);
-	images = $state<HTMLImageElement[]>([]);
+	images: HTMLImageElement[] = [];
 
 	currentZ = 1;
-	protected _tl: GSAPTimeline = gsap.timeline();
+	private _tl: GSAPTimeline = gsap.timeline();
 
 	constructor() {
 		$effect(() => {
@@ -34,7 +34,8 @@ class Hover implements HoverFunctionality {
 		$effect(() => {
 			if (this.isImgVisible) return;
 
-			this._tl.clear();
+			this._tl.kill();
+			this._tl = gsap.timeline();
 			this.currentZ = 1;
 			this.hoverQueue.length = 0;
 
@@ -55,7 +56,7 @@ class Hover implements HoverFunctionality {
 			{
 				yPercent: 100,
 				duration: 0.6,
-				ease: 'power5.out'
+				ease: 'power2.out'
 			}
 		);
 	}

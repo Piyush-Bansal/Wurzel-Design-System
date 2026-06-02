@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { List, ListItem, HoverImage } from '$components/list-hover';
 
-	let listData = [
+	const listData = [
 		{
 			title: 'Prow scuttle parrel provost Sail ho shrouds',
 			imgURL: 'https://picsum.photos/200/300.webp?random=1'
