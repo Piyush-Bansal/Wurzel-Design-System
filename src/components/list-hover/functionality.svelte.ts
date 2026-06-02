@@ -11,7 +11,9 @@ class Hover implements HoverFunctionality {
 	images: HTMLImageElement[] = [];
 
 	currentZ = 1;
-	private _tl: GSAPTimeline = gsap.timeline();
+	private _tl: GSAPTimeline = gsap.timeline({
+		autoRemoveChildren: true
+	});
 
 	constructor() {
 		$effect(() => {
@@ -49,14 +51,14 @@ class Hover implements HoverFunctionality {
 	}
 
 	animateImage(img: HTMLImageElement, z: number) {
-		const tl = gsap.timeline();
-		return tl.fromTo(
+		return gsap.fromTo(
 			img,
 			{ yPercent: 0, zIndex: z },
 			{
 				yPercent: 100,
 				duration: 0.6,
-				ease: 'power2.out'
+				ease: 'power2.out',
+				overwrite: true
 			}
 		);
 	}

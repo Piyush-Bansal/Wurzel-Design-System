@@ -49,6 +49,7 @@
 			inset: 0;
 
 			transform: translateY(-100%);
+			will-change: transform;
 		}
 	}
 </style>
