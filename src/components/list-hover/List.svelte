@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { getHoverState, setHoverState } from './functionality.svelte';
 
 	let { children } = $props();
 
 	setHoverState();
 	const currentState = getHoverState();
+
+	//cleanup
+	onDestroy(() => currentState.destroy());
 </script>
 
 <div

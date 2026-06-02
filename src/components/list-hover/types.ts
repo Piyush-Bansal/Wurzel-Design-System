@@ -14,4 +14,7 @@ export interface HoverFunctionality {
 	yAxis: Spring<number>;
 	imageWrapperHeight: number;
 	isImgVisible: boolean;
+	hoverQueue: number[];
+	images: HTMLImageElement[];
+	currentZ: number;
 }
