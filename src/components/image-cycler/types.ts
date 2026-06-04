@@ -1,6 +1,7 @@
 export interface ImageCycler {
 	images: string[];
 	active: boolean;
-	aspectRatio?: string;
 	interval?: number;
+	aspectRatio?: string;
+	borderRadius?: 'none' | 'tight' | 'default' | 'soft' | 'large' | 'full';
 }

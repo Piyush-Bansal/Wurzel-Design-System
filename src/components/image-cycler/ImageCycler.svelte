@@ -4,7 +4,23 @@
 		setImageCyclerFunctionality
 	} from './functionality.svelte';
 	import type { ImageCycler } from './types';
-	let { images, aspectRatio, interval = 200, active }: ImageCycler = $props();
+
+	const borders = {
+		none: '0',
+		tight: 'var(--br-tight)',
+		default: 'var(--br-default)',
+		soft: 'var(--br-soft)',
+		large: 'var(--br-large)',
+		full: 'var(--br-full)'
+	};
+
+	let {
+		images,
+		aspectRatio,
+		interval = 200,
+		active,
+		borderRadius = 'none'
+	}: ImageCycler = $props();
 
 	setImageCyclerFunctionality();
 	const state = getImageCyclerFunctionality();
@@ -17,7 +33,11 @@
 	});
 </script>
 
-<div class="img-wrapper" style:aspect-ratio={aspectRatio}>
+<div
+	class="img-wrapper"
+	style:aspect-ratio={aspectRatio}
+	style:border-radius={borders[borderRadius]}
+>
 	{#each images as src, i (i)}
 		<img
 			{src}

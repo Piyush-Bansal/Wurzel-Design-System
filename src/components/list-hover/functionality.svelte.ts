@@ -19,7 +19,7 @@ class Hover implements HoverFunctionality {
 		$effect(() => {
 			if (!this.hoverQueue.length || !this.isImgVisible) return;
 
-			const index = this.hoverQueue.shift();
+			const index = this.hoverQueue.shift(); //Retrigger effect
 			if (index === undefined) return;
 
 			const img = this.images[index];
@@ -33,13 +33,14 @@ class Hover implements HoverFunctionality {
 			);
 		});
 
+		//On hoverout
 		$effect(() => {
 			if (this.isImgVisible) return;
 
 			this._tl.kill();
 			this._tl = gsap.timeline();
 			this.currentZ = 1;
-			this.hoverQueue.length = 0;
+			this.hoverQueue.length = 0; //empty the array
 
 			for (const img of this.images) {
 				gsap.set(img, {
