@@ -56,7 +56,7 @@ class Hover implements HoverFunctionality {
 			{ yPercent: 0, zIndex: z },
 			{
 				yPercent: 100,
-				duration: 0.6,
+				duration: 0.45,
 				ease: 'power2.out',
 				overwrite: true
 			}
