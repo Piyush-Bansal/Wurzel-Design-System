@@ -12,6 +12,12 @@
 	padding: 0;
 }
 
+html {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 body {
 	//tap highlight color
 	-webkit-tap-highlight-color: transparent;
@@ -22,6 +28,9 @@ body {
 	hanging-punctuation: first last;
 	color: $clr-text-primary;
 	font-family: $ff-base;
+
+	font-synthesis: none;
+	font-optical-sizing: auto;
 }
 
 img,
