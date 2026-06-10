@@ -23,13 +23,13 @@
 	}: ImageCycler = $props();
 
 	setImageCyclerFunctionality();
-	const state = getImageCyclerFunctionality();
+	const componentState = getImageCyclerFunctionality();
 
 	//Pass state to the class
 	$effect(() => {
-		state.active = active;
-		state.intervalDuration = interval;
-		state.noOfImages = images.length;
+		componentState.active = active;
+		componentState.intervalDuration = interval;
+		componentState.noOfImages = images.length;
 	});
 </script>
 
@@ -43,7 +43,7 @@
 			{src}
 			alt=""
 			loading="lazy"
-			class={[i !== state.currentIndex && 'invisible']}
+			class={[i !== componentState.currentIndex && 'invisible']}
 		/>
 	{/each}
 </div>

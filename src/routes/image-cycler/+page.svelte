@@ -20,7 +20,7 @@
 			onmouseenter={() => (active = true)}
 			onmouseleave={() => (active = false)}
 		>
-			<ImageCycler {images} {active} aspectRatio={'3/4'} interval={600} borderRadius="none"
+			<ImageCycler {images} {active} aspectRatio={'3/4'} interval={1000} borderRadius="none"
 			></ImageCycler>
 		</div>
 	</div>

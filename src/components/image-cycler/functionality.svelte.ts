@@ -2,9 +2,9 @@ import { getContext, setContext } from 'svelte';
 
 class ImageCyclerFunctionality {
 	active = $state(false);
-	intervalDuration = 0;
 	currentIndex = $state(0);
-	noOfImages = $state(1);
+	noOfImages: number = $state(0);
+	intervalDuration: number = 0;
 	interval: ReturnType<typeof setInterval> | null = null;
 
 	constructor() {
@@ -16,7 +16,7 @@ class ImageCyclerFunctionality {
 
 				this.interval = setInterval(() => {
 					this.currentIndex = (this.currentIndex + 1) % this.noOfImages;
-				}, this.intervalDuration);
+				}, this.intervalDuration || 0);
 			} else {
 				this.stop();
 			}
@@ -36,10 +36,8 @@ class ImageCyclerFunctionality {
 }
 
 const KEY = Symbol('ImageCyclerFunctionality');
-
 export const setImageCyclerFunctionality = () => {
 	return setContext(KEY, new ImageCyclerFunctionality());
 };
-
 export const getImageCyclerFunctionality = () =>
 	getContext<ImageCyclerFunctionality>(KEY);
