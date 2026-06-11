@@ -1,16 +1,14 @@
 @use '../../tokens/functional' as *;
 @use '../../tokens/primitive/typography' as *;
 
-.paragraph-spacing {
-	p:not(:last-of-type),
-	.p:not(:last-of-type) {
-		margin-bottom: $paragraph-spacing;
-	}
+paragraph-spacing,
+p:not(:last-of-type),
+.p:not(:last-of-type) {
+	margin-bottom: $paragraph-spacing;
 }
 
-.paragraph-indent {
-	p:not(:first-of-type),
-	.p:not(:first-of-type) {
-		text-indent: $paragraph-indent;
-	}
-}
+// .paragraph-indent,
+// p:not(:first-of-type),
+// .p:not(:first-of-type) {
+// 	text-indent: $paragraph-indent;
+// }
