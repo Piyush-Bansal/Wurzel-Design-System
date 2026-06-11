@@ -1,43 +1,54 @@
-let position = $state({ x: 0, y: 0 });
+import { browser } from '$app/env';
+import { onDestroy } from 'svelte';
 
-const previous = $state({ x: 0, y: 0 });
+const state = $state({
+	x: 0,
+	y: 0
+});
 
-const deltaX = $derived(position.x - previous.x);
-const deltaY = $derived(position.y - previous.y);
+let consumers = 0;
 
-const speed = $derived(Math.sqrt(deltaX * deltaX + deltaY * deltaY));
-const angle = $derived(Math.atan2(deltaY, deltaX));
-const isMoving = $derived(speed > 0.1);
-
-export const pointerDetails = {
-	get position() {
-		return position;
+const pointer = {
+	get x() {
+		return state.x;
 	},
 
-	get speed() {
-		return speed;
-	},
-
-	get angle() {
-		return angle;
-	},
-
-	get isMoving() {
-		return isMoving;
+	get y() {
+		return state.y;
 	}
 };
 
-function handlePointer(e: MouseEvent) {
-	previous.x = position.x;
-	previous.y = position.y;
-
-	position.x = e.clientX;
-	position.y = e.clientY;
-}
-export function createListener() {
-	window.addEventListener('mousemove', handlePointer);
+function handlePointerMove(e: PointerEvent) {
+	state.x = e.clientX;
+	state.y = e.clientY;
 }
 
-export function removeListener() {
-	window.removeEventListener('mousemove', handlePointer);
+function attach() {
+	window.addEventListener('pointermove', handlePointerMove);
+}
+
+function detach() {
+	window.removeEventListener('pointermove', handlePointerMove);
+}
+
+export function usePointer() {
+	if (!browser) {
+		return pointer;
+	}
+
+	consumers++;
+
+	if (consumers === 1) {
+		attach();
+	}
+
+	onDestroy(() => {
+		consumers--;
+
+		if (consumers === 0) {
+			detach();
+		}
+	});
+
+	return pointer;
 }
