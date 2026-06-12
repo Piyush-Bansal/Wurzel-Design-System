@@ -12,6 +12,8 @@
 		{ stiffness: 0.2, damping: 0.5 }
 	);
 
+	let rafID: null | number = null;
+
 	$effect(() => {
 		if (!card) return;
 		const bound = useBounds(card);
@@ -25,10 +27,14 @@
 		class="card | place-col-6-8 ar-3-4"
 		bind:this={card}
 		onmousemove={() => {
-			rotationAngle.target = {
-				x: (space?.centred.x ?? 0) * -15,
-				y: (space?.centred.y ?? 0) * 15
-			};
+			if (rafID !== null) return;
+			rafID = requestAnimationFrame(() => {
+				rafID = null;
+				rotationAngle.target = {
+					x: (space?.centred.x ?? 0) * -15,
+					y: (space?.centred.y ?? 0) * 15
+				};
+			});
 		}}
 		onmouseleave={() => {
 			rotationAngle.target = { x: 0, y: 0 };
