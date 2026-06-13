@@ -50,7 +50,7 @@ $-br: (
 	br-xxxxxl: (
 		small: $micro-9
 	),
-	br-full: (
+	br-50: (
 		large: 50%,
 		medium: 50%,
 		small: 50%
@@ -69,4 +69,4 @@ $br-xxl: var(--br-xxl);
 $br-xxxl: var(--br-xxxl);
 $br-xxxxl: var(--br-xxxxl);
 $br-xxxxxl: var(--br-xxxxxl);
-$br-full: var(--br-full);
+$br-50: var(--br-50);
