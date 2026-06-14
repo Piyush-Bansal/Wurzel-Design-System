@@ -20,7 +20,7 @@ $-control-sizes: (
 	)
 );
 
-@include map-to-var-breakpoints($-control-sizes, 'ctrl-size');
+@include map-to-var-breakpoints($-control-sizes, 'ctrl-size-');
 
 $ctrl-size-point: var(--ctrl-size-point);
 $ctrl-size-thumb: var(--ctrl-size-thumb);
