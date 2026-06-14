@@ -72,22 +72,31 @@
 
 	const resetScaleX = $derived.by(() => {
 		if (!follower) return;
-		return gsap.quickTo(follower, 'scaleX', { duration: 0.02, ease: 'none' });
+		return gsap.quickTo(follower, 'scaleX', {
+			duration: 0.07,
+			ease: 'none'
+		});
 	});
 
 	const resetScaleY = $derived.by(() => {
 		if (!follower) return;
-		return gsap.quickTo(follower, 'scaleY', { duration: 0.02, ease: 'none' });
+		return gsap.quickTo(follower, 'scaleY', {
+			duration: 0.07,
+			ease: 'none'
+		});
 	});
 
 	const resetRotatePointer = $derived.by(() => {
 		if (!follower) return;
-		return gsap.quickTo(follower, 'rotation', { duration: 0.02, ease: 'none' });
+		return gsap.quickTo(follower, 'rotation', {
+			duration: 0.07,
+			ease: 'none'
+		});
 	});
 
 	$effect(() => {
 		if (
-			activity.idleTime > 10 &&
+			activity.idleTime > 100 &&
 			resetScaleX &&
 			resetScaleY &&
 			resetRotatePointer
@@ -105,6 +114,7 @@
 	<p>Angle: {velocity?.angleDegree.toFixed(2)}</p>
 	<p>X: {velocity?.dX}</p>
 	<p>Y: {velocity?.dY}</p>
+	<p>Idle: {activity.idleTime}</p>
 </div>
 
 <style lang="scss">

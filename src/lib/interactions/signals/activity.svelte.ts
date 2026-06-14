@@ -2,51 +2,44 @@ import type { usePointer } from './pointer.svelte';
 
 export function useActivity(position: ReturnType<typeof usePointer>) {
 	const ACTIVITY_THRESHOLD = 5_000;
+	const TICK_INTERVAL = 50;
 
-	const startedAt = Date.now();
-
-	let now = $state(startedAt);
-	let lastActivity = $state<number | null>(null);
-
-	let initialised = false;
-
-	$effect(() => {
-		const timer = setInterval(() => {
-			now = Date.now();
-		}, 1000);
-
-		return () => clearInterval(timer);
-	});
+	let lastActivityTime = $state(Date.now());
+	let tick = $state(0);
 
 	$effect(() => {
 		position.x;
 		position.y;
 
-		if (!initialised) {
-			initialised = true;
-			return;
-		}
-
-		const timestamp = Date.now();
-
-		now = timestamp;
-		lastActivity = timestamp;
+		lastActivityTime = Date.now();
 	});
+
+	$effect(() => {
+		const interval = setInterval(() => {
+			tick++;
+		}, TICK_INTERVAL);
+
+		return () => clearInterval(interval);
+	});
+
+	const idleTime = $derived.by(() => {
+		tick;
+		return Date.now() - lastActivityTime;
+	});
+
+	const isActive = $derived(idleTime < ACTIVITY_THRESHOLD);
 
 	return {
 		get isActive() {
-			const idleTime =
-				lastActivity === null ? now - startedAt : now - lastActivity;
-
-			return idleTime < ACTIVITY_THRESHOLD;
+			return isActive;
 		},
 
 		get idleTime() {
-			return lastActivity === null ? now - startedAt : now - lastActivity;
+			return idleTime;
 		},
 
 		get lastActivity() {
-			return lastActivity === null ? null : new Date(lastActivity);
+			return lastActivityTime;
 		}
 	};
 }
