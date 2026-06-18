@@ -6,6 +6,7 @@
 		useSpaces,
 		useVelocity
 	} from '$lib/interactions';
+	import { loadImages } from '$lib/interactions/resources/image-loader.svelte';
 	import TrailingImage from './TrailingImage.svelte';
 	import type { TrailItem } from './types';
 
@@ -22,21 +23,23 @@
 		'https://picsum.photos/200/200.webp?random=7'
 	];
 
-	if (browser) {
-		Promise.all(
-			images.map(
-				(src) =>
-					new Promise<string>((resolve) => {
-						const img = new Image();
-						img.onload = () => resolve(src);
-						img.onerror = () => resolve(src);
-						img.src = src;
-					})
-			)
-		).then((urls) => {
-			images = urls;
-		});
-	}
+	// if (browser) {
+	// 	Promise.all(
+	// 		images.map(
+	// 			(src) =>
+	// 				new Promise<string>((resolve) => {
+	// 					const img = new Image();
+	// 					img.onload = () => resolve(src);
+	// 					img.onerror = () => resolve(src);
+	// 					img.src = src;
+	// 				})
+	// 		)
+	// 	).then((urls) => {
+	// 		images = urls;
+	// 	});
+	// }
+
+	const loadedImages = await loadImages(images);
 
 	const bound = $derived.by(() => {
 		if (!trailArea) return;
@@ -86,7 +89,7 @@
 			x: localPointer?.local.x,
 			y: localPointer?.local.y,
 			z: zIndex,
-			src: images[targetIndex],
+			src: loadedImages.loaded[targetIndex],
 			speed: velocity.speed,
 			angle: velocity.angleDegree
 		};

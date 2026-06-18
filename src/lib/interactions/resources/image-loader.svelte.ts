@@ -18,7 +18,10 @@ function loadImage(src: string): Promise<string> {
 
 export async function loadImages(images: string[]): Promise<LoadImagesResult> {
 	if (!browser) {
-		throw new Error('loadImages can only run in the browser');
+		return {
+			loaded: [],
+			failed: []
+		};
 	}
 
 	if (images.length === 0) {

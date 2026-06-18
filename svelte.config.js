@@ -5,6 +5,12 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 const config = {
 	preprocess: [vitePreprocess()],
 
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
+	},
+
 	kit: {
 		adapter: adapter(),
 		alias: {
@@ -12,8 +18,12 @@ const config = {
 			$tokens: './src/scss/tokens/functional',
 			$sizes: './src/scss/abstract/functions',
 			$components: './src/components'
+		},
+		experimental: {
+			remoteFunctions: true
 		}
 	},
+
 	vitePlugin: {
 		inspector: {
 			toggleKeyCombo: 'control-shift'
