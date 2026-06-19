@@ -36,10 +36,6 @@
 		// 	}
 		// });
 	}
-
-	$effect(() => {
-		$inspect(details.angle, details.speed);
-	});
 </script>
 
 <img

@@ -1,3 +1,5 @@
+export * from './observers/distanceTrigger.svelte.js';
+export * from './resources/image-loader.svelte.js';
 export * from './signals/activity.svelte.js';
 export * from './signals/pointer.svelte.js';
 export * from './signals/velocity.svelte.js';

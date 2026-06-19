@@ -1,17 +1,15 @@
 <script lang="ts">
-	import { browser } from '$app/env';
 	import {
+		loadImages,
 		useBounds,
+		useDistanceTrigger,
 		usePointer,
 		useSpaces,
 		useVelocity
 	} from '$lib/interactions';
-	import { loadImages } from '$lib/interactions/resources/image-loader.svelte';
+
 	import TrailingImage from './TrailingImage.svelte';
 	import type { TrailItem } from './types';
-
-	const globalPointer = usePointer();
-	let trailArea = $state<HTMLElement>();
 
 	let images = [
 		'https://picsum.photos/200/200.webp?random=1',
@@ -23,23 +21,10 @@
 		'https://picsum.photos/200/200.webp?random=7'
 	];
 
-	// if (browser) {
-	// 	Promise.all(
-	// 		images.map(
-	// 			(src) =>
-	// 				new Promise<string>((resolve) => {
-	// 					const img = new Image();
-	// 					img.onload = () => resolve(src);
-	// 					img.onerror = () => resolve(src);
-	// 					img.src = src;
-	// 				})
-	// 		)
-	// 	).then((urls) => {
-	// 		images = urls;
-	// 	});
-	// }
-
 	const loadedImages = await loadImages(images);
+
+	const globalPointer = usePointer();
+	let trailArea = $state<HTMLElement>();
 
 	const bound = $derived.by(() => {
 		if (!trailArea) return;
@@ -47,47 +32,29 @@
 	});
 
 	const localPointer = $derived.by(() => {
-		if (!trailArea || !bound) return;
-		return useSpaces(globalPointer, bound);
+		if (!bound) return;
+		const spaces = useSpaces(globalPointer, bound);
+		return spaces?.local;
 	});
 
 	let isHovering = $state(false);
 
 	let zIndex = $state(0);
-
 	let trail = $state<TrailItem[]>([]);
 
-	const lastSpawn = {
-		x: 0,
-		y: 0
-	};
-
-	const SPAWN_DISTANCE = 150;
-
 	let imageIndex = 0;
-
 	let velocity = $derived(useVelocity(globalPointer));
 
-	$effect(() => {
-		if (!localPointer || !isHovering) return;
-
-		const dX = localPointer?.local.x - lastSpawn.x;
-		const dY = localPointer?.local.y - lastSpawn.y;
-
-		const distance = Math.hypot(dX, dY);
-
-		if (distance < SPAWN_DISTANCE) return;
-
-		lastSpawn.x = localPointer?.local.x;
-		lastSpawn.y = localPointer?.local.y;
+	function spawnImage() {
+		if (!localPointer) return;
 
 		zIndex++;
-		const targetIndex = imageIndex % images.length;
+		const targetIndex = imageIndex % loadedImages.loaded.length;
 
 		const item = {
 			id: crypto.randomUUID(),
-			x: localPointer?.local.x,
-			y: localPointer?.local.y,
+			x: localPointer?.x,
+			y: localPointer?.y,
 			z: zIndex,
 			src: loadedImages.loaded[targetIndex],
 			speed: velocity.speed,
@@ -97,6 +64,11 @@
 		trail.push(item);
 
 		imageIndex++;
+	}
+
+	$effect(() => {
+		if (!localPointer) return;
+		useDistanceTrigger(localPointer, spawnImage);
 	});
 
 	$effect(() => {
@@ -116,8 +88,8 @@
 	role="region"
 >
 	{#if isHovering}
-		<p>{localPointer?.local.x}</p>
-		<p>{localPointer?.local.y}</p>
+		<p>{localPointer?.x}</p>
+		<p>{localPointer?.y}</p>
 		<p>{trail.length} images</p>
 	{/if}
 
