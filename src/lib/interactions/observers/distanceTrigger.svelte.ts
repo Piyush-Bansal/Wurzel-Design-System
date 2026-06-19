@@ -1,30 +1,35 @@
-type UseDistanceTrigger = (
-	pointer: { x: number; y: number },
-	callback: () => void,
-	threshold?: number
-) => void;
-
-let lastPosition = { x: 0, y: 0 };
-let firstRun = true;
-
-export const useDistanceTrigger: UseDistanceTrigger = function (
-	pointer,
-	callback,
-	threshold = 40
-) {
-	const distance = Math.hypot(
-		pointer.x - lastPosition.x,
-		pointer.y - lastPosition.y
-	);
-
-	lastPosition = pointer;
-
-	if (firstRun) {
-		firstRun = false;
-		return;
-	}
-
-	if (distance > threshold) {
-		callback();
-	}
+export type Point = {
+	x: number;
+	y: number;
 };
+
+export function createDistanceTrigger(threshold = 40) {
+	let lastPosition: Point | null = null;
+
+	return {
+		check(position: Point, callback: (position: Point) => void) {
+			if (lastPosition === null) {
+				lastPosition = {
+					x: position.x,
+					y: position.y
+				};
+
+				return;
+			}
+
+			const distance = Math.hypot(
+				position.x - lastPosition.x,
+				position.y - lastPosition.y
+			);
+
+			if (distance < threshold) return;
+
+			lastPosition = {
+				x: position.x,
+				y: position.y
+			};
+
+			callback(position);
+		}
+	};
+}

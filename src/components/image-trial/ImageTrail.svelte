@@ -1,11 +1,12 @@
 <script lang="ts">
 	import {
+		createDistanceTrigger,
 		loadImages,
 		useBounds,
-		useDistanceTrigger,
 		usePointer,
 		useSpaces,
-		useVelocity
+		useVelocity,
+		type Point
 	} from '$lib/interactions';
 
 	import TrailingImage from './TrailingImage.svelte';
@@ -45,16 +46,14 @@
 	let imageIndex = 0;
 	let velocity = $derived(useVelocity(globalPointer));
 
-	function spawnImage() {
-		if (!localPointer) return;
-
+	function spawnImage(position: Point) {
 		zIndex++;
 		const targetIndex = imageIndex % loadedImages.loaded.length;
 
 		const item = {
 			id: crypto.randomUUID(),
-			x: localPointer?.x,
-			y: localPointer?.y,
+			x: position?.x,
+			y: position?.y,
 			z: zIndex,
 			src: loadedImages.loaded[targetIndex],
 			speed: velocity.speed,
@@ -62,13 +61,14 @@
 		};
 
 		trail.push(item);
-
 		imageIndex++;
 	}
 
+	const trigger = createDistanceTrigger();
+
 	$effect(() => {
 		if (!localPointer) return;
-		useDistanceTrigger(localPointer, spawnImage);
+		trigger.check(localPointer, (localPointer) => spawnImage(localPointer));
 	});
 
 	$effect(() => {
