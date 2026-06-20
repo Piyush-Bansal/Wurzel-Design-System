@@ -2,6 +2,7 @@ import {
 	createDistanceTrigger,
 	loadImages,
 	useBounds,
+	useIntersection,
 	usePointer,
 	useSpaces,
 	useVelocity,
@@ -49,6 +50,10 @@ class TrailFunctionality {
 			if (this.trail.length === 0) {
 				this._zIndex = 0;
 			}
+		});
+
+		$effect(() => {
+			useIntersection(() => this.trailArea, { rootMargin: '100px' });
 		});
 	}
 
@@ -117,15 +122,11 @@ class TrailFunctionality {
 					rotate: gsap.utils.mapRange(-180, 180, -30, 30, angle)
 				}
 			).to(element, {
-				yPercent: 100,
+				yPercent: travelDistance,
 				ease: 'power2.in',
 				duration: 0.2,
 				delay: 2
 			});
-
-			return () => {
-				tl.kill();
-			};
 		};
 	}
 }
