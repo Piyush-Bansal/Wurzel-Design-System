@@ -55,6 +55,10 @@ class TrailFunctionality {
 		$effect(() => {
 			useIntersection(() => this.trailArea, { rootMargin: '100px' });
 		});
+
+		// $effect(() => {
+		// 	$inspect(this.trail);
+		// });
 	}
 
 	private _bounds = $derived.by(() => {
@@ -100,16 +104,10 @@ class TrailFunctionality {
 
 	animate(details: TrailItem): Attachment {
 		return (element) => {
-			const { speed, angle, id } = untrack(() => ({
-				speed: details.speed,
-				angle: details.angle,
-				id: details.id
-			}));
-
-			const travelDistance = gsap.utils.mapRange(0, 80, 10, 120, speed);
+			const travelDistance = gsap.utils.mapRange(0, 80, 10, 120, details.speed);
 
 			const tl = gsap.timeline({
-				onComplete: () => this.removeImage(id)
+				onComplete: () => this.removeImage(details.id)
 			});
 
 			tl.fromTo(
@@ -119,7 +117,7 @@ class TrailFunctionality {
 					scale: 1,
 					ease: 'power2.out',
 					duration: 0.25,
-					rotate: gsap.utils.mapRange(-180, 180, -30, 30, angle)
+					rotate: gsap.utils.mapRange(-180, 180, -30, 30, details.angle)
 				}
 			).to(element, {
 				yPercent: travelDistance,

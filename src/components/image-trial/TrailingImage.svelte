@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { getImageTrailFunctionality } from './functionality.svelte';
 	import type { TrailItem } from './types';
 
@@ -14,7 +15,7 @@
 	style:left={`${details.x}px`}
 	style:top={`${details.y}px`}
 	style:z-index={`${details.z}`}
-	{@attach functionality.animate(details)}
+	{@attach functionality.animate(untrack(() => details))}
 />
 
 <style lang="scss">
