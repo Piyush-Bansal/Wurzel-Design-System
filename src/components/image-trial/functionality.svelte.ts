@@ -1,29 +1,138 @@
-import { useBounds, usePointer, useSpaces } from '$lib/interactions';
-import { getContext, setContext } from 'svelte';
+import {
+	createDistanceTrigger,
+	loadImages,
+	useBounds,
+	usePointer,
+	useSpaces,
+	useVelocity,
+	type LoadImagesResult,
+	type Point
+} from '$lib/interactions';
+import type { Attachment } from 'svelte/attachments';
+
+import type { TrailItem } from './types';
+import gsap from 'gsap';
+import { getContext, setContext, untrack } from 'svelte';
 
 class TrailFunctionality {
-	trailArea = $state<HTMLElement>();
+	trailArea = $state<HTMLDivElement>();
 
-	pointer = $derived(this._createPointer());
+	isHovering = $state(false);
 
-	private _createPointer() {
-		const globalPointer = usePointer();
-		const bound = $derived.by(() => {
-			if (!this.trailArea) return;
-			return useBounds(this.trailArea);
+	private _globalPointer = usePointer();
+	private _velocity = useVelocity(this._globalPointer);
+
+	private _trigger = createDistanceTrigger();
+
+	private _loadedImages: LoadImagesResult = {
+		loaded: [],
+		failed: []
+	};
+
+	private _imageIndex = 0;
+	private _zIndex = $state(0);
+
+	trail = $state<TrailItem[]>([]);
+
+	constructor(private images: string[]) {
+		this._loadImages();
+
+		$effect(() => {
+			if (!this.localPointer) return;
+
+			this._trigger.check(this.localPointer, (position) =>
+				this._spawnImage(position)
+			);
 		});
 
-		const space = $derived.by(() => {
-			if (!this.trailArea || !bound) return;
-			return useSpaces(globalPointer, bound).local;
+		$effect(() => {
+			if (this.trail.length === 0) {
+				this._zIndex = 0;
+			}
 		});
-		return { space };
+	}
+
+	private _bounds = $derived.by(() => {
+		if (!this.trailArea) return;
+
+		return useBounds(this.trailArea);
+	});
+
+	readonly localPointer = $derived.by(() => {
+		if (!this._bounds) return;
+
+		const spaces = useSpaces(this._globalPointer, this._bounds);
+		return spaces.local;
+	});
+
+	private async _loadImages() {
+		this._loadedImages = await loadImages(this.images);
+	}
+
+	private _spawnImage(position: Point) {
+		if (this._loadedImages.loaded.length === 0) return;
+
+		this._zIndex++;
+
+		const targetIndex = this._imageIndex % this._loadedImages.loaded.length;
+
+		this.trail.push({
+			id: crypto.randomUUID(),
+			x: position.x,
+			y: position.y,
+			z: this._zIndex,
+			src: this._loadedImages.loaded[targetIndex],
+			speed: this._velocity.speed,
+			angle: this._velocity.angleDegree
+		});
+
+		this._imageIndex++;
+	}
+
+	removeImage(id: string) {
+		this.trail = this.trail.filter((entry) => entry.id !== id);
+	}
+
+	animate(details: TrailItem): Attachment {
+		return (element) => {
+			const { speed, angle, id } = untrack(() => ({
+				speed: details.speed,
+				angle: details.angle,
+				id: details.id
+			}));
+
+			const travelDistance = gsap.utils.mapRange(0, 80, 10, 120, speed);
+
+			const tl = gsap.timeline({
+				onComplete: () => this.removeImage(id)
+			});
+
+			tl.fromTo(
+				element,
+				{ scale: 0.4 },
+				{
+					scale: 1,
+					ease: 'power2.out',
+					duration: 0.25,
+					rotate: gsap.utils.mapRange(-180, 180, -30, 30, angle)
+				}
+			).to(element, {
+				yPercent: 100,
+				ease: 'power2.in',
+				duration: 0.2,
+				delay: 2
+			});
+
+			return () => {
+				tl.kill();
+			};
+		};
 	}
 }
 
 const KEY = Symbol('imageTrail');
-export const setImageTrailFunctionality = () => {
-	return setContext(KEY, new TrailFunctionality());
+export const setImageTrailFunctionality = (images: string[]) => {
+	return setContext(KEY, new TrailFunctionality(images));
 };
 export const getImageTrailFunctionality = () =>
 	getContext<TrailFunctionality>(KEY);

@@ -1,16 +1,10 @@
 <script lang="ts">
 	import {
-		createDistanceTrigger,
-		loadImages,
-		useBounds,
-		usePointer,
-		useSpaces,
-		useVelocity,
-		type Point
-	} from '$lib/interactions';
+		getImageTrailFunctionality,
+		setImageTrailFunctionality
+	} from './functionality.svelte';
 
 	import TrailingImage from './TrailingImage.svelte';
-	import type { TrailItem } from './types';
 
 	let images = [
 		'https://picsum.photos/200/200.webp?random=1',
@@ -22,79 +16,25 @@
 		'https://picsum.photos/200/200.webp?random=7'
 	];
 
-	const loadedImages = await loadImages(images);
-
-	const globalPointer = usePointer();
-	let trailArea = $state<HTMLElement>();
-
-	const bound = $derived.by(() => {
-		if (!trailArea) return;
-		return useBounds(trailArea);
-	});
-
-	const localPointer = $derived.by(() => {
-		if (!bound) return;
-		const spaces = useSpaces(globalPointer, bound);
-		return spaces?.local;
-	});
-
-	let isHovering = $state(false);
-
-	let zIndex = $state(0);
-	let trail = $state<TrailItem[]>([]);
-
-	let imageIndex = 0;
-	let velocity = $derived(useVelocity(globalPointer));
-
-	function spawnImage(position: Point) {
-		zIndex++;
-		const targetIndex = imageIndex % loadedImages.loaded.length;
-
-		const item = {
-			id: crypto.randomUUID(),
-			x: position?.x,
-			y: position?.y,
-			z: zIndex,
-			src: loadedImages.loaded[targetIndex],
-			speed: velocity.speed,
-			angle: velocity.angleDegree
-		};
-
-		trail.push(item);
-		imageIndex++;
-	}
-
-	const trigger = createDistanceTrigger();
-
-	$effect(() => {
-		if (!localPointer) return;
-		trigger.check(localPointer, (localPointer) => spawnImage(localPointer));
-	});
-
-	$effect(() => {
-		if (trail.length === 0) zIndex = 0;
-	});
-
-	function handleExit(id: ReturnType<typeof crypto.randomUUID>) {
-		trail = trail.filter((entry) => entry.id !== id);
-	}
+	setImageTrailFunctionality(images);
+	const functionality = getImageTrailFunctionality();
 </script>
 
 <div
 	class="trail-area"
-	bind:this={trailArea}
-	onmouseenter={() => (isHovering = true)}
-	onmouseleave={() => (isHovering = false)}
+	bind:this={functionality.trailArea}
+	onmouseenter={() => (functionality.isHovering = true)}
+	onmouseleave={() => (functionality.isHovering = false)}
 	role="region"
 >
-	{#if isHovering}
-		<p>{localPointer?.x}</p>
-		<p>{localPointer?.y}</p>
-		<p>{trail.length} images</p>
+	{#if functionality.isHovering}
+		<p>{functionality.localPointer?.x}</p>
+		<p>{functionality.localPointer?.y}</p>
+		<p>{functionality.trail.length} images</p>
 	{/if}
 
-	{#each trail as img (img.id)}
-		<TrailingImage details={{ ...img, onExit: handleExit }} />
+	{#each functionality.trail as img (img.id)}
+		<TrailingImage details={img} />
 	{/each}
 </div>
 

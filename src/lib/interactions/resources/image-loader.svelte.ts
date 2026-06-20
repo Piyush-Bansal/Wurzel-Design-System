@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 
-type LoadImagesResult = {
+export type LoadImagesResult = {
 	loaded: string[];
 	failed: string[];
 };

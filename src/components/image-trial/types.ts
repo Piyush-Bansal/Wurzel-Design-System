@@ -7,7 +7,3 @@ export type TrailItem = {
 	speed: number;
 	angle: number;
 };
-
-export type TrailingImageProps = TrailItem & {
-	onExit: (id: ReturnType<typeof crypto.randomUUID>) => void;
-};
