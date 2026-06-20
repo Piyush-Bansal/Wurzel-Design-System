@@ -35,12 +35,20 @@ class TrailFunctionality {
 
 	trail = $state<TrailItem[]>([]);
 
+	private _intersection = $derived(
+		useIntersection(() => this.trailArea, { rootMargin: '100px 0px 100px 0px' })
+	);
 	constructor(private images: string[]) {
-		this._loadImages();
+		$effect(() => {
+			if (!this._intersection) return;
+			if (this._intersection.isIntersecting) {
+				this._loadImages();
+				this._intersection.disconnect();
+			}
+		});
 
 		$effect(() => {
 			if (!this.localPointer) return;
-
 			this._trigger.check(this.localPointer, (position) =>
 				this._spawnImage(position)
 			);
@@ -51,14 +59,6 @@ class TrailFunctionality {
 				this._zIndex = 0;
 			}
 		});
-
-		$effect(() => {
-			useIntersection(() => this.trailArea, { rootMargin: '100px' });
-		});
-
-		// $effect(() => {
-		// 	$inspect(this.trail);
-		// });
 	}
 
 	private _bounds = $derived.by(() => {
