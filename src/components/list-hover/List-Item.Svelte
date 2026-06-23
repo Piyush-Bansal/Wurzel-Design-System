@@ -10,7 +10,7 @@
 	role="presentation"
 	class="list-item"
 	onmouseenter={() => {
-		currentState.hoverQueue.push(index);
+		currentState.selection?.select(currentState.images[index]);
 	}}
 >
 	<div class="list-item-content">
@@ -28,6 +28,7 @@
 		align-items: center;
 		border-top: $stroke-hairline solid $clr-bdr-default;
 		cursor: pointer;
+		transition: background-color 0.5s $easeOutExpo;
 
 		&:last-of-type {
 			border-bottom: $stroke-hairline solid $clr-bdr-default;
@@ -38,6 +39,11 @@
 			flex-direction: row;
 			align-items: baseline;
 			column-gap: $h3-h-gap-default;
+		}
+
+		&:hover {
+			background-color: $clr-sur-secondary;
+			color: white;
 		}
 	}
 </style>

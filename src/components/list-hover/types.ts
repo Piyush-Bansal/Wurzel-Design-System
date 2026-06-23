@@ -9,12 +9,3 @@ export interface HoverImageProps {
 	urls: string[];
 	alt?: string;
 }
-
-export interface HoverFunctionality {
-	yAxis: Spring<number>;
-	imageWrapperHeight: number;
-	isImgVisible: boolean;
-	hoverQueue: number[];
-	images: HTMLImageElement[];
-	currentZ: number;
-}

@@ -14,11 +14,7 @@
 <div
 	role="presentation"
 	class="list | relative"
-	onmousemove={(e) => {
-		const rect = e.currentTarget.getBoundingClientRect();
-		currentState.yAxis.target =
-			e.clientY - rect.top - currentState.imageWrapperHeight / 2;
-	}}
+	bind:this={currentState.listArea}
 	onmouseleave={() => {
 		currentState.isImgVisible = false;
 	}}

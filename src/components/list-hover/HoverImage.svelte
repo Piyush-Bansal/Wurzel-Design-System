@@ -5,6 +5,11 @@
 	let { urls, alt = '' }: HoverImageProps = $props();
 
 	const currentState = getHoverState();
+
+	//bind urls to class
+	$effect(() => {
+		currentState.imageUrls = urls;
+	});
 </script>
 
 <div
@@ -13,16 +18,10 @@
 		!currentState.isImgVisible && 'fade'
 	]}
 	bind:clientHeight={currentState.imageWrapperHeight}
-	style:transform={`translateY(${currentState.yAxis.current}px)`}
+	bind:this={currentState.imgWrapper}
 >
-	{#each urls as src, i}
-		<img
-			bind:this={currentState.images[i]}
-			{src}
-			{alt}
-			class="absolute"
-			loading="lazy"
-		/>
+	{#each currentState.loadedImages.loaded as src, i}
+		<img bind:this={currentState.images[i]} {src} {alt} class="absolute" />
 	{/each}
 </div>
 
