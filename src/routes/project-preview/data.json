@@ -1,0 +1,72 @@
+[
+	{
+		"id": 1,
+		"location": "Santorini",
+		"country": "Greece",
+		"detail": "A picturesque island known for its whitewashed buildings, blue-domed churches, dramatic cliffs, and spectacular sunsets overlooking the Aegean Sea.",
+		"image": "https://picsum.photos/600/600.webp?random=1"
+	},
+	{
+		"id": 2,
+		"location": "Kyoto",
+		"country": "Japan",
+		"detail": "A historic city featuring ancient temples, traditional tea houses, bamboo forests, and beautiful cherry blossoms during spring.",
+		"image": "https://picsum.photos/600/600.webp?random=2"
+	},
+	{
+		"id": 3,
+		"location": "Banff",
+		"country": "Canada",
+		"detail": "A mountain retreat surrounded by turquoise lakes, snow-capped peaks, scenic hiking trails, and abundant wildlife.",
+		"image": "https://picsum.photos/600/600.webp?random=3"
+	},
+	{
+		"id": 4,
+		"location": "Bali",
+		"country": "Indonesia",
+		"detail": "A tropical paradise offering lush rice terraces, vibrant culture, serene beaches, and stunning volcanic landscapes.",
+		"image": "https://picsum.photos/600/600.webp?random=4"
+	},
+	{
+		"id": 5,
+		"location": "Reykjavík",
+		"country": "Iceland",
+		"detail": "The gateway to Iceland's geothermal wonders, waterfalls, glaciers, volcanic landscapes, and the Northern Lights.",
+		"image": "https://picsum.photos/600/600.webp?random=5"
+	},
+	{
+		"id": 6,
+		"location": "Cape Town",
+		"country": "South Africa",
+		"detail": "A coastal city famous for Table Mountain, beautiful beaches, world-class vineyards, and diverse wildlife experiences.",
+		"image": "https://picsum.photos/600/600.webp?random=6"
+	},
+	{
+		"id": 7,
+		"location": "Queenstown",
+		"country": "New Zealand",
+		"detail": "An adventure capital surrounded by majestic mountains and crystal-clear lakes, perfect for outdoor activities year-round.",
+		"image": "https://picsum.photos/600/600.webp?random=7"
+	},
+	{
+		"id": 8,
+		"location": "Marrakech",
+		"country": "Morocco",
+		"detail": "A vibrant city with bustling souks, historic palaces, colourful gardens, and rich Moroccan architecture.",
+		"image": "https://picsum.photos/600/600.webp?random=8"
+	},
+	{
+		"id": 9,
+		"location": "Amalfi Coast",
+		"country": "Italy",
+		"detail": "A stunning Mediterranean coastline featuring charming villages, winding coastal roads, and breathtaking sea views.",
+		"image": "https://picsum.photos/600/600.webp?random=9"
+	},
+	{
+		"id": 10,
+		"location": "Machu Picchu",
+		"country": "Peru",
+		"detail": "An ancient Incan citadel set high in the Andes, offering remarkable history and unforgettable mountain scenery.",
+		"image": "https://picsum.photos/600/600.webp?random=10"
+	}
+]
