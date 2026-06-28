@@ -16,10 +16,10 @@
 		role="presentation"
 		bind:this={functionality.listArea}
 		onpointerleave={() => {
-			if (functionality.hover === 'details') {
+			if (functionality.viewState === 'details') {
 				return;
 			} else {
-				functionality.hover = null;
+				functionality.viewState = null;
 				functionality.selected?.clear();
 			}
 		}}

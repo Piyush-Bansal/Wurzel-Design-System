@@ -1,8 +1,11 @@
 <script lang="ts">
-	import Details from '$components/list-preview-expand/Details.svelte';
-	import HoverDetails from '$components/list-preview-expand/HoverDetails.svelte';
-	import ListItem from '$components/list-preview-expand/List-item.svelte';
-	import List from '$components/list-preview-expand/List.svelte';
+	import {
+		Details,
+		HoverDetails,
+		List,
+		ListItem
+	} from '$components/list-preview-expand';
+
 	import data from './data.json';
 </script>
 

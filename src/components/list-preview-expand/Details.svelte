@@ -19,19 +19,23 @@
 	});
 </script>
 
-{#if selectedItem && functionality.hover === 'details'}
+{#if selectedItem && functionality.viewState === 'details'}
 	<div class="details">
 		<div
 			class="dismiss | center"
 			role="button"
-			onclick={() => (functionality.hover = null)}
+			onclick={() => (functionality.viewState = null)}
 			tabindex="1"
 		>
 			<img src="icons/close.svg" alt="" />
 		</div>
-		<img src={selectedItem.image} alt={selectedItem.location} />
-		<h3>{selectedItem.location}</h3>
-		<p>{selectedItem.country}</p>
+		<img
+			data-flip-id="morph-image"
+			src={selectedItem.image}
+			alt={selectedItem.location}
+		/>
+		<h3 data-flip-id="morph-location">{selectedItem.location}</h3>
+		<p data-flip-id="morph-country">{selectedItem.country}</p>
 		<p>{selectedItem.details}</p>
 	</div>
 {/if}

@@ -21,13 +21,14 @@
 			'unselected'
 	]}
 	onpointerenter={() => {
-		if (functionality.hover === 'details') return;
-		functionality.hover = 'preview';
+		if (functionality.viewState === 'details') return;
+		functionality.viewState = 'preview';
 		functionality.selected?.select(id);
 	}}
 	onclick={() => {
+		if (functionality.viewState === 'details') return;
 		functionality.selected?.select(id);
-		functionality.hover = 'details';
+		functionality.viewState = 'details';
 	}}
 >
 	<p>{incrementalIndex < 10 ? `0${incrementalIndex}` : incrementalIndex}</p>

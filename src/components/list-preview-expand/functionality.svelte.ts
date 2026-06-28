@@ -58,7 +58,7 @@ class ListPreviewFunctionality {
 		});
 	});
 
-	hover = $state<null | 'preview' | 'details'>(null);
+	viewState = $state<null | 'preview' | 'details'>(null);
 
 	//lazy load images
 	constructor() {
