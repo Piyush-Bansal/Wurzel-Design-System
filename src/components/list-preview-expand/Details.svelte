@@ -19,8 +19,8 @@
 	});
 </script>
 
-{#if selectedItem && functionality.viewState === 'details'}
-	<div class="details">
+{#if functionality.viewState === 'details'}
+	<div class="details" data-flip-id="morph-container">
 		<div
 			class="dismiss | center"
 			role="button"
@@ -31,12 +31,12 @@
 		</div>
 		<img
 			data-flip-id="morph-image"
-			src={selectedItem.image}
-			alt={selectedItem.location}
+			src={selectedItem?.image}
+			alt={selectedItem?.location}
 		/>
-		<h3 data-flip-id="morph-location">{selectedItem.location}</h3>
-		<p data-flip-id="morph-country">{selectedItem.country}</p>
-		<p>{selectedItem.details}</p>
+		<h3 data-flip-id="morph-location">{selectedItem?.location}</h3>
+		<p data-flip-id="morph-country">{selectedItem?.country}</p>
+		<p>{selectedItem?.details}</p>
 	</div>
 {/if}
 

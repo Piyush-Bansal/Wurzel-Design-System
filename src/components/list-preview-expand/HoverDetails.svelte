@@ -24,19 +24,20 @@
 	});
 </script>
 
-{#if selectedItem && functionality.viewState === 'preview'}
+{#if functionality.viewState === 'preview'}
 	<div
 		class="hover-details"
 		bind:this={functionality.hoveredDetails}
 		bind:clientHeight={functionality.hoveredDetailsHeight}
+		data-flip-id="morph-container"
 	>
 		<img
 			data-flip-id="morph-image"
-			src={selectedItem.image}
-			alt={selectedItem.location}
+			src={selectedItem?.image}
+			alt={selectedItem?.location}
 		/>
-		<p data-flip-id="morph-location">{selectedItem.location}</p>
-		<p data-flip-id="morph-country">{selectedItem.country}</p>
+		<p data-flip-id="morph-location">{selectedItem?.location}</p>
+		<p data-flip-id="morph-country">{selectedItem?.country}</p>
 	</div>
 {/if}
 

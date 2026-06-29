@@ -6,8 +6,11 @@ import {
 	useSpaces,
 	type LoadImagesResult
 } from '$lib/interactions';
-import { getContext, setContext } from 'svelte';
+import { getContext, setContext, tick } from 'svelte';
 import gsap from 'gsap';
+import Flip from 'gsap/Flip';
+
+gsap.registerPlugin(Flip);
 
 class ListPreviewFunctionality {
 	ids = $state<number[]>([]);
@@ -59,6 +62,24 @@ class ListPreviewFunctionality {
 	});
 
 	viewState = $state<null | 'preview' | 'details'>(null);
+
+	async open(id: number) {
+		if (this.viewState === 'details') return;
+
+		const state = Flip.getState('[data-flip-id]');
+
+		this.selected?.select(id);
+
+		this.viewState = 'details';
+		await tick();
+
+		Flip.from(state, {
+			targets: '[data-flip-id]',
+			duration: 0.4,
+			ease: 'power2.inOut',
+			absolute: true
+		});
+	}
 
 	//lazy load images
 	constructor() {

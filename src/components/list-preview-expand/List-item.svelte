@@ -26,9 +26,7 @@
 		functionality.selected?.select(id);
 	}}
 	onclick={() => {
-		if (functionality.viewState === 'details') return;
-		functionality.selected?.select(id);
-		functionality.viewState = 'details';
+		functionality.open(id);
 	}}
 >
 	<p>{incrementalIndex < 10 ? `0${incrementalIndex}` : incrementalIndex}</p>
