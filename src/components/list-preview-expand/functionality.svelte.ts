@@ -62,23 +62,31 @@ class ListPreviewFunctionality {
 	});
 
 	viewState = $state<null | 'preview' | 'details'>(null);
+	closeButton = $state<HTMLElement>();
+	details = $state<HTMLParagraphElement>();
 
 	async open(id: number) {
 		if (this.viewState === 'details') return;
 
+		const tl = gsap.timeline();
+
 		const state = Flip.getState('[data-flip-id]');
-
 		this.selected?.select(id);
-
 		this.viewState = 'details';
+
 		await tick();
 
-		Flip.from(state, {
-			targets: '[data-flip-id]',
-			duration: 0.4,
-			ease: 'power2.inOut',
-			absolute: true
-		});
+		tl.add(
+			Flip.from(state, {
+				targets: '[data-flip-id]',
+				duration: 0.4,
+				ease: 'power2.inOut',
+				absolute: true
+			})
+		);
+
+		tl.from(this.details!, { opacity: 0, duration: 0.2 });
+		tl.from(this.closeButton!, { opacity: 0, duration: 0.2, scale: 0.4 });
 	}
 
 	//lazy load images

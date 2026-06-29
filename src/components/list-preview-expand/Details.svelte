@@ -26,6 +26,7 @@
 			role="button"
 			onclick={() => (functionality.viewState = null)}
 			tabindex="1"
+			bind:this={functionality.closeButton}
 		>
 			<img src="icons/close.svg" alt="" />
 		</div>
@@ -36,7 +37,7 @@
 		/>
 		<h3 data-flip-id="morph-location">{selectedItem?.location}</h3>
 		<p data-flip-id="morph-country">{selectedItem?.country}</p>
-		<p>{selectedItem?.details}</p>
+		<p bind:this={functionality.details}>{selectedItem?.details}</p>
 	</div>
 {/if}
 

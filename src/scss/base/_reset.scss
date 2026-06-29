@@ -23,8 +23,6 @@ body {
 	-webkit-tap-highlight-color: transparent;
 	background-color: $clr-sur-page;
 
-	text-box-trim: trim-both;
-	text-box-edge: cap alphabetic;
 	hanging-punctuation: first last;
 	color: $clr-text-primary;
 	font-family: $ff-base;
@@ -45,4 +43,27 @@ p,
 li {
 	max-width: 75ch;
 	text-wrap: pretty;
+}
+
+:where(
+	body,
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	li,
+	blockquote,
+	.xl,
+	.xxl,
+	.xxxl,
+	dt,
+	dd,
+	label,
+	button
+) {
+	text-box-trim: trim-both;
+	text-box-edge: cap alphabetic;
 }
