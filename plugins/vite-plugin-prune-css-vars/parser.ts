@@ -9,7 +9,7 @@ const ALIAS_REGEX = /\$([\w-]+)\s*:\s*var\(\s*(--[\w-]+)\s*\)\s*;/g;
 
 const SCSS_VARIABLE_REGEX = /\$([\w-]+)/g;
 
-export function buildAliasMap(files: SourceFile[]): AliasMap {
+export function buildAliasMap(files: ReadonlyArray<SourceFile>): AliasMap {
 	const aliases = new Map<string, string>();
 	const definitionFiles = new Set<string>();
 
@@ -20,6 +20,9 @@ export function buildAliasMap(files: SourceFile[]): AliasMap {
 
 		while ((match = ALIAS_REGEX.exec(source))) {
 			aliases.set(match[1], match[2]);
+		}
+
+		if (aliases.size > 0) {
 			definitionFiles.add(file);
 		}
 	}
@@ -31,9 +34,9 @@ export function buildAliasMap(files: SourceFile[]): AliasMap {
 }
 
 export function collectUsedVariables(
-	files: SourceFile[],
-	aliases: Map<string, string>,
-	definitionFiles: Set<string>
+	files: ReadonlyArray<SourceFile>,
+	aliases: ReadonlyMap<string, string>,
+	definitionFiles: ReadonlySet<string>
 ): Set<string> {
 	const used = new Set<string>();
 
@@ -47,10 +50,10 @@ export function collectUsedVariables(
 		let match: RegExpExecArray | null;
 
 		while ((match = SCSS_VARIABLE_REGEX.exec(source))) {
-			const variable = aliases.get(match[1]);
+			const cssVariable = aliases.get(match[1]);
 
-			if (variable) {
-				used.add(variable);
+			if (cssVariable) {
+				used.add(cssVariable);
 			}
 		}
 	}

@@ -11,16 +11,17 @@ const DEFAULT_INCLUDE = ['src/**/*.{scss,sass,svelte}'];
 const DEFAULT_EXCLUDE = ['node_modules/**', '.svelte-kit/**', 'dist/**'];
 
 export async function scanFiles(
-	include: string[] = DEFAULT_INCLUDE,
-	exclude: string[] = DEFAULT_EXCLUDE
+	include: ReadonlyArray<string> = DEFAULT_INCLUDE,
+	exclude: ReadonlyArray<string> = DEFAULT_EXCLUDE
 ): Promise<SourceFile[]> {
-	const fileNames = await fg(include, {
-		ignore: exclude,
-		absolute: true
+	const files = await fg([...include], {
+		ignore: [...exclude],
+		absolute: true,
+		onlyFiles: true
 	});
 
 	return Promise.all(
-		fileNames.map(async (file) => ({
+		files.map(async (file) => ({
 			file,
 			source: await fs.readFile(file, 'utf8')
 		}))

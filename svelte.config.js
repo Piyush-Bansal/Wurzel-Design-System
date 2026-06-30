@@ -16,6 +16,7 @@ const config = {
 		alias: {
 			$styles: './src/scss',
 			$tokens: './src/scss/tokens/functional',
+			$breakpoints: './src/scss/abstract/mixins',
 			$sizes: './src/scss/abstract/functions',
 			$components: './src/components'
 		},

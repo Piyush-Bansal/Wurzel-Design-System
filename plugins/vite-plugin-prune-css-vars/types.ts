@@ -4,17 +4,17 @@ export interface PruneCssVarsOptions {
 	/**
 	 * Glob patterns for files to scan.
 	 */
-	include?: string[];
+	include?: ReadonlyArray<string>;
 
 	/**
 	 * Glob patterns to ignore.
 	 */
-	exclude?: string[];
+	exclude?: ReadonlyArray<string>;
 
 	/**
 	 * Variables that should never be removed.
 	 */
-	preserve?: PreserveMatcher[];
+	preserve?: ReadonlyArray<PreserveMatcher>;
 
 	/**
 	 * Enables debug logging.

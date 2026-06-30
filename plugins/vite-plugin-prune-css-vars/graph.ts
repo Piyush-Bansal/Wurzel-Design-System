@@ -1,14 +1,16 @@
 import postcss from 'postcss';
 
-export type DependencyGraph = Map<string, Set<string>>;
+type DependencyGraph = Map<string, Set<string>>;
 
 const VAR_REGEX = /var\(\s*(--[\w-]+)/g;
 
 function buildDependencyGraph(root: postcss.Root): DependencyGraph {
-	const graph = new Map<string, Set<string>>();
+	const graph: DependencyGraph = new Map();
 
 	root.walkDecls((decl) => {
-		if (!decl.prop.startsWith('--')) return;
+		if (!decl.prop.startsWith('--')) {
+			return;
+		}
 
 		if (!decl.value.includes('var(')) {
 			return;
@@ -34,21 +36,25 @@ function buildDependencyGraph(root: postcss.Root): DependencyGraph {
 }
 
 function expandDependencies(
-	initial: Set<string>,
-	graph: DependencyGraph
+	initial: ReadonlySet<string>,
+	graph: ReadonlyMap<string, ReadonlySet<string>>
 ): Set<string> {
 	const reachable = new Set(initial);
 	const stack = [...initial];
 
-	while (stack.length) {
+	while (stack.length > 0) {
 		const current = stack.pop()!;
 
 		const dependencies = graph.get(current);
 
-		if (!dependencies) continue;
+		if (!dependencies) {
+			continue;
+		}
 
 		for (const dependency of dependencies) {
-			if (reachable.has(dependency)) continue;
+			if (reachable.has(dependency)) {
+				continue;
+			}
 
 			reachable.add(dependency);
 			stack.push(dependency);
@@ -60,9 +66,7 @@ function expandDependencies(
 
 export function buildReachableVariables(
 	root: postcss.Root,
-	used: Set<string>
+	used: ReadonlySet<string>
 ): Set<string> {
-	const graph = buildDependencyGraph(root);
-
-	return expandDependencies(used, graph);
+	return expandDependencies(used, buildDependencyGraph(root));
 }

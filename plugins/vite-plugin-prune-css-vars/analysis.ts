@@ -13,11 +13,11 @@ export async function analyseProject(
 ): Promise<AnalysisResult> {
 	const start = performance.now();
 
-	const files = await scanFiles(options.include, options.exclude);
+	const sourceFiles = await scanFiles(options.include, options.exclude);
 
-	const { aliases, definitionFiles } = buildAliasMap(files);
+	const { aliases, definitionFiles } = buildAliasMap(sourceFiles);
 
-	const used = collectUsedVariables(files, aliases, definitionFiles);
+	const used = collectUsedVariables(sourceFiles, aliases, definitionFiles);
 
 	return {
 		used,

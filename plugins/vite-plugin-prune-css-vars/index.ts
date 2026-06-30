@@ -1,25 +1,43 @@
-import type { Plugin, ViteDevServer } from 'vite';
+import type { HmrContext, Plugin } from 'vite';
 
 import { analyseProject } from './analysis';
 import { pruneUnusedVariables } from './pruner';
 
 import type { PruneCssVarsOptions } from './types';
 
+const STYLE_FILE_REGEX = /\.(scss|sass|svelte)$/;
+
 export default function pruneCssVars(
 	options: PruneCssVarsOptions = {}
 ): Plugin {
 	let used = new Set<string>();
 
-	async function analyse() {
-		const result = await analyseProject(options);
+	let dirty = true;
+	let analysis: Promise<void> | null = null;
 
-		used = result.used;
-
-		if (options.debug) {
-			console.log(
-				`[prune-css-vars] ${used.size} variables (${result.duration.toFixed(1)} ms)`
-			);
+	async function ensureAnalysis(): Promise<void> {
+		if (!dirty) {
+			return;
 		}
+
+		if (!analysis) {
+			analysis = analyseProject(options)
+				.then(({ used: variables, duration }) => {
+					used = variables;
+					dirty = false;
+
+					if (options.debug) {
+						console.log(
+							`[prune-css-vars] ${used.size} variables (${duration.toFixed(1)} ms)`
+						);
+					}
+				})
+				.finally(() => {
+					analysis = null;
+				});
+		}
+
+		await analysis;
 	}
 
 	return {
@@ -29,17 +47,13 @@ export default function pruneCssVars(
 			return command === 'serve';
 		},
 
-		async configureServer(server: ViteDevServer) {
-			try {
-				await analyse();
-			} catch (error) {
-				server.config.logger.error(
-					`[prune-css-vars] ${(error as Error).message}`
-				);
+		handleHotUpdate(ctx: HmrContext) {
+			if (STYLE_FILE_REGEX.test(ctx.file)) {
+				dirty = true;
 			}
 		},
 
-		transform(code, id) {
+		async transform(code, id) {
 			if (!id.endsWith('.scss') && !id.includes('type=style')) {
 				return null;
 			}
@@ -47,6 +61,8 @@ export default function pruneCssVars(
 			if (!code.includes('--')) {
 				return null;
 			}
+
+			await ensureAnalysis();
 
 			return {
 				code: pruneUnusedVariables(code, used, options.preserve),

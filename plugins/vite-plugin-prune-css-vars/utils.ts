@@ -1,14 +1,16 @@
-import { type PreserveMatcher } from './types';
+import type { PreserveMatcher } from './types';
 
 export function shouldPreserve(
 	name: string,
-	preserve: PreserveMatcher[]
+	preserve: ReadonlyArray<PreserveMatcher>
 ): boolean {
 	for (const rule of preserve) {
-		if (typeof rule === 'string') {
-			if (rule === name) return true;
-		} else {
-			if (rule.test(name)) return true;
+		if (typeof rule === 'string' && rule === name) {
+			return true;
+		}
+
+		if (rule instanceof RegExp && rule.test(name)) {
+			return true;
 		}
 	}
 

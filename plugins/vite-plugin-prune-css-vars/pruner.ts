@@ -7,8 +7,8 @@ import type { PreserveMatcher } from './types';
 
 export function pruneUnusedVariables(
 	css: string,
-	used: Set<string>,
-	preserve: PreserveMatcher[] = []
+	used: ReadonlySet<string>,
+	preserve: ReadonlyArray<PreserveMatcher> = []
 ): string {
 	if (!css.includes('--')) {
 		return css;
