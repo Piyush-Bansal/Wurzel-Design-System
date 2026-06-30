@@ -23,6 +23,7 @@
 		"eslint": "^10.5.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.19.0",
+		"fast-glob": "^3.3.3",
 		"postcss": "^8.5.15",
 		"postcss-preset-env": "^11.3.1",
 		"prettier": "^3.8.4",
@@ -32,6 +33,7 @@
 		"svelte-check": "^4.6.0",
 		"svelte-preprocess": "^6.0.5",
 		"tslib": "^2.8.1",
+		"tsx": "^4.22.4",
 		"typescript": "^6.0.3",
 		"vite": "^8.0.16",
 		"vite-plugin-purgecss-updated-v5": "^1.2.7"

@@ -2,6 +2,8 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import type { Plugin, PluginOption } from 'vite';
 import pluginPurgeCss from 'vite-plugin-purgecss-updated-v5';
+import pruneCssVars from './plugins/vite-plugin-prune-css-vars';
+
 const removeEmptyRulesets = (): Plugin => ({
 	name: 'remove-empty-rulesets',
 	enforce: 'post',
@@ -24,6 +26,9 @@ const removeEmptyRulesets = (): Plugin => ({
 export default defineConfig({
 	plugins: [
 		sveltekit(),
+		pruneCssVars({
+			debug: true
+		}),
 		pluginPurgeCss({
 			content: ['./src/**/*.{html,js,svelte,ts}'],
 			fontFace: true,
