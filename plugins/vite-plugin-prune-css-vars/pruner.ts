@@ -1,37 +1,35 @@
 import postcss from 'postcss';
 
-import { buildDependencyGraph, expandDependencies } from './graph';
-import { cssRootCache } from './state';
+import { buildReachableVariables } from './graph';
 import { shouldPreserve } from './utils';
 
 import type { PreserveMatcher } from './types';
 
-export async function pruneUnusedVariables(
+export function pruneCss(
 	css: string,
 	used: Set<string>,
 	preserve: PreserveMatcher[] = []
-): Promise<string> {
+): string {
 	if (!css.includes('--')) {
 		return css;
 	}
 
-	let root = cssRootCache.get(css);
+	const reachable = buildReachableVariables(css, used);
 
-	if (!root) {
-		root = postcss.parse(css);
-		cssRootCache.set(css, root);
-	}
-
-	const graph = buildDependencyGraph(root);
-
-	const reachable = expandDependencies(used, graph);
+	const root = postcss.parse(css);
 
 	root.walkDecls((decl) => {
-		if (!decl.prop.startsWith('--')) return;
+		if (!decl.prop.startsWith('--')) {
+			return;
+		}
 
-		if (reachable.has(decl.prop)) return;
+		if (reachable.has(decl.prop)) {
+			return;
+		}
 
-		if (shouldPreserve(decl.prop, preserve)) return;
+		if (shouldPreserve(decl.prop, preserve)) {
+			return;
+		}
 
 		decl.remove();
 	});

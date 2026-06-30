@@ -1,20 +1,19 @@
 import type { Plugin, ViteDevServer } from 'vite';
 
-import { scan } from './scanner';
-import { pruneUnusedVariables } from './pruner';
+import { analyseProject } from './analysis';
+import { pruneCss } from './pruner';
+
 import type { PruneCssVarsOptions } from './types';
-import { cssRootCache } from './state';
 
 export default function pruneCssVars(
 	options: PruneCssVarsOptions = {}
 ): Plugin {
 	let used = new Set<string>();
 
-	async function rescan() {
-		const result = await scan(options);
+	async function analyse() {
+		const result = await analyseProject(options);
 
 		used = result.used;
-		cssRootCache.clear();
 
 		if (options.debug) {
 			console.log(
@@ -26,19 +25,23 @@ export default function pruneCssVars(
 	return {
 		name: 'vite-plugin-prune-css-vars',
 
-		apply: 'serve',
+		apply(_config, { command }) {
+			return command === 'serve';
+		},
 
 		async configureServer(server: ViteDevServer) {
-			await rescan();
+			await analyse();
 
 			server.watcher.on('change', async (file) => {
-				if (!/\.(svelte|scss|sass)$/.test(file)) return;
+				if (!/\.(scss|sass|svelte)$/.test(file)) {
+					return;
+				}
 
-				await rescan();
+				await analyse();
 			});
 		},
 
-		async transform(code, id) {
+		transform(code, id) {
 			if (!id.endsWith('.scss') && !id.includes('type=style')) {
 				return null;
 			}
@@ -48,7 +51,7 @@ export default function pruneCssVars(
 			}
 
 			return {
-				code: await pruneUnusedVariables(code, used, options.preserve),
+				code: pruneCss(code, used, options.preserve),
 				map: null
 			};
 		}

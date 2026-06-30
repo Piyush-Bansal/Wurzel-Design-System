@@ -1,20 +1,20 @@
 import postcss from 'postcss';
 
-const VAR_REGEX = /var\(\s*(--[\w-]+)/g;
-
 export type DependencyGraph = Map<string, Set<string>>;
 
-export function buildDependencyGraph(root: postcss.Root): DependencyGraph {
+const VAR_REGEX = /var\(\s*(--[\w-]+)/g;
+
+function buildDependencyGraph(root: postcss.Root): DependencyGraph {
 	const graph = new Map<string, Set<string>>();
 
 	root.walkDecls((decl) => {
 		if (!decl.prop.startsWith('--')) return;
 
-		let deps = graph.get(decl.prop);
+		let dependencies = graph.get(decl.prop);
 
-		if (!deps) {
-			deps = new Set();
-			graph.set(decl.prop, deps);
+		if (!dependencies) {
+			dependencies = new Set<string>();
+			graph.set(decl.prop, dependencies);
 		}
 
 		VAR_REGEX.lastIndex = 0;
@@ -22,35 +22,45 @@ export function buildDependencyGraph(root: postcss.Root): DependencyGraph {
 		let match: RegExpExecArray | null;
 
 		while ((match = VAR_REGEX.exec(decl.value))) {
-			deps.add(match[1]);
+			dependencies.add(match[1]);
 		}
 	});
 
 	return graph;
 }
 
-export function expandDependencies(
+function expandDependencies(
 	initial: Set<string>,
 	graph: DependencyGraph
 ): Set<string> {
 	const reachable = new Set(initial);
-
 	const stack = [...initial];
 
 	while (stack.length) {
 		const current = stack.pop()!;
 
-		const deps = graph.get(current);
+		const dependencies = graph.get(current);
 
-		if (!deps) continue;
+		if (!dependencies) continue;
 
-		for (const dep of deps) {
-			if (reachable.has(dep)) continue;
+		for (const dependency of dependencies) {
+			if (reachable.has(dependency)) continue;
 
-			reachable.add(dep);
-			stack.push(dep);
+			reachable.add(dependency);
+			stack.push(dependency);
 		}
 	}
 
 	return reachable;
+}
+
+export function buildReachableVariables(
+	css: string,
+	used: Set<string>
+): Set<string> {
+	const root = postcss.parse(css);
+
+	const graph = buildDependencyGraph(root);
+
+	return expandDependencies(used, graph);
 }
