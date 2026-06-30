@@ -1,7 +1,7 @@
 import type { Plugin, ViteDevServer } from 'vite';
 
 import { analyseProject } from './analysis';
-import { pruneCss } from './pruner';
+import { pruneUnusedVariables } from './pruner';
 
 import type { PruneCssVarsOptions } from './types';
 
@@ -51,7 +51,7 @@ export default function pruneCssVars(
 			}
 
 			return {
-				code: pruneCss(code, used, options.preserve),
+				code: pruneUnusedVariables(code, used, options.preserve),
 				map: null
 			};
 		}

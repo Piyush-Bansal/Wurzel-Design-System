@@ -10,6 +10,10 @@ function buildDependencyGraph(root: postcss.Root): DependencyGraph {
 	root.walkDecls((decl) => {
 		if (!decl.prop.startsWith('--')) return;
 
+		if (!decl.value.includes('var(')) {
+			return;
+		}
+
 		let dependencies = graph.get(decl.prop);
 
 		if (!dependencies) {

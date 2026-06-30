@@ -5,7 +5,7 @@ import { shouldPreserve } from './utils';
 
 import type { PreserveMatcher } from './types';
 
-export function pruneCss(
+export function pruneUnusedVariables(
 	css: string,
 	used: Set<string>,
 	preserve: PreserveMatcher[] = []
