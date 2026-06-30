@@ -30,15 +30,13 @@ export default function pruneCssVars(
 		},
 
 		async configureServer(server: ViteDevServer) {
-			await analyse();
-
-			server.watcher.on('change', async (file) => {
-				if (!/\.(scss|sass|svelte)$/.test(file)) {
-					return;
-				}
-
+			try {
 				await analyse();
-			});
+			} catch (error) {
+				server.config.logger.error(
+					`[prune-css-vars] ${(error as Error).message}`
+				);
+			}
 		},
 
 		transform(code, id) {
