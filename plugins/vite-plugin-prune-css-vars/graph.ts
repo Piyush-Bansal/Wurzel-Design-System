@@ -55,11 +55,9 @@ function expandDependencies(
 }
 
 export function buildReachableVariables(
-	css: string,
+	root: postcss.Root,
 	used: Set<string>
 ): Set<string> {
-	const root = postcss.parse(css);
-
 	const graph = buildDependencyGraph(root);
 
 	return expandDependencies(used, graph);

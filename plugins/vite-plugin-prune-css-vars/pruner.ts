@@ -14,9 +14,9 @@ export function pruneCss(
 		return css;
 	}
 
-	const reachable = buildReachableVariables(css, used);
-
 	const root = postcss.parse(css);
+
+	const reachable = buildReachableVariables(root, used);
 
 	root.walkDecls((decl) => {
 		if (!decl.prop.startsWith('--')) {
