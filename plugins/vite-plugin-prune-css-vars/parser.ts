@@ -17,12 +17,14 @@ export function buildAliasMap(files: ReadonlyArray<SourceFile>): AliasMap {
 		ALIAS_REGEX.lastIndex = 0;
 
 		let match: RegExpExecArray | null;
+		let hasAliases = false;
 
 		while ((match = ALIAS_REGEX.exec(source))) {
 			aliases.set(match[1], match[2]);
+			hasAliases = true;
 		}
 
-		if (aliases.size > 0) {
+		if (hasAliases) {
 			definitionFiles.add(file);
 		}
 	}
