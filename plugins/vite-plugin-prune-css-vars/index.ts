@@ -37,7 +37,13 @@ export default function pruneCssVars(
 				});
 		}
 
-		await analysis;
+		try {
+			await analysis;
+		} catch (error) {
+			throw new Error(
+				`[vite-plugin-prune-css-vars] ${error instanceof Error ? error.message : String(error)}`
+			);
+		}
 	}
 
 	return {

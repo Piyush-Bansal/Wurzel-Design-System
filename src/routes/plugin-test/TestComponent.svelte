@@ -9,7 +9,7 @@
 
 	div {
 		width: $comp-size-xl;
-		height: $height;
+		height: $comp-size-xl;
 		background-color: red;
 	}
 </style>
