@@ -87,3 +87,22 @@
 | 		'. sec-4 sec-4 sec-4 sec-4 . . . sec-5 sec-5 sec-5 sec-5 sec-5 . . .';
 | }
 */
+
+/* PERSONAL NOTES
+| Try creating simpler macro grids 1_1_1_1 
+| Subdivide it further
+| Do not add md, sm, keep them small and composable
+| Use extends to change composition at breakpoints
+|
+| .component {
+|   @extend .grid-a;
+|
+|   @media (...) {
+|     @extend .grid-b;
+|   }
+|
+|   @media (...) {
+|     @extend .grid-c;
+|   }
+| }
+*/

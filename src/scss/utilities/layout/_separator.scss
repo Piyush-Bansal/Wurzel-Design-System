@@ -1,33 +1,32 @@
-// @use '../../abstract/' as *;
-// @use '../../layouts' as *;
+@use '../../tokens/functional' as *;
 
-// .separator {
-// 	display: block;
-// 	height: $separator-height;
-// 	background-color: $separator-color;
+.separator {
+	display: block;
+	height: $stroke-hairline;
+	background-color: $clr-bdr-default;
 
-// 	&[data-size='full'] {
-// 		margin-left: calc($container-padding * -1);
-// 		margin-right: calc($container-padding * -1);
-// 	}
+	&[data-size='full'] {
+		padding-inline: 0;
+	}
 
-// 	&[data-size='right-extended'] {
-// 		margin-right: calc(($gutter/2) * -1);
-// 	}
+	&[data-size='right-extended'] {
+		padding-left: $page-margins;
+		padding-right: calc($page-margins - $half-gutter);
+	}
 
-// 	&[data-size='left-extended'] {
-// 		margin-left: calc(($gutter/2) * -1);
-// 	}
+	&[data-size='left-extended'] {
+		padding-left: calc($page-margins - $half-gutter);
+		padding-right: $page-margins;
+	}
 
-// 	&[data-size='left-right-extended'] {
-// 		margin-left: calc(($gutter/2) * -1);
-// 		margin-right: calc(($gutter/2) * -1);
-// 	}
-// }
+	&[data-size='left-right-extended'] {
+		padding-inline: calc($page-margins - $half-gutter);
+	}
+}
 
-// .vertical-separator {
-// 	display: block;
-// 	width: $vertical-separator-width;
-// 	height: 100%;
-// 	background-color: $vertical-separator-color;
-// }
+.vertical-separator {
+	display: block;
+	width: $stroke-hairline;
+	height: 100%;
+	background-color: $clr-bdr-default;
+}

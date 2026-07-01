@@ -5,8 +5,6 @@
 	margin-bottom: $paragraph-spacing;
 }
 
-// .p-indent
-// p:not(:first-of-type)
-//  {
-// 	text-indent: $paragraph-indent;
-// }
+.p-indent p:not(:first-of-type) {
+	text-indent: $paragraph-indent;
+}

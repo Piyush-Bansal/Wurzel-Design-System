@@ -18,4 +18,8 @@
 		padding-left: calc($page-margins - $half-gutter);
 		padding-right: $page-margins;
 	}
+
+	&[data-size='left-right-extended'] {
+		padding-inline: calc($page-margins - $half-gutter);
+	}
 }
