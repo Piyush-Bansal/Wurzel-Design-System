@@ -3,6 +3,7 @@
 	import gsap from 'gsap';
 	import { getSpatialGallery } from './functionality.svelte';
 	import type { Card } from './types';
+	import { useActivity } from '$lib/interactions';
 
 	let { details }: Card = $props();
 
@@ -17,6 +18,8 @@
 			10
 		);
 	});
+
+	const activity = $derived(useActivity(functionality.pointer, 1_000));
 
 	let card = $state<HTMLDivElement>();
 
@@ -58,7 +61,7 @@
 		});
 	});
 
-	const pose = $state({
+	const motion = $state({
 		idle: {
 			y: 0,
 			rotationX: 0,
@@ -75,20 +78,21 @@
 	$effect(() => {
 		if (!camera) return;
 
-		pose.camera = {
-			x: camera.translateX * depthFactor,
-			y: camera.translateY * depthFactor,
-			xRotation: camera.rotateX + details.rotateX,
-			yRotation: camera.rotateY + details.rotateY
-		};
+		motion.camera.x = camera.translateX * depthFactor;
+		motion.camera.y = camera.translateY * depthFactor;
+		motion.camera.xRotation = camera.rotateX + details.rotateX;
+		motion.camera.yRotation = camera.rotateY + details.rotateY;
 	});
 
+	let ctx: gsap.Context;
+	let idleTL: gsap.core.Tween;
+
 	$effect(() => {
-		const ctx = gsap.context(() => {
-			gsap.to(pose.idle, {
-				y: pose.camera.y + gsap.utils.random(-6, 6),
-				rotationX: pose.camera.xRotation + gsap.utils.random(-1, 1),
-				rotationY: pose.camera.yRotation + gsap.utils.random(-1, 1),
+		ctx = gsap.context(() => {
+			idleTL = gsap.to(motion.idle, {
+				y: gsap.utils.random(-30, 30),
+				rotationX: gsap.utils.random(-1, 1),
+				rotationY: gsap.utils.random(-1, 1),
 				duration: gsap.utils.random(3, 6),
 				ease: 'sine.inOut',
 				repeat: -1,
@@ -99,11 +103,34 @@
 		return () => ctx.revert();
 	});
 
+	let isMotionIdle = false;
+
 	$effect(() => {
-		xTo(pose.camera.x);
-		yTo(pose.camera.y + pose.idle.y);
-		rotateXTo(pose.camera.xRotation + pose.idle.rotationX);
-		rotateYTo(pose.camera.yRotation + pose.idle.rotationY);
+		if (!idleTL) return;
+		if (isMotionIdle == activity.isActive) return;
+
+		if (activity.isActive) {
+			gsap.to(motion.idle, {
+				duration: 0.4,
+				y: 0,
+				rotationX: 0,
+				rotationY: 0,
+				ease: 'sine.out',
+				onComplete: () => idleTL.pause()
+			});
+
+			isMotionIdle = true;
+		} else {
+			idleTL.restart();
+			isMotionIdle = false;
+		}
+	});
+
+	$effect(() => {
+		xTo(motion.camera.x);
+		yTo(motion.camera.y + motion.idle.y);
+		rotateXTo(motion.camera.xRotation + motion.idle.rotationX);
+		rotateYTo(motion.camera.yRotation + motion.idle.rotationY);
 	});
 </script>
 

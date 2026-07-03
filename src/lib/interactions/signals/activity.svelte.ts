@@ -1,7 +1,9 @@
 import type { usePointer } from './pointer.svelte';
 
-export function useActivity(position: ReturnType<typeof usePointer>) {
-	const ACTIVITY_THRESHOLD = 5_000;
+export function useActivity(
+	position: ReturnType<typeof usePointer>,
+	threshold = 5_000
+) {
 	const TICK_INTERVAL = 50;
 
 	let lastActivityTime = $state(Date.now());
@@ -27,7 +29,7 @@ export function useActivity(position: ReturnType<typeof usePointer>) {
 		return Date.now() - lastActivityTime;
 	});
 
-	const isActive = $derived(idleTime < ACTIVITY_THRESHOLD);
+	const isActive = $derived(idleTime < threshold);
 
 	return {
 		get isActive() {
