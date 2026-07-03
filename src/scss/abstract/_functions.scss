@@ -44,6 +44,28 @@
 	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
 }
 
+@function fluid-l-var($var-name) {
+	// $var-name is a string like '--x', not a number
+
+	// Precompute constant coefficients (Sass math, compile time)
+	$max-coef: math.div($ss-large-high, $ss-artboard-lg * 16); // unitless
+	$min-coef: math.div($ss-large-low, $ss-artboard-lg * 16);  // unitless
+
+	$min-vw: math.div($ss-large-low, 16) * 1rem;
+	$max-vw: math.div($ss-large-high, 16) * 1rem;
+
+	// These are now CSS calc() expressions, not Sass numbers
+	$max-rem: calc(var(#{$var-name}) * #{$max-coef} * 1rem);
+	$min-rem: calc(var(#{$var-name}) * #{$min-coef} * 1rem);
+
+	$preferred: calc(
+		#{$min-rem} + (#{$max-rem} - #{$min-rem}) *
+			((100vw - #{$min-vw}) / (#{$max-vw} - #{$min-vw}))
+	);
+
+	@return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
+}
+
 @function fluid-m($val) {
 	// Type check
 	@if meta.type-of($val) != 'number' {

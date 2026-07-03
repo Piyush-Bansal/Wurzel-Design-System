@@ -1,0 +1,102 @@
+[
+	{
+		"id": 1,
+		"image": "https://picsum.photos/600/600.webp?random=1",
+		"title": "Gallery Piece 1",
+		"x": 160,
+		"y": 410,
+		"depth": 0,
+		"rotateX": -1,
+		"rotateY": 2
+	},
+	{
+		"id": 2,
+		"image": "https://picsum.photos/600/600.webp?random=2",
+		"title": "Gallery Piece 2",
+		"x": 270,
+		"y": 260,
+		"depth": -35,
+		"rotateX": 1,
+		"rotateY": -1
+	},
+	{
+		"id": 3,
+		"image": "https://picsum.photos/600/600.webp?random=3",
+		"title": "Gallery Piece 3",
+		"x": 410,
+		"y": 540,
+		"depth": -70,
+		"rotateX": 0,
+		"rotateY": 3
+	},
+	{
+		"id": 4,
+		"image": "https://picsum.photos/600/600.webp?random=4",
+		"title": "Gallery Piece 4",
+		"x": 560,
+		"y": 340,
+		"depth": -110,
+		"rotateX": -2,
+		"rotateY": -2
+	},
+	{
+		"id": 5,
+		"image": "https://picsum.photos/600/600.webp?random=5",
+		"title": "Gallery Piece 5",
+		"x": 750,
+		"y": 210,
+		"depth": -155,
+		"rotateX": 1,
+		"rotateY": 1
+	},
+	{
+		"id": 6,
+		"image": "https://picsum.photos/600/600.webp?random=6",
+		"title": "Gallery Piece 6",
+		"x": 910,
+		"y": 450,
+		"depth": -205,
+		"rotateX": -1,
+		"rotateY": 0
+	},
+	{
+		"id": 7,
+		"image": "https://picsum.photos/600/600.webp?random=7",
+		"title": "Gallery Piece 7",
+		"x": 1080,
+		"y": 300,
+		"depth": -260,
+		"rotateX": 2,
+		"rotateY": -3
+	},
+	{
+		"id": 8,
+		"image": "https://picsum.photos/600/600.webp?random=8",
+		"title": "Gallery Piece 8",
+		"x": 1240,
+		"y": 580,
+		"depth": -320,
+		"rotateX": 0,
+		"rotateY": 2
+	},
+	{
+		"id": 9,
+		"image": "https://picsum.photos/600/600.webp?random=9",
+		"title": "Gallery Piece 9",
+		"x": 1380,
+		"y": 390,
+		"depth": -390,
+		"rotateX": -1,
+		"rotateY": -2
+	},
+	{
+		"id": 10,
+		"image": "https://picsum.photos/600/600.webp?random=10",
+		"title": "Gallery Piece 10",
+		"x": 1560,
+		"y": 670,
+		"depth": -470,
+		"rotateX": 1,
+		"rotateY": 1
+	}
+]
