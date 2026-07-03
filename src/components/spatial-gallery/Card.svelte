@@ -84,15 +84,19 @@
 	});
 
 	$effect(() => {
-		gsap.to(pose.idle, {
-			y: pose.camera.y + gsap.utils.random(-6, 6),
-			rotationX: pose.camera.xRotation + gsap.utils.random(-1, 1),
-			rotationY: pose.camera.yRotation + gsap.utils.random(-1, 1),
-			duration: gsap.utils.random(3, 6),
-			ease: 'sine.inOut',
-			repeat: -1,
-			yoyo: true
-		});
+		const ctx = gsap.context(() => {
+			gsap.to(pose.idle, {
+				y: pose.camera.y + gsap.utils.random(-6, 6),
+				rotationX: pose.camera.xRotation + gsap.utils.random(-1, 1),
+				rotationY: pose.camera.yRotation + gsap.utils.random(-1, 1),
+				duration: gsap.utils.random(3, 6),
+				ease: 'sine.inOut',
+				repeat: -1,
+				yoyo: true
+			});
+		}, card);
+
+		return () => ctx.revert();
 	});
 
 	$effect(() => {
