@@ -1,10 +1,8 @@
 <script lang="ts">
-	import type { Attachment } from 'svelte/attachments';
-	import type { Card } from './types';
-	import { getSpatialGallery } from './functionality.svelte';
-	import gsap from 'gsap';
 	import { useCamera } from '$lib/interactions/signals/camera.svelte';
-	import { untrack } from 'svelte';
+	import gsap from 'gsap';
+	import { getSpatialGallery } from './functionality.svelte';
+	import type { Card } from './types';
 
 	let { details }: Card = $props();
 
@@ -19,25 +17,6 @@
 			10
 		);
 	});
-
-	// const animate: Attachment = (card) => {
-	// 	const ctx = gsap.context(() => {
-	// 		const tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-	// 		tl.to(card, {
-	// 			y: gsap.utils.random(-6, 6),
-	// 			// x: camera?.translateX,
-	// 			rotateX: details.rotateX + gsap.utils.random(-1, 1),
-	// 			rotateY: details.rotateY + gsap.utils.random(-1, 1),
-	// 			duration: gsap.utils.random(3, 6),
-	// 			ease: 'sine.inOut'
-	// 		});
-	// 	});
-
-	// 	return () => {
-	// 		ctx.revert();
-	// 	};
-	// };
 
 	let card = $state<HTMLDivElement>();
 
@@ -79,12 +58,48 @@
 		});
 	});
 
+	const pose = $state({
+		idle: {
+			y: 0,
+			rotationX: 0,
+			rotationY: 0
+		},
+		camera: {
+			x: 0,
+			y: 0,
+			xRotation: 0,
+			yRotation: 0
+		}
+	});
+
 	$effect(() => {
 		if (!camera) return;
-		xTo(camera.translateX * depthFactor);
-		yTo(camera.translateY * depthFactor);
-		rotateXTo(details.rotateX + camera.rotateX);
-		rotateYTo(details.rotateY + camera.rotateY);
+
+		pose.camera = {
+			x: camera.translateX * depthFactor,
+			y: camera.translateY * depthFactor,
+			xRotation: camera.rotateX + details.rotateX,
+			yRotation: camera.rotateY + details.rotateY
+		};
+	});
+
+	$effect(() => {
+		gsap.to(pose.idle, {
+			y: pose.camera.y + gsap.utils.random(-6, 6),
+			rotationX: pose.camera.xRotation + gsap.utils.random(-1, 1),
+			rotationY: pose.camera.yRotation + gsap.utils.random(-1, 1),
+			duration: gsap.utils.random(3, 6),
+			ease: 'sine.inOut',
+			repeat: -1,
+			yoyo: true
+		});
+	});
+
+	$effect(() => {
+		xTo(pose.camera.x);
+		yTo(pose.camera.y + pose.idle.y);
+		rotateXTo(pose.camera.xRotation + pose.idle.rotationX);
+		rotateYTo(pose.camera.yRotation + pose.idle.rotationY);
 	});
 </script>
 
