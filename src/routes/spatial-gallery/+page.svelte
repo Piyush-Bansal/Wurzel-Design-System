@@ -5,7 +5,7 @@
 </script>
 
 <Gallery>
-	{#each data as item}
-		<Card details={item} />
+	{#each data as item, i}
+		<Card details={item} index={i} />
 	{/each}
 </Gallery>

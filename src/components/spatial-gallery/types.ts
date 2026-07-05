@@ -11,4 +11,43 @@ export type CardDetails = {
 
 export type Card = {
 	details: CardDetails;
+	index: number;
+};
+
+export type InteractionPose = {
+	idle: {
+		depth: number;
+		scale: number;
+		rotationX: number;
+		rotationY: number;
+		brightness: number;
+	};
+	hover: {
+		depth: number;
+		scale: number;
+		rotationX: number;
+		rotationY: number;
+		brightness: number;
+	};
+	dimmed: {
+		depth: number;
+		scale: number;
+		rotationX: number;
+		rotationY: number;
+		brightness: number;
+	};
+	background: {
+		depth: number;
+		scale: number;
+		rotationX: number;
+		rotationY: number;
+		brightness: number;
+	};
+	selected: {
+		depth: number;
+		scale: number;
+		rotationX: number;
+		rotationY: number;
+		brightness: number;
+	};
 };

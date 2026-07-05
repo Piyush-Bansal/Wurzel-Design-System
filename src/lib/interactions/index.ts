@@ -2,6 +2,7 @@ export * from './observers/distanceTrigger.svelte';
 export * from './observers/intersectionObserver.svelte';
 export * from './resources/image-loader.svelte';
 export * from './signals/activity.svelte';
+export * from './signals/camera.svelte';
 export * from './signals/pointer.svelte';
 export * from './signals/selection.svelte';
 export * from './signals/velocity.svelte';

@@ -1,4 +1,9 @@
-import { useBounds, usePointer, useSpaces } from '$lib/interactions';
+import {
+	useBounds,
+	usePointer,
+	useSelection,
+	useSpaces
+} from '$lib/interactions';
 import { getContext, setContext } from 'svelte';
 
 class SpatialGallery {
@@ -9,6 +14,11 @@ class SpatialGallery {
 		if (!this.galleryWrapper) return;
 		return useBounds(this.galleryWrapper);
 	});
+
+	ids: number[] = $state([]);
+	selected = $derived(useSelection(() => this.ids));
+	isAnyCardSelected = $state(false);
+	isGalleryOpen = $state(false);
 }
 
 const KEY = Symbol('SpatialGallery');
