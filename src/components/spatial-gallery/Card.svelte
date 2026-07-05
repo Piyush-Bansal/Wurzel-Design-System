@@ -245,8 +245,6 @@
 
 	// Rendering
 	function render() {
-		// if (functionality.isGalleryOpen) return;
-
 		xTo(motion.camera.x);
 		yTo(motion.camera.y + motion.idle.y);
 		rotateXTo(
@@ -267,7 +265,6 @@
 
 	$effect(render);
 
-	//Gallery animation
 	async function galleryAnimation() {
 		if (!card) return;
 
@@ -278,8 +275,8 @@
 		await tick();
 
 		Flip.from(state, {
-			duration: 0.45,
-			ease: 'power2.inOut'
+			duration: 1,
+			ease: 'none'
 		});
 	}
 
