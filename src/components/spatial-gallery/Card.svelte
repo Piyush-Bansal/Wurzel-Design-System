@@ -8,13 +8,13 @@
 
 	gsap.registerPlugin(Flip);
 
-	//props and state
+	//Props and States
 	let { details, index }: Card = $props();
 
 	const functionality = getSpatialGallery();
+	let flipTarget = $state<HTMLDivElement>();
 	let card = $state<HTMLDivElement>();
 	let interactionPose: InteractionPose | null = null;
-	let transformOwner: 'renderer' | 'flip' = $state('renderer');
 
 	const CardState = {
 		Idle: 'idle',
@@ -43,17 +43,8 @@
 
 	//Motion state
 	const motion = $state({
-		camera: {
-			x: 0,
-			y: 0,
-			rotationX: 0,
-			rotationY: 0
-		},
-		idle: {
-			y: 0,
-			rotationX: 0,
-			rotationY: 0
-		},
+		camera: { x: 0, y: 0, rotationX: 0, rotationY: 0 },
+		idle: { y: 0, rotationX: 0, rotationY: 0 },
 		interaction: {
 			scale: 1,
 			depth: 0,
@@ -77,7 +68,7 @@
 		functionality.selected?.current === details.id
 	);
 
-	//Quick to
+	//QuickTo
 	let xTo: gsap.QuickToFunc;
 	let yTo: gsap.QuickToFunc;
 	let rotateXTo: gsap.QuickToFunc;
@@ -88,10 +79,7 @@
 	let brightnessTo: gsap.QuickToFunc;
 
 	function createQuickTo(node: HTMLElement) {
-		const motionSetting = {
-			duration: 0.2,
-			ease: 'sine.out'
-		};
+		const motionSetting = { duration: 0.2, ease: 'sine.out' };
 
 		xTo = gsap.quickTo(node, 'x', motionSetting);
 		yTo = gsap.quickTo(node, 'y', motionSetting);
@@ -124,7 +112,7 @@
 		motion.camera.rotationY = camera.rotateY + details.rotateY;
 	});
 
-	//idle timeline
+	//Idle timeline
 	let idleTL: gsap.core.Tween;
 	$effect(() => {
 		const ctx = gsap.context(() => {
@@ -147,10 +135,10 @@
 
 	$effect(() => {
 		if (!idleTL) return;
-		if (isMotionIdlePlaying !== pointerActivity.isActive) return;
+		const shouldPause = pointerActivity.isActive || functionality.isGalleryOpen;
+		if (isMotionIdlePlaying === !shouldPause) return;
 
-		if (pointerActivity.isActive || functionality.isGalleryOpen) {
-			//If motion is active, idle animation stops
+		if (shouldPause) {
 			gsap.to(motion.idle, {
 				duration: 0.4,
 				y: 0,
@@ -159,7 +147,6 @@
 				ease: 'sine.out',
 				onComplete: () => idleTL.pause()
 			});
-
 			isMotionIdlePlaying = false;
 		} else {
 			idleTL.restart();
@@ -174,19 +161,9 @@
 		) {
 			return CardState.Selected;
 		}
-
-		if (functionality.isGalleryOpen) {
-			return CardState.Background;
-		}
-
-		if (isCardHovered) {
-			return CardState.Hover;
-		}
-
-		if (functionality.isAnyCardSelected) {
-			return CardState.Dimmed;
-		}
-
+		if (functionality.isGalleryOpen) return CardState.Background;
+		if (isCardHovered) return CardState.Hover;
+		if (functionality.isAnyCardSelected) return CardState.Dimmed;
 		return CardState.Idle;
 	});
 
@@ -200,7 +177,6 @@
 				rotationY: 0,
 				brightness: 1
 			},
-
 			[CardState.Hover]: {
 				depth: 150,
 				scale: 1.08,
@@ -208,7 +184,6 @@
 				rotationY: -details.rotateY,
 				brightness: 1
 			},
-
 			[CardState.Dimmed]: {
 				depth: 0,
 				scale: 1,
@@ -216,7 +191,6 @@
 				rotationY: 0,
 				brightness: 0.3
 			},
-
 			[CardState.Background]: {
 				depth: -100,
 				scale: 0.8,
@@ -224,7 +198,6 @@
 				rotationY: 0,
 				brightness: 0.3
 			},
-
 			[CardState.Selected]: {
 				depth: 0,
 				scale: 1,
@@ -244,25 +217,32 @@
 		});
 	});
 
-	// Rendering
+	//Rendering
 	function render() {
-		if (transformOwner === 'flip') return;
+		if (cardMotionState === CardState.Selected) {
+			xTo(0);
+			yTo(0);
+			rotateXTo(0);
+			rotateYTo(0);
+			depthTo(0);
+			scaleXTo(1);
+			scaleYTo(1);
+			brightnessTo(1);
+			return;
+		}
 
 		xTo(motion.camera.x);
 		yTo(motion.camera.y + motion.idle.y);
-
 		rotateXTo(
 			motion.camera.rotationX +
 				motion.idle.rotationX +
 				motion.interaction.rotationX
 		);
-
 		rotateYTo(
 			motion.camera.rotationY +
 				motion.idle.rotationY +
 				motion.interaction.rotationY
 		);
-
 		depthTo(details.depth + motion.interaction.depth);
 		scaleXTo(motion.interaction.scale);
 		scaleYTo(motion.interaction.scale);
@@ -272,101 +252,89 @@
 	$effect(render);
 
 	async function galleryAnimation() {
-		if (!card) return;
+		if (!flipTarget) return;
 
-		transformOwner = 'flip';
+		const state = Flip.getState(flipTarget);
 
-		await tick();
-
-		gsap.set(card, {
-			clearProps: 'transform'
-		});
-
-		const state = Flip.getState(card);
-
-		functionality.isGalleryOpen = true;
-
+		functionality.isGalleryOpen = !functionality.isGalleryOpen;
 		await tick();
 
 		Flip.from(state, {
-			duration: 0.4,
-			ease: 'none',
-
-			onComplete() {
-				transformOwner = 'renderer';
-			}
+			duration: 0.6,
+			ease: 'power3.inOut'
 		});
 	}
 
 	//Event handlers
 	function handlePointerEnter() {
 		if (functionality.isGalleryOpen) return;
-
 		functionality.selected?.select(details.id);
 		functionality.isAnyCardSelected = true;
 	}
 
 	function handlePointerLeave() {
 		if (functionality.isGalleryOpen) return;
-
 		functionality.selected?.clear();
 		functionality.isAnyCardSelected = false;
 	}
 
 	async function handleClick() {
 		if (functionality.isGalleryOpen) return;
-
 		await galleryAnimation();
 	}
 
 	function handleClose(event: MouseEvent) {
 		event.stopPropagation();
-		functionality.isGalleryOpen = false;
+		galleryAnimation();
 	}
 </script>
 
 <div
-	class={['card', gallerySelection && 'gallery']}
+	class={['card-anchor', gallerySelection && 'gallery']}
 	style:--x={details.x}
 	style:--y={details.y}
-	style:--depth={details.depth}
-	style:--rotate-x={details.rotateX}
-	style:--rotate-y={details.rotateY}
 	style:--z-index={isCardHovered ? functionality.ids.length : index}
-	style:--brightness={1}
-	bind:this={card}
+	bind:this={flipTarget}
 	role="presentation"
 	onpointerenter={handlePointerEnter}
 	onpointerleave={handlePointerLeave}
 	onclick={handleClick}
 	data-flip-id="morph-card"
 >
-	<img src={details.image} alt="" data-flip-id="morph-image" />
-	{#if gallerySelection}
-		<h3 class="invert">{details.title}</h3>
-		<div class="close" onclick={handleClose} role="presentation">
-			<img src="icons/close.svg" alt="close" />
-		</div>
-	{/if}
+	<div class="card" bind:this={card} style:--brightness={1}>
+		<img src={details.image} alt="" data-flip-id="morph-image" />
+		{#if gallerySelection}
+			<h3 class="invert">{details.title}</h3>
+			<div class="close" onclick={handleClose} role="presentation">
+				<img src="icons/close.svg" alt="close" />
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style lang="scss">
 	@use '$tokens' as *;
 	@use '$sizes' as *;
 
-	.card {
+	.card-anchor {
 		position: absolute;
 		width: $col-wide-2;
 		aspect-ratio: 3/4;
-		border-radius: $br-soft;
-		overflow: hidden;
 
 		top: calc(var(--y) * 1px);
 		left: calc(var(--x) * 1px);
-		transform: translate(-50%, -50%) translateZ(calc(var(--depth) * 1px));
+		transform: translate(-50%, -50%);
 		z-index: var(--z-index);
-		filter: brightness(var(--brightness, 1));
 		cursor: pointer;
+		transform-style: preserve-3d;
+	}
+
+	.card {
+		position: absolute;
+		inset: 0;
+		border-radius: $br-soft;
+		overflow: hidden;
+		filter: brightness(var(--brightness, 1));
 
 		img {
 			width: 100%;
