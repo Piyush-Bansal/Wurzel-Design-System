@@ -14,6 +14,7 @@
 	const functionality = getSpatialGallery();
 	let card = $state<HTMLDivElement>();
 	let interactionPose: InteractionPose | null = null;
+	let transformOwner: 'renderer' | 'flip' = $state('renderer');
 
 	const CardState = {
 		Idle: 'idle',
@@ -245,18 +246,23 @@
 
 	// Rendering
 	function render() {
+		if (transformOwner === 'flip') return;
+
 		xTo(motion.camera.x);
 		yTo(motion.camera.y + motion.idle.y);
+
 		rotateXTo(
 			motion.camera.rotationX +
 				motion.idle.rotationX +
 				motion.interaction.rotationX
 		);
+
 		rotateYTo(
 			motion.camera.rotationY +
 				motion.idle.rotationY +
 				motion.interaction.rotationY
 		);
+
 		depthTo(details.depth + motion.interaction.depth);
 		scaleXTo(motion.interaction.scale);
 		scaleYTo(motion.interaction.scale);
@@ -268,6 +274,14 @@
 	async function galleryAnimation() {
 		if (!card) return;
 
+		transformOwner = 'flip';
+
+		await tick();
+
+		gsap.set(card, {
+			clearProps: 'transform'
+		});
+
 		const state = Flip.getState(card);
 
 		functionality.isGalleryOpen = true;
@@ -275,8 +289,12 @@
 		await tick();
 
 		Flip.from(state, {
-			duration: 1,
-			ease: 'none'
+			duration: 0.4,
+			ease: 'none',
+
+			onComplete() {
+				transformOwner = 'renderer';
+			}
 		});
 	}
 
