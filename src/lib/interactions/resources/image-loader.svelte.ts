@@ -1,48 +1,57 @@
 import { browser } from '$app/environment';
 
-export type LoadImagesResult = {
-	loaded: string[];
-	failed: string[];
+export type ImageData = {
+	id: string | number;
+	src: string;
 };
 
-function loadImage(src: string): Promise<string> {
-	return new Promise((resolve, reject) => {
-		const img = new Image();
+export type LoadImagesResult = {
+	loaded: ImageData[];
+	failed: ImageData[];
+};
 
-		img.onload = () => resolve(src);
-		img.onerror = () => reject(src);
+type LoadImagesCallbacks = {
+	onLoad?: (image: ImageData) => void;
+	onError?: (image: ImageData) => void;
+	onComplete?: () => void;
+};
 
-		img.src = src;
-	});
-}
-
-export async function loadImages(images: string[]): Promise<LoadImagesResult> {
+export function loadImages(
+	images: ImageData[],
+	{ onLoad, onError, onComplete }: LoadImagesCallbacks = {}
+) {
 	if (!browser) {
-		return {
-			loaded: [],
-			failed: []
-		};
+		onComplete?.();
+		return;
 	}
 
 	if (images.length === 0) {
 		throw new Error('No images supplied');
 	}
 
-	const results = await Promise.allSettled(images.map(loadImage));
+	let completed = 0;
 
-	return {
-		loaded: results
-			.filter(
-				(result): result is PromiseFulfilledResult<string> =>
-					result.status === 'fulfilled'
-			)
-			.map((result) => result.value),
+	const finish = () => {
+		completed++;
 
-		failed: results
-			.filter(
-				(result): result is PromiseRejectedResult =>
-					result.status === 'rejected'
-			)
-			.map((result) => result.reason as string)
+		if (completed === images.length) {
+			onComplete?.();
+		}
 	};
+
+	for (const image of images) {
+		const img = new Image();
+
+		img.onload = () => {
+			onLoad?.(image);
+			finish();
+		};
+
+		img.onerror = () => {
+			onError?.(image);
+			finish();
+		};
+
+		img.src = image.src;
+	}
 }

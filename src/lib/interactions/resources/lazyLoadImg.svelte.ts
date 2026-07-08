@@ -1,42 +1,47 @@
 import {
 	loadImages,
 	useIntersection,
-	type LoadImagesResult
+	type LoadImagesResult,
+	type ImageData
 } from '$lib/interactions';
 
-export const lazyLoadImages = function (
-	imageSrc: string[],
+export const lazyLoadImages = (
+	imageSrc: ImageData[],
 	parentNode: () => HTMLElement | undefined,
-	options: IntersectionObserverInit = { rootMargin: '100px 0px 100px 0px' }
-) {
+	options: IntersectionObserverInit = {
+		rootMargin: '100px 0px 100px 0px'
+	}
+) => {
 	const intersection = $derived(useIntersection(parentNode, options));
 
-	let loadedImages: LoadImagesResult = $state({
+	const images = $state<LoadImagesResult>({
 		loaded: [],
 		failed: []
 	});
 
 	let running = false;
 
-	const run = async () => {
+	function run() {
 		if (running) return;
 		if (!intersection?.isIntersecting) return;
 
 		running = true;
 
-		try {
-			const result = await loadImages(imageSrc);
+		loadImages(imageSrc, {
+			onLoad(image) {
+				images.loaded.push(image);
+			},
 
-			loadedImages.loaded = result.loaded;
-			loadedImages.failed = result.failed;
+			onError(image) {
+				images.failed.push(image);
+			},
 
-			intersection.disconnect();
-		} catch (error) {
-			console.error(error);
-		} finally {
-			running = false;
-		}
-	};
+			onComplete() {
+				intersection.disconnect();
+				running = false;
+			}
+		});
+	}
 
 	const destroy = $effect.root(() => {
 		$effect(() => {
@@ -44,15 +49,14 @@ export const lazyLoadImages = function (
 		});
 
 		$effect(() => {
-			if (loadedImages.loaded.length || loadedImages.failed.length) {
+			if (
+				images.loaded.length + images.failed.length === imageSrc.length &&
+				imageSrc.length > 0
+			) {
 				destroy();
 			}
 		});
 	});
 
-	return {
-		get loaded() {
-			return loadedImages;
-		}
-	};
+	return images;
 };

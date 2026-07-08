@@ -15,6 +15,13 @@
 	let flipTarget = $state<HTMLDivElement>();
 	let card = $state<HTMLDivElement>();
 	let interactionPose: InteractionPose | null = null;
+	const imgData = $derived.by(() => {
+		if (!functionality.imageResources) return;
+
+		return functionality.imageResources.loaded.find(
+			(image) => image.id === details.id
+		);
+	});
 
 	const CardState = {
 		Idle: 'idle',
@@ -302,7 +309,9 @@
 	data-flip-id="morph-card"
 >
 	<div class="card" bind:this={card} style:--brightness={1}>
-		<img src={details.image} alt="" data-flip-id="morph-image" />
+		{#if imgData}
+			<img src={imgData?.src} alt="" data-flip-id="morph-image" />
+		{/if}
 		{#if gallerySelection}
 			<h3 class="invert">{details.title}</h3>
 			<div class="close" onclick={handleClose} role="presentation">

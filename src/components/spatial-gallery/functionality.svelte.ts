@@ -24,14 +24,16 @@ class SpatialGallery {
 
 	data: CardDetails[] = $state([]);
 
-	_images = $derived.by(() => {
+	_imageSources = $derived.by(() => {
 		if (this.data.length === 0) return;
-		return this.data.map((item) => item.image);
+		return this.data.map((item) => {
+			return { id: item.id, src: item.image };
+		});
 	});
 
-	loadedImages = $derived.by(() => {
-		if (!this._images) return;
-		return lazyLoadImages(this._images, () => this.galleryWrapper).loaded;
+	imageResources = $derived.by(() => {
+		if (!this._imageSources) return;
+		return lazyLoadImages(this._imageSources, () => this.galleryWrapper);
 	});
 }
 
