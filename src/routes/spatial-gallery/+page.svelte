@@ -4,7 +4,7 @@
 	import data from './data.json';
 </script>
 
-<Gallery>
+<Gallery {data}>
 	{#each data as item, i}
 		<Card details={item} index={i} />
 	{/each}

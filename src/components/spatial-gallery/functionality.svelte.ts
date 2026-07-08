@@ -1,10 +1,12 @@
 import {
+	lazyLoadImages,
 	useBounds,
 	usePointer,
-	useSelection,
-	useSpaces
+	useSelection
 } from '$lib/interactions';
 import { getContext, setContext } from 'svelte';
+
+import type { CardDetails } from './types';
 
 class SpatialGallery {
 	pointer = usePointer();
@@ -19,6 +21,18 @@ class SpatialGallery {
 	selected = $derived(useSelection(() => this.ids));
 	isAnyCardSelected = $state(false);
 	isGalleryOpen = $state(false);
+
+	data: CardDetails[] = $state([]);
+
+	_images = $derived.by(() => {
+		if (this.data.length === 0) return;
+		return this.data.map((item) => item.image);
+	});
+
+	loadedImages = $derived.by(() => {
+		if (!this._images) return;
+		return lazyLoadImages(this._images, () => this.galleryWrapper).loaded;
+	});
 }
 
 const KEY = Symbol('SpatialGallery');

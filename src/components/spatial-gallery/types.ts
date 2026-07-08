@@ -1,3 +1,5 @@
+import type { Snippet } from 'svelte';
+
 export type CardDetails = {
 	id: number;
 	image: string;
@@ -51,3 +53,5 @@ export type InteractionPose = {
 		brightness: number;
 	};
 };
+
+export type GalleryProps = { data: CardDetails[]; children: Snippet };

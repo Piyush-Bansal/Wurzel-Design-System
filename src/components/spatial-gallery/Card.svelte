@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { useActivity, useCamera } from '$lib/interactions';
-	import { getSpatialGallery } from './functionality.svelte';
-	import { onMount, tick } from 'svelte';
-	import type { Card, InteractionPose } from './types';
 	import gsap from 'gsap';
 	import Flip from 'gsap/Flip';
+	import { onMount, tick } from 'svelte';
+	import { getSpatialGallery } from './functionality.svelte';
+	import type { Card, InteractionPose } from './types';
 
 	gsap.registerPlugin(Flip);
 

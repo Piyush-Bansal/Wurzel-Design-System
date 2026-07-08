@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { getSpatialGallery, setSpatialGallery } from './functionality.svelte';
+	import type { GalleryProps } from './types';
 
-	let { children } = $props();
+	let { data, children }: GalleryProps = $props();
+
 	setSpatialGallery();
+
 	const functionality = getSpatialGallery();
+
+	$effect(() => {
+		functionality.data = data;
+	});
 </script>
 
 <div class="container" bind:this={functionality.galleryWrapper}>
