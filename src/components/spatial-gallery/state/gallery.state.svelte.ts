@@ -1,6 +1,7 @@
 import {
 	lazyLoadImages,
 	useBounds,
+	useLocalPointer,
 	usePointer,
 	useSelection
 } from '$lib/interactions';
@@ -12,13 +13,12 @@ export class GalleryState {
 	galleryWrapper = $state<HTMLElement>();
 
 	// Input
-	pointer = usePointer();
+	pointer = $derived(
+		this.galleryWrapper && useLocalPointer(this.galleryWrapper).local
+	);
 
 	//Geometry
-	bounds = $derived.by(() => {
-		if (!this.galleryWrapper) return;
-		return useBounds(this.galleryWrapper);
-	});
+	bounds = $derived(this.galleryWrapper && useBounds(this.galleryWrapper));
 
 	// Data
 	data: CardDetails[] = $state([]);
@@ -30,17 +30,17 @@ export class GalleryState {
 	selected = $derived(useSelection(() => this.ids));
 
 	// Resources
-	dataImages = $derived.by(() => {
-		if (this.data.length === 0) return;
-		return this.data.map((item) => {
-			return { id: item.id, src: item.image };
-		});
-	});
+	dataImages = $derived(
+		this.data.length > 0 &&
+			this.data.map((item) => {
+				return { id: item.id, src: item.image };
+			})
+	);
 
-	loadedImages = $derived.by(() => {
-		if (!this.dataImages) return;
-		return lazyLoadImages(this.dataImages, () => this.galleryWrapper);
-	});
+	loadedImages = $derived(
+		this.dataImages &&
+			lazyLoadImages(this.dataImages, () => this.galleryWrapper)
+	);
 }
 
 const KEY = Symbol('GalleryState');

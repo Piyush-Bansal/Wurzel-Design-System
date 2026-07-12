@@ -21,7 +21,7 @@ export class CardController {
 	private scaleXTo?: gsap.QuickToFunc;
 	private scaleYTo?: gsap.QuickToFunc;
 	private brightnessTo?: gsap.QuickToFunc;
-	private pointerActivity!: ReturnType<typeof useActivity>;
+	private pointerActivity!: ReturnType<typeof useActivity> | undefined;
 	private camera: ReturnType<typeof useCamera> | undefined;
 	private readonly depthFactor: number;
 
@@ -46,10 +46,11 @@ export class CardController {
 		private readonly state: CardState,
 		private readonly gallery: GalleryState
 	) {
-		this.pointerActivity = useActivity(this.gallery.pointer);
+		this.pointerActivity =
+			this.gallery.pointer && useActivity(this.gallery.pointer);
 
 		this.camera = $derived.by(() => {
-			if (!this.gallery.galleryWrapper) return;
+			if (!this.gallery.galleryWrapper || !this.gallery.pointer) return;
 			return useCamera(
 				this.gallery.pointer,
 				this.gallery.galleryWrapper,
@@ -194,7 +195,8 @@ export class CardController {
 		if (!this.idleTL) return;
 
 		const shouldPause =
-			this.pointerActivity.isActive || this.gallery.isGalleryOpen;
+			(this.pointerActivity && this.pointerActivity.isActive) ||
+			this.gallery.isGalleryOpen;
 
 		if (this.isMotionIdlePlaying === !shouldPause) return;
 
