@@ -1,6 +1,6 @@
 export * from './observers/distanceTrigger.svelte';
 export * from './observers/intersectionObserver.svelte';
-export * from './resources/image-loader.svelte';
+export * from './resources/imageLoader.svelte';
 export * from './resources/lazyLoadImg.svelte';
 export * from './resources/localPointer.svelte';
 export * from './signals/activity.svelte';

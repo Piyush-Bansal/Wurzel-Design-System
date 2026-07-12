@@ -1,320 +1,58 @@
 <script lang="ts">
-	import { useActivity, useCamera } from '$lib/interactions';
-	import gsap from 'gsap';
-	import Flip from 'gsap/Flip';
-	import { onMount, tick } from 'svelte';
-	import { getSpatialGallery } from './functionality.svelte';
-	import type { Card, InteractionPose } from './types';
+	import { onMount } from 'svelte';
 
-	gsap.registerPlugin(Flip);
+	import { CardController } from './behaviour/card.behaviour.svelte';
+	import {
+		CardMotionState,
+		IndividualCardState
+	} from './state/card.state.svelte';
+	import { getGalleryState } from './state/gallery.state.svelte';
 
-	//Props and States
+	import type { Card } from './types';
+
 	let { details, index }: Card = $props();
 
-	const functionality = getSpatialGallery();
-	let flipTarget = $state<HTMLDivElement>();
-	let card = $state<HTMLDivElement>();
-	let interactionPose: InteractionPose | null = null;
-	const imgData = $derived.by(() => {
-		if (!functionality.imageResources) return;
+	const gallery = getGalleryState();
 
-		return functionality.imageResources.loaded.find(
-			(image) => image.id === details.id
-		);
-	});
-
-	const CardState = {
-		Idle: 'idle',
-		Hover: 'hover',
-		Dimmed: 'dimmed',
-		Selected: 'selected',
-		Background: 'background'
-	} as const;
-
-	onMount(() => {
-		functionality.ids[index] = details.id;
-	});
-
-	//Toolkit
-	const camera = $derived.by(() => {
-		if (!functionality.galleryWrapper) return;
-		return useCamera(
-			functionality.pointer,
-			functionality.galleryWrapper,
-			30,
-			10
-		);
-	});
-
-	const pointerActivity = $derived(useActivity(functionality.pointer, 1_000));
-
-	//Motion state
-	const motion = $state({
-		camera: { x: 0, y: 0, rotationX: 0, rotationY: 0 },
-		idle: { y: 0, rotationX: 0, rotationY: 0 },
-		interaction: {
-			scale: 1,
-			depth: 0,
-			rotationX: 0,
-			rotationY: 0,
-			brightness: 1
-		}
-	});
-
-	//Derived states
-	const depthFactor = $derived(
-		gsap.utils.mapRange(-500, 0, 0, 1, details.depth)
-	);
+	const state = new IndividualCardState(details, index, gallery);
+	const controller = new CardController(state, gallery);
 
 	const gallerySelection = $derived(
-		functionality.isGalleryOpen &&
-			functionality.selected?.current === details.id
+		state.cardMotionState === CardMotionState.Selected
 	);
 
-	const isCardHovered = $derived(
-		functionality.selected?.current === details.id
-	);
+	const isCardHovered = $derived(state.isSelected);
 
-	//QuickTo
-	let xTo: gsap.QuickToFunc;
-	let yTo: gsap.QuickToFunc;
-	let rotateXTo: gsap.QuickToFunc;
-	let rotateYTo: gsap.QuickToFunc;
-	let depthTo: gsap.QuickToFunc;
-	let scaleXTo: gsap.QuickToFunc;
-	let scaleYTo: gsap.QuickToFunc;
-	let brightnessTo: gsap.QuickToFunc;
+	const imgData = $derived(state.image);
 
-	function createQuickTo(node: HTMLElement) {
-		const motionSetting = { duration: 0.2, ease: 'sine.out' };
-
-		xTo = gsap.quickTo(node, 'x', motionSetting);
-		yTo = gsap.quickTo(node, 'y', motionSetting);
-		rotateXTo = gsap.quickTo(node, 'rotationX', motionSetting);
-		rotateYTo = gsap.quickTo(node, 'rotationY', motionSetting);
-		depthTo = gsap.quickTo(node, 'z', motionSetting);
-		scaleXTo = gsap.quickTo(node, 'scaleX', motionSetting);
-		scaleYTo = gsap.quickTo(node, 'scaleY', motionSetting);
-		brightnessTo = gsap.quickTo(node, '--brightness', motionSetting);
-	}
-
-	$effect(() => {
-		if (!card) return;
-
-		gsap.set(card, {
-			rotationX: details.rotateX,
-			rotationY: details.rotateY
-		});
-
-		createQuickTo(card);
+	onMount(() => {
+		gallery.ids[index] = details.id;
 	});
-
-	//Motion producers
-	$effect(() => {
-		if (!camera) return;
-
-		motion.camera.x = camera.translateX * depthFactor;
-		motion.camera.y = camera.translateY * depthFactor;
-		motion.camera.rotationX = camera.rotateX + details.rotateX;
-		motion.camera.rotationY = camera.rotateY + details.rotateY;
-	});
-
-	//Idle timeline
-	let idleTL: gsap.core.Tween;
-	$effect(() => {
-		const ctx = gsap.context(() => {
-			idleTL = gsap.to(motion.idle, {
-				y: gsap.utils.random(-30, 30),
-				rotationX: gsap.utils.random(-1, 1),
-				rotationY: gsap.utils.random(-1, 1),
-				duration: gsap.utils.random(3, 6),
-				ease: 'sine.inOut',
-				repeat: -1,
-				yoyo: true
-			});
-		}, card);
-
-		return () => ctx.revert();
-	});
-
-	//Pointer rest activates idle movement
-	let isMotionIdlePlaying = true;
-
-	$effect(() => {
-		if (!idleTL) return;
-		const shouldPause = pointerActivity.isActive || functionality.isGalleryOpen;
-		if (isMotionIdlePlaying === !shouldPause) return;
-
-		if (shouldPause) {
-			gsap.to(motion.idle, {
-				duration: 0.4,
-				y: 0,
-				rotationX: 0,
-				rotationY: 0,
-				ease: 'sine.out',
-				onComplete: () => idleTL.pause()
-			});
-			isMotionIdlePlaying = false;
-		} else {
-			idleTL.restart();
-			isMotionIdlePlaying = true;
-		}
-	});
-
-	const cardMotionState = $derived.by(() => {
-		if (
-			functionality.isGalleryOpen &&
-			functionality.selected?.current === details.id
-		) {
-			return CardState.Selected;
-		}
-		if (functionality.isGalleryOpen) return CardState.Background;
-		if (isCardHovered) return CardState.Hover;
-		if (functionality.isAnyCardSelected) return CardState.Dimmed;
-		return CardState.Idle;
-	});
-
-	//Card motion state
-	$effect(() => {
-		interactionPose = {
-			[CardState.Idle]: {
-				depth: 0,
-				scale: 1,
-				rotationX: 0,
-				rotationY: 0,
-				brightness: 1
-			},
-			[CardState.Hover]: {
-				depth: 150,
-				scale: 1.08,
-				rotationX: -details.rotateX,
-				rotationY: -details.rotateY,
-				brightness: 1
-			},
-			[CardState.Dimmed]: {
-				depth: 0,
-				scale: 1,
-				rotationX: 0,
-				rotationY: 0,
-				brightness: 0.3
-			},
-			[CardState.Background]: {
-				depth: -100,
-				scale: 0.8,
-				rotationX: 0,
-				rotationY: 0,
-				brightness: 0.3
-			},
-			[CardState.Selected]: {
-				depth: 0,
-				scale: 1,
-				rotationX: 0,
-				rotationY: 0,
-				brightness: 1
-			}
-		};
-	});
-
-	$effect(() => {
-		if (!interactionPose) return;
-		gsap.to(motion.interaction, {
-			...interactionPose[cardMotionState],
-			duration: 0.45,
-			ease: 'power3.out'
-		});
-	});
-
-	//Rendering
-	function render() {
-		if (cardMotionState === CardState.Selected) {
-			xTo(0);
-			yTo(0);
-			rotateXTo(0);
-			rotateYTo(0);
-			depthTo(0);
-			scaleXTo(1);
-			scaleYTo(1);
-			brightnessTo(1);
-			return;
-		}
-
-		xTo(motion.camera.x);
-		yTo(motion.camera.y + motion.idle.y);
-		rotateXTo(
-			motion.camera.rotationX +
-				motion.idle.rotationX +
-				motion.interaction.rotationX
-		);
-		rotateYTo(
-			motion.camera.rotationY +
-				motion.idle.rotationY +
-				motion.interaction.rotationY
-		);
-		depthTo(details.depth + motion.interaction.depth);
-		scaleXTo(motion.interaction.scale);
-		scaleYTo(motion.interaction.scale);
-		brightnessTo(motion.interaction.brightness);
-	}
-
-	$effect(render);
-
-	async function galleryAnimation() {
-		if (!flipTarget) return;
-
-		const state = Flip.getState(flipTarget);
-
-		functionality.isGalleryOpen = !functionality.isGalleryOpen;
-		await tick();
-
-		Flip.from(state, {
-			duration: 0.6,
-			ease: 'power3.inOut'
-		});
-	}
-
-	//Event handlers
-	function handlePointerEnter() {
-		if (functionality.isGalleryOpen) return;
-		functionality.selected?.select(details.id);
-		functionality.isAnyCardSelected = true;
-	}
-
-	function handlePointerLeave() {
-		if (functionality.isGalleryOpen) return;
-		functionality.selected?.clear();
-		functionality.isAnyCardSelected = false;
-	}
-
-	async function handleClick() {
-		if (functionality.isGalleryOpen) return;
-		await galleryAnimation();
-	}
-
-	function handleClose(event: MouseEvent) {
-		event.stopPropagation();
-		galleryAnimation();
-	}
 </script>
 
 <div
 	class={['card-anchor', gallerySelection && 'gallery']}
 	style:--x={details.x}
 	style:--y={details.y}
-	style:--z-index={isCardHovered ? functionality.ids.length : index}
-	bind:this={flipTarget}
+	style:--z-index={isCardHovered ? gallery.ids.length : index}
+	bind:this={state.flipTarget}
 	role="presentation"
-	onpointerenter={handlePointerEnter}
-	onpointerleave={handlePointerLeave}
-	onclick={handleClick}
+	onpointerenter={() => controller.pointerEnter()}
+	onpointerleave={() => controller.pointerLeave()}
+	onclick={() => controller.click()}
 	data-flip-id="morph-card"
 >
-	<div class="card" bind:this={card} style:--brightness={1}>
+	<div class="card" bind:this={state.card} style:--brightness={1}>
 		{#if imgData}
 			<img src={imgData?.src} alt="" data-flip-id="morph-image" />
 		{/if}
 		{#if gallerySelection}
 			<h3 class="invert">{details.title}</h3>
-			<div class="close" onclick={handleClose} role="presentation">
+			<div
+				class="close"
+				onclick={(event) => controller.close(event)}
+				role="presentation"
+			>
 				<img src="icons/close.svg" alt="close" />
 			</div>
 		{/if}
