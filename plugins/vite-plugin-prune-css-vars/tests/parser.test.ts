@@ -70,6 +70,32 @@ describe('collectUsedVariables', () => {
 		expect(used.has('--bar')).toBe(false);
 	});
 
+	it('collects direct css variable usages', () => {
+		const files: SourceFile[] = [
+			{
+				file: 'variables.scss',
+				source: `
+					$foo: var(--foo);
+				`
+			},
+			{
+				file: 'component.scss',
+				source: `
+					.box {
+						width: var(--bar);
+					}
+				`
+			}
+		];
+
+		const { aliases, definitionFiles } = buildAliasMap(files);
+
+		const used = collectUsedVariables(files, aliases, definitionFiles);
+
+		expect(used.has('--bar')).toBe(true);
+		expect(used.has('--foo')).toBe(false);
+	});
+
 	it('does not scan alias definition files', () => {
 		const files: SourceFile[] = [
 			{

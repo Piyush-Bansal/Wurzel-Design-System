@@ -9,6 +9,8 @@ const ALIAS_REGEX = /\$([\w-]+)\s*:\s*var\(\s*(--[\w-]+)\s*\)\s*;/g;
 
 const SCSS_VARIABLE_REGEX = /\$([\w-]+)/g;
 
+const CSS_VARIABLE_REGEX = /var\(\s*(--[\w-]+)/g;
+
 export function buildAliasMap(files: ReadonlyArray<SourceFile>): AliasMap {
 	const aliases = new Map<string, string>();
 	const definitionFiles = new Set<string>();
@@ -57,6 +59,12 @@ export function collectUsedVariables(
 			if (cssVariable) {
 				used.add(cssVariable);
 			}
+		}
+
+		CSS_VARIABLE_REGEX.lastIndex = 0;
+
+		while ((match = CSS_VARIABLE_REGEX.exec(source))) {
+			used.add(match[1]);
 		}
 	}
 
