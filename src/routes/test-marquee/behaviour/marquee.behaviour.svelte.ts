@@ -31,13 +31,8 @@ export class MarqueeBehaviour {
 		for (const item of this.marquee.items) {
 			if (!item.item) continue;
 			const raw = item.startX + offset;
-			const rightEdge = raw + item.width;
-			const visualX = this.wrap(rightEdge, width) - item.width; //Shift back to left edge
+			const visualX = gsap.utils.wrap(-item.width, width, raw);
 			item.setX(visualX - item.startX);
 		}
-	}
-
-	private wrap(value: number, width: number) {
-		return ((value % width) + width) % width;
 	}
 }
