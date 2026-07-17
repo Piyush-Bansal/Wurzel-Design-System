@@ -27,6 +27,7 @@
 		aspect-ratio: 16/9;
 		background-color: red;
 		width: $col-wide-4;
+		will-change: transform;
 
 		div {
 			padding-inline: $cntr-pad-x-1;

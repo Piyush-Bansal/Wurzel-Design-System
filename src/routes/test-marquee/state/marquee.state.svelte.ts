@@ -5,7 +5,7 @@ class MarqueeState {
 	items = $state<MarqueeItem[]>([]);
 	marqueeWrapper = $state<HTMLDivElement>();
 
-	offset = $state(0);
+	offset = 0;
 
 	readonly gap = $derived.by(() => {
 		if (this.items.length < 2) return 0;

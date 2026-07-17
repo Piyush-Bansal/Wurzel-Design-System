@@ -8,11 +8,11 @@
 
 	setMarqueeState();
 	const marqueeState = getMarqueeState();
-	// new MarqueeBehaviour(marqueeState);
+	new MarqueeBehaviour(marqueeState);
 </script>
 
 <div class="container">
-	<div class="wrapper | relative" bind:this={marqueeState.marqueeWrapper}>
+	<div class="wrapper" bind:this={marqueeState.marqueeWrapper}>
 		{#each { length: 5 }, index}
 			<Item {index} />
 		{/each}
@@ -23,15 +23,14 @@
 	@use '$tokens' as *;
 
 	.container {
-		overflow: hidden;
 		margin-top: $sec-gap-l;
-		height: 500px;
 	}
 	.wrapper {
+		overflow: hidden;
 		display: flex;
 		flex-direction: row;
 		gap: $gutter;
-		width: fit-content;
+		width: 100%;
 		align-items: flex-start;
 	}
 </style>
