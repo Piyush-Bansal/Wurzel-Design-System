@@ -3,12 +3,15 @@ import gsap from 'gsap';
 import type MarqueeState from '../state/marquee.state.svelte';
 
 export class MarqueeBehaviour {
-	private readonly _speed = 60;
 	private _intersection = useIntersection(() => this._marquee.marqueeWrapper, {
 		rootMargin: '0px'
 	});
 
-	constructor(private readonly _marquee: MarqueeState) {
+	constructor(
+		private readonly _marquee: MarqueeState,
+		private readonly _speed = 60,
+		private readonly _direction = 1
+	) {
 		$effect(() => {
 			if (!this._intersection?.isIntersecting) return;
 			gsap.ticker.add(this._tick);
@@ -25,7 +28,7 @@ export class MarqueeBehaviour {
 
 	private _update(deltaTime: number) {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
-		this._marquee.offset -= this._speed * dt;
+		this._marquee.offset -= this._speed * this._direction * dt;
 	}
 
 	private _render() {
@@ -33,10 +36,13 @@ export class MarqueeBehaviour {
 		if (width === 0) return;
 
 		const offset = this._marquee.offset;
+
 		for (const item of this._marquee.items) {
 			if (!item.item) continue;
+
 			const raw = item.startX + offset;
 			const visualX = gsap.utils.wrap(-item.width, width - item.width, raw);
+
 			item.setX(visualX - item.startX);
 		}
 	}
