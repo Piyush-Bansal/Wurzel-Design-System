@@ -1,38 +1,48 @@
+import { useIntersection } from '$lib/interactions';
 import gsap from 'gsap';
 import type MarqueeState from '../state/marquee.state.svelte';
 
 export class MarqueeBehaviour {
-	private readonly speed = 60;
+	private readonly _speed = 60;
+	private _intersection = useIntersection(() => this._marquee.marqueeWrapper, {
+		rootMargin: '0px'
+	});
 
-	constructor(private readonly marquee: MarqueeState) {
+	constructor(private readonly _marquee: MarqueeState) {
 		$effect(() => {
-			if (this.marquee.items.length === 0) return;
-			gsap.ticker.add(this.tick);
-			return () => gsap.ticker.remove(this.tick);
+			if (!this._intersection?.isIntersecting) return;
+			gsap.ticker.add(this._tick);
+			this._intersection.disconnect();
+			return () => this.destroy();
 		});
 	}
 
-	private tick = (time: number, deltaTime: number) => {
-		this.update(deltaTime);
-		this.render();
+	private _tick = (time: number, deltaTime: number) => {
+		if (this._marquee.items.length === 0) return;
+		this._update(deltaTime);
+		this._render();
 	};
 
-	private update(deltaTime: number) {
+	private _update(deltaTime: number) {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
-		this.marquee.offset -= this.speed * dt;
+		this._marquee.offset -= this._speed * dt;
 	}
 
-	private render() {
-		const width = this.marquee.trackWidth;
+	private _render() {
+		const width = this._marquee.trackWidth;
 		if (width === 0) return;
 
-		const offset = this.marquee.offset;
-
-		for (const item of this.marquee.items) {
+		const offset = this._marquee.offset;
+		for (const item of this._marquee.items) {
 			if (!item.item) continue;
 			const raw = item.startX + offset;
-			const visualX = gsap.utils.wrap(-item.width, width, raw);
+			const visualX = gsap.utils.wrap(-item.width, width - item.width, raw);
 			item.setX(visualX - item.startX);
 		}
+	}
+
+	private destroy() {
+		gsap.ticker.remove(this._tick);
+		this._intersection?.disconnect();
 	}
 }

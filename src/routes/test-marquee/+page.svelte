@@ -8,13 +8,13 @@
 
 	setMarqueeState();
 	const marqueeState = getMarqueeState();
-	new MarqueeBehaviour(marqueeState);
+	const behaviour = new MarqueeBehaviour(marqueeState);
 </script>
 
 <div class="container">
 	<div class="wrapper" bind:this={marqueeState.marqueeWrapper}>
 		{#each { length: 5 }, index}
-			<Item {index} />
+			<Item {index}  />
 		{/each}
 	</div>
 </div>

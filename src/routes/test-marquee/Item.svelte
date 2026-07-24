@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { MarqueeItem } from './state/item.state.svelte';
 	import { getMarqueeState } from './state/marquee.state.svelte';
+	import type { MarqueeItemType } from './types';
 
-	let { index } = $props();
+	let { index, onpointerenter, onpointerleave }: MarqueeItemType = $props();
 
 	const marqueeState = getMarqueeState();
 
@@ -13,7 +14,13 @@
 	});
 </script>
 
-<div class="item" bind:this={marqueeItem.item}>
+<div
+	role="presentation"
+	class="item"
+	bind:this={marqueeItem.item}
+	{onpointerenter}
+	{onpointerleave}
+>
 	<div class="p-space">
 		<p>Index: {index}</p>
 	</div>
