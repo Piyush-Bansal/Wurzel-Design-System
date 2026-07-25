@@ -14,7 +14,11 @@
 <div class="container">
 	<div class="wrapper" bind:this={marqueeState.marqueeWrapper}>
 		{#each { length: 5 }, index}
-			<Item {index}  />
+			<Item
+				{index}
+				onpointerenter={() => behaviour.pause()}
+				onpointerleave={() => behaviour.play()}
+			/>
 		{/each}
 	</div>
 </div>

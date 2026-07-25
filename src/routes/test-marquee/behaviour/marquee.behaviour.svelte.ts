@@ -7,6 +7,10 @@ export class MarqueeBehaviour {
 		rootMargin: '0px'
 	});
 
+	private _motion = {
+		activity: 1
+	};
+
 	constructor(
 		private readonly _marquee: MarqueeState,
 		private readonly _speed = 60,
@@ -28,7 +32,8 @@ export class MarqueeBehaviour {
 
 	private _update(deltaTime: number) {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
-		this._marquee.offset -= this._speed * this._direction * dt;
+		this._marquee.offset -=
+			this._speed * this._direction * this._motion.activity * dt;
 	}
 
 	private _render() {
@@ -50,5 +55,21 @@ export class MarqueeBehaviour {
 	private destroy() {
 		gsap.ticker.remove(this._tick);
 		this._intersection?.disconnect();
+	}
+
+	pause() {
+		gsap.to(this._motion, {
+			activity: 0,
+			duration: 0.2,
+			ease: 'power2.out'
+		});
+	}
+
+	play() {
+		gsap.to(this._motion, {
+			activity: 1,
+			duration: 0.3,
+			ease: 'power2.in'
+		});
 	}
 }
