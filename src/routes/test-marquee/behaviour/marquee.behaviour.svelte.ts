@@ -1,6 +1,10 @@
 import { useIntersection } from '$lib/interactions';
-import gsap from 'gsap';
+import { scrollIdle } from '$lib/interactions/observers/scrollIdle.svelte';
 import type MarqueeState from '../state/marquee.state.svelte';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export class MarqueeBehaviour {
 	private _intersection = useIntersection(() => this._marquee.marqueeWrapper, {
@@ -8,12 +12,13 @@ export class MarqueeBehaviour {
 	});
 
 	private _motion = {
-		activity: 1
+		activity: 1,
+		scrollVelocity: 0
 	};
 
 	constructor(
 		private readonly _marquee: MarqueeState,
-		private readonly _speed = 60,
+		private readonly _baseSpeed = 60,
 		private readonly _direction = 1
 	) {
 		$effect(() => {
@@ -21,6 +26,29 @@ export class MarqueeBehaviour {
 			gsap.ticker.add(this._tick);
 			this._intersection.disconnect();
 			return () => this.destroy();
+		});
+
+		$effect(() => {
+			if (!this._marquee.marqueeWrapper) return;
+			ScrollTrigger.create({
+				trigger: this._marquee.marqueeWrapper,
+				onUpdate: (self) => {
+					const velocity = gsap.utils.clamp(
+						-200,
+						200,
+						self.getVelocity() * 0.04
+					);
+
+					this._motion.scrollVelocity = velocity;
+
+					gsap.to(this._motion, {
+						scrollVelocity: 0,
+						duration: 0.6,
+						overwrite: true,
+						ease: 'power3.out'
+					});
+				}
+			});
 		});
 	}
 
@@ -32,8 +60,11 @@ export class MarqueeBehaviour {
 
 	private _update(deltaTime: number) {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
-		this._marquee.offset -=
-			this._speed * this._direction * this._motion.activity * dt;
+
+		const velocity =
+			this._baseSpeed * this._direction + this._motion.scrollVelocity;
+
+		this._marquee.offset -= velocity * this._motion.activity * dt;
 	}
 
 	private _render() {
