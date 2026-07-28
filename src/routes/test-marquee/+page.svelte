@@ -14,11 +14,7 @@
 <div class="container">
 	<div class="wrapper" bind:this={marqueeState.marqueeWrapper}>
 		{#each { length: 5 }, index}
-			<Item
-				{index}
-				onpointerenter={() => behaviour.pause()}
-				onpointerleave={() => behaviour.play()}
-			/>
+			<Item {index} onpointerdown={() => behaviour.drag?.start()} />
 		{/each}
 	</div>
 </div>
@@ -36,5 +32,11 @@
 		gap: $gutter;
 		width: 100%;
 		align-items: flex-start;
+		cursor: grab;
+
+		&:active {
+			cursor: grabbing;
+			user-select: none;
+		}
 	}
 </style>

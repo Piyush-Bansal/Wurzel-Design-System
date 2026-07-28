@@ -28,7 +28,7 @@ export class ScrollIdle {
 		});
 	}
 
-	get idle() {
+	get isIdle() {
 		this.#subscribe();
 		return this.#idle;
 	}

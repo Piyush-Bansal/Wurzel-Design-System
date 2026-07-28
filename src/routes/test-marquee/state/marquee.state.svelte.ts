@@ -1,9 +1,13 @@
 import { getContext, setContext } from 'svelte';
 import type { MarqueeItem } from './item.state.svelte';
+import { usePointer, useVelocity } from '$lib/interactions';
 
 class MarqueeState {
 	items = $state<MarqueeItem[]>([]);
 	marqueeWrapper = $state<HTMLDivElement>();
+
+	readonly pointer = usePointer();
+	readonly velocity = useVelocity(this.pointer);
 
 	offset = 0;
 
