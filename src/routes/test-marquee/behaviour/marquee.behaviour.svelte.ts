@@ -9,12 +9,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export class MarqueeBehaviour {
 	private readonly _motion = {
-		velocity: 0,
-		autoplay: 0,
+		currentVelocity: 0,
+		targetVelocity: 0,
 		scrollImpulse: 0
 	};
 
-	private _releaseHandled = true;
+	private _hasReleased = true;
 
 	readonly drag: ReturnType<typeof useDrag> | undefined;
 	private readonly _intersection:
@@ -26,8 +26,8 @@ export class MarqueeBehaviour {
 		baseSpeed = 60,
 		direction = 1
 	) {
-		this._motion.autoplay = baseSpeed * direction;
-		this._motion.velocity = this._motion.autoplay;
+		this._motion.targetVelocity = baseSpeed * direction;
+		this._motion.currentVelocity = this._motion.targetVelocity;
 
 		if (browser) {
 			this.drag = useDrag(this._marquee.pointer, this._marquee.velocity);
@@ -74,30 +74,30 @@ export class MarqueeBehaviour {
 		this._handleReleaseIfNeeded();
 		this._stepVelocity();
 
-		this._marquee.offset -= this._motion.velocity * dt;
+		this._marquee.offset -= this._motion.currentVelocity * dt;
 	}
 
 	private _followPointer() {
-		this._releaseHandled = false;
+		this._hasReleased = false;
 		this._marquee.offset += this.drag!.deltaX;
 	}
 
 	private _handleReleaseIfNeeded() {
-		if (this._releaseHandled || !this.drag) return;
-		this._releaseHandled = true;
+		if (this._hasReleased || !this.drag) return;
+		this._hasReleased = true;
 
-		this._motion.velocity = -this.drag.velocityX * 500;
+		this._motion.currentVelocity = -this.drag.velocityX * 500;
 
-		this._motion.autoplay =
-			Math.sign(this._motion.velocity || this._motion.autoplay) *
-			Math.abs(this._motion.autoplay);
+		this._motion.targetVelocity =
+			Math.sign(this._motion.currentVelocity || this._motion.targetVelocity) *
+			Math.abs(this._motion.targetVelocity);
 	}
 
 	private _stepVelocity() {
-		this._motion.velocity +=
-			(this._motion.autoplay - this._motion.velocity) * 0.05;
+		this._motion.currentVelocity +=
+			(this._motion.targetVelocity - this._motion.currentVelocity) * 0.05;
 
-		this._motion.velocity += this._motion.scrollImpulse * 0.08;
+		this._motion.currentVelocity += this._motion.scrollImpulse * 0.08;
 	}
 
 	private _handleScroll = (self: ScrollTrigger) => {
