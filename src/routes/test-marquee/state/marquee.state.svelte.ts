@@ -9,7 +9,7 @@ class MarqueeState {
 	readonly pointer = usePointer();
 	readonly velocity = useVelocity(this.pointer);
 
-	offset = 0;
+	offset = $state(0);
 
 	readonly gap = $derived.by(() => {
 		if (this.items.length < 2) return 0;

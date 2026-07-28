@@ -14,10 +14,12 @@ export class MarqueeBehaviour {
 		scrollImpulse: 0
 	};
 
-	private _released = false;
+	private _releaseHandled = true;
 
-	readonly drag;
-	private readonly _intersection;
+	readonly drag: ReturnType<typeof useDrag> | undefined;
+	private readonly _intersection:
+		| ReturnType<typeof useIntersection>
+		| undefined;
 
 	constructor(
 		private readonly _marquee: MarqueeState,
@@ -65,26 +67,24 @@ export class MarqueeBehaviour {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
 
 		if (this.drag?.isDragging) {
-			this._drag();
+			this._followPointer();
 			return;
 		}
 
-		this._release();
-
+		this._handleReleaseIfNeeded();
 		this._stepVelocity();
 
 		this._marquee.offset -= this._motion.velocity * dt;
 	}
 
-	private _drag() {
-		this._released = false;
+	private _followPointer() {
+		this._releaseHandled = false;
 		this._marquee.offset += this.drag!.deltaX;
 	}
 
-	private _release() {
-		if (this._released || !this.drag) return;
-
-		this._released = true;
+	private _handleReleaseIfNeeded() {
+		if (this._releaseHandled || !this.drag) return;
+		this._releaseHandled = true;
 
 		this._motion.velocity = -this.drag.velocityX * 500;
 
