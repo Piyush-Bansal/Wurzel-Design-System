@@ -8,7 +8,7 @@ import type { GalleryState } from '../state/gallery.state.svelte';
 import gsap from 'gsap';
 import Flip from 'gsap/Flip';
 import type { InteractionPose } from '../types';
-import { useActivity, useCamera } from '$lib/interactions';
+import { useActivity, useOrbitCamera } from '$lib/interactions';
 
 gsap.registerPlugin(Flip);
 
@@ -22,7 +22,7 @@ export class CardController {
 	private scaleYTo?: gsap.QuickToFunc;
 	private brightnessTo?: gsap.QuickToFunc;
 	private pointerActivity!: ReturnType<typeof useActivity> | undefined;
-	private camera: ReturnType<typeof useCamera> | undefined;
+	private camera: ReturnType<typeof useOrbitCamera> | undefined;
 	private readonly depthFactor: number;
 
 	private readonly motionSetting = { duration: 0.2, ease: 'sine.out' };
@@ -51,7 +51,7 @@ export class CardController {
 
 		this.camera = $derived.by(() => {
 			if (!this.gallery.galleryWrapper || !this.gallery.pointer) return;
-			return useCamera(
+			return useOrbitCamera(
 				this.gallery.pointer,
 				this.gallery.galleryWrapper,
 				30,

@@ -2,7 +2,7 @@ import { useBounds } from '../spatial/bounds.svelte';
 import { useSpaces } from '../spatial/coordinate-space.svelte';
 import type { usePointer } from './pointer.svelte';
 
-export const useCamera = function (
+export const useOrbitCamera = function (
 	pointer: ReturnType<typeof usePointer>,
 	wrapper: HTMLElement,
 	translationStrength = 30,
