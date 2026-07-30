@@ -1,7 +1,7 @@
 import { onDestroy } from 'svelte';
 import type { usePointer } from './pointer.svelte';
 import type { useVelocity } from './velocity.svelte';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 
 class UseDrag {
 	#isDragging = $state(false);

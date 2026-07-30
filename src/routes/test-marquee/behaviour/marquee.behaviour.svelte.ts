@@ -1,4 +1,4 @@
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import { useIntersection } from '$lib/interactions';
 import { useDrag } from '$lib/interactions/signals/dragging.svelte';
 import gsap from 'gsap';
@@ -18,8 +18,7 @@ export class MarqueeBehaviour {
 
 	readonly drag: ReturnType<typeof useDrag> | undefined;
 	private readonly _intersection:
-		| ReturnType<typeof useIntersection>
-		| undefined;
+		ReturnType<typeof useIntersection> | undefined;
 
 	constructor(
 		private readonly _marquee: MarqueeState,
