@@ -4,7 +4,21 @@ export function useIntersection(
 	element: () => HTMLElement | undefined,
 	options: IntersectionObserverInit = {}
 ) {
-	if (!browser) return;
+	if (!browser) {
+		return {
+			get isIntersecting() {
+				return false;
+			},
+			get ratio() {
+				return 0;
+			},
+			get entry() {
+				return null;
+			},
+			disconnect() {}
+		};
+	}
+
 	const node = $derived(element());
 	let isIntersecting = $state(false);
 	let ratio = $state(0);
