@@ -11,7 +11,6 @@ export function useBounds(element: HTMLElement) {
 	};
 
 	if (!browser) return measurements;
-	measure();
 
 	function measure() {
 		const rect = element.getBoundingClientRect();
@@ -21,28 +20,31 @@ export function useBounds(element: HTMLElement) {
 		dimensions.left = rect.left;
 	}
 
-	const observer = new ResizeObserver(() => {
-		measure();
-	});
+	measure();
 
+	const observer = new ResizeObserver(measure);
 	observer.observe(element);
 
-	let rafID: null | number = null;
-	window.addEventListener(
-		'scroll',
-		() => {
-			if (rafID !== null) return;
-			rafID = requestAnimationFrame(() => {
-				rafID = null;
-				measure();
-			});
-		},
-		{ passive: true }
-	);
+	let rafID: number | null = null;
+
+	const onScroll = () => {
+		if (rafID !== null) return;
+
+		rafID = requestAnimationFrame(() => {
+			rafID = null;
+			measure();
+		});
+	};
+
+	window.addEventListener('scroll', onScroll, { passive: true });
 
 	onDestroy(() => {
 		observer.disconnect();
-		window.removeEventListener('scroll', measure);
+		window.removeEventListener('scroll', onScroll);
+
+		if (rafID !== null) {
+			cancelAnimationFrame(rafID);
+		}
 	});
 
 	return measurements;
