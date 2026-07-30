@@ -4,16 +4,15 @@ import { createSubscriber } from 'svelte/reactivity';
 class Pointer {
 	#subscriber;
 
-	#position = $state({
-		x: 0,
-		y: 0
-	});
+	#x = 0;
+	#y = 0;
 
 	constructor() {
 		this.#subscriber = createSubscriber((update) => {
 			const off = on(window, 'pointermove', (e) => {
-				this.#position.x = e.offsetX;
-				this.#position.y = e.offsetY;
+				this.#x = e.offsetX;
+				this.#y = e.offsetY;
+				update();
 			});
 			return () => off();
 		});
@@ -21,12 +20,12 @@ class Pointer {
 
 	get x() {
 		this.#subscriber();
-		return this.#position.x;
+		return this.#x;
 	}
 
 	get y() {
 		this.#subscriber();
-		return this.#position.y;
+		return this.#y;
 	}
 }
 
