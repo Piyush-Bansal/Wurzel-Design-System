@@ -1,6 +1,7 @@
 import { onDestroy } from 'svelte';
 import type { usePointer } from './pointer.svelte';
 import type { useVelocity } from './velocity.svelte';
+import { browser } from '$app/env';
 
 class UseDrag {
 	#isDragging = $state(false);
@@ -33,6 +34,7 @@ class UseDrag {
 	}
 
 	start() {
+		if (!browser) return;
 		this.#isDragging = true;
 		this.#startX = this.#lastX = this.#pointer.x;
 		this.#startY = this.#lastY = this.#pointer.y;
@@ -60,6 +62,7 @@ class UseDrag {
 	}
 
 	#end() {
+		if (!browser) return;
 		this.#isDragging = false;
 		window.removeEventListener('pointerup', this.#handlePointerUp);
 		window.removeEventListener('pointercancel', this.#handlePointerUp);
