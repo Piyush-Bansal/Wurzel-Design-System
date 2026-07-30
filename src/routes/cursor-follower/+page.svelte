@@ -112,8 +112,6 @@
 <div class="container">
 	<p>Speed: {velocity?.speed.toFixed(2)}</p>
 	<p>Angle: {velocity?.angleDegree.toFixed(2)}</p>
-	<p>X: {velocity?.dX}</p>
-	<p>Y: {velocity?.dY}</p>
 	<p>Idle: {activity.idleTime}</p>
 </div>
 

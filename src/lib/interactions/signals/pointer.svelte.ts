@@ -1,54 +1,35 @@
-import { browser } from '$app/env';
-import { onDestroy } from 'svelte';
+import { on } from 'svelte/events';
+import { createSubscriber } from 'svelte/reactivity';
 
-const state = $state({
-	x: 0,
-	y: 0
-});
+class Pointer {
+	#subscriber;
 
-let consumers = 0;
-
-const pointer = {
-	get x() {
-		return state.x;
-	},
-
-	get y() {
-		return state.y;
-	}
-};
-
-function handlePointerMove(e: PointerEvent) {
-	state.x = e.clientX;
-	state.y = e.clientY;
-}
-
-function attach() {
-	window.addEventListener('pointermove', handlePointerMove);
-}
-
-function detach() {
-	window.removeEventListener('pointermove', handlePointerMove);
-}
-
-export function usePointer() {
-	if (!browser) {
-		return pointer;
-	}
-
-	consumers++;
-
-	if (consumers === 1) {
-		attach();
-	}
-
-	onDestroy(() => {
-		consumers--;
-
-		if (consumers === 0) {
-			detach();
-		}
+	#position = $state({
+		x: 0,
+		y: 0
 	});
 
-	return pointer;
+	constructor() {
+		this.#subscriber = createSubscriber((update) => {
+			const off = on(window, 'pointermove', (e) => {
+				this.#position.x = e.offsetX;
+				this.#position.y = e.offsetY;
+			});
+			return () => off();
+		});
+	}
+
+	get x() {
+		this.#subscriber();
+		return this.#position.x;
+	}
+
+	get y() {
+		this.#subscriber();
+		return this.#position.y;
+	}
 }
+
+const pointer = new Pointer();
+
+export const usePointer = () => pointer;
