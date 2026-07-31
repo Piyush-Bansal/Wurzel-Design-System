@@ -1,25 +1,33 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { getHoverState, setHoverState } from './functionality.svelte';
+	import { ListBehaviour } from './behaviour/list.behaviour.svelte';
+	import {
+		getHoverImageState,
+		setHoverImageState
+	} from './state/hoverImage.state.svelte';
+	import { getListState, setListState } from './state/list.state.svelte';
 
 	let { children } = $props();
 
-	setHoverState();
-	const currentState = getHoverState();
+	setListState();
+	const listState = getListState();
+	setHoverImageState(listState);
+	const hoverImageState = getHoverImageState();
+	const listBehaviour = new ListBehaviour(listState, hoverImageState);
 
 	//cleanup
-	onDestroy(() => currentState.destroy());
+	onDestroy(() => listBehaviour.destroy());
 </script>
 
 <div
 	role="presentation"
 	class="list | relative"
-	bind:this={currentState.listArea}
+	bind:this={listState.listArea}
 	onmouseleave={() => {
-		currentState.isImgVisible = false;
+		listState.isImgVisible = false;
 	}}
 	onmouseenter={() => {
-		currentState.isImgVisible = true;
+		listState.isImgVisible = true;
 	}}
 >
 	{#if children}

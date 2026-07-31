@@ -1,29 +1,46 @@
 <script lang="ts">
-	import { getHoverState } from './functionality.svelte';
+	import type { Attachment } from 'svelte/attachments';
+	import { getHoverImageState } from './state/hoverImage.state.svelte';
+	import { getListState } from './state/list.state.svelte';
 	import type { HoverImageProps } from './types';
 
-	let { urls, alt = '' }: HoverImageProps = $props();
+	let { imageData }: HoverImageProps = $props();
 
-	const currentState = getHoverState();
+	// Add images to the state
+	const listState = getListState();
 
-	//bind urls to class
 	$effect(() => {
-		currentState.imageUrls = urls;
+		listState.imageUrls = imageData;
 	});
+
+	const hoverImageState = getHoverImageState();
+
+	function bindImage(id: number | string): Attachment {
+		return (element) => {
+			hoverImageState.images.push({ id, node: element });
+		};
+	}
 </script>
 
-<div
-	class={[
-		'image-wrapper | ar-2-3 overflow-hidden',
-		!currentState.isImgVisible && 'fade'
-	]}
-	bind:clientHeight={currentState.imageWrapperHeight}
-	bind:this={currentState.imgWrapper}
->
-	{#each currentState.loadedImages.loaded as src, i}
-		<img bind:this={currentState.images[i]} {src} {alt} class="absolute" />
-	{/each}
-</div>
+{#if listState.images.loaded.length === imageData.length}
+	<div
+		class={[
+			'image-wrapper | ar-2-3 overflow-hidden',
+			!listState.isImgVisible && 'fade'
+		]}
+		bind:clientHeight={hoverImageState.imageWrapperHeight}
+		bind:this={hoverImageState.imgWrapper}
+	>
+		{#each listState.images.loaded as data, i (i)}
+			<img
+				src={data.src}
+				alt=""
+				class="absolute"
+				{@attach bindImage(data.id)}
+			/>
+		{/each}
+	</div>
+{/if}
 
 <style lang="scss">
 	@use '$tokens' as *;

@@ -1,11 +1,11 @@
-import type { Spring } from 'svelte/motion';
+import { type ImageData } from '$lib/interactions';
 
 export interface ListItemProps {
 	index: number;
 	content: string;
+	id: number | string;
 }
 
 export interface HoverImageProps {
-	urls: string[];
-	alt?: string;
+	imageData: ImageData[];
 }

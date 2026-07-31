@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { getHoverState } from './functionality.svelte';
+	import { getListState } from './state/list.state.svelte';
 	import type { ListItemProps } from './types';
 
-	let { index, content }: ListItemProps = $props();
-	const currentState = getHoverState();
+	let { index, content, id }: ListItemProps = $props();
+	const listState = getListState();
 </script>
 
 <div
 	role="presentation"
 	class="list-item"
 	onmouseenter={() => {
-		currentState.selection?.select(currentState.images[index]);
+		listState.selection?.select(id);
 	}}
 >
 	<div class="list-item-content">
