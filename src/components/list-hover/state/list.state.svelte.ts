@@ -25,10 +25,6 @@ export class ListState {
 	selection = $derived(
 		useSelection(() => this.imageUrls.map((item) => item.id))
 	);
-
-	constructor() {
-		$inspect(this.images);
-	}
 }
 
 const KEY = Symbol('ListState');

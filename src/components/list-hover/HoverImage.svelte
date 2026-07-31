@@ -18,6 +18,11 @@
 	function bindImage(id: number | string): Attachment {
 		return (element) => {
 			hoverImageState.images.push({ id, node: element });
+
+			return () => {
+				const idx = hoverImageState.images.findIndex((img) => img.id === id);
+				if (idx !== -1) hoverImageState.images.splice(idx, 1);
+			};
 		};
 	}
 </script>

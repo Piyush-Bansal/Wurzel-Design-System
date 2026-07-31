@@ -17,7 +17,7 @@ export class HoverImageState {
 		);
 	});
 
-	images = $state<Images>([]);
+	images :Images =[];
 	constructor(private readonly _listState: ListState) {}
 }
 
