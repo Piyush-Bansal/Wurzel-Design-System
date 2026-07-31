@@ -14,7 +14,7 @@ export function useDistance(pointer: Pointer, bounds: Bounds) {
 
 	const y = $derived(pointer.y - center.y);
 
-	const value = $derived(Math.sqrt(x * x + y * y));
+	const value = $derived(Math.hypot(x, y));
 
 	return {
 		get x() {

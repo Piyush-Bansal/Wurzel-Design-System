@@ -1,51 +1,53 @@
-import { browser } from '$app/environment';
-import { onDestroy } from 'svelte';
+import { on } from 'svelte/events';
+import { createSubscriber } from 'svelte/reactivity';
 
-export function useBounds(element: HTMLElement) {
-	const dimensions = $state({ width: 0, height: 0, top: 0, left: 0 });
+class Bounds {
+	#subscriber;
+	#rafID: null | number = null;
 
-	const measurements = {
-		get rect() {
-			return dimensions;
-		}
-	};
+	#dimensions = $state({ width: 0, height: 0, top: 0, left: 0 });
 
-	if (!browser) return measurements;
+	constructor(private readonly element: HTMLElement) {
+		this.#measure(this.element);
 
-	function measure() {
-		const rect = element.getBoundingClientRect();
-		dimensions.width = rect.width;
-		dimensions.height = rect.height;
-		dimensions.top = rect.top;
-		dimensions.left = rect.left;
+		this.#subscriber = createSubscriber(() => {
+			const removeScroll = on(window, 'scroll', () => this.#onScroll(), {
+				passive: true
+			});
+			const removeResize = on(window, 'resize', () =>
+				this.#measure(this.element)
+			);
+
+			return () => {
+				removeScroll();
+				removeResize();
+			};
+		});
 	}
 
-	measure();
+	#onScroll() {
+		if (this.#rafID !== null) return;
 
-	const observer = new ResizeObserver(measure);
-	observer.observe(element);
-
-	let rafID: number | null = null;
-
-	const onScroll = () => {
-		if (rafID !== null) return;
-
-		rafID = requestAnimationFrame(() => {
-			rafID = null;
-			measure();
+		this.#rafID = requestAnimationFrame(() => {
+			this.#rafID = null;
+			this.#measure(this.element);
 		});
-	};
+	}
 
-	window.addEventListener('scroll', onScroll, { passive: true });
+	#measure(node: HTMLElement) {
+		const measurements = node.getBoundingClientRect();
+		this.#dimensions.width = measurements.width;
+		this.#dimensions.height = measurements.height;
+		this.#dimensions.top = measurements.top;
+		this.#dimensions.left = measurements.left;
+	}
 
-	onDestroy(() => {
-		observer.disconnect();
-		window.removeEventListener('scroll', onScroll);
+	get rect() {
+		this.#subscriber();
+		return this.#dimensions;
+	}
+}
 
-		if (rafID !== null) {
-			cancelAnimationFrame(rafID);
-		}
-	});
-
-	return measurements;
+export function useBounds(node: HTMLElement) {
+	return new Bounds(node);
 }
