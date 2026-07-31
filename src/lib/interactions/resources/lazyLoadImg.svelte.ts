@@ -6,7 +6,7 @@ import {
 } from '$lib/interactions';
 
 export const lazyLoadImages = (
-	imageSrc: ImageData[],
+	imageSrc: () => ImageData[],
 	parentNode: () => HTMLElement | undefined,
 	options: IntersectionObserverInit = {
 		rootMargin: '100px 0px 100px 0px'
@@ -20,14 +20,20 @@ export const lazyLoadImages = (
 	});
 
 	let running = false;
+	let loadedFor: ImageData[] | null = null;
 
 	function run() {
+		const src = imageSrc();
+
+		if (src.length === 0) return;
 		if (running) return;
+		if (loadedFor === src) return;
 		if (!intersection?.isIntersecting) return;
 
 		running = true;
+		loadedFor = src;
 
-		loadImages(imageSrc, {
+		loadImages(src, {
 			onLoad(image) {
 				images.loaded.push(image);
 			},
@@ -37,24 +43,14 @@ export const lazyLoadImages = (
 			},
 
 			onComplete() {
-				intersection.disconnect();
 				running = false;
 			}
 		});
 	}
 
-	const destroy = $effect.root(() => {
+	$effect.root(() => {
 		$effect(() => {
 			run();
-		});
-
-		$effect(() => {
-			if (
-				images.loaded.length + images.failed.length === imageSrc.length &&
-				imageSrc.length > 0
-			) {
-				destroy();
-			}
 		});
 	});
 

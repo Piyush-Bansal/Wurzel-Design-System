@@ -10,8 +10,9 @@ export class ListState {
 	//Lazy load images
 	imageUrls = $state<ImageData[]>([]);
 	listArea = $state<HTMLElement>();
-	readonly images = $derived(
-		this.imageUrls && lazyLoadImages(this.imageUrls, () => this.listArea)
+	readonly images = lazyLoadImages(
+		() => this.imageUrls,
+		() => this.listArea
 	);
 
 	//Local pointer

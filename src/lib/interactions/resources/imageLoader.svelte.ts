@@ -26,7 +26,8 @@ export function loadImages(
 	}
 
 	if (images.length === 0) {
-		throw new Error('No images supplied');
+		onComplete?.();
+		return;
 	}
 
 	let completed = 0;
