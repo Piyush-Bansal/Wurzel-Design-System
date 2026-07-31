@@ -13,9 +13,8 @@
 	<div class="span-3 p-space">
 		<p>PointerX: {buttonState.pointer.x}</p>
 		<p>PointerY: {buttonState.pointer.y}</p>
-		<p>DistanceX: {buttonState.distance?.x}</p>
-		<p>DistanceY: {buttonState.distance?.y}</p>
-		<p>Distance value: {buttonState.distance?.value}</p>
+		<p>Distance: {buttonState.distance?.value.toFixed(2)}</p>
+		<p>Strength: {buttonState.proximity?.strength.toFixed(2)}</p>
 	</div>
 </div>
 

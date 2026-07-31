@@ -8,20 +8,14 @@ export class ButtonBehaviour {
 		this.buttonState = buttonState;
 
 		$effect(() => {
-			if (
-				!buttonState?.proximity ||
-				!buttonState?.distance ||
-				!this.xTo ||
-				!this.yTo
-			)
-				return;
+			if (!buttonState?.proximity || !buttonState?.distance) return;
 
 			if (buttonState.proximity?.strength > 0.1) {
-				this.xTo(buttonState.distance?.x * buttonState.proximity.strength);
-				this.yTo(buttonState.distance?.y * buttonState.proximity.strength);
+				this.xTo?.(buttonState.distance?.x * buttonState.proximity.strength);
+				this.yTo?.(buttonState.distance?.y * buttonState.proximity.strength);
 			} else {
-				this.xTo(0);
-				this.yTo(0);
+				this.xTo?.(0);
+				this.yTo?.(0);
 			}
 		});
 	}
