@@ -1,10 +1,10 @@
 import type { GridState } from '../state/grid.state.svelte';
 
 export class GridBehaviour {
-	private _camera = {
+	private _camera = $state({
 		x: 0,
 		y: 0
-	};
+	});
 
 	constructor(private readonly _grid: GridState) {
 		$effect(() => {
@@ -17,11 +17,7 @@ export class GridBehaviour {
 				this._camera.y
 			);
 
-			this._grid.gridEL.style = matrix.toString();
-		});
-
-		$effect(() => {
-			$inspect(this._grid.drag.deltaX);
+			this._grid.gridEL.style.transform = matrix.toString();
 		});
 	}
 }

@@ -50,7 +50,6 @@
 	.grid {
 		align-items: center;
 		width: fluid-l(2000);
-		// justify-content: stretch;
 		will-change: transform;
 		cursor: grab;
 
