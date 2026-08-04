@@ -61,6 +61,7 @@
 		img {
 			object-fit: cover;
 			width: 100%;
+			pointer-events: none;
 		}
 	}
 </style>
