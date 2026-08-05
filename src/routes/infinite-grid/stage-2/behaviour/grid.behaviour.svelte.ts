@@ -1,10 +1,9 @@
-import gsap from 'gsap';
 import type { GridState } from '../state/grid.state.svelte';
+import gsap from 'gsap';
 import { onMount } from 'svelte';
 
 export class GridBehaviour {
 	private _velocity = { x: 0, y: 0 };
-	private _camera = { x: 0, y: 0 };
 
 	constructor(private readonly _grid: GridState) {
 		onMount(() => {
@@ -24,15 +23,15 @@ export class GridBehaviour {
 			this._velocity.y *= 0.95;
 		}
 
-		this._camera.x += this._velocity.x * dt;
-		this._camera.y += this._velocity.y * dt;
+		this._grid.camera.x += this._velocity.x * dt;
+		this._grid.camera.y += this._velocity.y * dt;
 		this._render();
 	};
 
 	private _render() {
 		const matrix = new DOMMatrix().translateSelf(
-			this._camera.x,
-			this._camera.y
+			this._grid.camera.x,
+			this._grid.camera.y
 		);
 		this._grid.gridEL &&
 			(this._grid.gridEL.style.transform = matrix.toString());
