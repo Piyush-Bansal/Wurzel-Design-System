@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { GridBehaviour } from './behaviour/grid.behaviour.svelte';
 	import data from './data.json';
 	import { GridState } from './state/grid.state.svelte';
-	import { GridMeasurements } from './state/gridMeasurements.state.svelte';
+	import { GridLayout } from './state/gridLayout.state.svelte';
+	import { GridBehaviour } from './behaviour/grid.behaviour.svelte';
 
 	const style = [
 		{
@@ -24,12 +24,12 @@
 	const gridState = new GridState();
 	new GridBehaviour(gridState);
 
-	const gridMeasurementsState = new GridMeasurements(gridState);
+	const gridLayoutState = new GridLayout(gridState);
 </script>
 
 <svelte:window
-	bind:innerHeight={gridMeasurementsState.windowHeight}
-	bind:innerWidth={gridMeasurementsState.windowWidth}
+	bind:innerHeight={gridLayoutState.windowHeight}
+	bind:innerWidth={gridLayoutState.windowWidth}
 />
 
 <div class="container | overflow-hidden">
@@ -40,11 +40,28 @@
 		onpointerdown={() => gridState.drag.start()}
 	>
 		{#each items as item, i (item.id)}
-			<div
-				class="img-wrapper | center span-3 ar-1-1"
-				bind:offsetWidth={gridMeasurementsState.cellWidth}
-			>
-				<img src={item.src} alt="" class={[item.ar]} />
+			<div class="img-wrapper | center span-3 ar-1-1">
+				<img
+					src={item.src}
+					alt=""
+					class={[item.ar]}
+					bind:offsetWidth={
+						null,
+						(width) => {
+							if (i === 0 && typeof width === 'number') {
+								gridLayoutState.cellWidth = width;
+							}
+						}
+					}
+					bind:offsetHeight={
+						null,
+						(height) => {
+							if (i === 0 && typeof height === 'number') {
+								gridLayoutState.cellHeight = height;
+							}
+						}
+					}
+				/>
 			</div>
 		{/each}
 	</div>

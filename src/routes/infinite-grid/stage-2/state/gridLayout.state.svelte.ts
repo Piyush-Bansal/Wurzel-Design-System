@@ -1,8 +1,10 @@
 import { observeResize, useBounds } from '$lib/interactions';
 import type { GridState } from './grid.state.svelte';
 
-export class GridMeasurements {
+export class GridLayout {
 	cellWidth = $state<number>();
+	cellHeight = $state<number>();
+
 	bounds = $derived.by(() => this._grid.gridEL && useBounds(this._grid.gridEL));
 
 	private _gridHeight = $derived(this.bounds && this.bounds.rect.height);
