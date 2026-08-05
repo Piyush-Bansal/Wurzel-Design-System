@@ -7,5 +7,5 @@ export class GridState {
 
 	gridEL = $state<HTMLElement>();
 
-	camera = { x: 0, y: 0 };
+	camera = $state({ x: 0, y: 0 });
 }
