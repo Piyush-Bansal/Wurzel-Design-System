@@ -6,6 +6,8 @@ export class GridState {
 	readonly drag = useDrag(this.pointer, this.velocity);
 
 	gridEL = $state<HTMLElement>();
+	gridELHeight = $state<number>();
+	gridELWidth = $state<number>();
 
 	camera = $state({ x: 0, y: 0 });
 }

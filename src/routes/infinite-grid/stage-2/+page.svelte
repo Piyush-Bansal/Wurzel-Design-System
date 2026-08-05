@@ -36,6 +36,8 @@
 	<div
 		class="grid"
 		bind:this={gridState.gridEL}
+		bind:offsetHeight={gridState.gridELHeight}
+		bind:offsetWidth={gridState.gridELWidth}
 		role="presentation"
 		onpointerdown={() => gridState.drag.start()}
 	>
