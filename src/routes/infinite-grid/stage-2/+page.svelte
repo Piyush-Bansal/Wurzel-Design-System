@@ -2,6 +2,7 @@
 	import { GridBehaviour } from './behaviour/grid.behaviour.svelte';
 	import data from './data.json';
 	import { GridState } from './state/grid.state.svelte';
+	import { GridMeasurements } from './state/gridMeasurements.state.svelte';
 
 	const style = [
 		{
@@ -22,7 +23,14 @@
 
 	const gridState = new GridState();
 	new GridBehaviour(gridState);
+
+	const gridMeasurementsState = new GridMeasurements(gridState);
 </script>
+
+<svelte:window
+	bind:innerHeight={gridMeasurementsState.windowHeight}
+	bind:innerWidth={gridMeasurementsState.windowWidth}
+/>
 
 <div class="container | overflow-hidden">
 	<div
@@ -31,8 +39,11 @@
 		role="presentation"
 		onpointerdown={() => gridState.drag.start()}
 	>
-		{#each items as item}
-			<div class="img-wrapper | center span-3 ar-1-1">
+		{#each items as item, i (item.id)}
+			<div
+				class="img-wrapper | center span-3 ar-1-1"
+				bind:offsetWidth={gridMeasurementsState.cellWidth}
+			>
 				<img src={item.src} alt="" class={[item.ar]} />
 			</div>
 		{/each}
@@ -48,7 +59,6 @@
 	}
 
 	.grid {
-		// align-items: center;
 		width: fluid-l(2000);
 		will-change: transform;
 		cursor: grab;
@@ -58,11 +68,6 @@
 			cursor: grabbing;
 			user-select: none;
 		}
-
-		// .img-wrapper {
-		// 	height: $col-wide-3;
-		// 	width: $col-wide-3;
-		// }
 
 		img {
 			object-fit: cover;
