@@ -75,6 +75,8 @@
 
 	.container {
 		height: 100vh;
+		overflow-x: hidden !important;
+		overflow-y: hidden;
 	}
 
 	.grid {
