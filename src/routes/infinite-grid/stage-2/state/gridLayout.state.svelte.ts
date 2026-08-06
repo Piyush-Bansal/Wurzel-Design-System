@@ -28,9 +28,9 @@ export class GridLayout {
 	});
 
 	firstRow = $derived.by(() => {
-		if (!this._gridRowGap || !this.cellWidth) return;
+		if (!this._gridRowGap || !this.cellHeight) return;
 		return Math.floor(
-			Math.abs(this._grid.camera.y) / (this.cellWidth + this._gridRowGap)
+			Math.abs(this._grid.camera.y) / (this.cellHeight + this._gridRowGap)
 		);
 	});
 
