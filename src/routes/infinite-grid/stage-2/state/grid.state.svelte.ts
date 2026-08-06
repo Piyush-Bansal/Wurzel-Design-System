@@ -1,4 +1,4 @@
-import { useDrag, usePointer, useVelocity } from '$lib/interactions';
+import { useBounds, useDrag, usePointer, useVelocity } from '$lib/interactions';
 
 export class GridState {
 	readonly pointer = usePointer();
@@ -10,4 +10,6 @@ export class GridState {
 	gridELWidth = $state<number>();
 
 	camera = $state({ x: 0, y: 0 });
+	container = $state<HTMLDivElement>();
+	containerDimensions = $derived(this.container && useBounds(this.container));
 }
