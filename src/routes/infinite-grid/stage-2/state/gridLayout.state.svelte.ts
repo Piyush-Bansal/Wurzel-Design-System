@@ -55,5 +55,17 @@ export class GridLayout {
 		return Math.ceil(bottomEdge / stride) - 1;
 	});
 
-	constructor(private readonly _grid: GridState) {}
+	noOfColumns = $derived.by(() => {
+		if (!this.cellWidth || !this._gridColGap || !this._grid.gridELWidth) return;
+		const combinedWidth = this.cellWidth + this._gridColGap;
+		return Math.floor(
+			(this._grid.gridELWidth + this._gridColGap) / combinedWidth
+		);
+	});
+
+	constructor(private readonly _grid: GridState) {
+		$effect(() => {
+			$inspect(this.noOfColumns);
+		});
+	}
 }
