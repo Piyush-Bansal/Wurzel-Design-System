@@ -55,9 +55,5 @@ export class GridLayout {
 		return Math.ceil(bottomEdge / stride) - 1;
 	});
 
-	constructor(private readonly _grid: GridState) {
-		$effect(() => {
-			$inspect(this.lastRow);
-		});
-	}
+	constructor(private readonly _grid: GridState) {}
 }
