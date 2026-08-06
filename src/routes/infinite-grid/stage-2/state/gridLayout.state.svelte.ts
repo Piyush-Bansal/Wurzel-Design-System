@@ -35,22 +35,29 @@ export class GridLayout {
 	});
 
 	lastColumn = $derived.by(() => {
-		if (
-			!this._grid.containerDimensions?.rect.width ||
-			!this._gridRowGap ||
-			!this.cellWidth
-		)
+		if (!this._grid.containerWidth || !this._gridColGap || !this.cellWidth)
 			return;
-		return Math.floor(
-			(Math.abs(this._grid.camera.x) +
-				this._grid.containerDimensions?.rect.width) /
-				(this.cellWidth + this._gridRowGap)
-		);
+
+		const stride = this.cellWidth + this._gridColGap;
+		const rightEdge = Math.abs(this._grid.camera.x) + this._grid.containerWidth;
+
+		return Math.ceil(rightEdge / stride) - 1;
+	});
+
+	lastRow = $derived.by(() => {
+		if (!this._grid.containerHeight || !this._gridRowGap || !this.cellHeight)
+			return;
+
+		const stride = this.cellHeight + this._gridRowGap;
+		const bottomEdge =
+			Math.abs(this._grid.camera.y) + this._grid.containerHeight;
+
+		return Math.ceil(bottomEdge / stride) - 1;
 	});
 
 	constructor(private readonly _grid: GridState) {
 		$effect(() => {
-			$inspect(this.lastColumn);
+			$inspect(this.lastRow);
 		});
 	}
 }

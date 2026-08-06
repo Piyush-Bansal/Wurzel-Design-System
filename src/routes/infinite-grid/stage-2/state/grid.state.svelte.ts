@@ -11,5 +11,19 @@ export class GridState {
 
 	camera = $state({ x: 0, y: 0 });
 	container = $state<HTMLDivElement>();
-	containerDimensions = $derived(this.container && useBounds(this.container));
+
+	containerWidth = $derived.by(() => {
+		if (!this.container) return;
+		const leftPadding = parseFloat(
+			getComputedStyle(this.container).paddingInlineStart
+		);
+		const rightPadding = parseFloat(
+			getComputedStyle(this.container).paddingInlineEnd
+		);
+		const width = this.container.clientWidth;
+
+		return width - leftPadding - rightPadding;
+	});
+
+	containerHeight = $derived(this.container && this.container.clientHeight);
 }

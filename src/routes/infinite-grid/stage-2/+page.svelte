@@ -42,28 +42,26 @@
 		onpointerdown={() => gridState.drag.start()}
 	>
 		{#each items as item, i (item.id)}
-			<div class="img-wrapper | center span-3 ar-1-1">
-				<img
-					src={item.src}
-					alt=""
-					class={[item.ar]}
-					bind:offsetWidth={
-						null,
-						(width) => {
-							if (i === 0 && typeof width === 'number') {
-								gridLayoutState.cellWidth = width;
-							}
+			<div
+				class="img-wrapper | center span-3 ar-1-1"
+				bind:offsetWidth={
+					null,
+					(width) => {
+						if (i === 0 && typeof width === 'number') {
+							gridLayoutState.cellWidth = width;
 						}
 					}
-					bind:offsetHeight={
-						null,
-						(height) => {
-							if (i === 0 && typeof height === 'number') {
-								gridLayoutState.cellHeight = height;
-							}
+				}
+				bind:offsetHeight={
+					null,
+					(height) => {
+						if (i === 0 && typeof height === 'number') {
+							gridLayoutState.cellHeight = height;
 						}
 					}
-				/>
+				}
+			>
+				<img src={item.src} alt="" class={[item.ar]} />
 			</div>
 		{/each}
 	</div>
