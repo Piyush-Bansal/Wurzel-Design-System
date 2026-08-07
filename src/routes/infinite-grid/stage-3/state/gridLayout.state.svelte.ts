@@ -109,8 +109,11 @@ export class GridLayout {
 				column <= this._lastColumn;
 				column++
 			) {
-				console.log(column, row);
-				const index = row * this._noOfColumns + column;
+				const rawIndex: number = row * this._noOfColumns + column;
+				const index =
+					((rawIndex % this._grid.items.length) + this._grid.items.length) %
+					this._grid.items.length;
+				// const index = row * this._noOfColumns + column;
 				const item = this._grid.items[index];
 				if (!item) continue;
 
