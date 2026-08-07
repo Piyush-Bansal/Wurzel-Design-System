@@ -42,26 +42,20 @@
 		role="presentation"
 		onpointerdown={() => gridState.drag.start()}
 	>
-		{#each gridLayoutState.visibleCells as cell, i (cell.row + '-' + cell.column)}
+		<div
+			class="img-wrapper | center ar-1-1 invisible"
+			style="grid-column:1 / span 1; grid-row:1 / span 1; pointer-events: none;"
+			bind:offsetWidth={gridLayoutState.cellWidth}
+			bind:offsetHeight={gridLayoutState.cellHeight}
+		>
+			<img src={items[0].src} alt="" class={[items[0].ar]} />
+		</div>
+
+		{#each gridLayoutState.visibleCells as cell (cell.row + '-' + cell.column)}
 			<div
-				class="img-wrapper | center span-3 ar-1-1"
-				style="grid-column: {cell.column + 1}; grid-row: {cell.row + 1};"
-				bind:offsetWidth={
-					null,
-					(width) => {
-						if (i === 0 && typeof width === 'number') {
-							gridLayoutState.cellWidth = width;
-						}
-					}
-				}
-				bind:offsetHeight={
-					null,
-					(height) => {
-						if (i === 0 && typeof height === 'number') {
-							gridLayoutState.cellHeight = height;
-						}
-					}
-				}
+				class="img-wrapper | center ar-1-1"
+				style="grid-column: {cell.column + 1} / span 1; 
+				grid-row: {cell.row + 1} / span 1;"
 			>
 				<img src={cell.item.src} alt="" class={[cell.item.ar]} />
 			</div>
@@ -80,6 +74,9 @@
 	}
 
 	.grid {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+
 		width: fluid-l(2000);
 		will-change: transform;
 		cursor: grab;

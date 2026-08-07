@@ -107,5 +107,9 @@ export class GridLayout {
 		return cells;
 	});
 
-	constructor(private readonly _grid: GridState) {}
+	constructor(private readonly _grid: GridState) {
+		$effect(() => {
+			$inspect(this.visibleCells);
+		});
+	}
 }

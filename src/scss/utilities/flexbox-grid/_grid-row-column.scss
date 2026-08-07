@@ -96,5 +96,17 @@
 		.place-row-#{$i}-#{$j} {
 			grid-row: #{$i} / #{$j + 1};
 		}
+
+		@include mq('md') {
+			.place-row-#{$i}-#{$j}-md {
+				grid-row: #{$i} / #{$j + 1};
+			}
+		}
+
+		@include mq('sm') {
+			.place-row-#{$i}-#{$j}-sm {
+				grid-row: #{$i} / #{$j + 1};
+			}
+		}
 	}
 }
