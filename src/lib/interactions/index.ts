@@ -5,6 +5,7 @@ export * from './observers/scrollIdle.svelte';
 export * from './resources/imageLoader.svelte';
 export * from './resources/lazyLoadImg.svelte';
 export * from './resources/localPointer.svelte';
+export * from './resources/loop.svelte';
 export * from './signals/activity.svelte';
 export * from './signals/camera.svelte';
 export * from './signals/dragging.svelte';

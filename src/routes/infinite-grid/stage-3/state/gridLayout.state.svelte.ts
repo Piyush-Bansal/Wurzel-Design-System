@@ -1,4 +1,4 @@
-import { observeResize } from '$lib/interactions';
+import { observeResize, useLoop } from '$lib/interactions';
 import type { GridState } from './grid.state.svelte';
 
 export class GridLayout {
@@ -110,10 +110,9 @@ export class GridLayout {
 				column++
 			) {
 				const rawIndex: number = row * this._noOfColumns + column;
-				const index =
-					((rawIndex % this._grid.items.length) + this._grid.items.length) %
-					this._grid.items.length;
-				// const index = row * this._noOfColumns + column;
+
+				const index = useLoop(rawIndex, this._grid.items.length);
+
 				const item = this._grid.items[index];
 				if (!item) continue;
 
