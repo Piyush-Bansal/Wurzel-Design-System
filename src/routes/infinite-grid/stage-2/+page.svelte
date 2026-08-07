@@ -28,11 +28,6 @@
 	const gridLayoutState = new GridLayout(gridState);
 </script>
 
-<svelte:window
-	bind:innerHeight={gridLayoutState.windowHeight}
-	bind:innerWidth={gridLayoutState.windowWidth}
-/>
-
 <div class="container | overflow-hidden" bind:this={gridState.container}>
 	<div
 		class="grid"
