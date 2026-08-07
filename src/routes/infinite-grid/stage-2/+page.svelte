@@ -21,7 +21,8 @@
 		...style[Math.floor(Math.random() * style.length)]
 	}));
 
-	const gridState = new GridState();
+	const gridState = new GridState(items);
+
 	new GridBehaviour(gridState);
 
 	const gridLayoutState = new GridLayout(gridState);
@@ -41,9 +42,10 @@
 		role="presentation"
 		onpointerdown={() => gridState.drag.start()}
 	>
-		{#each items as item, i (item.id)}
+		{#each gridLayoutState.visibleCells as cell, i (cell.row + '-' + cell.column)}
 			<div
 				class="img-wrapper | center span-3 ar-1-1"
+				style="grid-column: {cell.column + 1}; grid-row: {cell.row + 1};"
 				bind:offsetWidth={
 					null,
 					(width) => {
@@ -61,7 +63,7 @@
 					}
 				}
 			>
-				<img src={item.src} alt="" class={[item.ar]} />
+				<img src={cell.item.src} alt="" class={[cell.item.ar]} />
 			</div>
 		{/each}
 	</div>

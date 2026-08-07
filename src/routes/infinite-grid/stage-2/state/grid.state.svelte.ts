@@ -1,4 +1,10 @@
-import { useBounds, useDrag, usePointer, useVelocity } from '$lib/interactions';
+import { useDrag, usePointer, useVelocity } from '$lib/interactions';
+
+export type GridItems = {
+	ar: string;
+	id: number;
+	src: string;
+}[];
 
 export class GridState {
 	readonly pointer = usePointer();
@@ -26,4 +32,6 @@ export class GridState {
 	});
 
 	containerHeight = $derived(this.container && this.container.clientHeight);
+
+	constructor(public items: GridItems) {}
 }

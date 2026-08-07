@@ -63,9 +63,29 @@ export class GridLayout {
 		);
 	});
 
-	constructor(private readonly _grid: GridState) {
-		$effect(() => {
-			$inspect(this.noOfColumns);
-		});
-	}
+	visibleCells = $derived.by(() => {
+		if (
+			this.firstRow === undefined ||
+			this.lastRow === undefined ||
+			this.firstColumn === undefined ||
+			this.lastColumn === undefined ||
+			!this.noOfColumns
+		)
+			return;
+
+		const cells = [];
+
+		for (let row = this.firstRow; row <= this.lastRow; row++) {
+			for (let column = this.firstColumn; column <= this.lastColumn; column++) {
+				const index = row * this.noOfColumns + column;
+				const item = this._grid.items[index];
+				if (!item) continue;
+
+				cells.push({ row, column, item });
+			}
+		}
+		return cells;
+	});
+
+	constructor(private readonly _grid: GridState) {}
 }
