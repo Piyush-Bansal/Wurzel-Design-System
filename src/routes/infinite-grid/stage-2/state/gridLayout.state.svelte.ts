@@ -31,25 +31,25 @@ export class GridLayout {
 
 	firstColumn = $derived.by(() => {
 		if (!this._gridColGap || !this.cellWidth) return;
-		return Math.floor(
-			Math.abs(this._grid.camera.x) / (this.cellWidth + this._gridColGap)
+		return Math.max(
+			0,
+			Math.floor(-this._grid.camera.x / (this.cellWidth + this._gridColGap))
 		);
 	});
 
 	firstRow = $derived.by(() => {
 		if (!this._gridRowGap || !this.cellHeight) return;
-		return Math.floor(
-			Math.abs(this._grid.camera.y) / (this.cellHeight + this._gridRowGap)
+		return Math.max(
+			0,
+			Math.floor(-this._grid.camera.y / (this.cellHeight + this._gridRowGap))
 		);
 	});
 
 	lastColumn = $derived.by(() => {
 		if (!this._grid.containerWidth || !this._gridColGap || !this.cellWidth)
 			return;
-
 		const stride = this.cellWidth + this._gridColGap;
-		const rightEdge = Math.abs(this._grid.camera.x) + this._grid.containerWidth;
-
+		const rightEdge = -this._grid.camera.x + this._grid.containerWidth;
 		return Math.ceil(rightEdge / stride) - 1;
 	});
 

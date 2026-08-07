@@ -16,8 +16,8 @@ export class GridBehaviour {
 		const dt = Math.min(deltaTime / 1000, 1 / 30);
 
 		if (this._grid.drag.isDragging) {
-			this._velocity.x = this._grid.drag.velocityX * 400;
-			this._velocity.y = this._grid.drag.velocityY * 400;
+			this._velocity.x = this._grid.drag.velocityX * 1000;
+			this._velocity.y = this._grid.drag.velocityY * 1000;
 		} else {
 			this._velocity.x *= 0.95;
 			this._velocity.y *= 0.95;

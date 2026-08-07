@@ -84,6 +84,7 @@
 			pointer-events: none;
 			max-width: $col-wide-3;
 			max-height: $col-wide-3;
+			user-select: none;
 		}
 	}
 </style>
