@@ -42,15 +42,6 @@
 		role="presentation"
 		onpointerdown={() => gridState.drag.start()}
 	>
-		<div
-			class="img-wrapper | center ar-1-1 invisible"
-			style="grid-column:1 / span 1; grid-row:1 / span 1; pointer-events: none;"
-			bind:offsetWidth={gridLayoutState.cellWidth}
-			bind:offsetHeight={gridLayoutState.cellHeight}
-		>
-			<img src={items[0].src} alt="" class={[items[0].ar]} />
-		</div>
-
 		{#each gridLayoutState.visibleCells as cell (cell.row + '-' + cell.column)}
 			<div
 				class="img-wrapper | center ar-1-1"
@@ -75,9 +66,10 @@
 
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-template-columns: repeat(5, fluid-l(400));
+		grid-auto-columns: fluid-l(400);
+		grid-auto-rows: fluid-l(400);
 
-		width: fluid-l(2000);
 		will-change: transform;
 		cursor: grab;
 		gap: $size-4;

@@ -2,8 +2,17 @@ import { observeResize } from '$lib/interactions';
 import type { GridState } from './grid.state.svelte';
 
 export class GridLayout {
-	cellWidth = $state<number>();
-	cellHeight = $state<number>();
+	cellWidth = $derived.by(() => {
+		if (!this._grid.gridEL) return;
+		observeResize.track();
+		return parseFloat(getComputedStyle(this._grid.gridEL).gridAutoColumns);
+	});
+
+	cellHeight = $derived.by(() => {
+		if (!this._grid.gridEL) return;
+		observeResize.track();
+		return parseFloat(getComputedStyle(this._grid.gridEL).gridAutoRows);
+	});
 
 	private _gridColGap = $derived.by(() => {
 		if (!this._grid.gridEL) return;
@@ -56,11 +65,12 @@ export class GridLayout {
 	});
 
 	noOfColumns = $derived.by(() => {
-		if (!this.cellWidth || !this._gridColGap || !this._grid.gridELWidth) return;
-		const combinedWidth = this.cellWidth + this._gridColGap;
-		return Math.floor(
-			(this._grid.gridELWidth + this._gridColGap) / combinedWidth
-		);
+		if (!this._grid.gridEL) return;
+		const count = getComputedStyle(this._grid.gridEL).gridTemplateColumns.split(
+			' '
+		).length;
+
+		return count;
 	});
 
 	noOfRows = $derived.by(() => {
@@ -107,9 +117,5 @@ export class GridLayout {
 		return cells;
 	});
 
-	constructor(private readonly _grid: GridState) {
-		$effect(() => {
-			$inspect(this.visibleCells);
-		});
-	}
+	constructor(private readonly _grid: GridState) {}
 }
