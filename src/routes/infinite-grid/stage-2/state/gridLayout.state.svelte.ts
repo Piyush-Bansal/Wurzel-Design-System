@@ -63,6 +63,26 @@ export class GridLayout {
 		);
 	});
 
+	noOfRows = $derived.by(() => {
+		if (!this.noOfColumns || !this._grid.items.length) return 0;
+		return Math.ceil(this._grid.items.length / this.noOfColumns);
+	});
+
+	totalWidth = $derived.by(() => {
+		if (!this.cellWidth || !this._gridColGap || !this.noOfColumns) return 0;
+		return (
+			this.noOfColumns * this.cellWidth +
+			(this.noOfColumns - 1) * this._gridColGap
+		);
+	});
+
+	totalHeight = $derived.by(() => {
+		if (!this.cellHeight || !this._gridRowGap || !this.noOfRows) return 0;
+		return (
+			this.noOfRows * this.cellHeight + (this.noOfRows - 1) * this._gridRowGap
+		);
+	});
+
 	visibleCells = $derived.by(() => {
 		if (
 			this.firstRow === undefined ||
