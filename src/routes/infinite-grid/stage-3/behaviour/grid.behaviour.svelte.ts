@@ -33,12 +33,9 @@ export class GridBehaviour {
 	};
 
 	private _render() {
-		const offsetX = this._layout.originOffsetX; // GRID_ORIGIN_OFFSET * strideX
-		const offsetY = this._layout.originOffsetY; // GRID_ORIGIN_OFFSET * strideY
-
 		const matrix = new DOMMatrix().translateSelf(
-			this._grid.camera.x - offsetX,
-			this._grid.camera.y - offsetY
+			this._grid.camera.x - this._layout.originOffsetX,
+			this._grid.camera.y - this._layout.originOffsetY
 		);
 		this._grid.gridEL &&
 			(this._grid.gridEL.style.transform = matrix.toString());

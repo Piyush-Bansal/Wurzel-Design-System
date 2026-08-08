@@ -25,8 +25,6 @@
 
 	const gridLayoutState = new GridLayout(gridState);
 	new GridBehaviour(gridState, gridLayoutState);
-
-	const GRID_ORIGIN_OFFSET = 10_000;
 </script>
 
 <div class="container | overflow-hidden" bind:this={gridState.container}>
@@ -41,8 +39,10 @@
 		{#each gridLayoutState.visibleCells as cell (cell.row + '-' + cell.column)}
 			<div
 				class="img-wrapper | center ar-1-1"
-				style="grid-column: {cell.column + GRID_ORIGIN_OFFSET + 1} / span 1; 
-				grid-row: {cell.row + GRID_ORIGIN_OFFSET + 1} / span 1;"
+				style="grid-column: {cell.column +
+					GridLayout.ORIGIN_OFFSET +
+					1} / span 1; 
+				grid-row: {cell.row + GridLayout.ORIGIN_OFFSET + 1} / span 1;"
 			>
 				<img src={cell.item.src} alt="" class={[cell.item.ar]} />
 			</div>

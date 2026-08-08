@@ -2,6 +2,8 @@ import { observeResize, useLoop } from '$lib/interactions';
 import type { GridState } from './grid.state.svelte';
 
 export class GridLayout {
+	static readonly ORIGIN_OFFSET = 10_000;
+
 	private readonly _cellWidth = $derived.by(() => {
 		if (!this._grid.gridEL) return;
 		observeResize.track();
@@ -116,6 +118,16 @@ export class GridLayout {
 			}
 		}
 		return cells;
+	});
+
+	readonly originOffsetX = $derived.by(() => {
+		if (!this._cellWidth || !this._gridColGap) return 0;
+		return GridLayout.ORIGIN_OFFSET * (this._cellWidth + this._gridColGap);
+	});
+
+	readonly originOffsetY = $derived.by(() => {
+		if (!this._cellHeight || !this._gridRowGap) return 0;
+		return GridLayout.ORIGIN_OFFSET * (this._cellHeight + this._gridRowGap);
 	});
 
 	constructor(private readonly _grid: GridState) {}
