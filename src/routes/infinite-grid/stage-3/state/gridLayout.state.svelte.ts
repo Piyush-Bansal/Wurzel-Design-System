@@ -4,6 +4,18 @@ import type { GridState } from './grid.state.svelte';
 export class GridLayout {
 	static readonly ORIGIN_OFFSET = 10_000;
 
+	private readonly _columnStride = $derived.by(() => {
+		if (!this._cellWidth || !this._gridColGap) return null;
+		observeResize.track();
+		return this._cellWidth + this._gridColGap;
+	});
+
+	private readonly _rowStride = $derived.by(() => {
+		if (!this._cellHeight || !this._gridRowGap) return null;
+		observeResize.track();
+		return this._cellHeight + this._gridRowGap;
+	});
+
 	private readonly _cellWidth = $derived.by(() => {
 		if (!this._grid.gridEL) return;
 		observeResize.track();
@@ -29,38 +41,34 @@ export class GridLayout {
 	});
 
 	private readonly _firstColumn = $derived.by(() => {
-		if (!this._gridColGap || !this._cellWidth) return;
+		if (!this._columnStride) return;
 		return Math.floor(
-			-(this._grid.camera.x + this._cellWidth + this._gridColGap) /
-				(this._cellWidth + this._gridColGap)
+			-(this._grid.camera.x + this._columnStride) / this._columnStride
 		);
 	});
 
 	private readonly _firstRow = $derived.by(() => {
-		if (!this._gridRowGap || !this._cellHeight) return;
+		if (!this._rowStride) return;
 		return Math.floor(
-			-(this._grid.camera.y + this._cellHeight + this._gridRowGap) /
-				(this._cellHeight + this._gridRowGap)
+			-(this._grid.camera.y + this._rowStride) / this._rowStride
 		);
 	});
 
 	private readonly _lastColumn = $derived.by(() => {
-		if (!this._grid.containerWidth || !this._gridColGap || !this._cellWidth)
-			return;
-		const stride = this._cellWidth + this._gridColGap;
-		const rightEdge = -this._grid.camera.x + this._grid.containerWidth + stride;
-		return Math.ceil(rightEdge / stride) - 1;
+		if (!this._grid.containerWidth || !this._columnStride) return;
+
+		const rightEdge =
+			-this._grid.camera.x + this._grid.containerWidth + this._columnStride;
+		return Math.ceil(rightEdge / this._columnStride) - 1;
 	});
 
 	private readonly _lastRow = $derived.by(() => {
-		if (!this._grid.containerHeight || !this._gridRowGap || !this._cellHeight)
-			return;
+		if (!this._grid.containerHeight || !this._rowStride) return;
 
-		const stride = this._cellHeight + this._gridRowGap;
 		const bottomEdge =
-			-this._grid.camera.y + this._grid.containerHeight + stride;
+			-this._grid.camera.y + this._grid.containerHeight + this._rowStride;
 
-		return Math.ceil(bottomEdge / stride) - 1;
+		return Math.ceil(bottomEdge / this._rowStride) - 1;
 	});
 
 	private readonly _noOfColumns = $derived.by(() => {
@@ -124,15 +132,15 @@ export class GridLayout {
 	});
 
 	readonly originOffsetX = $derived.by(() => {
-		if (!this._cellWidth || !this._gridColGap) return 0;
+		if (!this._columnStride) return 0;
 		observeResize.track();
-		return GridLayout.ORIGIN_OFFSET * (this._cellWidth + this._gridColGap);
+		return GridLayout.ORIGIN_OFFSET * this._columnStride;
 	});
 
 	readonly originOffsetY = $derived.by(() => {
-		if (!this._cellHeight || !this._gridRowGap) return 0;
+		if (!this._rowStride) return 0;
 		observeResize.track();
-		return GridLayout.ORIGIN_OFFSET * (this._cellHeight + this._gridRowGap);
+		return GridLayout.ORIGIN_OFFSET * this._rowStride;
 	});
 
 	constructor(private readonly _grid: GridState) {}
