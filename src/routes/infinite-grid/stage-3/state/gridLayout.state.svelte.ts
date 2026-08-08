@@ -53,8 +53,7 @@ export class GridLayout {
 			return;
 
 		const stride = this._cellHeight + this._gridRowGap;
-		const bottomEdge =
-			Math.abs(this._grid.camera.y) + this._grid.containerHeight;
+		const bottomEdge = -this._grid.camera.y + this._grid.containerHeight;
 
 		return Math.ceil(bottomEdge / stride) - 1;
 	});

@@ -23,9 +23,9 @@
 
 	const gridState = new GridState(items);
 
-	new GridBehaviour(gridState);
-
 	const gridLayoutState = new GridLayout(gridState);
+	new GridBehaviour(gridState, gridLayoutState);
+
 	const GRID_ORIGIN_OFFSET = 10_000;
 </script>
 
