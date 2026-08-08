@@ -28,17 +28,15 @@ export class GridLayout {
 
 	private readonly _firstColumn = $derived.by(() => {
 		if (!this._gridColGap || !this._cellWidth) return;
-		return Math.max(
-			0,
-			Math.floor(-this._grid.camera.x / (this._cellWidth + this._gridColGap))
+		return Math.floor(
+			-this._grid.camera.x / (this._cellWidth + this._gridColGap)
 		);
 	});
 
 	private readonly _firstRow = $derived.by(() => {
 		if (!this._gridRowGap || !this._cellHeight) return;
-		return Math.max(
-			0,
-			Math.floor(-this._grid.camera.y / (this._cellHeight + this._gridRowGap))
+		return Math.floor(
+			-this._grid.camera.y / (this._cellHeight + this._gridRowGap)
 		);
 	});
 
@@ -112,7 +110,6 @@ export class GridLayout {
 				const rawIndex: number = row * this._noOfColumns + column;
 
 				const index = useLoop(rawIndex, this._grid.items.length);
-
 				const item = this._grid.items[index];
 				if (!item) continue;
 
