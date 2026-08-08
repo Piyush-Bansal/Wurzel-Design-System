@@ -31,14 +31,16 @@ export class GridLayout {
 	private readonly _firstColumn = $derived.by(() => {
 		if (!this._gridColGap || !this._cellWidth) return;
 		return Math.floor(
-			-this._grid.camera.x / (this._cellWidth + this._gridColGap)
+			-(this._grid.camera.x + this._cellWidth + this._gridColGap) /
+				(this._cellWidth + this._gridColGap)
 		);
 	});
 
 	private readonly _firstRow = $derived.by(() => {
 		if (!this._gridRowGap || !this._cellHeight) return;
 		return Math.floor(
-			-this._grid.camera.y / (this._cellHeight + this._gridRowGap)
+			-(this._grid.camera.y + this._cellHeight + this._gridRowGap) /
+				(this._cellHeight + this._gridRowGap)
 		);
 	});
 
@@ -46,7 +48,7 @@ export class GridLayout {
 		if (!this._grid.containerWidth || !this._gridColGap || !this._cellWidth)
 			return;
 		const stride = this._cellWidth + this._gridColGap;
-		const rightEdge = -this._grid.camera.x + this._grid.containerWidth;
+		const rightEdge = -this._grid.camera.x + this._grid.containerWidth + stride;
 		return Math.ceil(rightEdge / stride) - 1;
 	});
 
@@ -55,7 +57,8 @@ export class GridLayout {
 			return;
 
 		const stride = this._cellHeight + this._gridRowGap;
-		const bottomEdge = -this._grid.camera.y + this._grid.containerHeight;
+		const bottomEdge =
+			-this._grid.camera.y + this._grid.containerHeight + stride;
 
 		return Math.ceil(bottomEdge / stride) - 1;
 	});
@@ -122,11 +125,13 @@ export class GridLayout {
 
 	readonly originOffsetX = $derived.by(() => {
 		if (!this._cellWidth || !this._gridColGap) return 0;
+		observeResize.track();
 		return GridLayout.ORIGIN_OFFSET * (this._cellWidth + this._gridColGap);
 	});
 
 	readonly originOffsetY = $derived.by(() => {
 		if (!this._cellHeight || !this._gridRowGap) return 0;
+		observeResize.track();
 		return GridLayout.ORIGIN_OFFSET * (this._cellHeight + this._gridRowGap);
 	});
 
