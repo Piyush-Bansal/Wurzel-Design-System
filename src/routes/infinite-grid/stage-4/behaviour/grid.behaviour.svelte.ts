@@ -1,4 +1,4 @@
-import { clampDeltaTime, useTicker } from '$lib/interactions';
+import { clampDeltaTime, useDecay, useTicker } from '$lib/interactions';
 import type { GridState } from '../state/grid.state.svelte';
 import type { GridLayout } from '../state/gridLayout.state.svelte';
 
@@ -22,8 +22,8 @@ export class GridBehaviour {
 			this._velocity.x = this._grid.drag.velocityX * 1000;
 			this._velocity.y = this._grid.drag.velocityY * 1000;
 		} else {
-			this._velocity.x *= 0.95;
-			this._velocity.y *= 0.95;
+			this._velocity.x = useDecay(this._velocity.x, 0, 0.95);
+			this._velocity.y = useDecay(this._velocity.y, 0, 0.95);
 		}
 
 		this._grid.camera.x += this._velocity.x * dt;
