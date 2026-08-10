@@ -1,13 +1,16 @@
 import gsap from 'gsap';
-import { onDestroy } from 'svelte';
+import { onMount } from 'svelte';
 
 export function useTicker(callback: (deltaTime: number) => void) {
-	const tick = (_time: number, deltaTime: number) => {
-		callback(deltaTime);
-	};
+	onMount(() => {
+		const tick = (_time: number, deltaTime: number) => {
+			callback(deltaTime);
+		};
 
-	gsap.ticker.add(tick);
-	onDestroy(() => {
-		gsap.ticker.remove(tick);
+		gsap.ticker.add(tick);
+
+		return () => {
+			gsap.ticker.remove(tick);
+		};
 	});
 }

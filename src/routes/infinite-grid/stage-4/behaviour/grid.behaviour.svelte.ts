@@ -1,4 +1,4 @@
-import { useTicker } from '$lib/interactions';
+import { clampDeltaTime, useTicker } from '$lib/interactions';
 import type { GridState } from '../state/grid.state.svelte';
 import type { GridLayout } from '../state/gridLayout.state.svelte';
 
@@ -16,7 +16,7 @@ export class GridBehaviour {
 	}
 
 	private _tick(deltaTime: number) {
-		const dt = Math.min(deltaTime / 1000, 1 / 30);
+		const dt = clampDeltaTime(deltaTime);
 
 		if (this._grid.drag.isDragging) {
 			this._velocity.x = this._grid.drag.velocityX * 1000;
