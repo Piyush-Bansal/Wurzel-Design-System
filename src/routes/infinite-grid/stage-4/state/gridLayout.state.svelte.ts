@@ -1,4 +1,4 @@
-import { observeResize, useLoop } from '$lib/interactions';
+import { observeResize, useLoop, useVisibleRange } from '$lib/interactions';
 import type { GridState } from './grid.state.svelte';
 
 export class GridLayout {
@@ -40,35 +40,24 @@ export class GridLayout {
 		return parseFloat(getComputedStyle(this._grid.gridEL).rowGap);
 	});
 
-	private readonly _firstColumn = $derived.by(() => {
-		if (!this._columnStride) return;
-		return Math.floor(
-			-(this._grid.camera.x + this._columnStride) / this._columnStride
+	private readonly columnRange = $derived.by(() => {
+		if (!this._columnStride || !this._grid.containerWidth) return;
+		return useVisibleRange(
+			this._grid.camera.x,
+			this._columnStride,
+			this._grid.containerWidth,
+			1
 		);
 	});
 
-	private readonly _firstRow = $derived.by(() => {
-		if (!this._rowStride) return;
-		return Math.floor(
-			-(this._grid.camera.y + this._rowStride) / this._rowStride
+	private readonly rowRange = $derived.by(() => {
+		if (!this._rowStride || !this._grid.containerHeight) return;
+		return useVisibleRange(
+			this._grid.camera.y,
+			this._rowStride,
+			this._grid.containerHeight,
+			1
 		);
-	});
-
-	private readonly _lastColumn = $derived.by(() => {
-		if (!this._grid.containerWidth || !this._columnStride) return;
-
-		const rightEdge =
-			-this._grid.camera.x + this._grid.containerWidth + this._columnStride;
-		return Math.ceil(rightEdge / this._columnStride) - 1;
-	});
-
-	private readonly _lastRow = $derived.by(() => {
-		if (!this._grid.containerHeight || !this._rowStride) return;
-
-		const bottomEdge =
-			-this._grid.camera.y + this._grid.containerHeight + this._rowStride;
-
-		return Math.ceil(bottomEdge / this._rowStride) - 1;
 	});
 
 	private readonly _noOfColumns = $derived.by(() => {
@@ -103,20 +92,18 @@ export class GridLayout {
 
 	readonly visibleCells = $derived.by(() => {
 		if (
-			this._firstRow === undefined ||
-			this._lastRow === undefined ||
-			this._firstColumn === undefined ||
-			this._lastColumn === undefined ||
+			this.rowRange === undefined ||
+			this.columnRange === undefined ||
 			!this._noOfColumns
 		)
 			return;
 
 		const cells = [];
 
-		for (let row = this._firstRow; row <= this._lastRow; row++) {
+		for (let row = this.rowRange.first; row <= this.rowRange.last; row++) {
 			for (
-				let column: number = this._firstColumn;
-				column <= this._lastColumn;
+				let column: number = this.columnRange.first;
+				column <= this.columnRange.last;
 				column++
 			) {
 				const rawIndex: number = row * this._noOfColumns + column;
