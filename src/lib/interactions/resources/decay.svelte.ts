@@ -1,12 +1,8 @@
-import { useLerp } from './lerp.svelte';
+export function useDecay(value: number, duration: number, deltaTime: number) {
+	if (value === 0) return 0;
 
-export function useDecay(
-	startValue: number,
-	targetValue: number,
-	factor: number
-) {
-	if (targetValue === startValue) return targetValue;
-	const result = useLerp(targetValue, startValue, factor);
-	console.log(startValue, targetValue, result);
-	return Math.abs(result) <= targetValue + 0.1 ? targetValue : result;
+	const factor = Math.pow(0.01, deltaTime / duration);
+	const result = value * factor;
+
+	return Math.abs(result) < 0.1 ? 0 : result;
 }
