@@ -1,14 +1,14 @@
 <script lang="ts">
 	import MenuItem from './MenuItem.svelte';
+	import { setMenuState } from './state/menu.state.svelte';
+	setMenuState();
 </script>
 
 <div class="container | center">
 	<div class="menu">
-		<MenuItem><p>Item-1</p></MenuItem>
-		<MenuItem><p>Item-2</p></MenuItem>
-		<MenuItem><p>Item-3</p></MenuItem>
-		<MenuItem><p>Item-4</p></MenuItem>
-		<MenuItem><p>Item-5</p></MenuItem>
+		{#each { length: 5 }, index}
+			<MenuItem {index}><p>Item-{index + 1}</p></MenuItem>
+		{/each}
 	</div>
 </div>
 
