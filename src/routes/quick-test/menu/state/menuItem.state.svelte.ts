@@ -12,7 +12,7 @@ export class MenuItemState {
 		Math.max(0, 1 - Math.abs(this._gap) * 0.4)
 	);
 
-	readonly displacement = $derived(this._gap * this._strength * 40);
+	readonly displacement = $derived(Math.sign(this._gap) * this._strength * 40);
 
 	constructor(
 		private readonly _menuState: MenuState,
