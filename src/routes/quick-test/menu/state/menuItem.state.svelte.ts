@@ -11,22 +11,20 @@ export class MenuItemState {
 		private readonly _index: () => number
 	) {}
 
-	private _getGap(gapIndex: number, hoverIndex: number) {
-		const lastGapIndex = this._menuState.noOfItems - 2;
-
+	private _gap(gapIndex: number, hoverIndex: number) {
 		const isLeft = gapIndex < hoverIndex;
 
 		const distance = isLeft ? hoverIndex - gapIndex - 1 : gapIndex - hoverIndex;
 
-		const taperDistance = isLeft ? hoverIndex : lastGapIndex - hoverIndex;
+		const taperDistance = isLeft
+			? hoverIndex
+			: this._menuState.noOfItems - 1 - hoverIndex;
 
-		if (taperDistance === 0) {
-			return this._maxGap;
-		}
+		const progress = taperDistance
+			? Math.max(0, 1 - distance / taperDistance)
+			: 1;
 
-		const t = Math.max(0, 1 - distance / taperDistance);
-
-		return this._normalGap + (this._maxGap - this._normalGap) * t;
+		return this._normalGap + (this._maxGap - this._normalGap) * progress;
 	}
 
 	readonly displacement = $derived.by(() => {
@@ -37,24 +35,16 @@ export class MenuItemState {
 			return 0;
 		}
 
+		const direction = Math.sign(index - hoverIndex);
+		const start = Math.min(index, hoverIndex);
+		const end = Math.max(index, hoverIndex);
+
 		let displacement = 0;
 
-		if (index > hoverIndex) {
-			// Move items to the right of the hovered item right.
-			for (let gapIndex = hoverIndex; gapIndex < index; gapIndex++) {
-				const gap = this._getGap(gapIndex, hoverIndex);
-
-				displacement += gap - this._normalGap;
-			}
-		} else {
-			// Move items to the left of the hovered item left.
-			for (let gapIndex = index; gapIndex < hoverIndex; gapIndex++) {
-				const gap = this._getGap(gapIndex, hoverIndex);
-
-				displacement -= gap - this._normalGap;
-			}
+		for (let gap = start; gap < end; gap++) {
+			displacement += this._gap(gap, hoverIndex) - this._normalGap;
 		}
 
-		return displacement;
+		return direction * displacement;
 	});
 }
