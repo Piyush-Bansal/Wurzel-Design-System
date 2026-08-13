@@ -1,4 +1,5 @@
-import type { MenuState } from './menu.state.svelte';
+import { MenuState } from './menu.state.svelte';
+import gsap from 'gsap';
 
 export class MenuItemState {
 	menuItemWrapper = $state<HTMLElement>();
@@ -8,11 +9,23 @@ export class MenuItemState {
 		return this._index() - this._menuState.hoverIndex;
 	});
 
-	private readonly _strength = $derived(
-		Math.max(0, 1 - Math.abs(this._gap) * 0.4)
-	);
+	private readonly _normalisedGap = $derived.by(() => {
+		const totalItems = this._menuState.noOfItems - 1;
+		return Math.abs(this._gap) / totalItems;
+	});
 
-	readonly displacement = $derived(Math.sign(this._gap) * this._strength * 40);
+	readonly displacement = $derived.by(() => {
+		if (this._normalisedGap === 0) return 0;
+
+		const interpolatedValue = gsap.utils.mapRange(
+			1,
+			this._menuState.noOfItems - 1,
+			25,
+			18,
+			Math.abs(this._gap)
+		);
+		return interpolatedValue * Math.sign(this._gap);
+	});
 
 	constructor(
 		private readonly _menuState: MenuState,
