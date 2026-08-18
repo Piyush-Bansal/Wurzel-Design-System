@@ -1,7 +1,7 @@
 import { on } from 'svelte/events';
 import { createSubscriber } from 'svelte/reactivity';
 
-class Bounds {
+export class Bounds {
 	#subscriber;
 	#rafID: null | number = null;
 

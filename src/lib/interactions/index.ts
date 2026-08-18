@@ -3,6 +3,7 @@ export * from './observers/intersectionObserver.svelte';
 export * from './observers/observeResize.svelte';
 export * from './observers/scrollIdle.svelte';
 export * from './resources/clampDelta.svelte';
+export * from './resources/clampValues.svelte';
 export * from './resources/decay.svelte';
 export * from './resources/imageLoader.svelte';
 export * from './resources/lazyLoadImg.svelte';
