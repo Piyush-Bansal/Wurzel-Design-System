@@ -5,8 +5,12 @@ export class RepulsionBehaviour {
 	constructor(private readonly _target: RepulsionState) {
 		$effect(() => {
 			if (!_target.strength || !_target.direction) return;
-			this.xTo?.(_target.direction?.x * _target.strength * 200);
-			this.yTo?.(_target.direction?.y * _target.strength * 200);
+			this.xTo?.(
+				_target.direction?.x * _target.strength * _target.targetDistance.value
+			);
+			this.yTo?.(
+				_target.direction?.y * _target.strength * _target.targetDistance.value
+			);
 		});
 	}
 
