@@ -1,21 +1,43 @@
-import { clampDeltaTime, useDecay, useTicker } from '$lib/interactions';
+import {
+	clampDeltaTime,
+	useDecay,
+	useIntersection,
+	useTicker
+} from '$lib/interactions';
 import { onMount } from 'svelte';
 import type { GridState } from '../state/grid.state.svelte';
 import type { GridLayout } from '../state/gridLayout.state.svelte';
 
 export class GridBehaviour {
 	private _velocity = { x: 0, y: 0 };
+	private _intersection = useIntersection(() => this._grid.container);
+	private _ticker;
 
 	constructor(
 		private readonly _grid: GridState,
 		private readonly _layout: GridLayout
 	) {
-		useTicker((deltaTime) => {
+		this._ticker = useTicker((deltaTime) => {
 			this._tick(deltaTime);
 		});
 
 		onMount(() => {
 			this._render();
+		});
+
+		$effect(() => {
+			if (
+				this._intersection.isIntersecting &&
+				this._ticker.isActive === false
+			) {
+				this._ticker.add();
+			} else {
+				this._ticker.remove();
+			}
+
+			return () => {
+				this._intersection.disconnect();
+			};
 		});
 	}
 
