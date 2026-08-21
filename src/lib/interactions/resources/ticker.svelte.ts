@@ -1,11 +1,10 @@
 import gsap from 'gsap';
 import { onMount } from 'svelte';
 
-let tick: (_time: number, deltaTime: number) => void;
-
-let isActive = $state(false);
-
 export function useTicker(callback: (deltaTime: number) => void) {
+	let tick: (_time: number, deltaTime: number) => void;
+	let isActive = $state(false);
+
 	onMount(() => {
 		tick = (_time: number, deltaTime: number) => {
 			callback(deltaTime);
