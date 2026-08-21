@@ -21,10 +21,6 @@ export class GridBehaviour {
 			this._tick(deltaTime);
 		});
 
-		onMount(() => {
-			this._render();
-		});
-
 		$effect(() => {
 			if (
 				this._intersection.isIntersecting &&
@@ -34,6 +30,10 @@ export class GridBehaviour {
 			} else {
 				this._ticker.remove();
 			}
+		});
+
+		onMount(() => {
+			this._render();
 
 			return () => {
 				this._intersection.disconnect();
