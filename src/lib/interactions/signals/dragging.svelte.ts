@@ -18,16 +18,10 @@ class UseDrag {
 	#distanceX = $state(0);
 	#distanceY = $state(0);
 
-	#pointer: ReturnType<typeof usePointer>;
-	#velocity: ReturnType<typeof useVelocity>;
-
 	constructor(
-		pointer: ReturnType<typeof usePointer>,
-		velocity: ReturnType<typeof useVelocity>
+		private readonly _pointer: ReturnType<typeof usePointer>,
+		private readonly _velocity: ReturnType<typeof useVelocity>
 	) {
-		this.#pointer = pointer;
-		this.#velocity = velocity;
-
 		onDestroy(() => {
 			this.#end();
 		});
@@ -36,8 +30,8 @@ class UseDrag {
 	start() {
 		if (!browser) return;
 		this.#isDragging = true;
-		this.#startX = this.#lastX = this.#pointer.x;
-		this.#startY = this.#lastY = this.#pointer.y;
+		this.#startX = this.#lastX = this._pointer.x;
+		this.#startY = this.#lastY = this._pointer.y;
 
 		window.addEventListener('pointerup', this.#handlePointerUp);
 		window.addEventListener('pointercancel', this.#handlePointerUp);
@@ -49,12 +43,12 @@ class UseDrag {
 	};
 
 	#handlePointerMove = () => {
-		this.#deltaX = this.#pointer.x - this.#lastX;
-		this.#deltaY = this.#pointer.y - this.#lastY;
-		this.#lastX = this.#pointer.x;
-		this.#lastY = this.#pointer.y;
-		this.#distanceX = this.#pointer.x - this.#startX;
-		this.#distanceY = this.#pointer.y - this.#startY;
+		this.#deltaX = this._pointer.x - this.#lastX;
+		this.#deltaY = this._pointer.y - this.#lastY;
+		this.#lastX = this._pointer.x;
+		this.#lastY = this._pointer.y;
+		this.#distanceX = this._pointer.x - this.#startX;
+		this.#distanceY = this._pointer.y - this.#startY;
 	};
 
 	cancel() {
@@ -90,11 +84,11 @@ class UseDrag {
 	}
 
 	get velocityX() {
-		return this.#velocity.velocityX;
+		return this._velocity.velocityX;
 	}
 
 	get velocityY() {
-		return this.#velocity.velocityY;
+		return this._velocity.velocityY;
 	}
 }
 
