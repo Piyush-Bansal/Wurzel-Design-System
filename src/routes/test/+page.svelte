@@ -9,5 +9,5 @@
 </script>
 
 <div class="container">
-	<p>{size.currentValue}</p>
+	<p>{size.value}</p>
 </div>

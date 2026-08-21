@@ -9,7 +9,7 @@ import {
 	ssMediumLow,
 	ssSmallLow
 } from '../../../global-state/screenSize.svelte';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import { useClamp } from '../resources/clampValues.svelte';
 
 interface Size {
@@ -28,10 +28,11 @@ class FluidSize {
 		this.#currentBreakPoint();
 		this.#calculateSize();
 
-		this.#subscribe = createSubscriber(() => {
+		this.#subscribe = createSubscriber((update) => {
 			const off = on(window, 'resize', () => {
 				this.#currentBreakPoint();
 				this.#calculateSize();
+				update();
 			});
 			return () => off();
 		});
@@ -43,7 +44,7 @@ class FluidSize {
 			return;
 		}
 		this.#innerWidth = useClamp(window.innerWidth, ssSmallLow, ssLargeHigh);
-		innerWidth >= ssLargeLow
+		this.#innerWidth >= ssLargeLow
 			? (this.#screenSize = 'lg')
 			: this.#innerWidth >= ssMediumLow
 				? (this.#screenSize = 'md')
@@ -67,7 +68,7 @@ class FluidSize {
 		}
 	}
 
-	get currentValue() {
+	get value() {
 		this.#subscribe();
 		return this.#fluidSize;
 	}
