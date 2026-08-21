@@ -20,9 +20,9 @@ interface Size {
 
 class FluidSize {
 	#subscribe;
-	#innerWidth: number = 0;
-	#screenSize: 'lg' | 'md' | 'sm' = 'lg';
-	#fluidSize: number = 0;
+	#innerWidth: number | null = null;
+	#screenSize: 'lg' | 'md' | 'sm' | null = null;
+	#fluidSize: number | null = null;
 
 	constructor(private readonly size: Size) {
 		this.#currentBreakPoint();
@@ -52,6 +52,7 @@ class FluidSize {
 	}
 
 	#calculateSize() {
+		if (!this.#innerWidth) return;
 		switch (this.#screenSize) {
 			case 'lg': {
 				this.#fluidSize = (this.size.lg / artBoardLarge) * this.#innerWidth;
